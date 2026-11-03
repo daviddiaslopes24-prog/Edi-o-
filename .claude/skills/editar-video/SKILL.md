@@ -31,6 +31,20 @@ Meta: entregar em até ~50 min. Rode etapas pesadas em segundo plano e avise o u
    `python3 tools/render.py plano.json $A/tx2.json $A/ed/voz.wav $A $A/out/video.mp4`
 9. Entregar com `SendUserFile`. Não commitar o MP4 (grande); commitar `plano.json` e `cortes.json`.
 
+## FOTOS E VÍDEOS DE BANCO (Pexels + Pixabay) — usar SEMPRE, bastante
+O usuário quer o vídeo **muito dinâmico**: misture animações com fotos e vídeos reais.
+- Chaves lidas do ambiente: `PIXABAY_KEY` e `PEXELS_KEY` (nunca escrever chaves no repositório).
+  Se faltar alguma, use só a que existir; se faltarem as duas, avise o usuário e siga só com animações.
+- `tools/stock.py` busca e baixa (só filmagem real, sem animações), sem repetir o mesmo arquivo no vídeo.
+- No plano, qualquer cena aceita `"media": {"q": "busca em inglês", "kind": "video"|"photo"}`:
+  vira o fundo da cena (escurecido para o texto aparecer; `dim` ajusta, 0 = sem escurecer).
+- Cena `broll`: foto/vídeo em tela cheia, com tarja de TV opcional (`caption`, `sub`). Fotos ganham zoom lento.
+- **Proporção alvo: ~40–50% das cenas com mídia real** (broll ou fundo), alternando com mapas/gráficos.
+  Ex.: frase sobre pessoas/empresas/cidade/dinheiro → broll; número importante → bignum com vídeo ao fundo.
+- Buscas em inglês e concretas ("brazilian real banknotes", "stock exchange traders", "sao paulo skyline").
+- **Crédito da fonte**: aparece sozinho, pequeno e discreto no canto inferior direito, como na TV
+  ("Pixabay" ou "Pexels / Nome do autor"). Não fazer créditos chamativos.
+
 ## REGRAS FIXAS DE ÁUDIO (pedido do usuário — sempre seguir)
 - **A voz é sempre o elemento mais alto.** Efeitos sonoros e música SEMPRE abaixo da voz: dá para ouvir,
   mas nunca competem com a fala. Valores no `render.py`: `SFX_LEVEL = 0.16`, `SFX_CEIL = 0.16`
