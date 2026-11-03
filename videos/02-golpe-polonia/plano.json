@@ -1,0 +1,708 @@
+[
+{
+"type": "cine",
+"at": 0,
+"lines": [
+"GOLPE DE ESTADO",
+"*NA POLÔNIA?*"
+],
+"sub": "O que está acontecendo?"
+},
+{
+"type": "broll",
+"anchor": "uma crise politica que colocou",
+"media": {
+"file": "stock/pb260681.mp4"
+},
+"caption": "VARSÓVIA, POLÔNIA",
+"sub": "Crise política em alerta"
+},
+{
+"type": "kinetic",
+"anchor": "a polonia esta enfrentando",
+"text": "Uma das maiores crises *institucionais* da sua história recente",
+"media": {
+"file": "stock/pb278750.mp4"
+}
+},
+{
+"type": "datecard",
+"anchor": "na sexta feira",
+"highlight": [
+30
+],
+"label": "Sexta-feira, 30 de outubro de 2026"
+},
+{
+"type": "grid",
+"anchor": "o governo do primeiro",
+"title": "Os lados da disputa",
+"items": [
+[
+"Donald Tusk",
+"Primeiro-ministro"
+],
+[
+"Karol Nawrocki",
+"Presidente"
+],
+[
+"Tribunal",
+"Constitucional"
+]
+],
+"gap": 1.3
+},
+{
+"type": "doc",
+"anchor": "o presidente do tribunal",
+"head": "TRIBUNAL CONSTITUCIONAL",
+"text": "O presidente do Tribunal, Bogdan Święczkowski, foi suspenso de suas funções por decisão de uma magistrada.",
+"hl": "foi suspenso de suas funções",
+"tilt": true
+},
+{
+"type": "broll",
+"anchor": "policiais foram mobilizados",
+"media": {
+"file": "stock/pb6095.mp4"
+},
+"caption": "POLÍCIA MOBILIZADA",
+"sub": "Segurança reforçada no Tribunal"
+},
+{
+"type": "stamp",
+"anchor": "o episodio provocou",
+"text": "GOLPE DE ESTADO?",
+"sub": "ACUSAÇÕES EM VARSÓVIA",
+"foot": "Questionamentos sobre a independência das instituições",
+"letterbox": true
+},
+{
+"type": "question",
+"anchor": "mas o que provocou essa crise",
+"text": "O que provocou essa *crise*?",
+"media": {
+"file": "stock/pb367600.mp4"
+}
+},
+{
+"type": "grid",
+"anchor": "porque o governo e o presidente",
+"items": [
+[
+"GOVERNO",
+"Tusk"
+],
+[
+"PRESIDENTE",
+"Nawrocki"
+]
+],
+"gap": 1.0,
+"title": "Dois lados"
+},
+{
+"type": "question",
+"anchor": "existe realmente",
+"text": "Existe mesmo uma tentativa de *golpe*?"
+},
+{
+"type": "headline",
+"anchor": "como comecou o conflito",
+"kicker": "PARTE 2",
+"date": "DE 2015 A 2026",
+"title": "Como começou o conflito?"
+},
+{
+"type": "broll",
+"anchor": "para entender o que esta",
+"media": {
+"file": "stock/pb349087.mp4"
+},
+"caption": "DE VOLTA A 2015"
+},
+{
+"type": "timeline",
+"anchor": "a origem dessa crise",
+"items": [
+[
+"2015",
+"PiS chega ao poder"
+],
+[
+"2023",
+"Coalizão de Tusk vence"
+],
+[
+"2025",
+"Nawrocki eleito presidente"
+],
+[
+"2026",
+"Crise no Tribunal"
+]
+],
+"hl": "2015",
+"title": "LINHA DO TEMPO"
+},
+{
+"type": "chain",
+"anchor": "durante oito anos",
+"title": "8 ANOS DE GOVERNO PiS",
+"items": [
+"Mudanças no Judiciário",
+"Novas regras de nomeação",
+"Influência política?"
+],
+"span": 7
+},
+{
+"type": "broll",
+"anchor": "as reformas foram defendidas",
+"media": {
+"file": "stock/pb1587300.jpg"
+},
+"caption": "REFORMA DA JUSTIÇA"
+},
+{
+"type": "map",
+"anchor": "entretanto instituicoes europeias",
+"from": [
+15,
+52,
+90
+],
+"to": [
+19,
+52,
+30
+],
+"move": 3.5,
+"hl": {
+"POL": "red"
+},
+"hl_at": 0.4,
+"labels": [
+{
+"ll": [
+21,
+52.2
+],
+"text": "POLÔNIA",
+"at": 1.0,
+"dx": 200,
+"dy": -120
+},
+{
+"ll": [
+4.35,
+50.85
+],
+"text": "INSTITUIÇÕES EUROPEIAS",
+"at": 2.2,
+"dx": -120,
+"dy": 160
+}
+],
+"title": "EUROPA"
+},
+{
+"type": "bignum",
+"anchor": "em 2023 uma",
+"from": 2015,
+"to": 2023,
+"label": "Coalizão liderada por Donald Tusk vence as eleições",
+"color": "green",
+"dur": 1.2,
+"tilt": true,
+"year": "2023",
+"plain": true
+},
+{
+"type": "broll",
+"anchor": "de recuperar o estado",
+"media": {
+"file": "stock/pb2060093.jpg"
+},
+"caption": "ESTADO DE DIREITO",
+"sub": "Promessa de reverter as mudanças"
+},
+{
+"type": "kinetic",
+"anchor": "mas havia um obstaculo",
+"text": "Mas havia um *obstáculo*...",
+"size": 110
+},
+{
+"type": "doc",
+"anchor": "eleito em 2025",
+"head": "PRESIDÊNCIA",
+"text": "O presidente Karol Nawrocki, eleito em 2025 e alinhado ao campo conservador, passou a representar a resistência ao novo governo.",
+"hl": "a resistência ao novo governo",
+"tilt": true,
+"tilt_side": -1
+},
+{
+"type": "kinetic",
+"anchor": "e essa divisao politica",
+"text": "Quem tem *autoridade* sobre as instituições?",
+"media": {
+"file": "stock/pb30911.mp4"
+}
+},
+{
+"type": "chapter",
+"anchor": "o centro da disputa",
+"n": 3,
+"title": "O centro da disputa: o *Tribunal Constitucional*"
+},
+{
+"type": "broll",
+"anchor": "o principal cenario",
+"media": {
+"file": "stock/pb4781577.jpg"
+},
+"caption": "TRIBUNAL CONSTITUCIONAL",
+"sub": "Varsóvia"
+},
+{
+"type": "chain",
+"anchor": "essa instituicao tem uma funcao",
+"title": "FUNÇÃO DO TRIBUNAL",
+"items": [
+"Parlamento aprova leis",
+"Tribunal verifica",
+"De acordo com a Constituição?"
+],
+"span": 5
+},
+{
+"type": "broll",
+"anchor": "o problema comecou a se agravar",
+"media": {
+"file": "stock/pb6795423.jpg"
+},
+"caption": "2026: NOVOS JUÍZES ELEITOS",
+"sub": "Parlamento preenche vagas no Tribunal"
+},
+{
+"type": "burst",
+"anchor": "recusou se a receber",
+"from": 0,
+"to": 5,
+"suffix": " juízes",
+"label": "sem juramento aceito pelo presidente",
+"color": "navy"
+},
+{
+"type": "grid",
+"anchor": "o governo argumentou",
+"items": [
+[
+"GOVERNO",
+"Escolha legítima"
+],
+[
+"PRESIDENTE",
+"Procedimento ilegal"
+]
+],
+"gap": 1.0,
+"title": "Dois lados"
+},
+{
+"type": "broll",
+"anchor": "diante do impasse",
+"media": {
+"file": "stock/pb41121.mp4"
+},
+"caption": "JURAMENTO NO PARLAMENTO",
+"sub": "Sem a participação do presidente"
+},
+{
+"type": "grid",
+"anchor": "a partir daquele momento",
+"title": "Um Tribunal dividido",
+"items": [
+[
+"Lado 1",
+"juízes do governo"
+],
+[
+"Lado 2",
+"contestam nomeações"
+]
+],
+"gap": 1.5
+},
+{
+"type": "kinetic",
+"anchor": "preparou o terreno",
+"text": "O terreno estava pronto para *outubro*",
+"media": {
+"file": "stock/pb112957.mp4"
+}
+},
+{
+"type": "headline",
+"anchor": "a situacao explode",
+"kicker": "PARTE 4",
+"date": "30 DE OUTUBRO DE 2026",
+"title": "A situação explode"
+},
+{
+"type": "datecard",
+"anchor": "na sexta feira 30",
+"highlight": [
+30
+],
+"label": "A crise atinge um novo nível"
+},
+{
+"type": "doc",
+"anchor": "a magistrada",
+"head": "DECISÃO",
+"text": "A magistrada Anna Korwin-Piotrowska suspendeu o presidente do Tribunal, Bogdan Święczkowski, e o vice, Bartłomiej Sochański.",
+"hl": "suspendeu o presidente do Tribunal",
+"tilt": true
+},
+{
+"type": "bignum",
+"anchor": "a decisao estabeleceu",
+"from": 0,
+"to": 30,
+"suffix": " dias",
+"label": "de afastamento do presidente do Tribunal",
+"color": "red",
+"dur": 1.2
+},
+{
+"type": "broll",
+"anchor": "segundo ela",
+"media": {
+"file": "stock/pb198901.mp4"
+},
+"caption": "JUSTIFICATIVA",
+"sub": "Novos juízes estariam sendo impedidos"
+},
+{
+"type": "kinetic",
+"anchor": "entretanto a decisao provocou",
+"text": "A reação foi *imediata*"
+},
+{
+"type": "broll",
+"anchor": "integrantes da oposicao",
+"media": {
+"file": "stock/pb2654531.jpg"
+},
+"caption": "OPOSIÇÃO DENUNCIA",
+"sub": "\"Tomada ilegal do Tribunal\""
+},
+{
+"type": "broll",
+"anchor": "a situacao chegou as ruas",
+"media": {
+"file": "stock/pb21849.mp4"
+},
+"caption": "PROTESTOS EM VARSÓVIA"
+},
+{
+"type": "broll",
+"anchor": "a policia tambem foi",
+"media": {
+"file": "stock/pb19627.mp4"
+},
+"caption": "SEGURANÇA REFORÇADA"
+},
+{
+"type": "map",
+"anchor": "chegou a interromper",
+"from": [
+5,
+30,
+140
+],
+"to": [
+5,
+35,
+95
+],
+"move": 2.5,
+"hl": {
+"POL": "red",
+"SEN": "gold"
+},
+"hl_at": 0.3,
+"arrows": [
+{
+"a": [
+-17,
+14.7
+],
+"b": [
+21,
+52.2
+],
+"at": 1.2,
+"color": "red"
+}
+],
+"labels": [
+{
+"ll": [
+-17,
+14.7
+],
+"text": "SENEGAL",
+"at": 0.8,
+"dx": -60,
+"dy": 130
+},
+{
+"ll": [
+21,
+52.2
+],
+"text": "VOLTA A VARSÓVIA",
+"at": 2.6,
+"dx": 140,
+"dy": -100
+}
+],
+"title": "VIAGEM INTERROMPIDA"
+},
+{
+"type": "broll",
+"anchor": "naquela noite",
+"media": {
+"file": "stock/pb6529108.jpg"
+},
+"caption": "O PRESIDENTE VAI AO TRIBUNAL",
+"sub": "Contesta os novos juízes"
+},
+{
+"type": "kinetic",
+"anchor": "o conflito havia",
+"text": "Do debate jurídico a uma crise entre as *maiores autoridades* do país",
+"size": 84
+},
+{
+"type": "cine",
+"anchor": "mas afinal",
+"lines": [
+"POR QUE FALAM EM",
+"*GOLPE DE ESTADO?*"
+]
+},
+{
+"type": "kinetic",
+"anchor": "essa e provavelmente",
+"text": "A parte mais *importante* desta história"
+},
+{
+"type": "broll",
+"anchor": "o termo golpe",
+"media": {
+"file": "stock/pb27465.mp4"
+},
+"caption": "CAMPO CONSERVADOR ACUSA",
+"sub": "Controle ilegal do Tribunal"
+},
+{
+"type": "doc",
+"anchor": "o proprio tribunal publicou",
+"head": "DECLARAÇÃO DO TRIBUNAL",
+"text": "O próprio Tribunal publicou uma declaração afirmando que as ações realizadas representavam um golpe de Estado.",
+"hl": "representavam um golpe de Estado",
+"tilt": true,
+"tilt_side": -1
+},
+{
+"type": "chain",
+"anchor": "a argumentacao desse grupo",
+"title": "O ARGUMENTO DA OPOSIÇÃO",
+"items": [
+"Procedimentos questionáveis",
+"Afastar autoridades",
+"Mudar o Tribunal"
+],
+"span": 6
+},
+{
+"type": "broll",
+"anchor": "por outro lado",
+"media": {
+"file": "stock/pb65603.mp4"
+},
+"caption": "O OUTRO LADO",
+"sub": "Governo de Donald Tusk"
+},
+{
+"type": "doc",
+"anchor": "para o governo",
+"head": "POSIÇÃO DO GOVERNO",
+"text": "A crise é consequência de anos de interferência política no Judiciário. As medidas seriam necessárias para recuperar a independência das instituições.",
+"hl": "recuperar a independência das instituições"
+},
+{
+"type": "grid",
+"anchor": "portanto temos duas",
+"items": [
+[
+"OPOSIÇÃO",
+"Governo passou do limite"
+],
+[
+"GOVERNO",
+"Corrigir irregularidades"
+]
+],
+"gap": 1.0,
+"title": "Dois lados"
+},
+{
+"type": "kinetic",
+"anchor": "e importante destacar",
+"text": "Acusar de golpe *não significa* que houve um golpe",
+"size": 88
+},
+{
+"type": "stamp",
+"anchor": "o que existe e uma disputa",
+"text": "DISPUTA INSTITUCIONAL",
+"sub": "GRAVE",
+"foot": "A legalidade das decisões é questionada pelos dois lados"
+},
+{
+"type": "headline",
+"anchor": "por que a uniao europeia",
+"kicker": "PARTE 6",
+"date": "BRUXELAS / VARSÓVIA",
+"title": "Por que a União Europeia está preocupada?"
+},
+{
+"type": "broll",
+"anchor": "outro ponto importante",
+"media": {
+"file": "stock/pb276971.mp4"
+},
+"caption": "UNIÃO EUROPEIA ACOMPANHA"
+},
+{
+"type": "map",
+"anchor": "a polonia e um dos",
+"from": [
+15,
+52,
+60
+],
+"to": [
+28,
+52,
+45
+],
+"move": 4,
+"hl": {
+"POL": "red",
+"UKR": "gold",
+"RUS": "blue",
+"BLR": "blue"
+},
+"hl_at": 0.5,
+"labels": [
+{
+"ll": [
+19,
+52
+],
+"text": "POLÔNIA",
+"at": 1.0,
+"dx": -180,
+"dy": -120
+},
+{
+"ll": [
+31,
+49
+],
+"text": "UCRÂNIA",
+"at": 3.0,
+"dx": 140,
+"dy": 120
+},
+{
+"ll": [
+37.6,
+55.7
+],
+"text": "RÚSSIA",
+"at": 4.0,
+"dx": 140,
+"dy": -100
+}
+],
+"title": "POSIÇÃO ESTRATÉGICA"
+},
+{
+"type": "kinetic",
+"anchor": "por isso qualquer",
+"text": "Instituições fracas = *preocupação* internacional",
+"media": {
+"file": "stock/pb22552.mp4"
+}
+},
+{
+"type": "broll",
+"anchor": "a uniao europeia ja vinha",
+"media": {
+"file": "stock/pb151142.mp4"
+},
+"caption": "UE MONITORA DESDE OS GOVERNOS ANTERIORES"
+},
+{
+"type": "question",
+"anchor": "agora o novo confronto",
+"text": "Reorganizar a Justiça pode gerar *novas violações*?"
+},
+{
+"type": "broll",
+"anchor": "a comissao internacional",
+"media": {
+"file": "stock/pb2492011.jpg"
+},
+"caption": "COMISSÃO INTERNACIONAL DE JURISTAS",
+"sub": "Manifesta preocupação"
+},
+{
+"type": "list",
+"anchor": "a organizacao criticou",
+"title": "A Comissão criticou:",
+"items": [
+"Recusa do presidente ao juramento",
+"Suspensão do presidente do Tribunal",
+"Falta de procedimento legal claro"
+],
+"span": 9
+},
+{
+"type": "kinetic",
+"anchor": "isso demonstra",
+"text": "As críticas atingem *os dois lados*"
+},
+{
+"type": "broll",
+"anchor": "o desafio internacional",
+"media": {
+"file": "stock/pb57656.mp4"
+},
+"caption": "O DESAFIO",
+"sub": "Uma solução dentro da lei"
+},
+{
+"type": "outro",
+"anchor": "esse foi o video",
+"click": 5.0
+}
+]

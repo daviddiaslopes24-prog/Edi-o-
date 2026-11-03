@@ -289,7 +289,7 @@ def count_val(p, t):
 
 def sc_bignum(img, dr, t, D, p):
     v, k = count_val(p, t)
-    txt = p.get("prefix", "") + fmt_br(v, p.get("dec", 0)) + p.get("suffix", "")
+    txt = p.get("prefix", "") + (str(int(round(v))) if p.get("plain") else fmt_br(v, p.get("dec", 0))) + p.get("suffix", "")
     col = {"red": RED, "green": GREEN, "white": WHITE, "gold": GOLD}[p.get("color", "red")]
     s = 1 + 0.15 * (1 - back(prog(t, 0.0, 0.45)))
     f = F("black", int(200 * s * p.get("scale", 1)))
@@ -556,7 +556,9 @@ def sc_stamp(img, dr, t, D, p):
     if a > 0:
         lay = Image.new("RGBA", (1400, 400)); ld = ImageDraw.Draw(lay)
         ld.rounded_rectangle([10, 10, 1390, 390], radius=20, outline=rgba(RED, 1), width=16)
-        ld.text((700, 150), p["text"], font=F("black", 120), fill=rgba(RED, 1), anchor="mm")
+        fs = 120
+        while fs > 50 and tw(F("black", fs), p["text"]) > 1260: fs -= 4
+        ld.text((700, 150), p["text"], font=F("black", fs), fill=rgba(RED, 1), anchor="mm")
         if p.get("sub"): ld.text((700, 290), p["sub"], font=F("bold", 52), fill=rgba(WHITE, 1), anchor="mm")
         lay = lay.rotate(-4, expand=True, resample=Image.BICUBIC)
         lay = lay.resize((int(lay.width * s), int(lay.height * s)), Image.BILINEAR)
@@ -981,6 +983,11 @@ def main():
     for i, sc in enumerate(plan):
         m = sc.get("media")
         if not m: continue
+        if m.get("file"):  # arquivo escolhido a dedo (revisado visualmente)
+            fp = m["file"] if os.path.isabs(m["file"]) else os.path.join(assets, m["file"])
+            if os.path.exists(fp):
+                sc["_media"] = {"path": fp, "credit": m.get("credit", "Pixabay"), "kind": "video" if fp.endswith(".mp4") else "photo"}
+                continue
         r = stock.fetch(m["q"], m.get("kind", "video"), os.path.join(assets, "stock"), seed=i)
         if r: sc["_media"] = r; print(f"cena {i}: {r['credit']} <- {m['q']}")
         elif sc["type"] == "broll":
