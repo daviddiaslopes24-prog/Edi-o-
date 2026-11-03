@@ -786,6 +786,19 @@ def sc_photo(img, dr, t, D, p):
     dust(dr, t, 50, 2)
     return []
 
+def sc_broll(img, dr, t, D, p):
+    """Foto/vídeo em tela cheia. 'caption' = tarja de TV (lower third) opcional."""
+    if p.get("caption"):
+        k = ease(prog(t, 0.4, 0.5)); f = F("bold", 40); w = tw(f, p["caption"]) + 70
+        x0 = 90 - (1 - k) * (w + 120); y0 = H - 230
+        dr.rectangle([x0, y0, x0 + 14, y0 + 76], fill=rgba(RED, 1))
+        dr.rectangle([x0 + 14, y0, x0 + 14 + w, y0 + 76], fill=rgba((12, 14, 16), 0.85))
+        dr.text((x0 + 14 + 35, y0 + 40), p["caption"], font=f, fill=rgba(WHITE, 1), anchor="lm")
+        if p.get("sub"):
+            dr.rectangle([x0 + 14, y0 + 76, x0 + 14 + w * 0.8, y0 + 120], fill=rgba(RED, 0.9 * k))
+            dr.text((x0 + 49, y0 + 99), p["sub"], font=F("med", 28), fill=rgba(WHITE, k), anchor="lm")
+    return [(0.0, "whoosh", 0.3)]
+
 def find_coeffs(dst, src):
     A = []
     for (x, y), (X, Y) in zip(dst, src):
@@ -818,18 +831,23 @@ def tilt_frame(inner, t, D, p):
     return bgimg
 
 SCENES = {k[3:]: v for k, v in globals().items() if k.startswith("sc_")}
-BGS = {"title": "dark", "chapter": "paper", "bars": "paper", "doc": "gray", "map": "ocean", "burst": "cream", "headline": "dark", "cine": "dark"}
+BGS = {"broll": "dark", "title": "dark", "chapter": "paper", "bars": "paper", "doc": "gray", "map": "ocean", "burst": "cream", "headline": "dark", "cine": "dark"}
 
 # ---------- quadro final ----------
-def frame(scene, t, D):
+def frame(scene, t, D, mframe=None):
     kind = scene["type"]; p = scene
     b = p.get("bg") or BGS.get(kind, "dark")
-    img = Image.new("RGBA", (W, H), OCEAN + (255,)) if b == "ocean" else bg(b).copy()
+    if mframe is not None:
+        # foto/vídeo de banco como fundo; escurece quando há texto/gráfico por cima
+        img = mframe.copy(); b = "dark"
+        dim = p.get("dim", 0.0 if kind == "broll" else 0.58)
+        if dim: img.alpha_composite(Image.new("RGBA", (W, H), (0, 0, 0, int(255 * dim))))
+    else:
+        img = Image.new("RGBA", (W, H), OCEAN + (255,)) if b == "ocean" else bg(b).copy()
     dr = ImageDraw.Draw(img, "RGBA")
     sfx = SCENES[kind](img, dr, t, D, p)
     # marca do canal + fonte
     dark = b in ("dark", "ocean", "gray")
-    dr.text((60, 60), BRAND, font=F("bold", 26), fill=rgba(WHITE if dark else INK, 0.55), anchor="lm")
     if p.get("fonte"):
         dr.text((60, H - 50), "Fonte: " + p["fonte"], font=F("reg", 26), fill=rgba(WHITE if dark else INK, 0.7), anchor="lm")
     if p.get("tilt"):
@@ -837,11 +855,19 @@ def frame(scene, t, D):
     if p.get("letterbox") or kind == "cine":
         lb = int(110 * ease(prog(t, 0, 0.5))); dr.rectangle([0, 0, W, lb], fill=(0, 0, 0, 255)); dr.rectangle([0, H - lb, W, H], fill=(0, 0, 0, 255))
     # câmera: leve aproximação contínua + entrada
-    s = 1.0 + 0.045 * (t / max(D, 0.1)) + 0.06 * (1 - ease(prog(t, 0, 0.45)))
+    kb = 0.14 if (p.get("_media") or {}).get("kind") == "photo" else 0.045
+    s = 1.0 + kb * (t / max(D, 0.1)) + 0.06 * (1 - ease(prog(t, 0, 0.45)))
     im = img.convert("RGB")
     if s != 1.0:
         cw, ch = W / s, H / s; x0, y0 = (W - cw) / 2, (H - ch) / 2
         im = im.transform((W, H), Image.EXTENT, (x0, y0, x0 + cw, y0 + ch), Image.BILINEAR)
+    ImageDraw.Draw(im, "RGBA").text((60, 60), BRAND, font=F("bold", 26), fill=rgba(WHITE if dark else INK, 0.55), anchor="lm")
+    if p.get("_media"):
+        # crédito discreto no canto, como na TV
+        d2 = ImageDraw.Draw(im); txt = p["_media"]["credit"]; f = F("med", 22)
+        x, y = W - 48, H - 42
+        d2.text((x + 2, y + 2), txt, font=f, fill=(0, 0, 0), anchor="rm")
+        d2.text((x, y), txt, font=f, fill=(225, 225, 225), anchor="rm")
     return im, sfx
 
 def post(im, fi):
@@ -857,11 +883,27 @@ def render_scene(args):
                              "-r", str(FPS), "-i", "-", "-c:v", "libx264", "-preset", "veryfast", "-crf", "22",
                              "-pix_fmt", "yuv420p", "-threads", "2", path], stdin=subprocess.PIPE)
     sfx = None
+    med = scene.get("_media"); reader = photo = None
+    if med and med["kind"] == "video":
+        reader = subprocess.Popen(["ffmpeg", "-v", "error", "-stream_loop", "-1", "-ss", "0.3", "-i", med["path"], "-an",
+                                   "-vf", f"scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H},fps={FPS}",
+                                   "-frames:v", str(n), "-f", "rawvideo", "-pix_fmt", "rgb24", "-"], stdout=subprocess.PIPE)
+    elif med:
+        ph = Image.open(med["path"]).convert("RGB"); r = max(W / ph.width, H / ph.height)
+        ph = ph.resize((int(ph.width * r + 1), int(ph.height * r + 1)), Image.LANCZOS)
+        photo = ph.crop(((ph.width - W) // 2, (ph.height - H) // 2, (ph.width - W) // 2 + W, (ph.height - H) // 2 + H)).convert("RGBA")
+    last = None
     for k in range(n):
-        im, s = frame(scene, k / FPS, D)
+        mf = photo
+        if reader:
+            raw = reader.stdout.read(W * H * 3)
+            if len(raw) == W * H * 3: last = Image.frombuffer("RGB", (W, H), raw).convert("RGBA")
+            mf = last
+        im, s = frame(scene, k / FPS, D, mf)
         if sfx is None: sfx = s
         proc.stdin.write(post(im, f0 + k).tobytes())
     proc.stdin.close(); proc.wait()
+    if reader: reader.stdout.close(); reader.wait()
     ev = [(f0 / FPS + a, name, g) for a, name, g in (sfx or []) if a < D]
     json.dump(ev, open(f"{outdir}/s{i:03d}.json", "w"))
     return i, [(f0 / FPS + a, name, g) for a, name, g in (sfx or []) if a < D]
@@ -934,6 +976,15 @@ def main():
                                  capture_output=True, text=True).stdout) + 1.5
     starts = resolve(plan, words, total)
     work = os.path.splitext(out)[0] + "_parts"; os.makedirs(work, exist_ok=True)
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    import stock
+    for i, sc in enumerate(plan):
+        m = sc.get("media")
+        if not m: continue
+        r = stock.fetch(m["q"], m.get("kind", "video"), os.path.join(assets, "stock"), seed=i)
+        if r: sc["_media"] = r; print(f"cena {i}: {r['credit']} <- {m['q']}")
+        elif sc["type"] == "broll":
+            sc.update({"type": "kinetic", "text": sc.get("caption") or m["q"]}); print(f"cena {i}: sem mídia para '{m['q']}', virou texto")
     only = os.environ.get("ONLY")
     jobs = []
     for i, sc in enumerate(plan):
