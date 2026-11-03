@@ -80,5 +80,13 @@ cinematográfico e jornalismo investigativo.
 - `burst`: ilustração editorial — raios azul-marinho/laranja girando e cartão de papel rasgado com
   número (`from/to/suffix/label`) ou texto (`big/label`). Use 1–3 vezes por vídeo em destaques.
 - `"letterbox": true`: barras pretas de cinema em qualquer cena.
+**Motion 3D (pedido do usuário: "cada vídeo melhor", dinâmico, letras e formas em 3D):**
+- `text3d`: letras 3D extrudadas girando no espaço, piso em grade, brilho e partículas (`lines`, `*destaque*`, `sub`, `size`).
+  Use na abertura e em cada virada de parte (alternando com `cine`/`headline`/`chapter`).
+- `globe`: globo 3D girando de um ponto a outro (`from`/`to` = [lon, lat], `hl` países por código ISO3, `labels`).
+  Ótimo para relacionar países distantes (ex.: EUA → Irã).
+- No `map`: `"radar": {"ll": [lon, lat]}` (radar militar varrendo) e `"ships": [[[lon,lat],[lon,lat]], ...]`
+  (navios/pontos se movendo numa rota). Combine com `"tilt": true` para mapa em ângulo 3D.
+- Gráficos sem números no roteiro: use `"ticks": []` e `note: "Movimento ilustrativo"` — nunca invente valores.
 Regra de mistura: não repetir o mesmo tipo de cena mais de 2 vezes seguidas; variar fundos
 (escuro / papel creme / jornal / mapa) ao longo do vídeo.
