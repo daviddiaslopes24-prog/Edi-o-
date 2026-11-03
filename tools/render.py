@@ -981,6 +981,11 @@ def main():
     for i, sc in enumerate(plan):
         m = sc.get("media")
         if not m: continue
+        if m.get("file"):  # arquivo escolhido a dedo (revisado visualmente)
+            fp = m["file"] if os.path.isabs(m["file"]) else os.path.join(assets, m["file"])
+            if os.path.exists(fp):
+                sc["_media"] = {"path": fp, "credit": m.get("credit", "Pixabay"), "kind": "video" if fp.endswith(".mp4") else "photo"}
+                continue
         r = stock.fetch(m["q"], m.get("kind", "video"), os.path.join(assets, "stock"), seed=i)
         if r: sc["_media"] = r; print(f"cena {i}: {r['credit']} <- {m['q']}")
         elif sc["type"] == "broll":

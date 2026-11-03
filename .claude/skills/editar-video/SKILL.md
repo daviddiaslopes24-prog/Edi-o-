@@ -41,6 +41,10 @@ O usuário quer o vídeo **muito dinâmico**: misture animações com fotos e v�
 - Cena `broll`: foto/vídeo em tela cheia, com tarja de TV opcional (`caption`, `sub`). Fotos ganham zoom lento.
 - **Proporção alvo: ~40–50% das cenas com mídia real** (broll ou fundo), alternando com mapas/gráficos.
   Ex.: frase sobre pessoas/empresas/cidade/dinheiro → broll; número importante → bignum com vídeo ao fundo.
+- **Revise a mídia visualmente antes do render** (contact sheet com ffmpeg `tile`): busca automática traz
+  coisas erradas (ex.: parlamento da Hungria para "Polônia", constituição alemã, animações). Fixe os bons
+  arquivos no plano com `"media": {"file": "stock/pbXXXX.mp4"}`. Nunca use rosto de político real que não
+  seja o citado na frase.
 - Buscas em inglês e concretas ("brazilian real banknotes", "stock exchange traders", "sao paulo skyline").
 - **Crédito da fonte**: aparece sozinho, pequeno e discreto no canto inferior direito, como na TV
   ("Pixabay" ou "Pexels / Nome do autor"). Não fazer créditos chamativos.
