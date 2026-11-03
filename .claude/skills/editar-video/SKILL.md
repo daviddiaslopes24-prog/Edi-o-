@@ -29,7 +29,10 @@ Meta: entregar em até ~50 min. Rode etapas pesadas em segundo plano e avise o u
    extrair quadros com ffmpeg e olhar.
 8. **Render final** (≈10–12 min para 10 min de vídeo, 4 núcleos):
    `python3 tools/render.py plano.json $A/tx2.json $A/ed/voz.wav $A $A/out/video.mp4`
-9. Entregar com `SendUserFile`. Não commitar o MP4 (grande); commitar `plano.json` e `cortes.json`.
+9. **Vídeos longos (> 12 min)**: o MP4 do render fica muito grande (≈600 MB). Antes de entregar, recomprima:
+   `ffmpeg -i video.mp4 -c:v libx264 -preset veryfast -crf 27 -tune film -c:a copy -movflags +faststart final.mp4`
+   (≈4 min; reduz para ~250 MB sem perda visível no celular).
+10. Entregar com `SendUserFile`. Não commitar o MP4 (grande); commitar `plano.json` e `cortes.json`.
 
 ## FOTOS E VÍDEOS DE BANCO (Pexels + Pixabay) — usar SEMPRE, bastante
 O usuário quer o vídeo **muito dinâmico**: misture animações com fotos e vídeos reais.
