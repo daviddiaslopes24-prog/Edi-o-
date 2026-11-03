@@ -1,0 +1,993 @@
+[
+{
+"type": "text3d",
+"at": 0,
+"lines": [
+"TENSÃO",
+"*EUA × IRÃ*"
+],
+"sub": "Ataques, ameaças e o risco de uma nova escalada"
+},
+{
+"type": "globe",
+"anchor": "ataques ameacas e o risco",
+"from": [
+-95,
+38
+],
+"to": [
+53,
+30
+],
+"move": 5.0,
+"hl": {
+"USA": "blue",
+"IRN": "red"
+},
+"hl_at": 0.3,
+"labels": [
+{
+"ll": [
+53,
+32
+],
+"text": "IRÃ",
+"at": 4.0,
+"dx": 200,
+"dy": -120
+}
+]
+},
+{
+"type": "question",
+"anchor": "o que esta acontecendo",
+"text": "O que está *acontecendo*?",
+"media": {
+"file": "stock/pb10339.mp4"
+}
+},
+{
+"type": "broll",
+"anchor": "voltou a aumentar",
+"media": {
+"file": "stock/pb2693210.jpg"
+},
+"caption": "TENSÃO VOLTA A AUMENTAR",
+"sub": "Muito além de discursos"
+},
+{
+"type": "datecard",
+"anchor": "na segunda feira dia 2",
+"month": "NOVEMBRO 2026",
+"first_wd": 0,
+"ndays": 30,
+"highlight": [
+2
+],
+"label": "Segunda-feira, 2 de novembro"
+},
+{
+"type": "map",
+"anchor": "localizada no",
+"from": [
+52,
+27,
+24
+],
+"to": [
+56.1,
+26.5,
+7
+],
+"move": 3.0,
+"hl": {
+"IRN": "red",
+"OMN": "gold",
+"ARE": "gold"
+},
+"hl_at": 0.4,
+"radar": {
+"ll": [
+55.9,
+26.75
+],
+"r": 240
+},
+"labels": [
+{
+"ll": [
+55.9,
+26.75
+],
+"text": "ILHA DE QESHM",
+"at": 2.6,
+"dx": -420,
+"dy": -160
+}
+],
+"title": "ESTREITO DE ORMUZ",
+"tilt": true
+},
+{
+"type": "broll",
+"anchor": "a informacao foi confirmada",
+"media": {
+"file": "stock/pb202987.mp4"
+},
+"caption": "CONFIRMADO POR AUTORIDADES DOS EUA"
+},
+{
+"type": "broll",
+"anchor": "segundo os relatos",
+"media": {
+"file": "stock/pb242.mp4"
+},
+"caption": "ALVO: DEFESA AÉREA IRANIANA"
+},
+{
+"type": "broll",
+"anchor": "o episodio aconteceu",
+"media": {
+"file": "stock/pb211204.mp4"
+},
+"caption": "EM MEIO A NEGOCIAÇÕES"
+},
+{
+"type": "grid",
+"anchor": "discutem um possivel acordo",
+"title": "Ao mesmo tempo",
+"items": [
+[
+"Diplomacia",
+"possível acordo"
+],
+[
+"Militares",
+"operações na região"
+]
+],
+"gap": 1.5
+},
+{
+"type": "stamp",
+"anchor": "e o mais preocupante",
+"text": "SEM RESPOSTA? NÃO.",
+"sub": "IRÃ PROMETE REAGIR",
+"foot": "O país não pretende aceitar novos ataques sem responder",
+"letterbox": true
+},
+{
+"type": "headline",
+"anchor": "atacaram o territorio",
+"kicker": "PARTE 2",
+"date": "ILHA DE QESHM",
+"title": "Os Estados Unidos atacaram o território iraniano"
+},
+{
+"type": "map",
+"anchor": "nao e um territorio qualquer",
+"from": [
+50,
+27,
+30
+],
+"to": [
+55,
+26.5,
+13
+],
+"move": 3.5,
+"hl": {
+"IRN": "red"
+},
+"hl_at": 0.3,
+"ships": [
+[
+[
+50.5,
+27.6
+],
+[
+56.3,
+26.45
+]
+],
+[
+[
+56.3,
+26.35
+],
+[
+58.6,
+24.9
+]
+]
+],
+"labels": [
+{
+"ll": [
+55.9,
+26.75
+],
+"text": "QESHM",
+"at": 1.6,
+"dx": -200,
+"dy": -140
+},
+{
+"ll": [
+52,
+26.8
+],
+"text": "GOLFO PÉRSICO",
+"at": 2.6,
+"dx": -60,
+"dy": 150
+}
+],
+"title": "ROTA DO PETRÓLEO"
+},
+{
+"type": "broll",
+"anchor": "segundo autoridades americanas ouvidas",
+"media": {
+"file": "stock/pb239282.mp4"
+},
+"caption": "WASHINGTON",
+"sub": "\"Ação defensiva\""
+},
+{
+"type": "chain",
+"anchor": "depois de disparos",
+"title": "A VERSÃO AMERICANA",
+"items": [
+"Disparos iranianos",
+"Contra aeronave dos EUA",
+"Resposta \"defensiva\""
+],
+"span": 4
+},
+{
+"type": "broll",
+"anchor": "o governo dos estados unidos",
+"media": {
+"file": "stock/pb4426675.jpg"
+},
+"caption": "PROTEGER FORÇAS E NAVIOS"
+},
+{
+"type": "doc",
+"anchor": "mas existe um detalhe",
+"head": "WALL STREET JOURNAL",
+"text": "Os ataques fazem parte de uma série de operações limitadas realizadas pelos Estados Unidos contra o Irã nas últimas semanas.",
+"hl": "uma série de operações limitadas",
+"tilt": true
+},
+{
+"type": "kinetic",
+"anchor": "isso mostra que",
+"text": "A atividade militar *não parou*",
+"media": {
+"file": "stock/pb170300.mp4"
+}
+},
+{
+"type": "text3d",
+"anchor": "a resposta do",
+"lines": [
+"A RESPOSTA",
+"*DO IRÃ*"
+],
+"size": 140
+},
+{
+"type": "broll",
+"anchor": "a reacao de",
+"media": {
+"file": "stock/pb6974106.jpg"
+},
+"caption": "TEERÃ",
+"sub": "Reação dura"
+},
+{
+"type": "doc",
+"anchor": "presidente do parlamento",
+"head": "MOHAMMAD BAGHER QALIBAF",
+"text": "Presidente do Parlamento iraniano e principal negociador: cabe aos Estados Unidos impedir que os confrontos recomecem.",
+"hl": "cabe aos Estados Unidos impedir",
+"tilt": true,
+"tilt_side": -1
+},
+{
+"type": "stamp",
+"anchor": "ao mesmo tempo afirmou",
+"text": "PRONTO PARA LUTAR",
+"foot": "Recado do Irã aos Estados Unidos"
+},
+{
+"type": "kinetic",
+"anchor": "a mensagem e clara",
+"text": "Não aceitará *passivamente* novas ofensivas",
+"media": {
+"file": "stock/pb4459237.jpg"
+}
+},
+{
+"type": "globe",
+"anchor": "outro ponto que chamou",
+"from": [
+45,
+30
+],
+"to": [
+10,
+35
+],
+"move": 5,
+"hl": {
+"IRN": "red"
+},
+"hl_at": 0.2,
+"labels": [
+{
+"ll": [
+51.4,
+35.7
+],
+"text": "RETALIAÇÃO MAIS AMPLA?",
+"at": 1.0,
+"dx": 160,
+"dy": -140
+}
+],
+"title": "ALCANCE DA RETALIAÇÃO"
+},
+{
+"type": "broll",
+"anchor": "representantes do regime",
+"media": {
+"file": "stock/pb70499.jpg"
+},
+"caption": "BASES FORA DO ORIENTE MÉDIO",
+"sub": "Citadas como possíveis alvos"
+},
+{
+"type": "doc",
+"anchor": "isso nao significa",
+"head": "ENTENDA",
+"text": "Isso não significa que esses ataques já estejam acontecendo. Mas a retórica iraniana está ficando mais agressiva.",
+"hl": "a retórica iraniana está ficando mais agressiva"
+},
+{
+"type": "cine",
+"anchor": "o grande ponto de pressao",
+"lines": [
+"ESTREITO DE ORMUZ",
+"*PONTO DE PRESSÃO*"
+]
+},
+{
+"type": "globe",
+"anchor": "um dos principais motivos",
+"from": [
+30,
+20
+],
+"to": [
+56,
+26
+],
+"move": 4,
+"hl": {
+"IRN": "red",
+"OMN": "gold",
+"ARE": "gold",
+"SAU": "gold"
+},
+"hl_at": 0.5,
+"labels": [
+{
+"ll": [
+56.3,
+26.5
+],
+"text": "ORMUZ",
+"at": 3.2,
+"dx": 180,
+"dy": -120
+}
+],
+"r": 470
+},
+{
+"type": "broll",
+"anchor": "e uma passagem maritima",
+"media": {
+"file": "stock/pb10038606.jpg"
+},
+"caption": "PASSAGEM MARÍTIMA FUNDAMENTAL"
+},
+{
+"type": "map",
+"anchor": "uma parcela expressiva",
+"from": [
+56.3,
+26.2,
+10
+],
+"move": 1,
+"hl": {
+"IRN": "red",
+"OMN": "gold",
+"ARE": "gold"
+},
+"hl_at": 0,
+"ships": [
+[
+[
+52,
+26.9
+],
+[
+56.4,
+26.4
+]
+],
+[
+[
+56.4,
+26.3
+],
+[
+58.6,
+24.8
+]
+],
+[
+[
+58.8,
+25.0
+],
+[
+56.5,
+26.1
+]
+]
+],
+"labels": [
+{
+"ll": [
+56.4,
+26.4
+],
+"text": "PETRÓLEO EM NAVIOS",
+"at": 0.8,
+"dx": 200,
+"dy": -170
+}
+],
+"title": "TRÁFEGO DE PETROLEIROS",
+"tilt": true,
+"tilt_side": -1
+},
+{
+"type": "kinetic",
+"anchor": "e o",
+"text": "E o Irã *sabe disso*",
+"size": 120
+},
+{
+"type": "broll",
+"anchor": "vem utilizando o controle",
+"media": {
+"file": "stock/pb4803197.jpg"
+},
+"caption": "INSTRUMENTO DE PRESSÃO"
+},
+{
+"type": "list",
+"anchor": "condiciona a normalizacao",
+"title": "As exigências do Irã:",
+"items": [
+"Fim do bloqueio naval americano",
+"Liberação de ativos congelados"
+],
+"span": 6
+},
+{
+"type": "text3d",
+"anchor": "na pratica isso transforma",
+"lines": [
+"ORMUZ",
+"*ARMA DE NEGOCIAÇÃO*"
+],
+"size": 130
+},
+{
+"type": "broll",
+"anchor": "se a circulacao de navios",
+"media": {
+"file": "stock/pb7338.mp4"
+},
+"caption": "EFEITO NOS MERCADOS",
+"sub": "Se o tráfego for comprometido"
+},
+{
+"type": "headline",
+"anchor": "o petroleo ja sente",
+"kicker": "PARTE 5",
+"date": "MERCADO DE ENERGIA",
+"title": "O petróleo já sente os efeitos"
+},
+{
+"type": "broll",
+"anchor": "o mercado de petroleo acompanha",
+"media": {
+"file": "stock/pb67364.mp4"
+},
+"caption": "MERCADO DE PETRÓLEO"
+},
+{
+"type": "line",
+"anchor": "no inicio da semana",
+"title": "PETRÓLEO NA SEMANA",
+"points": [
+[
+"início",
+100
+],
+[
+"",
+96
+],
+[
+"expectativa de acordo",
+90
+],
+[
+"",
+89
+],
+[
+"ataque em Qeshm",
+93
+],
+[
+"",
+96
+]
+],
+"ymin": 84,
+"ymax": 102,
+"ticks": [],
+"draw": 5.0,
+"color": "red",
+"notes": {
+"2": "FORTE QUEDA",
+"5": "VOLTA A SUBIR"
+},
+"note": "Movimento ilustrativo, sem escala"
+},
+{
+"type": "kinetic",
+"anchor": "isso acontece porque",
+"text": "O mercado tenta *antecipar* o futuro",
+"media": {
+"file": "stock/pb202987.mp4"
+}
+},
+{
+"type": "chain",
+"anchor": "uma interrupcao prolongada",
+"title": "SE ORMUZ PARAR",
+"items": [
+[
+"Transporte de petróleo",
+"down"
+],
+[
+"Custo de energia",
+"up"
+],
+[
+"Economias pressionadas",
+"down"
+]
+],
+"span": 7
+},
+{
+"type": "map",
+"anchor": "e o brasil tambem pode",
+"from": [
+-52,
+-15,
+60
+],
+"move": 1,
+"hl": {
+"BRA": "green"
+},
+"hl_at": 0.1,
+"labels": [
+{
+"ll": [
+-47.9,
+-15.8
+],
+"text": "BRASIL TAMBÉM SENTE",
+"at": 0.8,
+"dx": 200,
+"dy": -130
+}
+],
+"title": "E O BRASIL?"
+},
+{
+"type": "broll",
+"anchor": "mesmo sendo produtor",
+"media": {
+"file": "stock/pb43629.mp4"
+},
+"caption": "PRODUTOR, MAS NÃO ISOLADO"
+},
+{
+"type": "chips",
+"anchor": "frete transportes",
+"title": "O que pode encarecer:",
+"items": [
+"Combustíveis",
+"Fretes",
+"Transporte",
+"Produção"
+],
+"span": 4,
+"media": {
+"file": "stock/pb175.mp4"
+}
+},
+{
+"type": "text3d",
+"anchor": "trump fala em acordo",
+"lines": [
+"TRUMP:",
+"*ACORDO OU ATAQUE?*"
+],
+"size": 130
+},
+{
+"type": "broll",
+"anchor": "donald trump tem adotado",
+"media": {
+"file": "stock/pb239278.mp4"
+},
+"caption": "PRESSÃO MILITAR + NEGOCIAÇÃO"
+},
+{
+"type": "doc",
+"anchor": "em declaracoes recentes",
+"head": "CASA BRANCA",
+"text": "O presidente americano afirmou que um acordo com o Irã ainda seria possível — mas novas ações militares continuam sendo uma possibilidade.",
+"hl": "novas ações militares continuam sendo uma possibilidade",
+"tilt": true
+},
+{
+"type": "kinetic",
+"anchor": "essa postura cria",
+"text": "Um cenário de *incerteza*",
+"size": 120,
+"media": {
+"file": "stock/pb225775.mp4"
+}
+},
+{
+"type": "grid",
+"anchor": "de um lado",
+"title": "O que cada lado quer",
+"items": [
+[
+"EUA",
+"frear o programa nuclear"
+],
+[
+"IRÃ",
+"fim das restrições"
+]
+],
+"gap": 3.5
+},
+{
+"type": "broll",
+"anchor": "segundo informacoes da",
+"media": {
+"file": "stock/pb291448.mp4"
+},
+"caption": "DOHA, CATAR",
+"sub": "Mediação das negociações · Reuters"
+},
+{
+"type": "stamp",
+"anchor": "portanto ainda nao existe",
+"text": "SEM ACORDO",
+"sub": "DEFINITIVO",
+"foot": "Os dois lados seguem distantes em pontos fundamentais"
+},
+{
+"type": "cine",
+"anchor": "o programa nuclear continua",
+"lines": [
+"PROGRAMA NUCLEAR",
+"*NO CENTRO DO CONFLITO*"
+]
+},
+{
+"type": "broll",
+"anchor": "a questao nuclear",
+"media": {
+"file": "stock/pb4535760.jpg"
+},
+"caption": "QUESTÃO NUCLEAR"
+},
+{
+"type": "doc",
+"anchor": "os estados unidos afirmam",
+"head": "POSIÇÃO DOS EUA",
+"text": "Os Estados Unidos afirmam que não aceitarão que o Irã desenvolva uma arma nuclear.",
+"hl": "não aceitarão",
+"tilt": true
+},
+{
+"type": "doc",
+"anchor": "o governo iraniano",
+"head": "POSIÇÃO DO IRÃ",
+"text": "O Irã insiste que seu programa nuclear tem finalidade pacífica e rejeita exigências que considera excessivas.",
+"hl": "finalidade pacífica",
+"tilt": true,
+"tilt_side": -1
+},
+{
+"type": "stamp",
+"anchor": "o problema e que a desconfianca",
+"text": "DESCONFIANÇA",
+"sub": "ENORME",
+"foot": "Entre Washington e Teerã"
+},
+{
+"type": "map",
+"anchor": "amplie sua capacidade nuclear",
+"from": [
+44,
+30,
+34
+],
+"move": 1,
+"hl": {
+"ISR": "blue",
+"IRN": "red",
+"SAU": "gold",
+"ARE": "gold",
+"QAT": "gold"
+},
+"hl_at": 0.2,
+"labels": [
+{
+"ll": [
+35,
+31.5
+],
+"text": "ISRAEL",
+"at": 0.8,
+"dx": -160,
+"dy": -140
+},
+{
+"ll": [
+53,
+32
+],
+"text": "PROGRAMA NUCLEAR",
+"at": 1.8,
+"dx": 160,
+"dy": -140
+}
+],
+"title": "RISCO ESTRATÉGICO"
+},
+{
+"type": "chain",
+"anchor": "abrir mao de suas",
+"title": "O DILEMA DO IRÃ",
+"items": [
+"Ceder capacidades",
+"Sem garantias",
+"Regime vulnerável"
+],
+"span": 6
+},
+{
+"type": "kinetic",
+"anchor": "e justamente essa disputa",
+"text": "Por isso qualquer acordo é *tão difícil*"
+},
+{
+"type": "text3d",
+"anchor": "o mundo aguarda",
+"lines": [
+"O MUNDO",
+"*AGUARDA*"
+],
+"size": 150
+},
+{
+"type": "grid",
+"anchor": "neste momento",
+"title": "Três elementos perigosos",
+"items": [
+[
+"Ataques",
+"militares"
+],
+[
+"Ameaças",
+"de retaliação"
+],
+[
+"Negociações",
+"sem resultado"
+]
+],
+"gap": 1.2
+},
+{
+"type": "broll",
+"anchor": "ataques militares ameaca",
+"media": {
+"file": "stock/pb659687.jpg"
+},
+"caption": "FORÇA MILITAR"
+},
+{
+"type": "broll",
+"anchor": "e os paises da regiao",
+"media": {
+"file": "stock/pb281828.mp4"
+},
+"caption": "PAÍSES DA REGIÃO EM ALERTA",
+"sub": "Bases, navios e energia"
+},
+{
+"type": "doc",
+"anchor": "nao e possivel afirmar",
+"head": "ANÁLISE",
+"text": "Uma nova guerra em grande escala não é inevitável. Mas também seria errado tratar tudo como uma simples disputa diplomática.",
+"hl": "não é inevitável"
+},
+{
+"type": "chips",
+"anchor": "os ataques em territorio",
+"title": "Os fatos:",
+"items": [
+"Ataques aconteceram",
+"Ameaças foram feitas",
+"Sem solução"
+],
+"span": 4
+},
+{
+"type": "broll",
+"anchor": "entrou em mais uma fase",
+"media": {
+"file": "stock/pb16160.mp4"
+},
+"caption": "UMA FASE DELICADA"
+},
+{
+"type": "kinetic",
+"anchor": "o ataque americano a ilha",
+"text": "A escalada militar *continua possível*",
+"media": {
+"file": "stock/pb10371332.jpg"
+}
+},
+{
+"type": "versus",
+"anchor": "agora a grande questao",
+"left": {
+"name": "ACORDO",
+"dir": "up",
+"val": "?"
+},
+"right": {
+"name": "ESCALADA",
+"dir": "down",
+"val": "?"
+}
+},
+{
+"type": "map",
+"anchor": "e existe um ponto",
+"from": [
+56.3,
+26.3,
+9
+],
+"move": 1,
+"hl": {
+"IRN": "red",
+"OMN": "gold",
+"ARE": "gold"
+},
+"hl_at": 0,
+"radar": {
+"ll": [
+56.4,
+26.4
+],
+"r": 300
+},
+"ships": [
+[
+[
+52,
+26.9
+],
+[
+56.4,
+26.4
+]
+],
+[
+[
+56.4,
+26.3
+],
+[
+58.6,
+24.8
+]
+]
+],
+"title": "ATENÇÃO REDOBRADA"
+},
+{
+"type": "globe",
+"anchor": "se essa passagem estrategica",
+"from": [
+56,
+26
+],
+"to": [
+-10,
+20
+],
+"move": 6,
+"hl": {
+"IRN": "red"
+},
+"hl_at": 0,
+"title": "ECONOMIA MUNDIAL",
+"r": 470
+},
+{
+"type": "broll",
+"anchor": "o mundo esta",
+"media": {
+"file": "stock/pb2695061.jpg"
+},
+"caption": "WASHINGTON × TEERÃ"
+},
+{
+"type": "text3d",
+"anchor": "qualquer decisao",
+"lines": [
+"PRÓXIMOS DIAS",
+"*DECISIVOS*"
+],
+"size": 140
+},
+{
+"type": "outro",
+"anchor": "o video de hoje",
+"click": 5.0
+}
+]

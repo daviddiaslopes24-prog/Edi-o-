@@ -537,6 +537,15 @@ def sc_map(img, dr, t, D, p):
         st = ar.get("at", 1.0 + i * 0.5)
         curve_arrow(dr, P(*ar["a"]), P(*ar["b"]), ease(prog(t, st, 1.2)), color={"gold": GOLD, "red": RED, "green": GREEN}[ar.get("color", "gold")])
         sfx.append((st, "whoosh", 0.35))
+    if p.get("radar"):
+        rl = Image.new("RGBA", (W, H)); radar_overlay(ImageDraw.Draw(rl), P(*p["radar"]["ll"]), t, p["radar"].get("r", 260)); img.alpha_composite(rl)
+    for j, path in enumerate(p.get("ships", [])):
+        a_, b_ = P(*path[0]), P(*path[1])
+        for m in range(4):
+            u = ((t * 0.08 + m * 0.25 + j * 0.13) % 1.0)
+            sx_, sy_ = a_[0] + (b_[0] - a_[0]) * u, a_[1] + (b_[1] - a_[1]) * u
+            dr.ellipse([sx_ - 9, sy_ - 9, sx_ + 9, sy_ + 9], fill=rgba(GOLD, 1), outline=rgba((0, 0, 0), 1))
+        dr.line([a_, b_], fill=rgba(GOLD, 0.35), width=3)
     if p.get("title"): kicker(dr, p["title"], 140, 120, t=t)
     return sfx
 
@@ -832,8 +841,147 @@ def tilt_frame(inner, t, D, p):
         label_box(d, (cx - cw / 2 + 140, cy - ch / 2 + 20), p["year"], t, bgc=(0, 0, 0), size=48, alpha=a)
     return bgimg
 
+# ================= MOTION 3D =================
+def extruded_text(text, size, face=(245, 245, 245), side=(120, 20, 28), depth=22, font="black"):
+    """Texto com extrusão 3D (profundidade + face com degradê)."""
+    f = F(font, size); w = int(tw(f, text)) + 80 + depth; h = int(size * 1.45) + depth
+    mask = Image.new("L", (w, h)); ImageDraw.Draw(mask).text((40, h / 2 - depth / 2), text, font=f, fill=255, anchor="lm")
+    out = Image.new("RGBA", (w, h))
+    for k in range(depth, 0, -1):
+        sh = 0.45 + 0.55 * (1 - k / depth)
+        col = tuple(int(c * sh) for c in side) + (255,)
+        layer = Image.new("RGBA", (w, h), col); out.paste(layer, (k, k), mask)
+    grad = np.linspace(1.0, 0.72, h)[:, None, None] * np.array(face, float)[None, None]
+    facei = Image.fromarray(np.clip(grad.repeat(w, 1), 0, 255).astype(np.uint8)).convert("RGBA")
+    out.paste(facei, (0, 0), mask)
+    # brilho na borda superior
+    hl = Image.new("RGBA", (w, h), (255, 255, 255, 90)); edge = mask.filter(ImageFilter.FIND_EDGES)
+    out.paste(hl, (0, -1), edge)
+    return out
+
+def warp3d(layer, yaw, pitch=0.0):
+    """Gira um layer em 3D (perspectiva) em torno do centro."""
+    w, h = layer.size; dz = yaw * w * 0.5; dp = pitch * h * 0.5
+    quad = [(0 + dp * 0.3, 0 + dz * 0.5), (w - dp * 0.3, 0 - dz * 0.5), (w + dp * 0.3, h + dz * 0.5), (0 - dp * 0.3, h - dz * 0.5)]
+    pad = int(abs(dz) + abs(dp)) + 10
+    quad = [(x + pad, y + pad) for x, y in quad]
+    coeffs = find_coeffs(quad, [(0, 0), (w, 0), (w, h), (0, h)])
+    return layer.transform((w + 2 * pad, h + 2 * pad), Image.PERSPECTIVE, coeffs, Image.BICUBIC)
+
+def sc_text3d(img, dr, t, D, p):
+    """Título em letras 3D extrudadas que giram no espaço, com reflexo e partículas."""
+    lines = p["lines"]; n = len(lines)
+    if not p.get("_media"):
+        # piso com perspectiva (grade)
+        ov = Image.new("RGBA", (W, H)); od = ImageDraw.Draw(ov)
+        hz = H * 0.62
+        for i in range(-20, 21):
+            od.line([(W / 2 + i * 40, hz), (W / 2 + i * 260, H)], fill=(230, 57, 70, 50), width=2)
+        for j in range(12):
+            yy = hz + (H - hz) * (j / 12) ** 1.8; od.line([(0, yy), (W, yy)], fill=(230, 57, 70, 40), width=2)
+        img.alpha_composite(ov)
+    yaw = (p.get("yaw", 0.28)) * math.cos(t * 0.9) * (1 - 0.5 * ease(prog(t, 0, D)))
+    total_h = 0; layers = []
+    for i, ln in enumerate(lines):
+        acc = ln.startswith("*")
+        lay = extruded_text(ln.strip("*"), p.get("size", 150) if not acc else int(p.get("size", 150) * 1.1),
+                            face=(255, 255, 255) if not acc else (255, 90, 100), side=(90, 14, 22) if acc else (60, 66, 72))
+        k = back(prog(t, 0.15 + i * 0.25, 0.6))
+        if k <= 0.01: layers.append(None); continue
+        lay = warp3d(lay, yaw + (1 - clamp(k)) * 0.8 * (1 if i % 2 else -1), 0)
+        if k != 1: lay = lay.resize((max(1, int(lay.width * clamp(k, 0.05, 1.2))), max(1, int(lay.height * clamp(k, 0.05, 1.2)))), Image.BICUBIC)
+        layers.append(lay); total_h += lay.height * 0.82
+    y = H / 2 - total_h / 2 - 30
+    for lay in layers:
+        if lay is None: continue
+        x = int(W / 2 - lay.width / 2)
+        # sombra difusa
+        sh = Image.new("RGBA", lay.size, (0, 0, 0, 0)); sh.putalpha(lay.getchannel("A").point(lambda v: v * 0.5))
+        sh = sh.resize((max(1, lay.width // 4), max(1, lay.height // 4))).filter(ImageFilter.GaussianBlur(4)).resize(lay.size)
+        img.alpha_composite(sh, (x + 20, int(y) + 30)); img.alpha_composite(lay, (x, int(y)))
+        y += lay.height * 0.82
+    if p.get("sub"):
+        a = ease(prog(t, 0.9, 0.5))
+        label_box(dr, (W / 2, H - 170), p["sub"], t, bgc=RED, size=40, alpha=a)
+    light_sweep(img, t, 0.6, 1.5, 0.4)
+    dust(dr, t, 45, 5, (255, 200, 200))
+    return [(0.0, "boom", 0.5), (0.15, "whoosh", 0.45), (0.4, "whoosh", 0.35)]
+
+def sc_globe(img, dr, t, D, p):
+    """Globo 3D girando (projeção ortográfica) com países destacados."""
+    countries, _ = geo()
+    k = ease_io(prog(t, 0, p.get("move", D * 0.85)))
+    lon0 = p["from"][0] + (p["to"][0] - p["from"][0]) * k; lat0 = p["from"][1] + (p["to"][1] - p["from"][1]) * k
+    R = p.get("r", 430) * (1 + 0.08 * k); cx, cy = W / 2, H / 2 + 20
+    # brilho da atmosfera
+    ov = Image.new("RGBA", (W, H)); od = ImageDraw.Draw(ov)
+    for i in range(18, 0, -1):
+        od.ellipse([cx - R - i * 4, cy - R - i * 4, cx + R + i * 4, cy + R + i * 4], fill=(60, 140, 200, int(6 + 3 * (18 - i) / 18 * 4)))
+    img.alpha_composite(ov)
+    yy, xx = np.mgrid[-R:R, -R:R].astype(np.float32)
+    dd = np.sqrt(xx ** 2 + yy ** 2) / R
+    shade = np.clip(1.0 - 0.55 * dd ** 2 - 0.25 * (xx + yy) / (2 * R), 0.25, 1.1)
+    sph = np.stack([12 * shade, 34 * shade, 52 * shade, (dd <= 1) * 255], -1).astype(np.uint8)
+    img.alpha_composite(Image.fromarray(sph, "RGBA"), (int(cx - R), int(cy - R)))
+    l0, p0 = math.radians(lon0), math.radians(lat0)
+    def proj(arr):
+        lam = np.radians(arr[:, 0]) - l0; phi = np.radians(arr[:, 1])
+        cosc = math.sin(p0) * np.sin(phi) + math.cos(p0) * np.cos(phi) * np.cos(lam)
+        x = np.cos(phi) * np.sin(lam); y = math.cos(p0) * np.sin(phi) - math.sin(p0) * np.cos(phi) * np.cos(lam)
+        nrm = np.sqrt(x * x + y * y) + 1e-9
+        x = np.where(cosc < 0, x / nrm, x); y = np.where(cosc < 0, y / nrm, y)
+        return np.stack([cx + R * x, cy - R * y], 1), cosc
+    hl = {c: {"red": RED, "green": GREEN, "gold": GOLD, "blue": BLUE}[col] for c, col in p.get("hl", {}).items()}
+    ha = ease(prog(t, p.get("hl_at", 0.5), 0.6))
+    land = Image.new("RGBA", (W, H)); ld = ImageDraw.Draw(land)
+    for code, rings, bb in countries:
+        for r in rings:
+            pts, cosc = proj(r[::2] if len(r) > 60 else r)
+            if (cosc > 0).sum() < 3: continue
+            P = [tuple(q) for q in pts]
+            col = hl.get(code)
+            ld.polygon(P, fill=(rgba(col, 0.55 + 0.4 * ha) if col and ha > 0 else (46, 92, 70, 255)), outline=(120, 190, 150, 200))
+    # sombreamento por cima da terra
+    shade_l = Image.fromarray(np.stack([np.zeros_like(shade), np.zeros_like(shade), np.zeros_like(shade),
+                                        np.clip((1 - shade) * 200, 0, 200) * (dd <= 1)], -1).astype(np.uint8), "RGBA")
+    land.alpha_composite(shade_l, (int(cx - R), int(cy - R)))
+    img.alpha_composite(land)
+    # graticula
+    for lat in range(-60, 90, 30):
+        arr = np.array([[lo, lat] for lo in range(-180, 181, 6)], float); pts, cosc = proj(arr)
+        seg = [tuple(q) for q, c in zip(pts, cosc) if c > 0]
+        if len(seg) > 1: dr.line(seg, fill=(150, 200, 230, 40), width=1)
+    for lo in range(-180, 180, 30):
+        arr = np.array([[lo, la] for la in range(-90, 91, 6)], float); pts, cosc = proj(arr)
+        seg = [tuple(q) for q, c in zip(pts, cosc) if c > 0]
+        if len(seg) > 1: dr.line(seg, fill=(150, 200, 230, 40), width=1)
+    sfx = [(0.0, "whoosh", 0.4)]
+    for i, lab in enumerate(p.get("labels", [])):
+        pt, c = proj(np.array([lab["ll"]], float))
+        if c[0] > 0.15:
+            callout(dr, tuple(pt[0]), lab["text"], t, start=lab.get("at", 1.0), dx=lab.get("dx", 180), dy=lab.get("dy", -120))
+    if p.get("title"): kicker(dr, p["title"], 140, 120, t=t)
+    dust(dr, t, 70, 7)
+    return sfx
+
+def radar_overlay(dr, pt, t, r=260, color=GREEN):
+    x, y = pt
+    for i in range(1, 5):
+        rr = r * i / 4; dr.ellipse([x - rr, y - rr, x + rr, y + rr], outline=rgba(color, 0.35), width=2)
+    dr.line([(x - r, y), (x + r, y)], fill=rgba(color, 0.25)); dr.line([(x, y - r), (x, y + r)], fill=rgba(color, 0.25))
+    ang = (t * 140) % 360
+    for k in range(18):
+        a0 = ang - k * 3
+        dr.pieslice([x - r, y - r, x + r, y + r], a0 - 3, a0, fill=rgba(color, 0.22 * (1 - k / 18) ** 1.5))
+    rng = np.random.default_rng(3)
+    for _ in range(5):
+        a = rng.random() * 360; d = r * (0.3 + 0.6 * rng.random())
+        diff = (ang - a) % 360; al = clamp(1 - diff / 200)
+        bx, by = x + d * math.cos(math.radians(a)), y + d * math.sin(math.radians(a))
+        dr.ellipse([bx - 7, by - 7, bx + 7, by + 7], fill=rgba(RED, al))
+
 SCENES = {k[3:]: v for k, v in globals().items() if k.startswith("sc_")}
-BGS = {"broll": "dark", "title": "dark", "chapter": "paper", "bars": "paper", "doc": "gray", "map": "ocean", "burst": "cream", "headline": "dark", "cine": "dark"}
+BGS = {"globe": "dark", "text3d": "dark", "broll": "dark", "title": "dark", "chapter": "paper", "bars": "paper", "doc": "gray", "map": "ocean", "burst": "cream", "headline": "dark", "cine": "dark"}
 
 # ---------- quadro final ----------
 def frame(scene, t, D, mframe=None):
