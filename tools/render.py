@@ -198,17 +198,21 @@ def curve_arrow(dr, a, b, k, color=GOLD, width=6, bend=-0.3):
 
 def word_reveal(dr, lines, font, cx, cy, t, start=0.0, gap=0.09, color=WHITE, accent=RED, lh=1.15, align="center", x0=None):
     """Linhas de texto com palavras surgindo; palavras entre *asteriscos* ficam na cor de destaque."""
+    word_reveal.acc = False
     sz = font.size; total_h = len(lines) * sz * lh; y = cy - total_h / 2 + sz * lh / 2
     idx = 0
     for line in lines:
         words = line.split()
-        clean = [w.strip("*") for w in words]
+        clean = [w.replace("*", "") for w in words]
         lw = tw(font, " ".join(clean))
         x = (cx - lw / 2) if align == "center" else x0
         for w, c in zip(words, clean):
             k = ease(prog(t, start + idx * gap, 0.35)); idx += 1
+            if w.startswith("*"): word_reveal.acc = True
+            on = getattr(word_reveal, "acc", False)
+            if w.endswith("*") or w.rstrip("?.,!").endswith("*"): word_reveal.acc = False
             if k > 0:
-                col = accent if w.startswith("*") else color
+                col = accent if on else color
                 dr.text((x, y + (1 - k) * 40), c, font=font, fill=rgba(col, k), anchor="lm")
             x += tw(font, c + " ")
         y += sz * lh
@@ -554,7 +558,11 @@ def sc_stamp(img, dr, t, D, p):
         lay = lay.rotate(-4, expand=True, resample=Image.BICUBIC)
         lay = lay.resize((int(lay.width * s), int(lay.height * s)), Image.BILINEAR)
         if a < 1: lay.putalpha(lay.getchannel("A").point(lambda v: int(v * a)))
-        img.alpha_composite(lay, (int(W / 2 - lay.width / 2), int(H / 2 - lay.height / 2)))
+        ox, oy = int(W / 2 - lay.width / 2), int(H / 2 - lay.height / 2)
+        if ox < 0 or oy < 0:
+            lay = lay.crop((max(0, -ox), max(0, -oy), max(0, -ox) + min(W, lay.width), max(0, -oy) + min(H, lay.height)))
+            ox, oy = max(0, ox), max(0, oy)
+        img.alpha_composite(lay, (ox, oy))
     if p.get("foot"):
         fa = prog(t, 1.0, 0.4)
         dr.text((W / 2, H - 140), p["foot"], font=F("med", 46), fill=rgba(WHITE, fa), anchor="mm")
@@ -575,7 +583,7 @@ def sc_versus(img, dr, t, D, p):
 
 def sc_grid(img, dr, t, D, p):
     items = p["items"]; n = len(items); cols = 2 if n == 4 else n
-    rows = math.ceil(n / cols); tw_, th = 700, 260
+    rows = math.ceil(n / cols); tw_, th = 760, 240
     if p.get("title"):
         a = ease(prog(t, 0, 0.4)); dr.text((W / 2, 170), p["title"], font=F("black", 64), fill=rgba(WHITE, a), anchor="mm")
     sfx = [(0.0, "whoosh", 0.5)]
@@ -592,7 +600,9 @@ def sc_grid(img, dr, t, D, p):
                              fill=rgba((24, 40, 34), 1), outline=rgba(RED, 1), width=4)
         if s > 0.7:
             big, small = (it if isinstance(it, list) else [it, ""])
-            dr.text((cx, cy - (25 if small else 0)), big, font=F("black", 62), fill=rgba(WHITE, 1), anchor="mm")
+            fs = 62
+            while fs > 30 and tw(F("black", fs), big) > tw2 - 60: fs -= 2
+            dr.text((cx, cy - (25 if small else 0)), big, font=F("black", fs), fill=rgba(WHITE, 1), anchor="mm")
             if small: dr.text((cx, cy + 55), small, font=F("med", 34), fill=rgba(MUTED, 1), anchor="mm")
         sfx.append((st, "pop", 0.5))
     return sfx
@@ -655,6 +665,8 @@ def render_scene(args):
         if sfx is None: sfx = s
         proc.stdin.write(post(im, f0 + k).tobytes())
     proc.stdin.close(); proc.wait()
+    ev = [(f0 / FPS + a, name, g) for a, name, g in (sfx or []) if a < D]
+    json.dump(ev, open(f"{outdir}/s{i:03d}.json", "w"))
     return i, [(f0 / FPS + a, name, g) for a, name, g in (sfx or []) if a < D]
 
 # ---------- sincronização com a fala ----------
@@ -729,8 +741,14 @@ def main():
     jobs.sort(key=lambda j: -(j[3] - j[2]))
     with Pool(int(os.environ.get("JOBS", "4"))) as pool:
         res = pool.map(render_scene, jobs, chunksize=1)
-    if only: print("ok parcial"); return
-    events = [e for _, ev in sorted(res) for e in ev]
+    if only and not os.environ.get("FINAL"): print("ok parcial"); return
+    allj = []
+    for i, sc in enumerate(plan):
+        a = starts[i]; b = starts[i + 1] if i + 1 < len(plan) else total
+        f0, f1 = round(a * FPS), round(b * FPS)
+        if f1 - f0 >= 1: allj.append((i, sc, f0, f1, work))
+    jobs = allj
+    events = [e for j in jobs for e in json.load(open(f"{work}/s{j[0]:03d}.json"))]
     with open(f"{work}/list.txt", "w") as fl:
         for j in sorted(jobs): fl.write(f"file 's{j[0]:03d}.mp4'\n")
     subprocess.run(["ffmpeg", "-v", "error", "-y", "-f", "concat", "-safe", "0", "-i", f"{work}/list.txt", "-c", "copy", f"{work}/video.mp4"], check=True)
