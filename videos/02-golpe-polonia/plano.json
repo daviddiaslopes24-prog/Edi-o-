@@ -216,7 +216,8 @@
 "color": "green",
 "dur": 1.2,
 "tilt": true,
-"year": "2023"
+"year": "2023",
+"plain": true
 },
 {
 "type": "broll",
