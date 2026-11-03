@@ -1,0 +1,1118 @@
+[
+{
+"type": "cine",
+"at": 0,
+"lines": [
+"ESTOQUE COMIDA",
+"*EM CASA?*"
+],
+"sub": "Um alerta que está chamando a atenção do mundo"
+},
+{
+"type": "broll",
+"anchor": "imagine receber uma orientacao",
+"media": {
+"file": "stock/pb570114.jpg"
+},
+"caption": "ALIMENTOS ESTOCADOS EM CASA"
+},
+{
+"type": "broll",
+"anchor": "agua e produtos essenciais",
+"media": {
+"file": "stock/pb2032980.jpg"
+}
+},
+{
+"type": "kinetic",
+"anchor": "e exatamente esse tipo",
+"text": "Uma orientação que chama a atenção *no mundo todo*",
+"media": {
+"file": "stock/pb11595.jpg"
+}
+},
+{
+"type": "map",
+"anchor": "o reino unido lancou",
+"from": [
+10,
+45,
+150
+],
+"to": [
+-2,
+54,
+28
+],
+"move": 3.0,
+"hl": {
+"GBR": "red"
+},
+"hl_at": 1.0,
+"labels": [
+{
+"ll": [
+-1.5,
+52.5
+],
+"text": "REINO UNIDO: 3 DIAS",
+"at": 2.2,
+"dx": 220,
+"dy": -120
+}
+],
+"title": "REINO UNIDO"
+},
+{
+"type": "map",
+"anchor": "na alemanha as autoridades",
+"from": [
+-2,
+54,
+28
+],
+"to": [
+10.5,
+51,
+22
+],
+"move": 2.5,
+"hl": {
+"DEU": "gold"
+},
+"hl_at": 0.6,
+"labels": [
+{
+"ll": [
+10.5,
+51.2
+],
+"text": "ALEMANHA: ATÉ 10 DIAS",
+"at": 2.0,
+"dx": 220,
+"dy": -120
+}
+],
+"title": "ALEMANHA"
+},
+{
+"type": "map",
+"anchor": "e no japao o governo",
+"from": [
+60,
+45,
+160
+],
+"to": [
+138,
+37,
+30
+],
+"move": 3.0,
+"hl": {
+"JPN": "red"
+},
+"hl_at": 1.2,
+"labels": [
+{
+"ll": [
+139.7,
+35.7
+],
+"text": "JAPÃO: 3 DIAS A 1 SEMANA",
+"at": 2.4,
+"dx": -560,
+"dy": -120
+}
+],
+"title": "JAPÃO"
+},
+{
+"type": "broll",
+"anchor": "as recomendacoes provocaram",
+"media": {
+"file": "stock/pb6387.mp4"
+},
+"caption": "DISCUSSÃO NAS REDES SOCIAIS"
+},
+{
+"type": "question",
+"anchor": "estao reforcando a preparacao",
+"text": "Por que tantos países estão se preparando *justamente agora*?"
+},
+{
+"type": "grid",
+"anchor": "estamos diante de",
+"title": "Qual é a preocupação?",
+"items": [
+"Guerras",
+"Ataques cibernéticos",
+"Desastres naturais",
+"Abastecimento"
+],
+"gap": 1.0
+},
+{
+"type": "kinetic",
+"anchor": "hoje vamos entender",
+"text": "O que cada governo anunciou, os *motivos* e o impacto no mundo",
+"size": 84,
+"media": {
+"file": "stock/pb243075.mp4"
+}
+},
+{
+"type": "headline",
+"anchor": "reino unido governo pede",
+"kicker": "PARTE 2 · REINO UNIDO",
+"date": "22 DE OUTUBRO DE 2026",
+"title": "Governo pede que famílias mantenham alimentos em casa"
+},
+{
+"type": "broll",
+"anchor": "comecando pelo reino unido",
+"media": {
+"file": "stock/pb18792.mp4"
+},
+"caption": "LONDRES, REINO UNIDO"
+},
+{
+"type": "stamp",
+"anchor": "o governo britanico divulgou",
+"text": "BE READY",
+"sub": "\"ESTEJA PREPARADO\"",
+"foot": "Nova campanha nacional do governo britânico"
+},
+{
+"type": "broll",
+"anchor": "a iniciativa incentiva",
+"media": {
+"file": "stock/pb202368.mp4"
+},
+"caption": "SERVIÇOS ESSENCIAIS",
+"sub": "E se deixarem de funcionar?"
+},
+{
+"type": "burst",
+"anchor": "entre as recomendacoes esta",
+"from": 0,
+"to": 3,
+"suffix": " dias",
+"label": "de comida e água em casa (Reino Unido)"
+},
+{
+"type": "broll",
+"anchor": "o governo tambem recomenda",
+"media": {
+"file": "stock/pb6746028.jpg"
+},
+"caption": "LANTERNAS E PILHAS"
+},
+{
+"type": "chips",
+"anchor": "carregadores portateis",
+"title": "Além da comida:",
+"items": [
+"Lanternas",
+"Pilhas",
+"Carregadores",
+"Remédios",
+"Primeiros socorros",
+"Rádio"
+],
+"span": 5
+},
+{
+"type": "broll",
+"anchor": "a preocupacao e que acontecimentos",
+"media": {
+"file": "stock/pb278750.mp4"
+},
+"caption": "TEMPESTADES SEVERAS"
+},
+{
+"type": "broll",
+"anchor": "enchentes incendios",
+"media": {
+"file": "stock/pb224206.mp4"
+},
+"caption": "ENCHENTES, INCÊNDIOS, APAGÕES"
+},
+{
+"type": "broll",
+"anchor": "ataques ciberneticos possam",
+"media": {
+"file": "stock/pb289001.mp4"
+},
+"caption": "ATAQUES CIBERNÉTICOS"
+},
+{
+"type": "broll",
+"anchor": "destacou a importancia",
+"media": {
+"file": "stock/pb3584.mp4"
+},
+"caption": "AJUDAR OS VIZINHOS"
+},
+{
+"type": "stamp",
+"anchor": "um detalhe importante",
+"text": "NÃO É ORDEM",
+"sub": "DE GRANDES COMPRAS",
+"foot": "A campanha não pede que as pessoas encham a casa de comida"
+},
+{
+"type": "chain",
+"anchor": "a orientacao e comecar",
+"title": "COMO COMEÇAR",
+"items": [
+"O que já existe em casa",
+"Ampliar aos poucos",
+"Autonomia na emergência"
+],
+"span": 8
+},
+{
+"type": "broll",
+"anchor": "o objetivo e permitir",
+"media": {
+"file": "stock/pb7031077.jpg"
+},
+"caption": "AUTONOMIA PARA AS FAMÍLIAS"
+},
+{
+"type": "headline",
+"anchor": "alemanha recomendacao",
+"kicker": "PARTE 3 · ALEMANHA",
+"date": "PROTEÇÃO CIVIL",
+"title": "A recomendação é ainda mais extensa"
+},
+{
+"type": "broll",
+"anchor": "agora vamos a alemanha",
+"media": {
+"file": "stock/pb3721.mp4"
+},
+"caption": "ALEMANHA"
+},
+{
+"type": "broll",
+"anchor": "o pais possui uma das",
+"media": {
+"file": "stock/pb47179.mp4"
+},
+"caption": "REFERÊNCIA NA EUROPA"
+},
+{
+"type": "doc",
+"anchor": "o escritorio federal",
+"head": "BBK · PROTEÇÃO CIVIL",
+"text": "O Escritório Federal de Proteção Civil (BBK) recomenda que os cidadãos consigam se manter por cerca de 10 dias sem fazer compras.",
+"hl": "cerca de 10 dias sem fazer compras",
+"tilt": true
+},
+{
+"type": "bars",
+"anchor": "a orientacao tambem deixa",
+"title": "Quanto tempo de *reserva*?",
+"sub": "Recomendação alemã (dias)",
+"items": [
+[
+"Ideal",
+10
+],
+[
+"Mínimo já importante",
+3
+]
+],
+"vmax": 12,
+"fmt": "{} dias",
+"posgreen": true,
+"span": 3
+},
+{
+"type": "question",
+"anchor": "e quais sao os motivos",
+"text": "E quais são os *motivos*?"
+},
+{
+"type": "broll",
+"anchor": "as autoridades alemas",
+"media": {
+"file": "stock/pb135765.mp4"
+},
+"caption": "ENCHENTES"
+},
+{
+"type": "broll",
+"anchor": "nevascas interrupcoes",
+"media": {
+"file": "stock/pb29314.mp4"
+},
+"caption": "NEVASCAS"
+},
+{
+"type": "broll",
+"anchor": "problemas no transporte",
+"media": {
+"file": "stock/pb8359.mp4"
+},
+"caption": "TRANSPORTE DE MERCADORIAS"
+},
+{
+"type": "broll",
+"anchor": "de impedir que os supermercados",
+"media": {
+"file": "stock/pb1275480.jpg"
+},
+"caption": "SUPERMERCADOS SEM REPOSIÇÃO"
+},
+{
+"type": "list",
+"anchor": "a recomendacao inclui",
+"title": "O que a Alemanha recomenda:",
+"items": [
+"Alimentos de longa duração",
+"Água potável",
+"Nada que precise de geladeira",
+"Comida sem eletricidade"
+],
+"span": 11
+},
+{
+"type": "chips",
+"anchor": "o planejamento tambem considera",
+"title": "Pense em todos da casa:",
+"items": [
+"Crianças",
+"Idosos",
+"Restrições alimentares",
+"Animais"
+],
+"span": 6
+},
+{
+"type": "broll",
+"anchor": "restricoes alimentares e animais",
+"media": {
+"file": "stock/pb251873.mp4"
+}
+},
+{
+"type": "chain",
+"anchor": "outro ponto interessante",
+"title": "ESTOQUE QUE GIRA",
+"items": [
+"Usar normalmente",
+"Repor o que consumiu",
+"Nada vencido"
+],
+"span": 9
+},
+{
+"type": "broll",
+"anchor": "cheia de alimentos vencidos",
+"media": {
+"file": "stock/pb428094.jpg"
+},
+"caption": "DESPENSA ATUALIZADA"
+},
+{
+"type": "doc",
+"anchor": "portanto a alemanha",
+"head": "ENTENDA",
+"text": "A Alemanha não está anunciando uma catástrofe. É uma política de preparação que já faz parte da proteção civil do país.",
+"hl": "não está anunciando uma catástrofe",
+"tilt": true,
+"tilt_side": -1
+},
+{
+"type": "headline",
+"anchor": "japao nova orientacao",
+"kicker": "PARTE 4 · JAPÃO",
+"date": "2 DE NOVEMBRO DE 2026",
+"title": "Um país acostumado a grandes desastres"
+},
+{
+"type": "broll",
+"anchor": "mas existe outro pais",
+"media": {
+"file": "stock/pb181114.mp4"
+},
+"caption": "TÓQUIO, JAPÃO"
+},
+{
+"type": "broll",
+"anchor": "o japao convive",
+"media": {
+"file": "stock/pb1665878.jpg"
+},
+"caption": "TERREMOTOS"
+},
+{
+"type": "broll",
+"anchor": "e outros fenomenos",
+"media": {
+"file": "stock/pb350195.mp4"
+},
+"caption": "TSUNAMIS E TUFÕES"
+},
+{
+"type": "broll",
+"anchor": "por isso a preparacao",
+"media": {
+"file": "stock/pb214940.mp4"
+},
+"caption": "PREOCUPAÇÃO HISTÓRICA"
+},
+{
+"type": "datecard",
+"anchor": "no dia 2 de novembro",
+"month": "NOVEMBRO 2026",
+"first_wd": 0,
+"ndays": 30,
+"highlight": [
+2
+],
+"label": "Nova Agência de Gestão de Desastres"
+},
+{
+"type": "doc",
+"anchor": "na ocasiao o ministro",
+"head": "JAPÃO · GESTÃO DE DESASTRES",
+"text": "O ministro Goshi Hosono reforçou que as famílias devem manter suprimentos de emergência em casa.",
+"hl": "manter suprimentos de emergência em casa",
+"tilt": true
+},
+{
+"type": "bars",
+"anchor": "a recomendacao e ter",
+"title": "Reserva recomendada no *Japão*",
+"sub": "Comida, água e produtos sanitários",
+"items": [
+[
+"Mínimo",
+3
+],
+[
+"Ideal",
+7
+]
+],
+"vmax": 8,
+"fmt": "{} dias",
+"posgreen": true,
+"span": 3
+},
+{
+"type": "kinetic",
+"anchor": "e existe uma explicacao",
+"text": "Existe uma explicação bem *prática*"
+},
+{
+"type": "chain",
+"anchor": "em um terremoto",
+"title": "NUM GRANDE TERREMOTO",
+"items": [
+"Estradas bloqueadas",
+"Mercados fechados",
+"Ajuda demora dias"
+],
+"span": 8
+},
+{
+"type": "burst",
+"anchor": "o proprio ministerio",
+"from": 0,
+"to": 3,
+"prefix": "+",
+"suffix": " dias",
+"label": "para a ajuda chegar a algumas regiões",
+"color": "navy"
+},
+{
+"type": "broll",
+"anchor": "alem disso uma interrupcao",
+"media": {
+"file": "stock/pb44622.mp4"
+},
+"caption": "LOJAS SEM ABASTECIMENTO",
+"sub": "Por cerca de uma semana"
+},
+{
+"type": "kinetic",
+"anchor": "por isso a ideia",
+"text": "Aguentar os primeiros dias *sem depender* de ajuda externa",
+"size": 88,
+"media": {
+"file": "stock/pb1665870.jpg"
+}
+},
+{
+"type": "chips",
+"anchor": "o japao tambem recomenda",
+"title": "Também no Japão:",
+"items": [
+"Água potável",
+"Longa duração",
+"Produtos sanitários",
+"Sem esgoto?"
+],
+"span": 6
+},
+{
+"type": "cine",
+"anchor": "por que tantos paises estao fazendo",
+"lines": [
+"POR QUE TODOS",
+"*AGORA?*"
+]
+},
+{
+"type": "kinetic",
+"anchor": "agora chegamos",
+"text": "Uma das partes mais *importantes*"
+},
+{
+"type": "grid",
+"anchor": "quando",
+"title": "A mesma preocupação",
+"items": [
+[
+"Reino Unido",
+"3 dias"
+],
+[
+"Alemanha",
+"10 dias"
+],
+[
+"Japão",
+"até 1 semana"
+]
+],
+"gap": 1.0
+},
+{
+"type": "stamp",
+"anchor": "mas isso nao significa",
+"text": "NÃO É GUERRA",
+"sub": "NECESSARIAMENTE",
+"foot": "Os países não estão necessariamente esperando uma guerra mundial"
+},
+{
+"type": "broll",
+"anchor": "existe um contexto",
+"media": {
+"file": "stock/pb11595.jpg"
+},
+"caption": "CONTEXTO INTERNACIONAL"
+},
+{
+"type": "chips",
+"anchor": "nos ultimos anos",
+"title": "Riscos em foco:",
+"items": [
+"Infraestrutura",
+"Energia",
+"Transporte",
+"Comunicações",
+"Abastecimento"
+],
+"span": 6
+},
+{
+"type": "broll",
+"anchor": "uma tempestade de grandes",
+"media": {
+"file": "stock/pb4340503.jpg"
+},
+"caption": "TEMPESTADES",
+"sub": "Estradas interrompidas"
+},
+{
+"type": "broll",
+"anchor": "um ataque cibernetico pode",
+"media": {
+"file": "stock/pb201748.mp4"
+},
+"caption": "ATAQUE CIBERNÉTICO",
+"sub": "Energia e distribuição"
+},
+{
+"type": "broll",
+"anchor": "um conflito militar",
+"media": {
+"file": "stock/pb23544.mp4"
+},
+"caption": "ROTAS COMERCIAIS E PORTOS"
+},
+{
+"type": "broll",
+"anchor": "e uma grande crise sanitaria",
+"media": {
+"file": "stock/pb2165.mp4"
+},
+"caption": "CRISE SANITÁRIA"
+},
+{
+"type": "bignum",
+"anchor": "outro fator importante",
+"from": 0,
+"to": 72,
+"suffix": " horas",
+"label": "Estratégia de preparação civil da União Europeia (março de 2025)",
+"color": "gold",
+"dur": 1.4,
+"tilt": true,
+"year": "UE"
+},
+{
+"type": "broll",
+"anchor": "de que a populacao esteja",
+"media": {
+"file": "stock/pb2183637.jpg"
+},
+"caption": "72 HORAS DE AUTONOMIA"
+},
+{
+"type": "kinetic",
+"anchor": "portanto existe uma tendencia",
+"text": "Uma *tendência* mundial de preparação",
+"media": {
+"file": "stock/pb167404.mp4"
+}
+},
+{
+"type": "headline",
+"anchor": "e o que os governos recomendam",
+"kicker": "PARTE 6",
+"date": "GUIA PRÁTICO",
+"title": "O que manter dentro de casa?"
+},
+{
+"type": "kinetic",
+"anchor": "e afinal o que",
+"text": "O que uma família deveria ter *armazenado*?"
+},
+{
+"type": "broll",
+"anchor": "o primeiro item e",
+"media": {
+"file": "stock/pb38220.mp4"
+},
+"caption": "1º ITEM: ÁGUA POTÁVEL"
+},
+{
+"type": "bignum",
+"anchor": "no caso do reino unido a orientacao",
+"from": 0,
+"to": 3,
+"suffix": " litros",
+"label": "de água por pessoa, por dia",
+"color": "white",
+"dur": 1.2
+},
+{
+"type": "burst",
+"anchor": "isso significa que uma familia",
+"from": 0,
+"to": 36,
+"suffix": " litros",
+"label": "família de 4 pessoas · 3 dias"
+},
+{
+"type": "broll",
+"anchor": "alimentos nao pereciveis",
+"media": {
+"file": "stock/pb570114.jpg"
+},
+"caption": "2º ITEM: NÃO PERECÍVEIS"
+},
+{
+"type": "chips",
+"anchor": "entre os exemplos",
+"title": "Exemplos:",
+"items": [
+"Arroz",
+"Massas",
+"Enlatados",
+"Biscoitos",
+"Frutas secas",
+"Castanhas"
+],
+"span": 6
+},
+{
+"type": "broll",
+"anchor": "tambem e importante ter",
+"media": {
+"file": "stock/pb7939326.jpg"
+},
+"caption": "SEM PREPARO COMPLICADO"
+},
+{
+"type": "broll",
+"anchor": "sao os medicamentos",
+"media": {
+"file": "stock/pb8287535.jpg"
+},
+"caption": "3º ITEM: MEDICAMENTOS"
+},
+{
+"type": "broll",
+"anchor": "lanternas",
+"media": {
+"file": "stock/pb4333412.jpg"
+},
+"caption": "LANTERNAS, PILHAS E RÁDIO"
+},
+{
+"type": "broll",
+"anchor": "afinal durante",
+"media": {
+"file": "stock/pb3194287.jpg"
+},
+"caption": "DURANTE UM APAGÃO",
+"sub": "Informação oficial é essencial"
+},
+{
+"type": "stamp",
+"anchor": "e existe um detalhe",
+"text": "SEM PÂNICO",
+"sub": "NADA DE COMPRAS DESESPERADAS",
+"foot": "As autoridades não recomendam compras desesperadas"
+},
+{
+"type": "list",
+"anchor": "a orientacao e organizar",
+"title": "Como organizar:",
+"items": [
+"Tamanho da família",
+"Orçamento doméstico",
+"Repor aos poucos"
+],
+"span": 6
+},
+{
+"type": "cine",
+"anchor": "existe uma ameaca",
+"lines": [
+"EXISTE UMA",
+"*AMEAÇA MAIOR?*"
+]
+},
+{
+"type": "kinetic",
+"anchor": "essa e uma pergunta",
+"text": "A pergunta que *muita gente* está fazendo",
+"media": {
+"file": "stock/pb6387.mp4"
+}
+},
+{
+"type": "map",
+"anchor": "a guerra entre",
+"from": [
+20,
+50,
+60
+],
+"to": [
+32,
+50,
+40
+],
+"move": 3,
+"hl": {
+"RUS": "red",
+"UKR": "gold"
+},
+"hl_at": 0.4,
+"labels": [
+{
+"ll": [
+31,
+49
+],
+"text": "GUERRA RÚSSIA × UCRÂNIA",
+"at": 1.4,
+"dx": -200,
+"dy": 160
+}
+],
+"title": "SEGURANÇA ENERGÉTICA"
+},
+{
+"type": "broll",
+"anchor": "alem disso ataques",
+"media": {
+"file": "stock/pb85824.mp4"
+},
+"caption": "SABOTAGEM E INFRAESTRUTURA"
+},
+{
+"type": "stamp",
+"anchor": "entretanto e fundamental",
+"text": "FATOS × ESPECULAÇÃO",
+"foot": "É fundamental separar uma coisa da outra"
+},
+{
+"type": "doc",
+"anchor": "as recomendacoes de estoque",
+"head": "ENTENDA",
+"text": "Os estoques domésticos não confirmam que uma guerra está prestes a começar, nem que governos saibam de uma catástrofe iminente.",
+"hl": "não confirmam que uma guerra está prestes a começar",
+"tilt": true
+},
+{
+"type": "grid",
+"anchor": "no caso do japao por exemplo",
+"title": "O motivo de cada país",
+"items": [
+[
+"Japão",
+"terremotos"
+],
+[
+"Reino Unido",
+"clima, energia, ciber"
+],
+[
+"Alemanha",
+"proteção civil antiga"
+]
+],
+"gap": 2.5
+},
+{
+"type": "broll",
+"anchor": "no reino unido a campanha",
+"media": {
+"file": "stock/pb291454.mp4"
+},
+"caption": "REINO UNIDO",
+"sub": "Clima, energia e incidentes cibernéticos"
+},
+{
+"type": "broll",
+"anchor": "na alemanha possuem",
+"media": {
+"file": "stock/pb3721.mp4"
+},
+"caption": "ALEMANHA",
+"sub": "Política antiga de proteção civil"
+},
+{
+"type": "kinetic",
+"anchor": "o que podemos afirmar",
+"text": "Preparar a população para quando a ajuda *demora a chegar*",
+"size": 88,
+"media": {
+"file": "stock/pb8357.mp4"
+}
+},
+{
+"type": "headline",
+"anchor": "e o que isso significa para o brasil",
+"kicker": "PARTE 8 · BRASIL",
+"date": "E POR AQUI?",
+"title": "O que isso significa para o Brasil?"
+},
+{
+"type": "broll",
+"anchor": "o brasil possui",
+"media": {
+"file": "stock/pb198289.mp4"
+},
+"caption": "BRASIL",
+"sub": "Grande produção agrícola"
+},
+{
+"type": "broll",
+"anchor": "temos uma grande",
+"media": {
+"file": "stock/pb16685.mp4"
+}
+},
+{
+"type": "kinetic",
+"anchor": "entretanto isso nao significa",
+"text": "Mas não estamos *livres* de interrupções"
+},
+{
+"type": "map",
+"anchor": "as enchentes que atingiram",
+"from": [
+-52,
+-15,
+60
+],
+"to": [
+-53,
+-29.5,
+14
+],
+"move": 3.0,
+"hl": {
+"BRA": "red"
+},
+"hl_at": 0.2,
+"labels": [
+{
+"ll": [
+-51.2,
+-30.03
+],
+"text": "RIO GRANDE DO SUL · ENCHENTES 2024",
+"at": 2.6,
+"dx": -600,
+"dy": -150
+}
+],
+"title": "ENCHENTES DE 2024"
+},
+{
+"type": "broll",
+"anchor": "podem comprometer estradas",
+"media": {
+"file": "stock/pb5680458.jpg"
+},
+"caption": "ESTRADAS E MERCADOS AFETADOS"
+},
+{
+"type": "chips",
+"anchor": "tambem podemos",
+"title": "Outros riscos no Brasil:",
+"items": [
+"Apagões",
+"Deslizamentos",
+"Secas",
+"Logística"
+],
+"span": 5
+},
+{
+"type": "broll",
+"anchor": "em situacoes assim",
+"media": {
+"file": "stock/pb89835.mp4"
+},
+"caption": "O ALIMENTO EXISTE...",
+"sub": "Mas pode não chegar"
+},
+{
+"type": "kinetic",
+"anchor": "e esse e justamente",
+"text": "Por isso as recomendações *merecem atenção*"
+},
+{
+"type": "stamp",
+"anchor": "nao se trata de incentivar",
+"text": "NÃO É MEDO",
+"sub": "É ORGANIZAÇÃO",
+"foot": "Nada de compras desnecessárias"
+},
+{
+"type": "grid",
+"anchor": "ter agua",
+"title": "O básico nos primeiros dias",
+"items": [
+"Água",
+"Comida de longa duração",
+"Medicamentos",
+"Itens básicos"
+],
+"gap": 0.8
+},
+{
+"type": "cine",
+"anchor": "o mundo esta se preparando",
+"lines": [
+"O MUNDO SE PREPARA",
+"*PARA O QUÊ?*"
+]
+},
+{
+"type": "kinetic",
+"anchor": "o que estamos observando",
+"text": "2026: um reforço da *preparação* para emergências",
+"media": {
+"file": "stock/pb243075.mp4"
+}
+},
+{
+"type": "bars",
+"anchor": "o reino unido recomenda",
+"title": "Reservas recomendadas em *2026*",
+"sub": "Dias de autonomia",
+"items": [
+[
+"Reino Unido",
+3
+],
+[
+"Alemanha",
+10
+],
+[
+"Japão (ideal)",
+7
+]
+],
+"vmax": 11,
+"fmt": "{} dias",
+"posgreen": true,
+"span": 6
+},
+{
+"type": "kinetic",
+"anchor": "essas iniciativas",
+"text": "Governos levam *a sério* as interrupções nas cidades",
+"media": {
+"file": "stock/pb310109.mp4"
+}
+},
+{
+"type": "stamp",
+"anchor": "mas e importante compreender",
+"text": "PREPARAÇÃO",
+"sub": "NÃO É PREVISÃO",
+"foot": "Não há confirmação de guerra ou colapso"
+},
+{
+"type": "chips",
+"anchor": "o que existe sao",
+"title": "Riscos reais:",
+"items": [
+"Desastres naturais",
+"Ataques à infraestrutura",
+"Abastecimento"
+],
+"span": 4
+},
+{
+"type": "kinetic",
+"anchor": "e talvez a principal",
+"text": "Não precisamos esperar a emergência para *começar a nos preparar*",
+"size": 84,
+"media": {
+"file": "stock/pb11186.mp4"
+}
+},
+{
+"type": "broll",
+"anchor": "este foi mais um",
+"media": {
+"file": "stock/pb167404.mp4"
+},
+"caption": "IMPACTO ECONÔMICO",
+"sub": "Economia e acontecimentos internacionais"
+},
+{
+"type": "outro",
+"anchor": "deixe o seu comentario",
+"click": 6.0
+}
+]
