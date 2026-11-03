@@ -31,7 +31,33 @@ Meta: entregar em até ~50 min. Rode etapas pesadas em segundo plano e avise o u
    `python3 tools/render.py plano.json $A/tx2.json $A/ed/voz.wav $A $A/out/video.mp4`
 9. Entregar com `SendUserFile`. Não commitar o MP4 (grande); commitar `plano.json` e `cortes.json`.
 
+## REGRAS FIXAS DE ÁUDIO (pedido do usuário — sempre seguir)
+- **A voz é sempre o elemento mais alto.** Efeitos sonoros e música SEMPRE abaixo da voz: dá para ouvir,
+  mas nunca competem com a fala. Valores no `render.py`: `SFX_LEVEL = 0.16`, `SFX_CEIL = 0.16`
+  (limitador do barramento de efeitos), música 0.085 com voz / 0.17 nas pausas. Não aumentar.
+- **Nada de sirene ou alarme alto.** O som `alarm` agora é um pulso grave e discreto. Não criar sons estridentes.
+- **Tirar eco/reverberação** (o usuário grava no celular, às vezes em ambiente aberto):
+  `edit_audio.py` passa a voz pelo DeepFilterNet (remove ruído e reverberação) e depois por filtros
+  (expansor contra a cauda do eco, corte de 300 Hz abafado, presença em 3 kHz, de-esser, compressor).
+  Se o DeepFilterNet não estiver instalado: `pip install torch torchaudio --index-url https://download.pytorch.org/whl/cpu && pip install deepfilternet` (o edit_audio.py já contorna a incompatibilidade com torchaudio novo).
+- Ao revisar: confira que a voz soa limpa, sem eco e sem cortes de palavras.
+
 ## Estilo (referências do usuário)
 Documentário explicativo: mapa escuro verde com regiões em vermelho e etiquetas; papel creme
 quadriculado com título serifado e palavra em *itálico* vermelho; documento com trecho grifado;
 números grandes animados; câmera sempre em leve movimento; cortes com whoosh; trilha tensa ao fundo.
+
+**Segunda leva de referências (MISTURAR com o estilo acima, sem remover nada):** documentário
+cinematográfico e jornalismo investigativo.
+- `cine`: abertura de série — faixas vermelhas diagonais, letras grandes condensadas e gastas, poeira,
+  barras de cinema, brilho passando. Use na abertura (cena 0) e em viradas fortes.
+- `headline`: manchete de jornal investigativo — fundo de jornal envelhecido, recorte de papel rasgado,
+  título datilografado, sublinhado vermelho, data. Alterne com `chapter` nas aberturas de parte.
+- `"tilt": true` (vale para QUALQUER cena): câmera em ângulo — a cena vira um cartão inclinado em 3D
+  com fundo desfocado e poeira; `tilt_side` 1 ou -1 alterna o lado; `year` põe etiqueta de ano.
+  Use em ~1 de cada 4 cenas (números, documentos, gráficos).
+- `burst`: ilustração editorial — raios azul-marinho/laranja girando e cartão de papel rasgado com
+  número (`from/to/suffix/label`) ou texto (`big/label`). Use 1–3 vezes por vídeo em destaques.
+- `"letterbox": true`: barras pretas de cinema em qualquer cena.
+Regra de mistura: não repetir o mesmo tipo de cena mais de 2 vezes seguidas; variar fundos
+(escuro / papel creme / jornal / mapa) ao longo do vídeo.

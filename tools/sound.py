@@ -107,8 +107,18 @@ def glitch(d=0.35):
     return fast_lp(x, 7000) * env(n, 0.005, 0.05)
 
 def alarm(d=1.6):
-    tt = t(d); f = np.where((tt * 4) % 1 < 0.5, 880, 660)
-    return np.sign(np.sin(2 * np.pi * np.cumsum(f) / SR)) * 0.3 * env(len(tt), 0.01, 0.2) + np.sin(2 * np.pi * np.cumsum(f) / SR) * 0.5
+    """Antes era uma sirene (alta demais). Agora: pulso grave e discreto de tensão."""
+    tt = t(d)
+    pulse = np.sin(2 * np.pi * 55 * tt) * (0.5 + 0.5 * np.sin(2 * np.pi * 2 * tt - np.pi / 2))
+    return fast_lp(pulse + rng.standard_normal(len(tt)) * 0.03, 400) * env(len(tt), 0.15, 0.6) * 0.6
+
+def paper(d=0.5):
+    """Folha de papel / jornal deslizando."""
+    x = bandsweep(int(SR * d), 2500, 900, 0.5)
+    crack = np.zeros(int(SR * d))
+    for _ in range(25):
+        i = rng.integers(0, len(crack) - 200); crack[i:i + 120] += rng.standard_normal(120) * np.exp(-np.arange(120) / 25)
+    return (x * 0.7 + crack * 0.5) * env(int(SR * d), 0.03, 0.2)
 
 def cash(d=0.9):
     return ding(d) * 0.6 + np.concatenate([np.zeros(int(0.02 * SR)), tick(d - 0.02) * 0])[: int(SR * d)] + \
@@ -174,7 +184,7 @@ if __name__ == "__main__":
     os.makedirs(out, exist_ok=True)
     for name, fn in [("whoosh", lambda: whoosh(0.7)), ("whoosh_down", lambda: whoosh(0.6, False)), ("boom", boom),
                      ("hit", hit), ("riser", riser), ("tick", tick), ("typing", typing), ("ding", ding),
-                     ("pop", pop), ("glitch", glitch), ("alarm", alarm), ("cash", cash)]:
+                     ("pop", pop), ("glitch", glitch), ("alarm", alarm), ("cash", cash), ("paper", paper)]:
         save(f"{out}/{name}.wav", fn())
     save(f"{out}/music.wav", music(dur))
     print("ok")
