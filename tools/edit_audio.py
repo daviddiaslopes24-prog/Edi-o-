@@ -63,10 +63,42 @@ for a, b in merged:
     t = max(t, b)
 if dur - t > 0.04: keep.append([t, dur])
 
+# ---- limpeza da voz: tira eco/reverberação de ambiente aberto e ruído ----
+def dereverb(path):
+    """Usa DeepFilterNet (IA que remove ruído e reverberação) se instalado; senão segue só com filtros."""
+    try:
+        import torch, types
+        # compatibilidade: versões novas do torchaudio não têm mais torchaudio.backend.common
+        if "torchaudio.backend.common" not in sys.modules:
+            b = types.ModuleType("torchaudio.backend"); c = types.ModuleType("torchaudio.backend.common")
+            c.AudioMetaData = object; b.common = c
+            sys.modules["torchaudio.backend"] = b; sys.modules["torchaudio.backend.common"] = c
+        from df.enhance import enhance, init_df
+        mdir = os.environ.get("DFN_MODEL", os.path.expanduser("~/.cache/DeepFilterNet/DeepFilterNet3"))
+        model, st, _ = init_df(model_base_dir=mdir, log_level="ERROR")
+        sr = st.sr()
+        r = subprocess.run(["ffmpeg", "-v", "error", "-i", path, "-ac", "1", "-ar", str(sr), "-f", "f32le", "-"], capture_output=True, check=True).stdout
+        a = torch.from_numpy(np.frombuffer(r, np.float32).copy())[None]
+        e = enhance(model, st, a).squeeze(0).numpy().astype(np.float32)
+        clean = os.path.join(out, "voz_limpa.wav")
+        p = subprocess.Popen(["ffmpeg", "-v", "error", "-y", "-f", "f32le", "-ar", str(sr), "-ac", "1", "-i", "-", clean], stdin=subprocess.PIPE)
+        p.communicate(e.tobytes()); print("eco/ruído removidos com DeepFilterNet")
+        return clean
+    except BaseException as ex:
+        print("DeepFilterNet indisponível, usando só filtros:", ex)
+        return path
+
+clean_src = dereverb(src)
+# filtros: corta graves de vento, reduz ruído, "expansor" que encurta a cauda do eco entre palavras,
+# tira o som abafado de sala (250-400 Hz), dá presença (3 kHz), compressor para voz firme e na frente
+VOICE_CHAIN = ("highpass=f=85,afftdn=nf=-28,"
+               "agate=threshold=0.02:ratio=2.5:range=0.2:attack=3:release=120:knee=4,"
+               "equalizer=f=300:t=q:w=1.2:g=-3,equalizer=f=3200:t=q:w=1:g=2.5,equalizer=f=8000:t=q:w=1:g=1,"
+               "deesser=i=0.4,acompressor=threshold=-22dB:ratio=3.5:attack=5:release=100:makeup=4")
+
 # monta com crossfade curto (10 ms) para evitar estalos
-X = np.frombuffer(subprocess.run(["ffmpeg", "-v", "error", "-i", src, "-ac", "1", "-ar", str(SR),
-     "-af", "highpass=f=80,afftdn=nf=-30,acompressor=threshold=-20dB:ratio=3:attack=5:release=120:makeup=3,"
-     "equalizer=f=3000:t=q:w=1:g=2,equalizer=f=250:t=q:w=1:g=-2", "-f", "f32le", "-"],
+X = np.frombuffer(subprocess.run(["ffmpeg", "-v", "error", "-i", clean_src, "-ac", "1", "-ar", str(SR),
+     "-af", VOICE_CHAIN, "-f", "f32le", "-"],
      capture_output=True, check=True).stdout, np.float32)
 fade = int(0.012 * SR); parts = []; mapa = []; pos = 0.0
 for a, b in keep:

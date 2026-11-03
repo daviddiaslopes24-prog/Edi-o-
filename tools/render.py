@@ -76,6 +76,9 @@ def bg(kind):
         for gx in range(0, W, 60): dr.line([(gx, 0), (gx, H)], fill=PAPER_GRID + (255,), width=1)
         for gy in range(0, H, 60): dr.line([(0, gy), (W, gy)], fill=PAPER_GRID + (255,), width=1)
         return img
+    if kind == "cream":
+        rng = np.random.default_rng(2)
+        return Image.fromarray(np.clip(np.array(CREAM, float)[None, None] + rng.normal(0, 4, (H, W, 1)), 0, 255).astype(np.uint8)).convert("RGBA")
     if kind == "gray":
         y, x = np.mgrid[0:H, 0:W]
         d = np.sqrt(((x - W / 2) / W) ** 2 + ((y - H / 2) / H) ** 2)
@@ -624,8 +627,198 @@ def sc_outro(img, dr, t, D, p):
                        fill=rgba(WHITE, 1), outline=rgba((0, 0, 0), 1))
     return [(0.0, "whoosh", 0.5), (1.0, "pop", 0.6), (p.get("click", 3.2), "ding", 0.6)]
 
+
+# ================= ESTILO CINEMATOGRÁFICO / INVESTIGATIVO =================
+NAVY = (31, 45, 74); ORANGE = (214, 96, 52); CREAM = (240, 230, 210)
+
+@lru_cache(None)
+def newsprint():
+    """Fundo de jornal envelhecido (colunas de texto, manchetes, manchas de tinta)."""
+    rng = np.random.default_rng(11)
+    img = Image.new("RGB", (W, H), (226, 222, 212)); d = ImageDraw.Draw(img)
+    f = F("serif", 15); fb = F("serif", 40)
+    words = ("mercado bolsa economia governo juros dólar investidores crise pregão índice fiscal dívida banco "
+             "central inflação emprego empresas ações queda alta semana relatório análise contas").split()
+    x = 16
+    while x < W:
+        colw = int(rng.integers(230, 330)); y = 14
+        while y < H:
+            if rng.random() < 0.1:
+                d.text((x, y), " ".join(rng.choice(words, 2)).upper(), font=fb, fill=(60, 58, 55)); y += 56
+            else:
+                for _ in range(int(rng.integers(6, 15))):
+                    d.text((x, y), " ".join(rng.choice(words, int(rng.integers(4, 7)))), font=f, fill=(105, 101, 96)); y += 19
+                y += 14
+        x += colw + 24
+    a = np.asarray(img).astype(np.float32)
+    blot = np.asarray(Image.fromarray((rng.random((18, 32)) * 255).astype(np.uint8)).resize((W, H), Image.BICUBIC)).astype(np.float32) / 255
+    a = a * (0.78 + 0.3 * blot[..., None]) + rng.normal(0, 6, (H, W, 1))
+    g = a.mean(2, keepdims=True); a = g * 0.85 + a * 0.15
+    return Image.fromarray(np.clip(a, 0, 255).astype(np.uint8)).convert("RGBA")
+
+@lru_cache(None)
+def grunge(w, h, seed=3):
+    rng = np.random.default_rng(seed)
+    n = np.asarray(Image.fromarray((rng.random((h // 8, w // 8)) * 255).astype(np.uint8)).resize((w, h), Image.BICUBIC)).astype(np.float32) / 255
+    fine = rng.random((h, w))
+    m = np.clip((n * 0.88 + fine * 0.12 - 0.12) * 4, 0, 1)
+    return Image.fromarray((m * 255).astype(np.uint8))
+
+def torn_mask(w, h, seed=0, rough=12):
+    rng = np.random.default_rng(seed); pts = []
+    for x in np.linspace(0, w, 48): pts.append((x, rng.uniform(0, rough)))
+    for y in np.linspace(0, h, 28): pts.append((w - rng.uniform(0, rough), y))
+    for x in np.linspace(w, 0, 48): pts.append((x, h - rng.uniform(0, rough)))
+    for y in np.linspace(h, 0, 28): pts.append((rng.uniform(0, rough), y))
+    m = Image.new("L", (int(w), int(h)), 0); ImageDraw.Draw(m).polygon(pts, fill=255); return m
+
+def paper_card(w, h, color=CREAM, seed=0):
+    card = Image.new("RGBA", (int(w), int(h)), color + (255,))
+    card.putalpha(torn_mask(w, h, seed)); return card
+
+def light_sweep(img, t, start=0.2, dur=1.4, strength=0.35):
+    k = prog(t, start, dur)
+    if k <= 0 or k >= 1: return
+    ov = Image.new("RGBA", (W, H)); d = ImageDraw.Draw(ov)
+    cx = -600 + (W + 1200) * ease_io(k)
+    for i, wd in enumerate((260, 160, 70)):
+        a = strength * (0.35 + i * 0.3)
+        d.polygon([(cx - wd, 0), (cx + wd, 0), (cx + wd - 500, H), (cx - wd - 500, H)], fill=(255, 245, 225, int(a * 80)))
+    img.alpha_composite(ov)
+
+def dust(dr, t, n=40, seed=0, color=WHITE):
+    rng = np.random.default_rng(seed + int(t * 8))
+    for _ in range(n):
+        x, y = rng.random() * W, rng.random() * H; r = rng.random() * 2.2 + 0.5
+        dr.ellipse([x - r, y - r, x + r, y + r], fill=rgba(color, 0.25 + rng.random() * 0.4))
+
+def condensed_text(text, size, color, cond=0.78, grunge_on=True):
+    f = F("black", size); w = int(tw(f, text)) + 40; h = int(size * 1.35)
+    lay = Image.new("RGBA", (w, h)); ImageDraw.Draw(lay).text((20, h / 2), text, font=f, fill=color + (255,), anchor="lm")
+    lay = lay.resize((max(1, int(w * cond)), h), Image.LANCZOS)
+    if grunge_on:
+        g = grunge(lay.width, lay.height, 7)
+        lay.putalpha(Image.fromarray((np.asarray(lay.getchannel("A")).astype(np.float32) * (0.78 + 0.22 * np.asarray(g) / 255)).astype(np.uint8)))
+    return lay
+
+def sc_headline(img, dr, t, D, p):
+    """Manchete de jornal investigativo sobre fundo de jornal."""
+    img.alpha_composite(newsprint())
+    k = ease(prog(t, 0.0, 0.6))
+    cw, ch = 1500, 420
+    card = paper_card(cw, ch, (246, 242, 232), seed=len(p["title"]))
+    cd = ImageDraw.Draw(card)
+    cd.text((70, 70), p.get("kicker", "INVESTIGAÇÃO"), font=F("bold", 30), fill=rgba(RED, 1), anchor="lm")
+    cd.text((cw - 70, 70), p.get("date", ""), font=F("med", 28), fill=rgba((90, 90, 90), 1), anchor="rm")
+    for x in range(70, cw - 70, 14): cd.ellipse([x, 108, x + 4, 112], fill=rgba((120, 120, 120), 1))
+    f = F("serif", 92); lines = wrap(p["title"].replace("*", ""), f, cw - 140)
+    n_chars = sum(len(l) for l in lines); shown = int(n_chars * prog(t, 0.4, min(1.8, n_chars * 0.04))); c = 0
+    y = 200 if len(lines) > 1 else 240
+    for ln in lines:
+        vis = ln[: max(0, shown - c)]; c += len(ln)
+        cd.text((70, y), vis, font=f, fill=rgba(INK, 1), anchor="lm"); y += 110
+    ul = ease(prog(t, 0.4 + min(1.8, n_chars * 0.04), 0.5))
+    cd.rectangle([70, ch - 70, 70 + (cw - 140) * 0.45 * ul, ch - 58], fill=rgba(RED, 1))
+    rot = -2 + 1.5 * (1 - k)
+    card = card.rotate(rot, expand=True, resample=Image.BICUBIC)
+    sh = Image.new("RGBA", card.size, (0, 0, 0, 0)); sh.putalpha(card.getchannel("A").point(lambda v: v * 0.45))
+    sh = sh.filter(ImageFilter.GaussianBlur(14))
+    x0 = int(W / 2 - card.width / 2); y0 = int(H / 2 - card.height / 2 + (1 - k) * 80)
+    img.alpha_composite(sh, (x0 + 18, y0 + 24)); img.alpha_composite(card, (x0, y0))
+    light_sweep(img, t, 0.3, 1.6, 0.4)
+    return [(0.0, "whoosh", 0.4), (0.4, "typing", 0.35), (0.0, "paper", 0.5)]
+
+def sc_cine(img, dr, t, D, p):
+    """Abertura cinematográfica: faixas vermelhas diagonais, letras grandes gastas, poeira."""
+    img.paste((14, 12, 12, 255), (0, 0, W, H))
+    rng = np.random.default_rng(4)
+    ov = Image.new("RGBA", (W, H)); od = ImageDraw.Draw(ov)
+    for i in range(5):
+        st = 0.05 + i * 0.12; k = ease(prog(t, st, 0.7))
+        off = (1 - k) * 2200 * (1 if i % 2 else -1)
+        y = 140 + i * 190 + math.sin(i) * 40; th = 90 + 60 * rng.random()
+        col = (150 + int(60 * rng.random()), 20, 28, 235)
+        od.polygon([(-400 + off, y + 260), (W + 400 + off, y - 260), (W + 400 + off, y - 260 + th), (-400 + off, y + 260 + th)], fill=col)
+    g = grunge(W, H, 9); ov.putalpha(Image.fromarray((np.asarray(ov.getchannel("A")).astype(np.float32) * np.asarray(g) / 255).astype(np.uint8)))
+    img.alpha_composite(ov)
+    band = Image.new("RGBA", (W, H)); bd = ImageDraw.Draw(band)
+    for i in range(60):
+        yy = H / 2 - 330 + i * 11; aa = int(150 * math.sin(math.pi * i / 59))
+        bd.rectangle([0, yy, W, yy + 11], fill=(0, 0, 0, aa))
+    img.alpha_composite(band)
+    s = 1.12 - 0.1 * ease(prog(t, 0.3, D)); a = prog(t, 0.5, 0.4)
+    y = H / 2 - 40 * (len(p["lines"]) - 1)
+    for i, ln in enumerate(p["lines"]):
+        accent = ln.startswith("*"); lay = condensed_text(ln.strip("*"), int((200 if accent else 150) * s), (255, 255, 255) if accent else (215, 205, 200))
+        if a < 1: lay.putalpha(lay.getchannel("A").point(lambda v: int(v * a)))
+        img.alpha_composite(lay, (int(W / 2 - lay.width / 2), int(y - lay.height / 2 + i * 170 * s - 60 * (len(p["lines"]) - 1))))
+    if p.get("sub"):
+        sa = prog(t, 1.2, 0.5)
+        dr.text((W / 2, H - 230), p["sub"], font=F("bold", 44), fill=rgba((230, 225, 220), sa), anchor="mm")
+    light_sweep(img, t, 0.9, 1.4, 0.5)
+    dust(dr, t, 60, 1, (230, 120, 120))
+    return [(0.0, "boom", 0.6), (0.05, "whoosh", 0.4), (0.5, "hit", 0.4)]
+
+def sc_burst(img, dr, t, D, p):
+    """Ilustração editorial: raios de explosão em azul/laranja e cartão de papel rasgado com número/texto."""
+    rot = t * 6; k = back(prog(t, 0.1, 0.5))
+    ov = Image.new("RGBA", (W, H)); od = ImageDraw.Draw(ov)
+    for i in range(36):
+        a0 = math.radians(rot + i * 10); a1 = a0 + math.radians(4)
+        col = ORANGE if i % 2 else NAVY
+        od.polygon([(W / 2, H / 2), (W / 2 + 1400 * math.cos(a0), H / 2 + 1400 * math.sin(a0)),
+                    (W / 2 + 1400 * math.cos(a1), H / 2 + 1400 * math.sin(a1))], fill=col + (int(150 * clamp(k)),))
+    img.alpha_composite(ov)
+    if k > 0:
+        cw, ch = int(1000 * clamp(k, 0, 1.2)), int(520 * clamp(k, 0, 1.2))
+        if cw > 20:
+            card = paper_card(cw, ch, CREAM, 5); cd = ImageDraw.Draw(card)
+            v, _ = count_val(p, t) if "to" in p else (None, 1)
+            big = (p.get("prefix", "") + fmt_br(v, p.get("dec", 0)) + p.get("suffix", "")) if v is not None else p.get("big", "")
+            cd.text((cw / 2, ch * 0.42), big, font=F("black", int(170 * cw / 1000)), fill=rgba(ORANGE if p.get("color") != "navy" else NAVY, 1), anchor="mm")
+            cd.text((cw / 2, ch * 0.78), p.get("label", ""), font=F("bold", int(44 * cw / 1000)), fill=rgba(NAVY, 1), anchor="mm")
+            img.alpha_composite(card.rotate(-3, expand=True, resample=Image.BICUBIC), (int(W / 2 - cw / 2 - 20), int(H / 2 - ch / 2 - 20)))
+    return [(0.0, "whoosh", 0.4), (0.1, "hit", 0.45)]
+
+def sc_photo(img, dr, t, D, p):
+    """Cartão com ano e texto em ângulo de câmera (documentário P&B). Usa imagem se houver 'img'."""
+    img.paste((20, 20, 22, 255), (0, 0, W, H))
+    dust(dr, t, 50, 2)
+    return []
+
+def find_coeffs(dst, src):
+    A = []
+    for (x, y), (X, Y) in zip(dst, src):
+        A.append([x, y, 1, 0, 0, 0, -X * x, -X * y]); A.append([0, 0, 0, x, y, 1, -Y * x, -Y * y])
+    b = np.array(src).reshape(8)
+    return np.linalg.solve(np.array(A, float), b).tolist()
+
+def tilt_frame(inner, t, D, p):
+    """Câmera em ângulo: a cena vira um cartão inclinado em 3D, com fundo desfocado e poeira."""
+    small = inner.resize((W // 6, H // 6), Image.BILINEAR).filter(ImageFilter.GaussianBlur(3)).resize((W, H), Image.BILINEAR)
+    bgimg = Image.blend(small.convert("RGB"), Image.new("RGB", (W, H), (0, 0, 0)), 0.55).convert("RGBA")
+    k = ease_io(t / max(D, 0.1)); side = p.get("tilt_side", 1)
+    yaw = (0.22 - 0.12 * k) * side  # rotação aparente
+    sc = 0.80 + 0.05 * k
+    cw, ch = W * sc, H * sc; cx, cy = W / 2 + 40 * side * (1 - k), H / 2
+    dz = yaw * cw * 0.5
+    quad = [(cx - cw / 2, cy - ch / 2 + dz * 0.6), (cx + cw / 2, cy - ch / 2 - dz * 0.6),
+            (cx + cw / 2, cy + ch / 2 + dz * 0.6), (cx - cw / 2, cy + ch / 2 - dz * 0.6)]
+    coeffs = find_coeffs(quad, [(0, 0), (W, 0), (W, H), (0, H)])
+    rgba_in = inner.convert("RGBA")
+    warped = rgba_in.transform((W, H), Image.PERSPECTIVE, coeffs, Image.BILINEAR)
+    m = Image.new("L", (W, H), 0); ImageDraw.Draw(m).polygon(quad, fill=255)
+    sh = Image.new("RGBA", (W, H), (0, 0, 0, 0)); ImageDraw.Draw(sh).polygon([(x + 30, y + 40) for x, y in quad], fill=(0, 0, 0, 170))
+    sh = sh.resize((W // 4, H // 4)).filter(ImageFilter.GaussianBlur(6)).resize((W, H))
+    bgimg.alpha_composite(sh); bgimg.paste(warped, (0, 0), m)
+    d = ImageDraw.Draw(bgimg, "RGBA"); dust(d, t, 35, 3)
+    if p.get("year"):
+        a = prog(t, 0.3, 0.5)
+        label_box(d, (cx - cw / 2 + 140, cy - ch / 2 + 20), p["year"], t, bgc=(0, 0, 0), size=48, alpha=a)
+    return bgimg
+
 SCENES = {k[3:]: v for k, v in globals().items() if k.startswith("sc_")}
-BGS = {"title": "dark", "chapter": "paper", "bars": "paper", "doc": "gray", "map": "ocean"}
+BGS = {"title": "dark", "chapter": "paper", "bars": "paper", "doc": "gray", "map": "ocean", "burst": "cream", "headline": "dark", "cine": "dark"}
 
 # ---------- quadro final ----------
 def frame(scene, t, D):
@@ -639,6 +832,10 @@ def frame(scene, t, D):
     dr.text((60, 60), BRAND, font=F("bold", 26), fill=rgba(WHITE if dark else INK, 0.55), anchor="lm")
     if p.get("fonte"):
         dr.text((60, H - 50), "Fonte: " + p["fonte"], font=F("reg", 26), fill=rgba(WHITE if dark else INK, 0.7), anchor="lm")
+    if p.get("tilt"):
+        img = tilt_frame(img, t, D, p); dr = ImageDraw.Draw(img, "RGBA")
+    if p.get("letterbox") or kind == "cine":
+        lb = int(110 * ease(prog(t, 0, 0.5))); dr.rectangle([0, 0, W, lb], fill=(0, 0, 0, 255)); dr.rectangle([0, H - lb, W, H], fill=(0, 0, 0, 255))
     # câmera: leve aproximação contínua + entrada
     s = 1.0 + 0.045 * (t / max(D, 0.1)) + 0.06 * (1 - ease(prog(t, 0, 0.45)))
     im = img.convert("RGB")
@@ -693,6 +890,9 @@ def resolve(plan, words, total):
     starts[0] = 0.0
     return starts
 
+SFX_LEVEL = 0.16   # volume geral dos efeitos (antes 0.42: estava alto demais)
+SFX_CEIL = 0.16    # pico máximo do barramento de efeitos (voz tem pico ~0.8)
+
 def mix(voice_path, sfx_events, assets_sfx, music_path, out_path, total):
     SR = 48000
     def rd(p):
@@ -706,7 +906,7 @@ def mix(voice_path, sfx_events, assets_sfx, music_path, out_path, total):
     blk = envv[: N // hop * hop].reshape(-1, hop).mean(1)
     act = (blk > 0.01).astype(np.float32)
     sm = np.convolve(act, np.ones(5) / 5, mode="same")
-    gain = 0.16 + (0.30 - 0.16) * (1 - sm)
+    gain = 0.085 + (0.17 - 0.085) * (1 - sm)  # música bem abaixo da voz
     g = np.repeat(gain, hop); g = np.concatenate([g, np.full(N - len(g), g[-1] if len(g) else 0.2)])
     music *= g[:, None]
     fx = np.zeros((N, 2), np.float32); cache = {}
@@ -714,7 +914,11 @@ def mix(voice_path, sfx_events, assets_sfx, music_path, out_path, total):
         if name not in cache: cache[name] = rd(os.path.join(assets_sfx, name + ".wav"))
         s = cache[name]; i = int(tsec * SR)
         if i >= N: continue
-        e = min(N, i + len(s)); fx[i:e] += s[: e - i] * gn * 0.42
+        e = min(N, i + len(s)); fx[i:e] += s[: e - i] * min(gn, 0.6) * SFX_LEVEL
+    # efeitos: limitador no barramento para nunca passarem da voz; ainda mais baixos enquanto há fala
+    fx = np.tanh(fx / SFX_CEIL) * SFX_CEIL
+    dk = np.repeat(0.65 + 0.35 * (1 - sm), hop); dk = np.concatenate([dk, np.ones(max(0, N - len(dk)))])[:N]
+    fx *= dk[:, None]
     out = voice * 1.0 + music + fx
     out = np.tanh(out * 1.05) / 1.05
     p = subprocess.Popen(["ffmpeg", "-v", "error", "-y", "-f", "f32le", "-ar", str(SR), "-ac", "2", "-i", "-",
