@@ -6,7 +6,7 @@ description: Faz um SHORT vertical (YouTube Shorts / Reels / TikTok, 1080x1920, 
 # Editar SHORT (áudio/vídeo → MP4 vertical de até 1 min)
 
 Pedido fixo do usuário: **"quanto mais dinâmico, melhor"**. Nunca deixar a tela parada: uma cena
-diferente a cada 2–5 s, nada de cena com mais de ~6 s. Modelo pronto: `videos/05-short-circuit-breaker/`.
+diferente a cada 2–5 s, nada de cena com mais de ~6 s. Modelos prontos: `videos/05-short-circuit-breaker/` (economia) e `videos/06-short-golpe-polonia/` (política).
 
 ## Passos
 1. **Preparar** (em segundo plano, ~5 min na 1ª vez): `bash tools/setup.sh $A` (A = pasta no scratchpad).
@@ -58,7 +58,13 @@ diferente a cada 2–5 s, nada de cena com mais de ~6 s. Modelo pronto: `videos/
 | `switch` | disjuntor ON → OFF com faíscas | `kicker`, `label`, `flip` (s) |
 | `gauge` | termômetro descendo até um limite + "PARA TUDO!" | `limit`, `kicker` |
 | `timer` | cronômetro circular + cadeado | `minutes`, `label` |
-| `map` | mapa do Brasil pulsando com ondas | `label` |
+| `map` | mapa de qualquer país pulsando com ondas e alfinete | `iso` (ISO3, padrão BRA), `view` [lon0,lon1,lat0,lat1], `pin` [lon,lat], `pin_label`, `label` |
+| `versus` | duelo: dois cartões com silhueta + VS 3D e raio | `left`/`right` {`name`,`role`,`color`}, `right_at`, `vs_at`, `kicker` |
+| `court` | prédio de tribunal/instituição subindo; `crack` racha e treme | `label`, `kicker`, `crack` |
+| `stamp` | cartão de autoridade + carimbo batendo | `name`, `role`, `stamp` (padrão SUSPENSO), `at_stamp`, `kicker` |
+| `reaction` | 3 reações em sequência (ícones de político, autoridade e manifestante) | `items` [[ícone, rótulo]], `times` |
+| `police` | sirene azul/vermelha, distintivo e fita de isolamento | `label`, `badge`, `tape` |
+| `glitchword` | palavras 3D gigantes com glitch (termos fortes, abertura) | `lines` (`*destaque*`), `sub`, `glitchy: true` |
 | `outro` | marca 3D + botão "Inscreva-se" clicado | `label`, `nocap: true` |
 
 Quando o assunto pedir algo novo (ex.: dólar, inflação, juros, empresas), **crie uma cena nova** no
@@ -75,6 +81,10 @@ Quando o assunto pedir algo novo (ex.: dólar, inflação, juros, empresas), **c
   tremem a câmera. Barra de progresso vermelha no topo e "IMPACTO ECONÔMICO" no alto.
 - **Áudio** segue as mesmas regras da skill `editar-video`: a voz é sempre o mais alto, os efeitos e a música ficam
   baixos, nada de sirene, e a voz passa pelo DeepFilterNet.
+- **Pessoas reais** aparecem só como silhueta genérica com nome e cargo, nunca como rosto desenhado ou inventado.
+  Corrija a grafia dos nomes na transcrição (ex.: "Carl Nile World" → "Karol Nawrocki"), usando o `plano.json` do vídeo longo como referência.
+- **Final com pergunta**: se o trecho terminar numa pergunta, use `question` com um rótulo que chame comentários ("É GOLPE? COMENTA AÍ").
+- Toda cena aceita `"glitchy": true` (glitch intermitente durante a cena toda).
 - **Dados**: só números do roteiro/áudio. Gráficos sem número real levam "Movimento ilustrativo".
 - Se houver `PEXELS_KEY`/`PIXABAY_KEY`, dá para usar filmagens reais (veja `tools/stock.py`). Por enquanto o
   short é 100% animação.

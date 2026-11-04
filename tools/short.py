@@ -100,10 +100,10 @@ def sc_hook(img, dr, t, D, p):
     """Abertura: gráfico despencando + palavras 3D batendo na tela."""
     pulse_glow(img, t, RED, 0.6, 0.45)
     # linha de preço caindo atrás
-    rng = np.random.default_rng(3); n = 60; k = ease(prog(t, 0, 1.6))
+    rng = np.random.default_rng(3); n = 60; k = ease(prog(t, 0, 1.6)) if p.get("chart", True) else 0
     ys = np.cumsum(rng.normal(0, 14, n)) + np.linspace(0, 760, n) ** 1.15 / 2.4
     pts = [(40 + i * (W - 80) / (n - 1), 380 + ys[i]) for i in range(int(2 + (n - 2) * k))]
-    if len(pts) > 1:
+    if len(pts) > 2:
         dr.line(pts, fill=rgba(RED, 0.35), width=22, joint="curve"); dr.line(pts, fill=rgba((255, 110, 110), 1), width=8, joint="curve")
         x, y = pts[-1]; dr.ellipse([x - 16, y - 16, x + 16, y + 16], fill=rgba(WHITE, 1))
     lines = p.get("lines", ["BOLSA", "*DESPENCA*"]); times = p.get("times", [0.0, 1.0])
@@ -384,50 +384,206 @@ def sc_timer(img, dr, t, D, p):
     return [(0.0, "whoosh", 0.5)] + [(0.2 + 0.27 * i, "tick", 0.45) for i in range(6)] + [(1.9, "hit", 0.6)]
 
 @lru_cache(None)
-def brazil_layer(size=900):
+def country_layer(iso="BRA", view=(-75, -33, -35, 7), size=900):
+    """Recorte de mapa: vizinhos em verde-escuro e máscara do país em destaque (projeção com correção de latitude)."""
     d = json.load(open(os.path.join(R.ASSETS, "geo", "countries.geojson")))
-    feats = {}
+    lon0, lon1, lat0, lat1 = view
+    cl = math.cos(math.radians((lat0 + lat1) / 2))
+    s = size / ((lon1 - lon0) * cl)
+    lay = Image.new("RGBA", (size, int((lat1 - lat0) * s))); ld = ImageDraw.Draw(lay)
+    mask = Image.new("L", lay.size); md = ImageDraw.Draw(mask)
+    def P(x, y): return ((x - lon0) * s * cl, (lat1 - y) * s)
     for f in d["features"]:
-        pr = f["properties"]; iso = pr.get("ADM0_A3") or pr.get("ISO_A3")
-        feats[iso] = f["geometry"]
-    lon0, lon1, lat0, lat1 = -75, -33, -35, 7
-    s = size / (lon1 - lon0)
-    lay = Image.new("RGBA", (size, int((lat1 - lat0) * s)))
-    ld = ImageDraw.Draw(lay)
-    def rings(g):
-        polys = g["coordinates"] if g["type"] == "MultiPolygon" else [g["coordinates"]]
-        return [poly[0] for poly in polys]
-    for iso, g in feats.items():
+        g = f["geometry"]; pr = f["properties"]
         if not g: continue
-        for rg in rings(g):
-            pts = [((x - lon0) * s, (lat1 - y) * s) for x, y in rg]
-            if iso == "BRA": continue
-            ld.polygon(pts, fill=(30, 52, 44, 255), outline=(70, 110, 90, 255))
-    br = Image.new("L", lay.size); bd = ImageDraw.Draw(br)
-    for rg in rings(feats["BRA"]):
-        bd.polygon([((x - lon0) * s, (lat1 - y) * s) for x, y in rg], fill=255)
-    return lay, br, s, lon0, lat1
+        code = pr.get("ADM0_A3") or pr.get("ISO_A3")
+        polys = g["coordinates"] if g["type"] == "MultiPolygon" else [g["coordinates"]]
+        for poly in polys:
+            pts = [P(x, y) for x, y in poly[0]]
+            if code == iso: md.polygon(pts, fill=255)
+            else: ld.polygon(pts, fill=(30, 52, 44, 255), outline=(70, 110, 90, 255))
+    return lay, mask, P
 
 def sc_map(img, dr, t, D, p):
-    """Mapa do Brasil pulsando em vermelho, com ondas saindo de Brasília."""
-    base, mask, s, lon0, lat1 = brazil_layer()
+    """Mapa de um país pulsando em vermelho, com ondas saindo de um ponto (capital/cidade)."""
+    base, mask, P = country_layer(p.get("iso", "BRA"), tuple(p.get("view", (-75, -33, -35, 7))))
     k = ease(prog(t, 0, 0.6)); zoom = 0.9 + 0.12 * (t / max(D, 0.1))
     lay = base.copy()
     a = 0.75 + 0.25 * math.sin(t * 5)
-    red = Image.new("RGBA", lay.size, RED + (int(255 * a),)); lay.paste(red, (0, 0), mask)
+    lay.paste(Image.new("RGBA", lay.size, RED + (int(255 * a),)), (0, 0), mask)
     edge = mask.filter(ImageFilter.FIND_EDGES).point(lambda v: 255 if v > 30 else 0)
     lay.paste(Image.new("RGBA", lay.size, (255, 200, 200, 255)), (0, 0), edge)
-    bx, by = (-47.9 - lon0) * s, (lat1 + 15.8) * s
+    bx, by = P(*p.get("pin", (-47.9, -15.8)))
     ld = ImageDraw.Draw(lay)
     for i in range(3):
         rr = ((t * 260 + i * 140) % 420)
         ld.ellipse([bx - rr, by - rr, bx + rr, by + rr], outline=(255, 255, 255, int(200 * (1 - rr / 420))), width=6)
     ld.ellipse([bx - 16, by - 16, bx + 16, by + 16], fill=(255, 255, 255, 255))
+    if p.get("pin_label") and t > 0.5:
+        f = F("black", 54); w = tw(f, p["pin_label"]) + 40
+        lx = bx + 30 if bx + 30 + w < lay.width else bx - 30 - w
+        ld.rounded_rectangle([lx, by - 110, lx + w, by - 30], 14, fill=(15, 15, 15, 235))
+        ld.text((lx + 20, by - 70), p["pin_label"], font=f, fill=(255, 255, 255, 255), anchor="lm")
     lay = R.warp3d(lay, 0.12 * math.sin(t * 0.9), 0)
     put(img, lay, W / 2, CY + 20, zoom * k, clamp(k * 2))
     if p.get("label"):
         put(img, text_layer(p["label"], 70, WHITE, "black", 8), W / 2, CY - 450, back(prog(t, 0.4, 0.35)))
     return [(0.0, "whoosh", 0.5), (0.4, "boom", 0.4)]
+
+# ---------- pessoas / instituições (silhuetas genéricas, nunca rostos reais) ----------
+def silhouette(d, cx, cy, s, col, tie=None):
+    d.ellipse([cx - 60 * s, cy - 170 * s, cx + 60 * s, cy - 50 * s], fill=rgba(col, 1))
+    d.rounded_rectangle([cx - 120 * s, cy - 30 * s, cx + 120 * s, cy + 150 * s], int(70 * s), fill=rgba(col, 1))
+    if tie: d.polygon([(cx, cy - 25 * s), (cx - 16 * s, cy + 10 * s), (cx, cy + 90 * s), (cx + 16 * s, cy + 10 * s)], fill=rgba(tie, 1))
+
+def person_card(name, role, col, w=470, h=640):
+    c = Image.new("RGBA", (w, h)); d = ImageDraw.Draw(c, "RGBA")
+    d.rounded_rectangle([0, 0, w, h], 36, fill=(245, 242, 235, 255))
+    d.rounded_rectangle([0, 0, w, 380], 36, fill=col + (255,)); d.rectangle([0, 340, w, 380], fill=col + (255,))
+    silhouette(d, w / 2, 250, 1.15, tuple(int(v * 0.45) for v in col), (240, 240, 240))
+    lines = R.wrap(name, F("black", 56), w - 40)
+    for i, ln in enumerate(lines[:2]):
+        d.text((w / 2, 440 + i * 62), ln, font=F("black", 56), fill=INK + (255,), anchor="mm")
+    d.text((w / 2, 440 + len(lines[:2]) * 62 + 20), role, font=F("bold", 38), fill=col + (255,), anchor="mm")
+    return c
+
+def sc_versus(img, dr, t, D, p):
+    """Duelo: dois cartões entrando pelos lados e um VS 3D com raio."""
+    L, Rr = p["left"], p["right"]
+    ra, va = p.get("right_at", 0.35), p.get("vs_at", 0.8)
+    for side, info, a0 in ((-1, L, 0.0), (1, Rr, ra)):
+        k = back(prog(t, a0, 0.45))
+        if k <= 0: continue
+        card = person_card(info["name"], info["role"], tuple(info.get("color", BLUE if side < 0 else RED)))
+        card = R.warp3d(card, -0.25 * side + 0.05 * math.sin(t * 1.5), 0)
+        x = W / 2 + side * 275 + side * 700 * (1 - k)
+        shadowed(img, card, x, CY + 10 * math.sin(t * 2 + side), 0.8)
+    kv = prog(t, va, 0.25)
+    if kv > 0:
+        if 0 < t - va < 0.15:
+            img.alpha_composite(Image.new("RGBA", (W, H), (255, 255, 255, 120)))
+        bolt = [(W / 2 + 40, CY - 420), (W / 2 - 50, CY - 60), (W / 2 + 30, CY - 60), (W / 2 - 40, CY + 400)]
+        dr.line(bolt, fill=rgba(YEL, 0.9 * (0.6 + 0.4 * math.sin(t * 30))), width=16, joint="curve")
+        lay = ext3d("VS", 230, (255, 214, 10), (130, 90, 0), 26)
+        shadowed(img, R.warp3d(lay, 0.2 * math.sin(t * 2), 0), W / 2, CY - 40, 2.2 - 1.2 * ease(kv) if kv < 1 else 1.0)
+    if p.get("kicker"): pill(dr, W / 2, CY - 480, p["kicker"], 48, WHITE, (20, 20, 20), ease(prog(t, 0, 0.3)))
+    return [(0.0, "whoosh", 0.5), (ra, "whoosh", 0.4), (va, "boom", 0.6), (va + 0.02, "glitch", 0.3)]
+
+def building(d, cx, base_y, s, col, shade):
+    w = 820 * s; colw = 64 * s; n = 6
+    d.polygon([(cx - w / 2 - 30 * s, base_y - 520 * s), (cx, base_y - 720 * s), (cx + w / 2 + 30 * s, base_y - 520 * s)], fill=rgba(col, 1))
+    d.polygon([(cx - w / 2 + 40 * s, base_y - 540 * s), (cx, base_y - 680 * s), (cx + w / 2 - 40 * s, base_y - 540 * s)], fill=rgba(shade, 1))
+    d.rectangle([cx - w / 2 - 20 * s, base_y - 520 * s, cx + w / 2 + 20 * s, base_y - 470 * s], fill=rgba(col, 1))
+    for i in range(n):
+        x = cx - w / 2 + 50 * s + i * (w - 100 * s - colw) / (n - 1)
+        d.rectangle([x, base_y - 470 * s, x + colw, base_y - 90 * s], fill=rgba(col, 1))
+        d.rectangle([x + colw * 0.62, base_y - 470 * s, x + colw, base_y - 90 * s], fill=rgba(shade, 1))
+    for j in range(3):
+        d.rectangle([cx - w / 2 - 20 * s - j * 30 * s, base_y - 90 * s + j * 30 * s, cx + w / 2 + 20 * s + j * 30 * s, base_y - 60 * s + j * 30 * s], fill=rgba(col, 1))
+
+def sc_court(img, dr, t, D, p):
+    """Prédio do tribunal (colunas) subindo; com `crack`, racha e treme."""
+    k = back(prog(t, 0, 0.5)); by = CY + 330 + 900 * (1 - clamp(k))
+    pulse_glow(img, t, RED if p.get("crack") else GOLD, 1.3, 0.25, CY - 100)
+    ov = Image.new("RGBA", (W, H)); od = ImageDraw.Draw(ov, "RGBA")
+    building(od, W / 2, by, 1.0, (238, 232, 218), (190, 182, 165))
+    if p.get("crack"):
+        ck = ease(prog(t, 0.6, 0.8)); rng = np.random.default_rng(4)
+        for c in range(3):
+            x, y = W / 2 + (c - 1) * 230, by - 690 + c * 40; pts = [(x, y)]
+            for _ in range(int(2 + 12 * ck)):
+                x += rng.normal(0, 40); y += 50; pts.append((x, y))
+            od.line(pts, fill=(25, 20, 20, 255), width=10)
+    img.alpha_composite(R.warp3d(ov.crop((0, 0, W, H)), 0.06 * math.sin(t * 1.2), 0).resize((W, H)))
+    if p.get("label"):
+        put(img, text_layer(p["label"], 66, WHITE, "black", 8, (0, 0, 0)), W / 2, CY + 420, back(prog(t, 0.5, 0.35)))
+    if p.get("kicker"): pill(dr, W / 2, CY - 500, p["kicker"], 48, WHITE, RED, ease(prog(t, 0.2, 0.3)))
+    ev = [(0.0, "whoosh_down", 0.5), (0.35, "hit", 0.5)]
+    if p.get("crack"): ev += [(0.6, "glitch", 0.4), (0.9, "boom", 0.5)]
+    return ev
+
+def sc_stamp(img, dr, t, D, p):
+    """Cartão de uma autoridade e um carimbo vermelho batendo por cima."""
+    k = back(prog(t, 0, 0.4))
+    card = person_card(p["name"], p["role"], tuple(p.get("color", (70, 80, 100))), 560, 700)
+    card = R.warp3d(card, 0.15 * math.sin(t * 1.3), 0)
+    shadowed(img, card, W / 2, CY - 20, clamp(k, 0, 1.2))
+    at = p.get("at_stamp", 0.9); ks = prog(t, at, 0.22)
+    if ks > 0:
+        st = text_layer(p.get("stamp", "SUSPENSO"), 150, RED, "black", 0)
+        box = Image.new("RGBA", (st.width + 60, st.height + 20)); bd = ImageDraw.Draw(box)
+        bd.rounded_rectangle([4, 4, box.width - 4, box.height - 4], 20, outline=RED + (255,), width=14)
+        box.alpha_composite(st, (30, 10))
+        put(img, fit(box, 980), W / 2, CY + 60, 2.6 - 1.6 * ease(ks) if ks < 1 else 1.0, 0.92, rot=14)
+    if p.get("kicker"): pill(dr, W / 2, CY - 480, p["kicker"], 48, WHITE, (20, 20, 20), ease(prog(t, 0, 0.3)))
+    return [(0.0, "whoosh", 0.5), (at + 0.2, "hit", 0.8), (at + 0.22, "paper", 0.4)]
+
+def icon(d, kind, cx, cy, s, col):
+    if kind == "politico": silhouette(d, cx, cy + 30 * s, s * 0.8, col, (230, 57, 70))
+    elif kind == "autoridade":
+        d.polygon([(cx, cy - 120 * s), (cx + 100 * s, cy - 70 * s), (cx + 85 * s, cy + 60 * s), (cx, cy + 130 * s), (cx - 85 * s, cy + 60 * s), (cx - 100 * s, cy - 70 * s)], fill=rgba(col, 1))
+        star = [(cx + math.cos(math.radians(-90 + 36 * i)) * (55 if i % 2 == 0 else 22) * s, cy + math.sin(math.radians(-90 + 36 * i)) * (55 if i % 2 == 0 else 22) * s) for i in range(10)]
+        d.polygon(star, fill=rgba(YEL, 1))
+    else:  # manifestantes: placa levantada
+        d.line([(cx, cy - 40 * s), (cx, cy + 130 * s)], fill=rgba((150, 110, 70), 1), width=int(16 * s))
+        d.rounded_rectangle([cx - 110 * s, cy - 140 * s, cx + 110 * s, cy - 20 * s], int(14 * s), fill=rgba(col, 1))
+        d.text((cx, cy - 80 * s), "!!!", font=F("black", int(80 * s)), fill=rgba(RED, 1), anchor="mm")
+
+def sc_reaction(img, dr, t, D, p):
+    """Três reações aparecendo em sequência (ícones + rótulos)."""
+    items = p.get("items", [["politico", "POLÍTICOS"], ["autoridade", "AUTORIDADES"], ["manifestante", "MANIFESTANTES"]])
+    times = p.get("times", [0.2 + 0.6 * i for i in range(len(items))])
+    ev = [(0.0, "whoosh", 0.5)]
+    for i, ((kind, label), a) in enumerate(zip(items, times)):
+        k = back(prog(t, a, 0.35))
+        if k <= 0: continue
+        y = CY - 380 + i * 300; x = W / 2 + 18 * math.sin(t * 2 + i)
+        ov = Image.new("RGBA", (W, 280)); od = ImageDraw.Draw(ov, "RGBA")
+        od.rounded_rectangle([60, 10, W - 60, 270], 40, fill=(250, 248, 242, 255))
+        od.ellipse([90, 30, 310, 250], fill=(30, 36, 50, 255))
+        icon(od, kind, 200, 140, 0.75, (240, 240, 240))
+        od.text((350, 140), label, font=F("black", 78), fill=INK + (255,), anchor="lm")
+        put(img, R.warp3d(ov, 0.12 * math.sin(t * 1.4 + i), 0), x + 400 * (1 - clamp(k)), y, clamp(k, 0, 1.1))
+        ev.append((a, "pop", 0.6))
+    return ev
+
+def sc_police(img, dr, t, D, p):
+    """Sirene azul/vermelha piscando, distintivo e fita de isolamento."""
+    on = int(t * 6) % 2
+    ov = Image.new("RGBA", (W // 8, H // 8)); od = ImageDraw.Draw(ov)
+    od.ellipse([-60, CY / 8 - 120, W / 16 + 20, CY / 8 + 120], fill=(230, 40, 50, 150 if on else 40))
+    od.ellipse([W / 16 - 20, CY / 8 - 120, W / 8 + 60, CY / 8 + 120], fill=(40, 90, 255, 40 if on else 150))
+    img.alpha_composite(ov.filter(ImageFilter.GaussianBlur(14)).resize((W, H), Image.BILINEAR))
+    k = back(prog(t, 0.1, 0.45))
+    b = Image.new("RGBA", (520, 600)); bd = ImageDraw.Draw(b, "RGBA")
+    icon(bd, "autoridade", 260, 300, 2.3, (30, 60, 140))
+    bd.text((260, 470), p.get("badge", "POLÍCIA"), font=F("black", 60), fill=(255, 255, 255, 255), anchor="mm")
+    shadowed(img, R.warp3d(b, 0.3 * math.sin(t * 1.6), 0), W / 2, CY - 60, clamp(k, 0, 1.2))
+    tape = Image.new("RGBA", (W + 500, 100)); td = ImageDraw.Draw(tape)
+    td.rectangle([0, 0, W + 500, 100], fill=YEL + (255,))
+    msg = "   ".join([p.get("tape", "ÁREA ISOLADA")] * 8); off = -(t * 260) % 700
+    td.text((off - 700, 50), msg, font=F("black", 56), fill=(15, 15, 15, 255), anchor="lm")
+    tape = tape.rotate(-9, Image.BICUBIC, expand=True)
+    kt = ease(prog(t, 0.5, 0.35))
+    img.alpha_composite(tape, (int(W / 2 - tape.width / 2 - 1400 * (1 - kt)), int(CY + 360 - tape.height / 2)))
+    if p.get("label"):
+        put(img, text_layer(p["label"], 64, WHITE, "black", 8, (0, 0, 0)), W / 2, CY - 470, back(prog(t, 0.3, 0.35)))
+    return [(0.0, "whoosh", 0.5), (0.1, "alarm", 0.3), (0.5, "whoosh", 0.4)]
+
+def sc_glitchword(img, dr, t, D, p):
+    """Palavras 3D gigantes com glitch constante e rachaduras (para acusações / termos fortes)."""
+    pulse_glow(img, t, RED, 0.4, 0.5)
+    lines = p.get("lines", ["GOLPE", "*DE ESTADO?*"]); ev = [(0.0, "boom", 0.6), (0.05, "glitch", 0.5)]
+    for i, ln in enumerate(lines):
+        acc = ln.startswith("*"); ln = ln.strip("*"); a = 0.1 + i * 0.35
+        kk = prog(t, a, 0.25)
+        if kk <= 0: continue
+        lay = ext3d(ln, 200 if not acc else 150, (255, 80, 90) if acc else (255, 255, 255), (90, 10, 18) if acc else (70, 76, 82), 26)
+        jitter = (np.random.default_rng(int(t * 20) + i).normal(0, 10) if math.sin(t * 9 + i) > 0.6 else 0)
+        shadowed(img, R.warp3d(lay, 0.15 * math.sin(t * 1.7 + i), 0), W / 2 + jitter, CY - 120 + i * 240, 2.4 - 1.4 * ease(kk) if kk < 1 else 1.0)
+        if i: ev.append((a + 0.2, "hit", 0.6))
+    if p.get("sub"): pill(dr, W / 2, CY + 330, p["sub"], 48, WHITE, (20, 20, 20), ease(prog(t, 1.0, 0.3)))
+    return ev
 
 def sc_outro(img, dr, t, D, p):
     """Final: marca do canal + botão de inscrever com clique."""
@@ -454,18 +610,20 @@ def sc_outro(img, dr, t, D, p):
 
 SCENES = {k[3:]: v for k, v in globals().items() if k.startswith("sc_")}
 BGS = {"hook": "red", "date": "dark", "candles": "dark", "bignum": "red", "ticker": "dark", "alert": "red",
-       "since": "navy", "question": "navy", "switch": "dark", "gauge": "dark", "timer": "navy", "map": "dark", "outro": "red"}
+       "since": "navy", "question": "navy", "switch": "dark", "gauge": "dark", "timer": "navy", "map": "dark", "outro": "red",
+       "versus": "dark", "court": "navy", "stamp": "red", "reaction": "dark", "police": "dark", "glitchword": "red"}
 
 # ================= LEGENDA (palavra por palavra) =================
 KEYS = {"bolsa", "despenca", "queda", "grave", "circuit", "breaker", "b3", "ibovespa", "seguranca", "suspensas",
-        "turbulentos", "preocupacao", "futuro", "minutos", "negociacoes"}
+        "turbulentos", "preocupacao", "futuro", "minutos", "negociacoes",
+        "golpe", "estado", "polonia", "tribunal", "constitucional", "suspenso", "policiais", "critico", "independencia"}
 
 def caption_chunks(words, maxw=930, size=92):
     f = F("black", size); chunks = []; cur = []
     for i, w in enumerate(words):
         txt = w[2].strip().upper()
         if not txt: continue
-        if cur and txt[0] in ",.%?!":
+        if cur and txt[0] in ",.%?!-":
             cur[-1][2] += txt; cur[-1][1] = w[1]; continue
         test = " ".join(x[2] for x in cur + [[0, 0, txt]])
         gap = (w[0] - cur[-1][1]) if cur else 0
@@ -527,7 +685,7 @@ def frame(scene, t, D, g, chunks, total, rng):
     a = np.asarray(im.convert("RGB"), dtype=np.float32)
     # flash branco na troca de cena e glitch RGB nos impactos
     fl = 0.55 * (1 - prog(t, 0, 0.12))
-    glitch = any(name == "glitch" and 0 <= t - at < 0.2 for at, name, _ in sfx) or t < 0.07
+    glitch = any(name == "glitch" and 0 <= t - at < 0.2 for at, name, _ in sfx) or t < 0.07 or (scene.get("glitchy") and math.sin(t * 11) > 0.85)
     if glitch:
         sh = int(rng.integers(12, 28)); a[..., 0] = np.roll(a[..., 0], sh, 1); a[..., 2] = np.roll(a[..., 2], -sh, 1)
         for _ in range(4):

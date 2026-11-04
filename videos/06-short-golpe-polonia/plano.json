@@ -1,0 +1,15 @@
+[
+{"type": "glitchword", "at": 0, "lines": ["GOLPE", "*DE ESTADO?*"], "sub": "NA POLÔNIA", "nocap": true, "glitchy": true},
+{"type": "date", "anchor": "na sexta feira", "weekday": "SEXTA-FEIRA", "day": "30", "month": "OUTUBRO 2026", "kicker": "O DIA DA CRISE"},
+{"type": "versus", "anchor": "do primeiro ministro", "right_at": 2.6, "vs_at": 3.1, "left": {"name": "DONALD TUSK", "role": "PRIMEIRO-MINISTRO", "color": [52, 104, 200]}, "right": {"name": "KAROL NAWROCKI", "role": "PRESIDENTE", "color": [200, 45, 60]}},
+{"type": "court", "anchor": "e integrantes do tribunal", "label": "TRIBUNAL CONSTITUCIONAL"},
+{"type": "alert", "anchor": "chegou a um ponto", "l1": "PONTO", "l2": "CRÍTICO", "sub": "CRISE INSTITUCIONAL"},
+{"type": "stamp", "anchor": "o presidente do tribunal", "name": "BOGDAN ŚWIĘCZKOWSKI", "role": "PRESIDENTE DO TRIBUNAL", "kicker": "AFASTADO POR UMA MAGISTRADA", "at_stamp": 2.0},
+{"type": "reaction", "anchor": "provocando uma reacao", "times": [0.3, 1.6, 2.3]},
+{"type": "police", "anchor": "a situacao ficou", "label": "POLÍCIA NO TRIBUNAL", "tape": "SEGURANÇA REFORÇADA"},
+{"type": "map", "anchor": "o edificio do tribunal", "iso": "POL", "view": [13.5, 25.0, 48.6, 55.2], "pin": [21.01, 52.23], "pin_label": "VARSÓVIA", "label": "POLÔNIA"},
+{"type": "glitchword", "anchor": "o episodio provocou", "lines": ["ACUSAÇÕES", "*DE GOLPE*"], "glitchy": true},
+{"type": "court", "anchor": "e levantou", "crack": true, "kicker": "INDEPENDÊNCIA EM XEQUE", "label": "INSTITUIÇÕES ABALADAS"},
+{"type": "question", "anchor": "existe realmente", "label": "É GOLPE? COMENTA AÍ"},
+{"type": "outro", "at": "end", "label": "Política e economia sem enrolação", "nocap": true}
+]
