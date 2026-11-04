@@ -62,8 +62,9 @@ diferente a cada 2–5 s, nada de cena com mais de ~6 s. Modelos prontos: `video
 | `versus` | duelo: dois cartões com silhueta + VS 3D e raio | `left`/`right` {`name`,`role`,`color`}, `right_at`, `vs_at`, `kicker` |
 | `court` | prédio de tribunal/instituição subindo; `crack` racha e treme | `label`, `kicker`, `crack` |
 | `stamp` | cartão de autoridade + carimbo batendo | `name`, `role`, `stamp` (padrão SUSPENSO), `at_stamp`, `kicker` |
-| `reaction` | 3 reações em sequência (ícones de político, autoridade e manifestante) | `items` [[ícone, rótulo]], `times` |
+| `reaction` | 3 reações em sequência (ícones `politico`, `autoridade`, `manifestante` ou `glyph:⚔`) | `items` [[ícone, rótulo]], `times`, `gap`, `scale` |
 | `police` | sirene azul/vermelha, distintivo e fita de isolamento | `label`, `badge`, `tape` |
+| `flagdays` | bandeira tremulando (GBR, DEU, JPN) + contagem de dias 3D | `iso`, `country`, `days`, `unit`, `at_days`, `label` |
 | `glitchword` | palavras 3D gigantes com glitch (termos fortes, abertura) | `lines` (`*destaque*`), `sub`, `glitchy: true` |
 | `outro` | marca 3D + botão "Inscreva-se" clicado | `label`, `nocap: true` |
 

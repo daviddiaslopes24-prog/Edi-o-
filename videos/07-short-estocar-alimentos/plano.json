@@ -1,0 +1,152 @@
+[
+ {
+  "type": "glitchword",
+  "at": 0,
+  "lines": [
+   "ALERTA",
+   "*MUNDIAL*"
+  ],
+  "sub": "GOVERNOS PEDEM ESTOQUE EM CASA",
+  "nocap": true,
+  "glitchy": true
+ },
+ {
+  "type": "flagdays",
+  "anchor": "o reino unido",
+  "iso": "GBR",
+  "country": "REINO UNIDO",
+  "days": 3,
+  "at_days": 2.0,
+  "label": "CAMPANHA NACIONAL"
+ },
+ {
+  "type": "switch",
+  "anchor": "de interrupcao",
+  "kicker": "INTERRUPÇÃO",
+  "label": "SERVIÇOS ESSENCIAIS",
+  "flip": 0.5
+ },
+ {
+  "type": "map",
+  "anchor": "na alemanha",
+  "iso": "DEU",
+  "view": [
+   5.0,
+   16.0,
+   47.0,
+   55.2
+  ],
+  "pin": [
+   13.4,
+   52.5
+  ],
+  "pin_label": "BERLIM",
+  "label": "ALEMANHA"
+ },
+ {
+  "type": "flagdays",
+  "anchor": "manter reservas",
+  "iso": "DEU",
+  "country": "ALEMANHA",
+  "days": 10,
+  "at_days": 1.5,
+  "label": "PROTEÇÃO CIVIL",
+  "bg": "dark"
+ },
+ {
+  "type": "flagdays",
+  "anchor": "e no japao",
+  "iso": "JPN",
+  "country": "JAPÃO",
+  "days": 3,
+  "at_days": 99,
+  "bg": "red"
+ },
+ {
+  "type": "reaction",
+  "anchor": "tenham alimentos",
+  "items": [
+   [
+    "glyph:✚",
+    "ALIMENTOS"
+   ],
+   [
+    "glyph:☂",
+    "ÁGUA"
+   ],
+   [
+    "glyph:⚠",
+    "EMERGÊNCIA"
+   ]
+  ],
+  "times": [
+   0.2,
+   0.7,
+   1.6
+  ]
+ },
+ {
+  "type": "bignum",
+  "anchor": "para pelo menos",
+  "from": 3,
+  "to": 7,
+  "suffix": " DIAS",
+  "dur": 1.6,
+  "color": [
+   46,
+   204,
+   113
+  ],
+  "kicker": "JAPÃO",
+  "label": "IDEAL: UMA SEMANA",
+  "size": 240
+ },
+ {
+  "type": "question",
+  "anchor": "por que tantos",
+  "label": "PREPARAÇÃO PARA EMERGÊNCIAS"
+ },
+ {
+  "type": "alert",
+  "anchor": "justamente agora",
+  "l1": "POR QUE",
+  "l2": "AGORA?",
+  "sub": "O QUE ESTÁ POR TRÁS"
+ },
+ {
+  "type": "reaction",
+  "anchor": "com guerras",
+  "items": [
+   [
+    "glyph:⚔",
+    "GUERRAS"
+   ],
+   [
+    "glyph:⌨",
+    "ATAQUES HACKER"
+   ],
+   [
+    "glyph:⚡",
+    "DESASTRES"
+   ],
+   [
+    "glyph:⚠",
+    "FALTA DE COMIDA"
+   ]
+  ],
+  "times": [
+   0.05,
+   0.85,
+   2.3,
+   6.3
+  ],
+  "gap": 235,
+  "scale": 0.85
+ },
+ {
+  "type": "outro",
+  "at": "end",
+  "label": "Comenta: você tem estoque em casa?",
+  "nocap": true
+ }
+]

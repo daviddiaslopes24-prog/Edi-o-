@@ -524,6 +524,8 @@ def icon(d, kind, cx, cy, s, col):
         d.polygon([(cx, cy - 120 * s), (cx + 100 * s, cy - 70 * s), (cx + 85 * s, cy + 60 * s), (cx, cy + 130 * s), (cx - 85 * s, cy + 60 * s), (cx - 100 * s, cy - 70 * s)], fill=rgba(col, 1))
         star = [(cx + math.cos(math.radians(-90 + 36 * i)) * (55 if i % 2 == 0 else 22) * s, cy + math.sin(math.radians(-90 + 36 * i)) * (55 if i % 2 == 0 else 22) * s) for i in range(10)]
         d.polygon(star, fill=rgba(YEL, 1))
+    elif kind.startswith("glyph:"):
+        d.text((cx, cy + 6 * s), kind[6:], font=F("sym", int(150 * s)), fill=rgba(col, 1), anchor="mm")
     else:  # manifestantes: placa levantada
         d.line([(cx, cy - 40 * s), (cx, cy + 130 * s)], fill=rgba((150, 110, 70), 1), width=int(16 * s))
         d.rounded_rectangle([cx - 110 * s, cy - 140 * s, cx + 110 * s, cy - 20 * s], int(14 * s), fill=rgba(col, 1))
@@ -537,13 +539,15 @@ def sc_reaction(img, dr, t, D, p):
     for i, ((kind, label), a) in enumerate(zip(items, times)):
         k = back(prog(t, a, 0.35))
         if k <= 0: continue
-        y = CY - 380 + i * 300; x = W / 2 + 18 * math.sin(t * 2 + i)
+        gap = p.get("gap", 300); y = CY - 380 + i * gap; x = W / 2 + 18 * math.sin(t * 2 + i)
         ov = Image.new("RGBA", (W, 280)); od = ImageDraw.Draw(ov, "RGBA")
         od.rounded_rectangle([60, 10, W - 60, 270], 40, fill=(250, 248, 242, 255))
         od.ellipse([90, 30, 310, 250], fill=(30, 36, 50, 255))
         icon(od, kind, 200, 140, 0.75, (240, 240, 240))
-        od.text((350, 140), label, font=F("black", 78), fill=INK + (255,), anchor="lm")
-        put(img, R.warp3d(ov, 0.12 * math.sin(t * 1.4 + i), 0), x + 400 * (1 - clamp(k)), y, clamp(k, 0, 1.1))
+        fs = 78
+        while fs > 40 and tw(F("black", fs), label) > W - 60 - 350 - 30: fs -= 4
+        od.text((350, 140), label, font=F("black", fs), fill=INK + (255,), anchor="lm")
+        put(img, R.warp3d(ov, 0.12 * math.sin(t * 1.4 + i), 0), x + 400 * (1 - clamp(k)), y, clamp(k, 0, 1.1) * p.get("scale", 1.0))
         ev.append((a, "pop", 0.6))
     return ev
 
@@ -608,10 +612,50 @@ def sc_outro(img, dr, t, D, p):
         dr.text((W / 2, CY + 330), p["label"], font=F("bold", 46), fill=rgba(WHITE, ease(prog(t, 0.8, 0.4))), anchor="mm")
     return [(0.0, "whoosh", 0.5), (1.1, "pop", 0.6), (1.15, "ding", 0.5)]
 
+
+def flag_img(iso, w=640, h=400):
+    f = Image.new("RGBA", (w, h)); d = ImageDraw.Draw(f)
+    if iso == "DEU":
+        for i, c in enumerate([(20, 20, 20), (220, 30, 40), (255, 205, 0)]): d.rectangle([0, i * h / 3, w, (i + 1) * h / 3], fill=c + (255,))
+    elif iso == "JPN":
+        d.rectangle([0, 0, w, h], fill=(250, 250, 250, 255)); r = h * 0.3; d.ellipse([w / 2 - r, h / 2 - r, w / 2 + r, h / 2 + r], fill=(200, 16, 46, 255))
+    elif iso == "GBR":
+        d.rectangle([0, 0, w, h], fill=(1, 33, 105, 255))
+        d.line([(0, 0), (w, h)], fill=(255, 255, 255, 255), width=int(h * 0.2)); d.line([(0, h), (w, 0)], fill=(255, 255, 255, 255), width=int(h * 0.2))
+        d.line([(0, 0), (w, h)], fill=(200, 16, 46, 255), width=int(h * 0.07)); d.line([(0, h), (w, 0)], fill=(200, 16, 46, 255), width=int(h * 0.07))
+        d.rectangle([w / 2 - h * 0.17, 0, w / 2 + h * 0.17, h], fill=(255, 255, 255, 255)); d.rectangle([0, h / 2 - h * 0.17, w, h / 2 + h * 0.17], fill=(255, 255, 255, 255))
+        d.rectangle([w / 2 - h * 0.1, 0, w / 2 + h * 0.1, h], fill=(200, 16, 46, 255)); d.rectangle([0, h / 2 - h * 0.1, w, h / 2 + h * 0.1], fill=(200, 16, 46, 255))
+    return f
+
+def wave(img_f, t, amp=18):
+    w, h = img_f.size; out = Image.new("RGBA", (w, h + 2 * amp)); n = 32; sw = w // n + 1
+    for i in range(n):
+        x = i * w // n; ph = math.sin(t * 5 - i * 0.35); y = amp + ph * amp * (i / n)
+        strip = img_f.crop((x, 0, min(w, x + sw), h))
+        if ph < 0: strip = Image.blend(strip, Image.new("RGBA", strip.size, (0, 0, 0, 255)), -ph * 0.25)
+        out.paste(strip, (x, int(y)))
+    return out
+
+def sc_flagdays(img, dr, t, D, p):
+    """Bandeira tremulando + contagem de dias em 3D."""
+    k = back(prog(t, 0, 0.45))
+    fl = wave(flag_img(p.get("iso", "GBR")), t)
+    shadowed(img, R.warp3d(fl, 0.18 * math.sin(t * 1.2), 0), W / 2, CY - 300 - 600 * (1 - clamp(k)), 1.0)
+    dr.text((W / 2, CY - 50), p.get("country", ""), font=F("black", 80), fill=rgba(WHITE, ease(prog(t, 0.3, 0.3))), anchor="mm")
+    a = p.get("at_days", 0.6); kd = ease(prog(t, a, 0.7))
+    if t >= a:
+        n = int(round(p.get("days", 3) * kd))
+        lay = R.extruded_text(str(n), 300, face=(255, 214, 10), side=(130, 90, 0), depth=26)
+        s = 1 + 0.2 * (1 - ease(prog(t, a + 0.7, 0.25)))
+        shadowed(img, R.warp3d(lay, 0.15 * math.sin(t * 1.6), 0), W / 2 - 120, CY + 220, s)
+        dr.text((W / 2 + 110, CY + 230), p.get("unit", "DIAS"), font=F("black", 110), fill=rgba(WHITE, 1), anchor="lm")
+    if p.get("label"): pill(dr, W / 2, CY + 450, p["label"], 46, WHITE, RED, ease(prog(t, 1.2, 0.3)))
+    return [(0.0, "whoosh", 0.5), (a, "riser", 0.3), (a + 0.7, "hit", 0.6)]
+
 SCENES = {k[3:]: v for k, v in globals().items() if k.startswith("sc_")}
 BGS = {"hook": "red", "date": "dark", "candles": "dark", "bignum": "red", "ticker": "dark", "alert": "red",
        "since": "navy", "question": "navy", "switch": "dark", "gauge": "dark", "timer": "navy", "map": "dark", "outro": "red",
-       "versus": "dark", "court": "navy", "stamp": "red", "reaction": "dark", "police": "dark", "glitchword": "red"}
+       "versus": "dark", "court": "navy", "stamp": "red", "reaction": "dark", "police": "dark", "glitchword": "red", "flagdays": "navy"}
 
 # ================= LEGENDA (palavra por palavra) =================
 KEYS = {"bolsa", "despenca", "queda", "grave", "circuit", "breaker", "b3", "ibovespa", "seguranca", "suspensas",
