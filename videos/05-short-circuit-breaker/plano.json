@@ -1,15 +1,102 @@
 [
-{"type": "hook", "at": 0, "lines": ["BOLSA", "*DESPENCA*"], "times": [0.0, 1.05], "sub": "NO BRASIL", "nocap": true},
-{"type": "date", "anchor": "na segunda feira", "weekday": "SEGUNDA-FEIRA", "day": "26", "month": "OUTUBRO 2026", "kicker": "O DIA DO PÂNICO"},
-{"type": "candles", "anchor": "um dos pregoes", "title": "IBOVESPA", "label": "PREGÃO HISTÓRICO"},
-{"type": "bignum", "anchor": "o ibovespa chegou", "from": 0, "to": -17, "suffix": "%", "dur": 1.6, "arrow": "down", "kicker": "DURANTE O DIA", "label": "QUEDA DE MAIS DE 17%"},
-{"type": "ticker", "anchor": "e encerrou o pregao", "to": -13.88, "name": "IBOVESPA", "sub": "FECHAMENTO · 26/10"},
-{"type": "alert", "anchor": "a situacao foi tao grave", "sub": "ACIONADO PELA B3"},
-{"type": "since", "anchor": "pela primeira vez", "from": 2026, "to": 2020, "month": "MARÇO DE 2020"},
-{"type": "question", "anchor": "mas o que significa", "label": "ENTENDA EM 20 SEGUNDOS"},
-{"type": "switch", "anchor": "o circuit breaker e um", "kicker": "MECANISMO DE SEGURANÇA", "label": "PAUSA NAS NEGOCIAÇÕES", "flip": 1.6},
-{"type": "gauge", "anchor": "quando o ibovespa atinge", "limit": 10, "kicker": "QUEDA NO DIA"},
-{"type": "timer", "anchor": "nesse caso", "minutes": 30, "label": "NEGOCIAÇÕES SUSPENSAS"},
-{"type": "map", "anchor": "e aquele pregao", "label": "E O FUTURO DO PAÍS?"},
-{"type": "outro", "at": "end", "label": "Economia explicada sem enrolação", "nocap": true}
+ {
+  "type": "hook",
+  "at": 0,
+  "lines": [
+   "BOLSA",
+   "*DESPENCA*"
+  ],
+  "times": [
+   0.0,
+   1.05
+  ],
+  "sub": "NO BRASIL",
+  "nocap": true
+ },
+ {
+  "type": "date",
+  "anchor": "na segunda feira",
+  "weekday": "SEGUNDA-FEIRA",
+  "day": "26",
+  "month": "OUTUBRO 2026",
+  "kicker": "O DIA DO PÂNICO"
+ },
+ {
+  "type": "candles",
+  "anchor": "um dos pregoes",
+  "title": "IBOVESPA",
+  "label": "PREGÃO HISTÓRICO"
+ },
+ {
+  "type": "bignum",
+  "anchor": "chegou a registrar",
+  "from": 0,
+  "to": -17,
+  "suffix": "%",
+  "dur": 1.6,
+  "arrow": "down",
+  "kicker": "DURANTE O DIA",
+  "label": "QUEDA DE MAIS DE 17%"
+ },
+ {
+  "type": "ticker",
+  "anchor": "e encerrou o pregao",
+  "to": -13.88,
+  "name": "IBOVESPA",
+  "sub": "FECHAMENTO · 26/10"
+ },
+ {
+  "type": "alert",
+  "anchor": "a situacao foi tao grave",
+  "sub": "ACIONADO PELA B3"
+ },
+ {
+  "type": "since",
+  "anchor": "pela primeira vez",
+  "from": 2026,
+  "to": 2020,
+  "month": "MARÇO DE 2020"
+ },
+ {
+  "type": "question",
+  "anchor": "mas o que significa",
+  "label": "ENTENDA EM 20 SEGUNDOS"
+ },
+ {
+  "type": "switch",
+  "anchor": "o circuit breaker e um",
+  "kicker": "MECANISMO DE SEGURANÇA",
+  "label": "PAUSA NAS NEGOCIAÇÕES",
+  "flip": 1.6
+ },
+ {
+  "type": "gauge",
+  "anchor": "quando o ibovespa atinge",
+  "limit": 10,
+  "kicker": "QUEDA NO DIA"
+ },
+ {
+  "type": "timer",
+  "anchor": "nesse caso",
+  "minutes": 30,
+  "label": "NEGOCIAÇÕES SUSPENSAS"
+ },
+ {
+  "type": "candles",
+  "anchor": "e aquele pregao",
+  "title": "MERCADO EM ALERTA",
+  "label": "PREOCUPAÇÃO COM O PAÍS",
+  "bg": "red"
+ },
+ {
+  "type": "map",
+  "anchor": "o futuro economico",
+  "label": "E O FUTURO DO PAÍS?"
+ },
+ {
+  "type": "outro",
+  "at": "end",
+  "label": "Economia explicada sem enrolação",
+  "nocap": true
+ }
 ]

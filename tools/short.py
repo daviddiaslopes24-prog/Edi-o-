@@ -51,6 +51,7 @@ def shadowed(img, lay, cx, cy, s=1.0, alpha=1.0):
     put(img, sh, cx + 18, cy + 26, s, alpha); put(img, lay, cx, cy, s, alpha)
 
 def pill(dr, cx, cy, text, size=44, fg=WHITE, bgc=RED, alpha=1.0):
+    if alpha <= 0.02: return
     f = F("xbold", size); w = tw(f, text) + 56; h = size + 34
     dr.rounded_rectangle([cx - w / 2, cy - h / 2, cx + w / 2, cy + h / 2], radius=h / 2, fill=rgba(bgc, alpha))
     dr.text((cx, cy + 2), text, font=f, fill=rgba(fg, alpha), anchor="mm")
@@ -216,9 +217,9 @@ def sc_ticker(img, dr, t, D, p):
     dr.text((W / 2, y0 + 210), p.get("sub", "FECHAMENTO · 26/10"), font=F("bold", 44), fill=rgba((200, 200, 200), ease(k)), anchor="mm")
     v = p["to"] * ease(prog(t, 0.2, 0.9))
     txt = "▼ " + fmt_br(v, 2) + "%"
-    lay = text_layer(txt.replace("▼ ", ""), 200, RED, "black")
+    lay = text_layer(txt.replace("▼ ", ""), 170, RED, "black")
     put(img, lay, W / 2 + 50, y0 + 420, 1.0, blink)
-    dr.text((W / 2 - lay.width / 2 - 20, y0 + 420), "▼", font=F("sym", 130), fill=rgba(RED, blink), anchor="mm")
+    dr.text((W / 2 - lay.width / 2 - 10, y0 + 420), "▼", font=F("sym", 110), fill=rgba(RED, blink), anchor="mm")
     # grade de LED por cima
     ov = Image.new("RGBA", (x1 - x0, y1 - y0)); od = ImageDraw.Draw(ov)
     for gx in range(0, x1 - x0, 7): od.line([(gx, 0), (gx, y1 - y0)], fill=(0, 0, 0, 150), width=2)
@@ -464,6 +465,8 @@ def caption_chunks(words, maxw=930, size=92):
     for i, w in enumerate(words):
         txt = w[2].strip().upper()
         if not txt: continue
+        if cur and txt[0] in ",.%?!":
+            cur[-1][2] += txt; cur[-1][1] = w[1]; continue
         test = " ".join(x[2] for x in cur + [[0, 0, txt]])
         gap = (w[0] - cur[-1][1]) if cur else 0
         prev_end = cur[-1][2][-1:] in ".,?!" if cur else False
@@ -483,7 +486,7 @@ def draw_caption(img, g, chunks, size=92):
         if a - 0.02 <= g < b: cur = (a, c); break
     if not cur: return
     a, c = cur; f = F("black", size)
-    space = tw(f, " ")
+    space = tw(f, " ") + 22
     widths = [tw(f, w[2]) for w in c]; total = sum(widths) + space * (len(c) - 1)
     x = W / 2 - total / 2
     k_in = back(prog(g, a, 0.15))
@@ -495,7 +498,7 @@ def draw_caption(img, g, chunks, size=92):
             active = s - 0.02 <= g < e + 0.05
             col = YEL if active else ((255, 85, 95) if (nk in KEYS or any(ch.isdigit() for ch in txt)) else (255, 255, 255))
         if alpha > 0:
-            pk = 1 + 0.22 * (1 - ease(prog(g, s, 0.12)))
+            pk = 1 + 0.12 * (1 - ease(prog(g, s, 0.12)))
             lay = text_layer(txt, size, col, "black", 9)
             put(img, lay, x + wd / 2, CAP_Y, pk * clamp(k_in, 0.5, 1.2))
         x += wd + space
@@ -503,9 +506,11 @@ def draw_caption(img, g, chunks, size=92):
 # ================= QUADRO =================
 def frame(scene, t, D, g, chunks, total, rng):
     kind = scene["type"]
-    img = background(scene.get("bg") or BGS.get(kind, "dark"), g)
+    base = background(scene.get("bg") or BGS.get(kind, "dark"), g)
+    img = base.copy()
     dr = ImageDraw.Draw(img, "RGBA")
     sfx = SCENES[kind](img, dr, t, D, scene)
+    img = Image.alpha_composite(base, img)  # textos com alfa ~0 não deixam "buracos" no quadro
     # câmera: punch-in na entrada + aproximação lenta + tremor nos impactos
     s = 1.0 + 0.035 * (t / max(D, 0.1)) + 0.16 * (1 - ease(prog(t, 0, 0.3)))
     dx = dy = 0.0
