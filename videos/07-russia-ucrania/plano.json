@@ -1,0 +1,1490 @@
+[
+{
+"type": "text3d",
+"at": 0,
+"lines": [
+"RÚSSIA ATACA",
+"*A UCRÂNIA*"
+],
+"sub": "Mais de 40 mortos e nova escalada antes das negociações"
+},
+{
+"type": "broll",
+"anchor": "enquanto representantes",
+"media": {
+"file": "stock/pb119428.mp4"
+},
+"caption": "KIEV, UCRÂNIA",
+"sub": "Negociações de paz em preparação"
+},
+{
+"type": "grid",
+"anchor": "rodada de negociacoes",
+"title": "Na mesa de negociação",
+"items": [
+"Rússia",
+"Ucrânia",
+"Estados Unidos"
+],
+"gap": 0.5
+},
+{
+"type": "broll",
+"anchor": "um bombardeio russo",
+"media": {
+"file": "stock/pb175213.mp4"
+},
+"caption": "MAIS DE 40 MORTOS",
+"sub": "Local de distribuição de ajuda humanitária"
+},
+{
+"type": "broll",
+"anchor": "ajuda humanitaria deixou mais",
+"media": {
+"file": "stock/pb119431.mp4"
+},
+"_filler": true
+},
+{
+"type": "map",
+"anchor": "e nesta quinta feira",
+"from": [
+32,
+49,
+22
+],
+"move": 1,
+"hl": {
+"UKR": "gold",
+"RUS": "red"
+},
+"hl_at": 0.2,
+"radar": {
+"ll": [
+31,
+49
+],
+"r": 300
+},
+"labels": [
+{
+"ll": [
+30.5,
+50.45
+],
+"text": "NOVA ONDA DE DRONES",
+"at": 1.0,
+"dx": -560,
+"dy": -120
+}
+],
+"title": "5 DE NOVEMBRO"
+},
+{
+"type": "broll",
+"anchor": "drones russos atingiu diferentes",
+"media": {
+"file": "stock/pb6824576.jpg"
+},
+"_filler": true
+},
+{
+"type": "question",
+"anchor": "a pergunta agora e",
+"text": "Uma nova *escalada* justamente quando se negocia o fim?",
+"media": {
+"file": "stock/pb110268.mp4"
+}
+},
+{
+"type": "broll",
+"anchor": "justamente quando existe uma",
+"media": {
+"file": "stock/pb91282.mp4"
+},
+"_filler": true
+},
+{
+"type": "headline",
+"anchor": "o ataque deixou mais",
+"kicker": "PARTE 2",
+"date": "ZAPORÍJIA · 2 DE NOVEMBRO",
+"title": "O ataque que deixou mais de 40 mortos"
+},
+{
+"type": "map",
+"anchor": "a noticia mais grave",
+"from": [
+31,
+49,
+22
+],
+"to": [
+35.3,
+47.8,
+6
+],
+"move": 3.5,
+"hl": {
+"UKR": "gold"
+},
+"hl_at": 0.2,
+"labels": [
+{
+"ll": [
+35.14,
+47.84
+],
+"text": "ZAPORÍJIA",
+"at": 2.6,
+"dx": 200,
+"dy": -120
+}
+],
+"title": "SUDESTE DA UCRÂNIA",
+"tilt": true
+},
+{
+"type": "datecard",
+"anchor": "na segunda feira 2",
+"month": "NOVEMBRO 2026",
+"first_wd": 0,
+"ndays": 30,
+"highlight": [
+2
+],
+"label": "Bombardeio em Komyshuvakha"
+},
+{
+"type": "broll",
+"anchor": "forcas russas bombardearam",
+"media": {
+"file": "stock/pb4757647.jpg"
+},
+"caption": "ANTIGA ESCOLA ATINGIDA",
+"sub": "Usada para distribuir ajuda humanitária"
+},
+{
+"type": "broll",
+"anchor": "sendo utilizada como ponto",
+"media": {
+"file": "stock/pb2151.mp4"
+},
+"_filler": true
+},
+{
+"type": "broll",
+"anchor": "o ataque aconteceu",
+"media": {
+"file": "stock/pb7506870.jpg"
+},
+"caption": "MORADORES AGUARDAVAM ASSISTÊNCIA"
+},
+{
+"type": "grid",
+"anchor": "de acordo com informacoes",
+"title": "O número de mortos",
+"items": [
+[
+"42",
+"Polícia ucraniana / Folha"
+],
+[
+"43",
+"Presidente Zelensky"
+]
+],
+"gap": 2.5
+},
+{
+"type": "broll",
+"anchor": "o numero de mortes",
+"media": {
+"file": "stock/pb343932.mp4"
+},
+"_filler": true
+},
+{
+"type": "broll",
+"anchor": "zelensky afirmou que 43",
+"media": {
+"file": "stock/pb4320892.jpg"
+},
+"_filler": true
+},
+{
+"type": "broll",
+"anchor": "e o numero poderia",
+"media": {
+"file": "stock/pb1665870.jpg"
+},
+"caption": "DEZENAS PODEM ESTAR SOTERRADAS"
+},
+{
+"type": "kinetic",
+"anchor": "um detalhe torne",
+"text": "Um detalhe torna o episódio *ainda mais dramático*",
+"size": 88
+},
+{
+"type": "doc",
+"anchor": "imagens registradas",
+"head": "VERIFICADO PELA REUTERS",
+"text": "Imagens da câmera corporal de um policial que morreu no ataque mostram os momentos anteriores a um segundo bombardeio.",
+"hl": "um segundo bombardeio",
+"tilt": true
+},
+{
+"type": "broll",
+"anchor": "no ataque cuja autenticidade",
+"media": {
+"file": "stock/pb1761801.jpg"
+},
+"_filler": true
+},
+{
+"type": "broll",
+"anchor": "os momentos anteriores a",
+"media": {
+"file": "stock/pb63973.mp4"
+},
+"_filler": true
+},
+{
+"type": "broll",
+"anchor": "depois de uma alerta",
+"media": {
+"file": "stock/pb542097.jpg"
+},
+"caption": "MORADORES BUSCARAM ABRIGO",
+"sub": "O local também foi atingido"
+},
+{
+"type": "bignum",
+"anchor": "segundo informacoes divulgadas pela imprensa",
+"from": 0,
+"to": 3,
+"prefix": "≈ ",
+"suffix": " toneladas",
+"label": "bomba planadora usada no ataque, segundo a imprensa",
+"color": "white",
+"dur": 1.2,
+"plain": true,
+"tilt": true
+},
+{
+"type": "broll",
+"anchor": "uma bomba planadora de",
+"media": {
+"file": "stock/pb110269.mp4"
+},
+"_filler": true
+},
+{
+"type": "doc",
+"anchor": "a russia afirmou",
+"head": "VERSÃO RUSSA",
+"text": "A Rússia afirmou que o alvo eram unidades militares ucranianas nas proximidades.",
+"hl": "o alvo eram unidades militares",
+"tilt": true,
+"tilt_side": -1
+},
+{
+"type": "broll",
+"anchor": "e declarou que militares",
+"media": {
+"file": "stock/pb7120297.jpg"
+},
+"_filler": true
+},
+{
+"type": "stamp",
+"anchor": "essa versao nao deve",
+"text": "SEM VERIFICAÇÃO",
+"sub": "INDEPENDENTE DO ALVO",
+"foot": "A versão russa não foi confirmada de forma independente"
+},
+{
+"type": "grid",
+"anchor": "o que esta confirmado",
+"title": "O que está confirmado",
+"items": [
+[
+"Ajuda humanitária",
+"era distribuída no local"
+],
+[
+"Dezenas de mortos",
+"entre civis"
+]
+],
+"gap": 1.5
+},
+{
+"type": "broll",
+"anchor": "o episodio esta entre",
+"media": {
+"file": "stock/pb111281.mp4"
+},
+"caption": "UM DOS ATAQUES MAIS LETAIS DO ANO",
+"sub": "Folha / Reuters"
+},
+{
+"type": "broll",
+"anchor": "na ucrania neste ano",
+"media": {
+"file": "stock/pb2746815.jpg"
+},
+"_filler": true
+},
+{
+"type": "broll",
+"anchor": "da helter nova onda",
+"media": {
+"file": "stock/pb3369500.jpg"
+},
+"_filler": true
+},
+{
+"type": "headline",
+"anchor": "e os ataques nao",
+"kicker": "PARTE 3",
+"date": "MADRUGADA DE 4 PARA 5 DE NOVEMBRO",
+"title": "Nova onda de drones e mísseis russos"
+},
+{
+"type": "broll",
+"anchor": "na madrugada de 4",
+"media": {
+"file": "stock/pb131195.mp4"
+},
+"caption": "NOVA OFENSIVA AÉREA"
+},
+{
+"type": "broll",
+"anchor": "nova ofensiva aerea contra",
+"media": {
+"file": "stock/pb88240.mp4"
+},
+"_filler": true
+},
+{
+"type": "bars",
+"anchor": "segundo a forca aerea",
+"title": "A ofensiva da *madrugada*",
+"sub": "Força Aérea da Ucrânia",
+"items": [
+[
+"Drones lançados",
+128
+],
+[
+"Drones abatidos",
+105
+],
+[
+"Mísseis Kh-35",
+2
+]
+],
+"vmax": 140,
+"fmt": "{}",
+"span": 7
+},
+{
+"type": "broll",
+"anchor": "2 6 kh 35",
+"media": {
+"file": "stock/pb34126.mp4"
+},
+"_filler": true
+},
+{
+"type": "broll",
+"anchor": "drones foram abatidos ou",
+"media": {
+"file": "stock/pb8064078.jpg"
+},
+"_filler": true
+},
+{
+"type": "broll",
+"anchor": "mesmo com essa interceptacao",
+"media": {
+"file": "stock/pb224206.mp4"
+},
+"caption": "DANOS EM DIFERENTES REGIÕES"
+},
+{
+"type": "map",
+"anchor": "na regiao de",
+"from": [
+33,
+49,
+14
+],
+"move": 1,
+"hl": {
+"UKR": "gold"
+},
+"hl_at": 0.1,
+"labels": [
+{
+"ll": [
+35.05,
+48.46
+],
+"text": "DNIPRO: 3 FERIDOS",
+"at": 0.8,
+"dx": 200,
+"dy": -120
+},
+{
+"ll": [
+30.52,
+50.45
+],
+"text": "KIEV: INCÊNDIO EM ESTRUTURA LOGÍSTICA",
+"at": 5.0,
+"dx": -200,
+"dy": -150
+}
+],
+"title": "REGIÕES ATINGIDAS",
+"tilt": true
+},
+{
+"type": "broll",
+"anchor": "na cidade de dinipro",
+"media": {
+"file": "stock/pb43252.mp4"
+},
+"_filler": true
+},
+{
+"type": "broll",
+"anchor": "ataque contra uma estrutura",
+"media": {
+"file": "stock/pb47052.mp4"
+},
+"_filler": true
+},
+{
+"type": "broll",
+"anchor": "pessoa ferida tambem",
+"media": {
+"file": "stock/pb5242315.jpg"
+},
+"caption": "ENERGIA, DEPÓSITOS E LOGÍSTICA ATINGIDOS"
+},
+{
+"type": "broll",
+"anchor": "depositos e estruturas utilizadas",
+"media": {
+"file": "stock/pb1979261.jpg"
+},
+"_filler": true
+},
+{
+"type": "bignum",
+"anchor": "a agencia associated press",
+"from": 0,
+"to": 4,
+"suffix": " feridos",
+"label": "em Dnipropetrovsk e Kiev, segundo a Associated Press",
+"color": "white",
+"dur": 1.0,
+"plain": true
+},
+{
+"type": "broll",
+"anchor": "registrados nas regioes de",
+"media": {
+"file": "stock/pb3196481.jpg"
+},
+"_filler": true
+},
+{
+"type": "kinetic",
+"anchor": "isso mostra que a ofensiva",
+"text": "A ofensiva continua *mesmo com a diplomacia*",
+"media": {
+"file": "stock/pb119431.mp4"
+}
+},
+{
+"type": "broll",
+"anchor": "mesmo com a preparacao",
+"media": {
+"file": "stock/pb6917865.jpg"
+},
+"_filler": true
+},
+{
+"type": "text3d",
+"anchor": "de energia volta",
+"lines": [
+"ENERGIA",
+"*NA MIRA*"
+],
+"size": 150
+},
+{
+"type": "broll",
+"anchor": "mas existe outro episodio",
+"media": {
+"file": "stock/pb91282.mp4"
+},
+"caption": "INFRAESTRUTURA ENERGÉTICA"
+},
+{
+"type": "datecard",
+"anchor": "na terca feira 3",
+"month": "NOVEMBRO 2026",
+"first_wd": 0,
+"ndays": 30,
+"highlight": [
+3
+],
+"label": "Grande ofensiva contra a rede de energia"
+},
+{
+"type": "bars",
+"anchor": "segundo o presidente",
+"title": "O ataque de *3 de novembro*",
+"sub": "Segundo o presidente Zelensky",
+"items": [
+[
+"Drones",
+289
+],
+[
+"Mísseis de cruzeiro",
+59
+],
+[
+"Mísseis balísticos",
+17
+]
+],
+"vmax": 310,
+"fmt": "{}",
+"span": 6
+},
+{
+"type": "broll",
+"anchor": "17 misseis balisticos e",
+"media": {
+"file": "stock/pb3816.mp4"
+},
+"_filler": true
+},
+{
+"type": "map",
+"anchor": "os ataques atingiram",
+"from": [
+31,
+49,
+18
+],
+"move": 1,
+"hl": {
+"UKR": "gold"
+},
+"hl_at": 0.1,
+"labels": [
+{
+"ll": [
+30.73,
+46.48
+],
+"text": "ODESA (SUL)",
+"at": 2.5,
+"dx": 200,
+"dy": 100
+},
+{
+"ll": [
+26.25,
+50.62
+],
+"text": "RIVNE (OESTE)",
+"at": 4.0,
+"dx": -150,
+"dy": -130
+}
+],
+"title": "SUBESTAÇÕES ATINGIDAS"
+},
+{
+"type": "broll",
+"anchor": "do pais desde a",
+"media": {
+"file": "stock/pb7850299.jpg"
+},
+"_filler": true
+},
+{
+"type": "broll",
+"anchor": "de acordo com a",
+"media": {
+"file": "stock/pb128312.mp4"
+},
+"caption": "DTEK: MAIOR GERADORA PRIVADA",
+"sub": "Reuters"
+},
+{
+"type": "bignum",
+"anchor": "informou que tres",
+"from": 0,
+"to": 3,
+"suffix": " de 5",
+"label": "usinas termelétricas da DTEK fora de operação",
+"color": "gold",
+"dur": 1.0,
+"plain": true,
+"tilt": true
+},
+{
+"type": "broll",
+"anchor": "as autoridades ucranianas tambem",
+"media": {
+"file": "stock/pb63973.mp4"
+},
+"caption": "FALTA DE LUZ EM KIEV E MAIS 6 REGIÕES"
+},
+{
+"type": "broll",
+"anchor": "de eletricidade em kiev",
+"media": {
+"file": "stock/pb172458.mp4"
+},
+"_filler": true
+},
+{
+"type": "question",
+"anchor": "e por que atacar",
+"text": "Por que atacar a *energia*?"
+},
+{
+"type": "chips",
+"anchor": "porque energia eletrica",
+"title": "Energia é essencial para:",
+"items": [
+"Hospitais",
+"Indústrias",
+"Abastecimento",
+"Transporte",
+"Comunicações",
+"Serviços públicos"
+],
+"span": 8
+},
+{
+"type": "broll",
+"anchor": "ela e essencial para",
+"media": {
+"file": "stock/pb47889.mp4"
+},
+"_filler": true
+},
+{
+"type": "broll",
+"anchor": "abastecimento transporte comunicacoes e",
+"media": {
+"file": "stock/pb8346.mp4"
+},
+"_filler": true
+},
+{
+"type": "broll",
+"anchor": "ou subestacao e atingida",
+"media": {
+"file": "stock/pb5724320.jpg"
+},
+"caption": "MILHÕES AFETADOS"
+},
+{
+"type": "broll",
+"anchor": "alem disso a chegada",
+"media": {
+"file": "stock/pb63281.mp4"
+},
+"caption": "O INVERNO EUROPEU SE APROXIMA"
+},
+{
+"type": "broll",
+"anchor": "de manter o fornecimento",
+"media": {
+"file": "stock/pb49443.mp4"
+},
+"_filler": true
+},
+{
+"type": "broll",
+"anchor": "a ucrania se prepara",
+"media": {
+"file": "stock/pb63970.mp4"
+},
+"caption": "MAIS UM INVERNO EM GUERRA"
+},
+{
+"type": "broll",
+"anchor": "reparar estruturas que ja",
+"media": {
+"file": "stock/pb7624034.jpg"
+},
+"_filler": true
+},
+{
+"type": "headline",
+"anchor": "a ucrania tambem ataca",
+"kicker": "PARTE 5",
+"date": "RIAZAN · RÚSSIA",
+"title": "A Ucrânia também ataca território russo"
+},
+{
+"type": "broll",
+"anchor": "a russia tambem enfrenta",
+"media": {
+"file": "stock/pb41884.mp4"
+},
+"caption": "ATAQUES DENTRO DA RÚSSIA"
+},
+{
+"type": "map",
+"anchor": "na madrugada de 5",
+"from": [
+33,
+52,
+26
+],
+"to": [
+38.5,
+55,
+12
+],
+"move": 3,
+"hl": {
+"RUS": "red",
+"UKR": "gold"
+},
+"hl_at": 0.2,
+"arrows": [
+{
+"a": [
+33,
+50
+],
+"b": [
+39.6,
+54.5
+],
+"at": 2.0,
+"color": "gold"
+}
+],
+"labels": [
+{
+"ll": [
+39.74,
+54.63
+],
+"text": "RIAZAN",
+"at": 3.2,
+"dx": 200,
+"dy": 100
+},
+{
+"ll": [
+37.62,
+55.75
+],
+"text": "MOSCOU (≈200 KM)",
+"at": 4.0,
+"dx": -300,
+"dy": -120
+}
+],
+"title": "REGIÃO DE RIAZAN"
+},
+{
+"type": "broll",
+"anchor": "regiao de riyazan localizada",
+"media": {
+"file": "stock/pb110270.mp4"
+},
+"_filler": true
+},
+{
+"type": "bignum",
+"anchor": "o governador local",
+"from": 0,
+"to": 200,
+"prefix": "+ de ",
+"suffix": " drones",
+"label": "direcionados à região, segundo o governador",
+"color": "gold",
+"dur": 1.2,
+"plain": true
+},
+{
+"type": "broll",
+"anchor": "segundo as autoridades russas",
+"media": {
+"file": "stock/pb324019.mp4"
+},
+"caption": "INCÊNDIOS INDUSTRIAIS E LINHAS DANIFICADAS"
+},
+{
+"type": "broll",
+"anchor": "e denificaram linhas de",
+"media": {
+"file": "stock/pb720233.jpg"
+},
+"_filler": true
+},
+{
+"type": "broll",
+"anchor": "uma refinaria de petroleo",
+"media": {
+"file": "stock/pb199788.mp4"
+},
+"caption": "REFINARIA DE RIAZAN",
+"sub": "Fumaça e chamas · Associated Press"
+},
+{
+"type": "broll",
+"anchor": "divulgaram imagens de fomaca",
+"media": {
+"file": "stock/pb3483539.jpg"
+},
+"_filler": true
+},
+{
+"type": "stamp",
+"anchor": "e importante observar",
+"text": "FONTES ENVOLVIDAS",
+"sub": "NO CONFLITO",
+"foot": "Parte das informações vem das próprias autoridades"
+},
+{
+"type": "broll",
+"anchor": "dos danos foi divulgada",
+"media": {
+"file": "stock/pb119278.mp4"
+},
+"_filler": true
+},
+{
+"type": "kinetic",
+"anchor": "mas o episodio demonstra",
+"text": "Alvos ligados à *indústria e à energia*",
+"media": {
+"file": "stock/pb6226244.jpg"
+}
+},
+{
+"type": "broll",
+"anchor": "territorio rosto especialmente instalacoes",
+"media": {
+"file": "stock/pb128312.mp4"
+},
+"_filler": true
+},
+{
+"type": "grid",
+"anchor": "a dimensao economica da",
+"title": "A dimensão econômica",
+"items": [
+[
+"Custos",
+"militares"
+],
+[
+"Danos",
+"em infraestrutura"
+]
+],
+"gap": 1.5
+},
+{
+"type": "broll",
+"anchor": "paises precisam lidar com",
+"media": {
+"file": "stock/pb119431.mp4"
+},
+"_filler": true
+},
+{
+"type": "text3d",
+"anchor": "negociacoes de paz",
+"lines": [
+"NEGOCIAÇÕES",
+"*DE PAZ*"
+],
+"size": 150
+},
+{
+"type": "kinetic",
+"anchor": "agora aqui esta",
+"text": "Mesmo com os ataques, *uma nova tentativa*",
+"size": 96
+},
+{
+"type": "broll",
+"anchor": "mesmo com os ataques",
+"media": {
+"file": "stock/pb6824576.jpg"
+},
+"_filler": true
+},
+{
+"type": "globe",
+"anchor": "o kremlin confirmou",
+"from": [
+35,
+50
+],
+"to": [
+54,
+28
+],
+"move": 5,
+"hl": {
+"RUS": "red",
+"UKR": "gold",
+"USA": "blue",
+"ARE": "green"
+},
+"hl_at": 0.3,
+"labels": [
+{
+"ll": [
+54.37,
+24.45
+],
+"text": "ABU DHABI",
+"at": 4.0,
+"dx": 200,
+"dy": -120
+}
+],
+"title": "ENCONTRO EM ABU DHABI"
+},
+{
+"type": "broll",
+"anchor": "devem se reunir em",
+"media": {
+"file": "stock/pb91282.mp4"
+},
+"_filler": true
+},
+{
+"type": "datecard",
+"anchor": "dias 10 e 11",
+"month": "NOVEMBRO 2026",
+"first_wd": 0,
+"ndays": 30,
+"highlight": [
+10,
+11
+],
+"label": "Reunião confirmada pelo Kremlin · Reuters"
+},
+{
+"type": "broll",
+"anchor": "pelo lado russo",
+"media": {
+"file": "stock/pb4630827.jpg"
+},
+"caption": "VLADIMIR MEDINSKY LIDERA A DELEGAÇÃO RUSSA",
+"sub": "Assessor de Vladimir Putin"
+},
+{
+"type": "list",
+"anchor": "as conversas devem",
+"title": "Na pauta:",
+"items": [
+"Saída para a guerra",
+"Garantias de segurança",
+"Redução da escalada"
+],
+"span": 8
+},
+{
+"type": "broll",
+"anchor": "para o periodo posterior",
+"media": {
+"file": "stock/pb2151.mp4"
+},
+"_filler": true
+},
+{
+"type": "stamp",
+"anchor": "mas existe um problema",
+"text": "ACORDO DIFÍCIL",
+"foot": "Os ataques recentes mostram o tamanho do desafio"
+},
+{
+"type": "broll",
+"anchor": "transformar essas reunioes em",
+"media": {
+"file": "stock/pb343932.mp4"
+},
+"_filler": true
+},
+{
+"type": "grid",
+"anchor": "a ucrania exige",
+"title": "Posições",
+"items": [
+[
+"Ucrânia",
+"garantias contra nova invasão"
+],
+[
+"Rússia",
+"mantém exigências"
+]
+],
+"gap": 4.0
+},
+{
+"type": "broll",
+"anchor": "invasao aconteca no futuro",
+"media": {
+"file": "stock/pb4320892.jpg"
+},
+"_filler": true
+},
+{
+"type": "broll",
+"anchor": "nao demonstrou disposicao para",
+"media": {
+"file": "stock/pb1761801.jpg"
+},
+"_filler": true
+},
+{
+"type": "doc",
+"anchor": "portanto a existencia",
+"head": "ENTENDA",
+"text": "A existência de uma reunião não significa que a paz esteja próxima.",
+"hl": "não significa que a paz esteja próxima",
+"tilt": true
+},
+{
+"type": "broll",
+"anchor": "o encontro pode abrir",
+"media": {
+"file": "stock/pb47170.mp4"
+},
+"caption": "AVANÇO OU IMPASSE?"
+},
+{
+"type": "kinetic",
+"anchor": "e e justamente isso",
+"text": "Concessões ou *posição militar* antes de negociar?",
+"size": 90
+},
+{
+"type": "broll",
+"anchor": "se continuarao tentando melhorar",
+"media": {
+"file": "stock/pb63973.mp4"
+},
+"_filler": true
+},
+{
+"type": "headline",
+"anchor": "o que esta em jogo",
+"kicker": "PARTE 7",
+"date": "EUROPA E O MUNDO",
+"title": "O que está em jogo para a Europa?"
+},
+{
+"type": "broll",
+"anchor": "guerra tambem tem consequencias",
+"media": {
+"file": "stock/pb110269.mp4"
+},
+"_filler": true
+},
+{
+"type": "chips",
+"anchor": "a infraestrutura energetica",
+"title": "Diretamente envolvidos:",
+"items": [
+"Energia",
+"Transportes",
+"Indústria",
+"Segurança europeia"
+],
+"span": 6
+},
+{
+"type": "broll",
+"anchor": "e a seguranca europeia",
+"media": {
+"file": "stock/pb7120297.jpg"
+},
+"_filler": true
+},
+{
+"type": "broll",
+"anchor": "alem disso a reconstrucao",
+"media": {
+"file": "stock/pb6231616.jpg"
+},
+"caption": "RECONSTRUÇÃO: RECURSOS GIGANTESCOS"
+},
+{
+"type": "bars",
+"anchor": "quinta feira a comissao",
+"title": "Apoio da *União Europeia*",
+"sub": "Bilhões de euros",
+"items": [
+[
+"Transferência anunciada",
+4.4
+],
+[
+"Pacote de empréstimos",
+90
+]
+],
+"vmax": 95,
+"fmt": "€ {} bi",
+"dec": 1,
+"posgreen": true,
+"span": 5
+},
+{
+"type": "broll",
+"anchor": "bilhoes de euros para",
+"media": {
+"file": "stock/pb2746815.jpg"
+},
+"_filler": true
+},
+{
+"type": "broll",
+"anchor": "de 90 bilhoes de",
+"media": {
+"file": "stock/pb3369500.jpg"
+},
+"_filler": true
+},
+{
+"type": "broll",
+"anchor": "segundo a",
+"media": {
+"file": "stock/pb1395913.jpg"
+},
+"caption": "DEFESA E SERVIÇOS PÚBLICOS",
+"sub": "Associated Press"
+},
+{
+"type": "broll",
+"anchor": "despesas essenciais da defesa",
+"media": {
+"file": "stock/pb88240.mp4"
+},
+"_filler": true
+},
+{
+"type": "kinetic",
+"anchor": "isso mostra que a guerra continua",
+"text": "A guerra exige *apoio internacional* contínuo",
+"media": {
+"file": "stock/pb174938.mp4"
+}
+},
+{
+"type": "broll",
+"anchor": "de aliados internacionais e",
+"media": {
+"file": "stock/pb34126.mp4"
+},
+"_filler": true
+},
+{
+"type": "chain",
+"anchor": "quanto mais tempo",
+"title": "QUESTÃO ESTRATÉGICA",
+"items": [
+"Guerra mais longa",
+"Pressão sobre a Ucrânia",
+"Pressão sobre aliados"
+],
+"span": 6
+},
+{
+"type": "broll",
+"anchor": "recursos da ucrania e",
+"media": {
+"file": "stock/pb8064078.jpg"
+},
+"_filler": true
+},
+{
+"type": "grid",
+"anchor": "para a europa",
+"title": "Desafios",
+"items": [
+[
+"Europa",
+"segurança, energia, orçamento"
+],
+[
+"EUA",
+"saída diplomática"
+]
+],
+"gap": 4.0
+},
+{
+"type": "broll",
+"anchor": "para os estados unidos",
+"media": {
+"file": "stock/pb43252.mp4"
+},
+"_filler": true
+},
+{
+"type": "broll",
+"anchor": "saida diplomatica para uma",
+"media": {
+"file": "stock/pb47052.mp4"
+},
+"_filler": true
+},
+{
+"type": "text3d",
+"anchor": "a guerra esta perto",
+"lines": [
+"A GUERRA ESTÁ",
+"*PERTO DO FIM?*"
+],
+"size": 130
+},
+{
+"type": "broll",
+"anchor": "e possivel afirmar que",
+"media": {
+"file": "stock/pb1979261.jpg"
+},
+"_filler": true
+},
+{
+"type": "chips",
+"anchor": "os ataques recentes sao",
+"title": "Alvos recentes:",
+"items": [
+"Energia",
+"Logística",
+"Ajuda humanitária"
+],
+"span": 6
+},
+{
+"type": "broll",
+"anchor": "estruturas logisticas e um",
+"media": {
+"file": "stock/pb3196481.jpg"
+},
+"_filler": true
+},
+{
+"type": "stamp",
+"anchor": "mas e necessario",
+"text": "CAUTELA",
+"sub": "COM AS CONCLUSÕES",
+"foot": "Sem confirmação de grande ofensiva terrestre ou fracasso das negociações"
+},
+{
+"type": "broll",
+"anchor": "de que uma nova",
+"media": {
+"file": "stock/pb6917865.jpg"
+},
+"_filler": true
+},
+{
+"type": "broll",
+"anchor": "a comecar nem de",
+"media": {
+"file": "stock/pb3816.mp4"
+},
+"_filler": true
+},
+{
+"type": "grid",
+"anchor": "o que existe sao",
+"title": "O que existe hoje",
+"items": [
+[
+"Ataques",
+"contínuos"
+],
+[
+"Danos",
+"importantes"
+],
+[
+"Diplomacia",
+"em Abu Dhabi"
+]
+],
+"gap": 1.2
+},
+{
+"type": "broll",
+"anchor": "o encontro de abu dhabi",
+"media": {
+"file": "stock/pb150527.mp4"
+},
+"caption": "ABU DHABI: MOMENTO DECISIVO"
+},
+{
+"type": "broll",
+"anchor": "possibilidade concreta de reducao",
+"media": {
+"file": "stock/pb7850299.jpg"
+},
+"_filler": true
+},
+{
+"type": "broll",
+"anchor": "a populacao ucraniana",
+"media": {
+"file": "stock/pb110271.mp4"
+},
+"caption": "A POPULAÇÃO SEGUE SOB OS EFEITOS DA GUERRA"
+},
+{
+"type": "cine",
+"anchor": "a situacao e preocupante",
+"lines": [
+"UMA SITUAÇÃO",
+"*PREOCUPANTE*"
+]
+},
+{
+"type": "broll",
+"anchor": "discutir o futuro da",
+"media": {
+"file": "stock/pb172458.mp4"
+},
+"_filler": true
+},
+{
+"type": "broll",
+"anchor": "equipes de resgate",
+"media": {
+"file": "stock/pb4495488.jpg"
+},
+"caption": "EQUIPES DE RESGATE ENTRE OS ESCOMBROS"
+},
+{
+"type": "broll",
+"anchor": "o bombardeio que deixou",
+"media": {
+"file": "stock/pb175213.mp4"
+},
+"caption": "KOMYSHUVAKHA",
+"sub": "O custo humano do conflito"
+},
+{
+"type": "kinetic",
+"anchor": "e os novos ataques",
+"text": "A negociação *ainda não* interrompeu a violência",
+"media": {
+"file": "stock/pb131195.mp4"
+}
+},
+{
+"type": "broll",
+"anchor": "por enquanto a negociacao",
+"media": {
+"file": "stock/pb47889.mp4"
+},
+"_filler": true
+},
+{
+"type": "globe",
+"anchor": "agora os olhos",
+"from": [
+35,
+45
+],
+"to": [
+54,
+25
+],
+"move": 4,
+"hl": {
+"ARE": "gold"
+},
+"hl_at": 0.2,
+"labels": [
+{
+"ll": [
+54.37,
+24.45
+],
+"text": "OS OLHOS DO MUNDO",
+"at": 2.5,
+"dx": 200,
+"dy": -120
+}
+]
+},
+{
+"type": "broll",
+"anchor": "a russia ucrania e",
+"media": {
+"file": "stock/pb8346.mp4"
+},
+"_filler": true
+},
+{
+"type": "broll",
+"anchor": "em um avanco real",
+"media": {
+"file": "stock/pb49443.mp4"
+},
+"_filler": true
+},
+{
+"type": "question",
+"anchor": "e voce acredita",
+"text": "As negociações podem *levar ao fim* da guerra?",
+"media": {
+"file": "stock/pb119432.mp4"
+}
+},
+{
+"type": "broll",
+"anchor": "ou estamos diante de",
+"media": {
+"file": "stock/pb7624034.jpg"
+},
+"_filler": true
+},
+{
+"type": "broll",
+"anchor": "deixe sua opiniao",
+"media": {
+"file": "stock/pb119432.mp4"
+},
+"caption": "DEIXE SUA OPINIÃO NOS COMENTÁRIOS",
+"sub": "Impacto Econômico"
+},
+{
+"type": "outro",
+"anchor": "no canal se voce",
+"click": 4.0
+}
+]
