@@ -49,6 +49,14 @@ O usuário pediu: 3D sim, mas **sem movimento infantil/juvenil**. O `render.py` 
   vítimas, equipes de resgate), nunca imagens chocantes. Preferir mapas, documentos, dados, globo e b-roll.
 - O modo antigo (mais animado) só com `TOM=dinamico`, se o usuário pedir.
 
+## ARQUIVO DOCUMENTAL (referência do vídeo 08 — usar em ~20–25% das cenas)
+Cena `archive`: fundo escuro gasto (papel queimado, arranhões, caligrafia apagada ao fundo), 1–2 fotos/vídeos em
+**sépia-dourado** como cópias impressas com borda clara, **fita adesiva** nas pontas e sombra, sobrepostas;
+título em **serifa clássica dourada (Cinzel)** com letras surgindo, subtítulo e, opcionalmente, um parágrafo curto.
+Movimento só de leve deriva lateral — sóbrio. Campos: `media`, `media2` (foto de trás), `title`, `sub`, `body`,
+`layout: left|right` (alternar). Ótimo para fatos, instituições, personagens e números citados no roteiro.
+Fontes extras baixadas em `setup.sh`: Cinzel, La Belle Aurore (caligrafia).
+
 ## CORES DO CANAL: PRETO E AMARELO (regra fixa)
 - Destaque da marca = **amarelo** (`ACCENT`, padrão `TEMA=amarelo`); fundo preto/escuro. Tarjas, sublinhados,
   palavras em destaque, carimbos, números, botões e mira usam amarelo, com texto **preto** sobre o amarelo.
@@ -67,7 +75,11 @@ Use para números-chave (ex.: "81,6% das famílias"), listas de fatores e virada
 - Planeje **uma cena a cada 5–8 s**; nenhuma cena acima de 10 s. Se uma frase longa passar disso, divida
   com uma cena extra (broll, kinetic, chips) ancorada no meio da frase.
 - Depois de escrever o plano, rode `tools/dividir_cenas.py` (com a lista de mídias revisadas): ele insere
-  b-rolls no meio das cenas com mais de 9 s até a média ficar em ~5–6 s.
+  b-rolls no meio das cenas com mais de 9 s até a média ficar em ~5–6 s. Ele NÃO interrompe infográficos
+  (cadeias, grades, listas, gráficos, mapas, globo) — esses revelam itens ao longo da fala (até ~15 s).
+- **Cuidado com cortes de "palavras soltas"** que a transcrição inventa no fim de uma palavra (ex.: "a porta"
+  depois de "importa"): confira a energia do áudio antes de cortar e, após editar, retranscreva e procure
+  palavras truncadas ("simpó..."); se houver, desfaça o corte.
 - O `render.py` avisa ("AVISO: cenas com mais de 10 s") e, como rede de segurança, aplica **batidas
   automáticas a cada 5 s** em cenas longas: punch-in de câmera + brilho passando + whoosh discreto.
   Fotos ganham zoom + pan lateral alternado. Ainda assim, prefira dividir as cenas.

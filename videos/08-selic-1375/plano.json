@@ -1,0 +1,1078 @@
+[
+{
+"type": "titlecard",
+"at": 0,
+"kicker": "IMPACTO ECONÔMICO · COPOM",
+"lines": [
+"SELIC EM 13,75%",
+"*O QUE MUDA NO SEU BOLSO?*"
+],
+"sub": "Banco Central segura os juros"
+},
+{
+"type": "broll",
+"anchor": "central segura os juros",
+"media": {
+"file": "stock/pb138315.mp4"
+},
+"_filler": true
+},
+{
+"type": "archive",
+"anchor": "o banco central acaba",
+"media": {
+"file": "stock/pb5991196.jpg"
+},
+"title": "DECISÃO DO BANCO CENTRAL",
+"sub": "Afeta diretamente a economia brasileira",
+"layout": "left"
+},
+{
+"type": "bignum",
+"anchor": "a selic foi mantida",
+"from": 15,
+"to": 13.75,
+"dec": 2,
+"suffix": "%",
+"label": "Selic mantida ao ano",
+"color": "gold",
+"dur": 1.4,
+"tilt": true
+},
+{
+"type": "chain",
+"anchor": "com isso os juros",
+"title": "O QUE CONTINUA",
+"items": [
+"Juros elevados",
+"Crédito caro",
+"Financiamentos difíceis"
+],
+"span": 6
+},
+{
+"type": "archive",
+"anchor": "mas existe outro lado",
+"media": {
+"file": "stock/pb2696229.jpg"
+},
+"title": "O OUTRO LADO",
+"sub": "Quem investe segue ganhando com juros altos",
+"layout": "right"
+},
+{
+"type": "list",
+"anchor": "afinal o que essa decisao",
+"title": "O que vamos responder:",
+"items": [
+"O cartão vai ficar mais caro?",
+"O financiamento vai diminuir?",
+"A poupança vai render mais?"
+],
+"span": 9
+},
+{
+"type": "kinetic",
+"anchor": "vamos entender o que",
+"text": "Como isso chega ao *seu bolso*",
+"size": 110
+},
+{
+"type": "titlecard",
+"anchor": "porque o banco central manteve",
+"kicker": "PARTE 2",
+"lines": [
+"POR QUE O BANCO CENTRAL",
+"*MANTEVE A SELIC?*"
+]
+},
+{
+"type": "datecard",
+"anchor": "na quarta feira 4",
+"month": "NOVEMBRO 2026",
+"first_wd": 0,
+"ndays": 30,
+"highlight": [
+4
+],
+"label": "Reunião do Copom"
+},
+{
+"type": "archive",
+"anchor": "o comite de politica",
+"media": {
+"file": "stock/pb2181960.jpg"
+},
+"title": "COPOM",
+"sub": "Comitê de Política Monetária",
+"body": "Decidiu manter a taxa Selic em 13,75% ao ano.",
+"layout": "left"
+},
+{
+"type": "stamp",
+"anchor": "a decisao interrompeu",
+"text": "PAUSA",
+"sub": "APÓS 5 CORTES SEGUIDOS",
+"foot": "O ciclo de cortes foi interrompido"
+},
+{
+"type": "line",
+"anchor": "a taxa havia comecado",
+"title": "SELIC EM 2026",
+"points": [
+[
+"março",
+15.0
+],
+[
+"",
+14.75
+],
+[
+"",
+14.5
+],
+[
+"",
+14.25
+],
+[
+"",
+14.0
+],
+[
+"nov",
+13.75
+]
+],
+"ymin": 13,
+"ymax": 15.5,
+"ticks": [
+13.5,
+14.5,
+15.5
+],
+"yfmt": "{}%",
+"ydec": 1,
+"draw": 3.5,
+"color": "green",
+"notes": {
+"0": "15%",
+"5": "13,75%"
+},
+"note": "Cortes intermediários ilustrativos"
+},
+{
+"type": "question",
+"anchor": "mas porque o banco central resolveu",
+"text": "Por que o Banco Central *resolveu parar*?"
+},
+{
+"type": "archive",
+"anchor": "com a inflacao e com",
+"media": {
+"file": "stock/pb5196890.jpg"
+},
+"title": "INFLAÇÃO",
+"sub": "A principal preocupação",
+"layout": "right"
+},
+{
+"type": "doc",
+"anchor": "no comunicado o copom",
+"head": "COMUNICADO DO COPOM",
+"text": "A inflação cheia e as medidas de pressões mais persistentes aceleraram e ficaram acima do limite superior da meta.",
+"hl": "acima do limite superior da meta",
+"tilt": true
+},
+{
+"type": "broll",
+"anchor": "que mostram as pressoes",
+"media": {
+"file": "stock/pb4017104.jpg"
+},
+"_filler": true
+},
+{
+"type": "broll",
+"anchor": "aceleraram e ficaram acima",
+"media": {
+"file": "stock/pb2724241.jpg"
+},
+"_filler": true
+},
+{
+"type": "globe",
+"anchor": "alem disso o banco central destacou",
+"from": [
+-47,
+-15
+],
+"to": [
+45,
+28
+],
+"move": 5,
+"hl": {
+"BRA": "gold",
+"IRN": "red",
+"SAU": "red",
+"ISR": "red"
+},
+"hl_at": 0.3,
+"labels": [
+{
+"ll": [
+48,
+29
+],
+"text": "ORIENTE MÉDIO · PETRÓLEO",
+"at": 4.0,
+"dx": 160,
+"dy": -130
+}
+],
+"title": "CENÁRIO EXTERNO"
+},
+{
+"type": "archive",
+"anchor": "outro fator citado",
+"media": {
+"file": "stock/pb256312.jpg"
+},
+"title": "SITUAÇÃO FISCAL",
+"sub": "Preocupação com as contas públicas",
+"layout": "left"
+},
+{
+"type": "broll",
+"anchor": "as preocupacoes com as",
+"media": {
+"file": "stock/pb349089.mp4"
+},
+"_filler": true
+},
+{
+"type": "doc",
+"anchor": "o recado do banco central",
+"head": "O RECADO",
+"text": "Apesar da desaceleração da economia, ainda não há condições tranquilas para reduzir os juros com segurança.",
+"hl": "reduzir os juros com segurança",
+"tilt": true,
+"tilt_side": -1
+},
+{
+"type": "broll",
+"anchor": "nao existem condicoes suficientes",
+"media": {
+"file": "stock/pb1195056.jpg"
+},
+"_filler": true
+},
+{
+"type": "kinetic",
+"anchor": "e isso tem consequencias",
+"text": "Consequências para *milhões* de brasileiros",
+"media": {
+"file": "stock/pb24887.mp4"
+}
+},
+{
+"type": "titlecard",
+"anchor": "o que a selic tem",
+"kicker": "PARTE 3",
+"lines": [
+"O QUE A SELIC TEM A VER",
+"*COM O SEU BOLSO?*"
+]
+},
+{
+"type": "chips",
+"anchor": "a selic e a principal",
+"title": "A Selic influencia:",
+"items": [
+"Custo do dinheiro",
+"Empréstimos",
+"Financiamentos",
+"Investimentos"
+],
+"span": 8
+},
+{
+"type": "chain",
+"anchor": "quando a selic permanece",
+"title": "POR QUE O CRÉDITO ENCARECE",
+"items": [
+[
+"Selic alta",
+"up"
+],
+[
+"Custo dos bancos",
+"up"
+],
+[
+"Juros ao cliente",
+"up"
+]
+],
+"span": 8
+},
+{
+"type": "broll",
+"anchor": "caro isso acontece porque",
+"media": {
+"file": "stock/pb8256.mp4"
+},
+"_filler": true
+},
+{
+"type": "broll",
+"anchor": "para captar recursos e",
+"media": {
+"file": "stock/pb1340649.jpg"
+},
+"_filler": true
+},
+{
+"type": "archive",
+"anchor": "uma pessoa que precisa",
+"media": {
+"file": "stock/pb6688945.jpg"
+},
+"media2": "stock/pb791390.jpg",
+"title": "CONDIÇÕES PIORES",
+"sub": "Carro, imóvel e empréstimo",
+"layout": "left"
+},
+{
+"type": "broll",
+"anchor": "contratar um emprestimo pode",
+"media": {
+"file": "stock/pb2387280.jpg"
+},
+"_filler": true
+},
+{
+"type": "stamp",
+"anchor": "mas existe um detalhe importante",
+"text": "NÃO É AUTOMÁTICO",
+"foot": "A Selic não define diretamente a taxa de todos os empréstimos"
+},
+{
+"type": "chips",
+"anchor": "cada instituicao",
+"title": "Cada banco considera:",
+"items": [
+"Risco do cliente",
+"Custo da operação",
+"Garantias",
+"Outras condições"
+],
+"span": 6
+},
+{
+"type": "kinetic",
+"anchor": "fique parada",
+"text": "Os juros de cada banco *podem variar*",
+"size": 110
+},
+{
+"type": "titlecard",
+"anchor": "cartao de credito e",
+"kicker": "PARTE 4",
+"lines": [
+"CARTÃO E EMPRÉSTIMOS",
+"*O BRASILEIRO PAGA CARO*"
+]
+},
+{
+"type": "archive",
+"anchor": "segundo as estatisticas",
+"media": {
+"file": "stock/pb851502.jpg"
+},
+"title": "62,4% AO ANO",
+"sub": "Juros médios do crédito livre · setembro",
+"body": "Novas operações de crédito para pessoas físicas, segundo o Banco Central.",
+"layout": "right"
+},
+{
+"type": "broll",
+"anchor": "a taxa media de",
+"media": {
+"file": "stock/pb59139.mp4"
+},
+"_filler": true
+},
+{
+"type": "broll",
+"anchor": "chegou a 62 4",
+"media": {
+"file": "stock/pb1726618.jpg"
+},
+"_filler": true
+},
+{
+"type": "bignum",
+"anchor": "das familias permaneceu",
+"from": 0,
+"to": 6,
+"suffix": "%",
+"label": "inadimplência das famílias",
+"color": "red",
+"dur": 1.0,
+"plain": true,
+"tilt": true
+},
+{
+"type": "kinetic",
+"anchor": "isso mostra como",
+"text": "O crédito continua *pesado*",
+"size": 120,
+"media": {
+"file": "stock/pb44637.mp4"
+}
+},
+{
+"type": "archive",
+"anchor": "imagine uma pessoa",
+"media": {
+"file": "stock/pb1583534.jpg"
+},
+"title": "O ROTATIVO",
+"sub": "Uma dívida pequena pode virar um problema grande",
+"layout": "left"
+},
+{
+"type": "broll",
+"anchor": "rotativo relativamente pequena em",
+"media": {
+"file": "stock/pb1232944.jpg"
+},
+"_filler": true
+},
+{
+"type": "doc",
+"anchor": "nao significa que o cartao",
+"head": "ENTENDA",
+"text": "O cartão não fica mais caro automaticamente. Mas também não há alívio imediato para quem já paga taxas altas.",
+"hl": "não há alívio imediato",
+"tilt": true
+},
+{
+"type": "broll",
+"anchor": "cria um alivio imediato",
+"media": {
+"file": "stock/pb24114.mp4"
+},
+"_filler": true
+},
+{
+"type": "chips",
+"anchor": "o mesmo vale",
+"title": "O mesmo vale para:",
+"items": [
+"Empréstimo pessoal",
+"Cheque especial"
+],
+"span": 3
+},
+{
+"type": "list",
+"anchor": "o consumidor precisa",
+"title": "Antes de contratar crédito:",
+"items": [
+"Compare propostas",
+"Veja o Custo Efetivo Total (CET)",
+"Saiba quanto vai pagar no final"
+],
+"span": 8
+},
+{
+"type": "titlecard",
+"anchor": "financiamento de casa",
+"kicker": "PARTE 5",
+"lines": [
+"FINANCIAMENTO DE CASA E CARRO",
+"*O QUE MUDA?*"
+]
+},
+{
+"type": "archive",
+"anchor": "quem esta pensando",
+"media": {
+"file": "stock/pb1353389.jpg"
+},
+"media2": "stock/pb5190050.jpg",
+"title": "ATENÇÃO",
+"sub": "Financiamentos mais caros e aprovação mais difícil",
+"layout": "right"
+},
+{
+"type": "broll",
+"anchor": "os juros elevados podem",
+"media": {
+"file": "stock/pb2301933.jpg"
+},
+"_filler": true
+},
+{
+"type": "grid",
+"anchor": "no caso dos imoveis",
+"title": "O que pesa na conta",
+"items": [
+[
+"Imóvel",
+"modalidade, fonte de recursos"
+],
+[
+"Veículo",
+"prazo, entrada, perfil, risco"
+]
+],
+"gap": 5.0
+},
+{
+"type": "broll",
+"anchor": "de recursos e das",
+"media": {
+"file": "stock/pb12564.mp4"
+},
+"_filler": true
+},
+{
+"type": "broll",
+"anchor": "entram na conta o",
+"media": {
+"file": "stock/pb1853262.jpg"
+},
+"_filler": true
+},
+{
+"type": "stamp",
+"anchor": "e aqui existe",
+"text": "TAXA FIXA",
+"sub": "PARCELA NÃO MUDA",
+"foot": "A manutenção da Selic não aumenta prestações já contratadas"
+},
+{
+"type": "broll",
+"anchor": "prestacoes vao subir se",
+"media": {
+"file": "stock/pb4521073.jpg"
+},
+"_filler": true
+},
+{
+"type": "broll",
+"anchor": "a parcela normalmente nao",
+"media": {
+"file": "stock/pb2165.mp4"
+},
+"_filler": true
+},
+{
+"type": "grid",
+"anchor": "os maiores impactos",
+"title": "Onde está o impacto",
+"items": [
+[
+"Novos contratos",
+"sentem mais"
+],
+[
+"Taxa variável",
+"pode mudar"
+]
+],
+"gap": 1.5
+},
+{
+"type": "archive",
+"anchor": "por isso quem pretende",
+"media": {
+"file": "stock/pb3196481.jpg"
+},
+"title": "COMPARE O TOTAL",
+"sub": "Não olhe só o tamanho da parcela",
+"layout": "left"
+},
+{
+"type": "broll",
+"anchor": "e comparar o valor",
+"media": {
+"file": "stock/pb1595992.jpg"
+},
+"_filler": true
+},
+{
+"type": "titlecard",
+"anchor": "quem tem dinheiro investido",
+"kicker": "PARTE 6",
+"lines": [
+"QUEM TEM DINHEIRO INVESTIDO",
+"*PODE SE BENEFICIAR?*"
+]
+},
+{
+"type": "grid",
+"anchor": "se os juros altos",
+"title": "Juros altos",
+"items": [
+[
+"Quem pega emprestado",
+"perde"
+],
+[
+"Quem investe",
+"pode ganhar"
+]
+],
+"gap": 2.5
+},
+{
+"type": "archive",
+"anchor": "e o caso de aplicacoes",
+"media": {
+"file": "stock/pb2180330.jpg"
+},
+"title": "CDI E TESOURO SELIC",
+"sub": "CDBs e títulos atrelados aos juros",
+"layout": "right"
+},
+{
+"type": "bignum",
+"anchor": "com a celic em",
+"from": 10,
+"to": 13.75,
+"dec": 2,
+"suffix": "%",
+"label": "ambiente de juros elevados para a renda fixa",
+"color": "green",
+"dur": 1.2
+},
+{
+"type": "stamp",
+"anchor": "mas atencao isso nao",
+"text": "NÃO RENDE 13,75%",
+"sub": "PARA TODOS",
+"foot": "O rendimento varia conforme o investimento"
+},
+{
+"type": "chips",
+"anchor": "o resultado depende",
+"title": "O rendimento depende de:",
+"items": [
+"Tipo de aplicação",
+"% do CDI",
+"Impostos",
+"Taxas",
+"Prazo"
+],
+"span": 5
+},
+{
+"type": "doc",
+"anchor": "tambem e importante entender",
+"head": "ATENÇÃO",
+"text": "A taxa anual divulgada não representa necessariamente o valor líquido que o investidor receberá.",
+"hl": "valor líquido",
+"tilt": true
+},
+{
+"type": "broll",
+"anchor": "representa necessariamente o valor",
+"media": {
+"file": "stock/pb100344.mp4"
+},
+"_filler": true
+},
+{
+"type": "archive",
+"anchor": "ainda assim para quem",
+"media": {
+"file": "stock/pb2696228.jpg"
+},
+"title": "RENDA FIXA",
+"sub": "Cenário ainda interessante para a reserva",
+"layout": "left"
+},
+{
+"type": "broll",
+"anchor": "renda fixa o cenario",
+"media": {
+"file": "stock/pb2696219.jpg"
+},
+"_filler": true
+},
+{
+"type": "titlecard",
+"anchor": "e a poupanca",
+"kicker": "PARTE 7",
+"lines": [
+"E A POUPANÇA?",
+"*VAI RENDER MAIS?*"
+]
+},
+{
+"type": "archive",
+"anchor": "muita gente tambem",
+"media": {
+"file": "stock/pb970340.jpg"
+},
+"title": "POUPANÇA",
+"sub": "A regra muda com a Selic?",
+"layout": "right"
+},
+{
+"type": "doc",
+"anchor": "para regras atuais",
+"head": "REGRA DA POUPANÇA",
+"text": "Com a Selic acima de 8,5% ao ano, a poupança rende 0,5% ao mês mais a TR (Taxa Referencial).",
+"hl": "0,5% ao mês mais a TR",
+"tilt": true
+},
+{
+"type": "broll",
+"anchor": "rende 0 5 ao",
+"media": {
+"file": "stock/pb3105631.jpg"
+},
+"_filler": true
+},
+{
+"type": "stamp",
+"anchor": "portanto com a",
+"text": "SEM MUDANÇA",
+"sub": "NA FÓRMULA DA POUPANÇA",
+"foot": "Com a Selic em 13,75%, a regra continua a mesma"
+},
+{
+"type": "broll",
+"anchor": "que a manutencao da",
+"media": {
+"file": "stock/pb1842205.jpg"
+},
+"_filler": true
+},
+{
+"type": "grid",
+"anchor": "e importante lembrar que a poupanca",
+"title": "Poupança",
+"items": [
+[
+"Vantagem",
+"isenta de IR (pessoa física)"
+],
+[
+"Mas",
+"nem sempre rende mais"
+]
+],
+"gap": 3.0
+},
+{
+"type": "chips",
+"anchor": "o investidor precisa comparar",
+"title": "Compare sempre:",
+"items": [
+"Rendimento líquido",
+"Segurança",
+"Facilidade de resgate"
+],
+"span": 5
+},
+{
+"type": "titlecard",
+"anchor": "bolsa de valores e o dolar",
+"kicker": "PARTE 8",
+"lines": [
+"BOLSA E DÓLAR",
+"*POR QUE O MERCADO SE IMPORTA?*"
+]
+},
+{
+"type": "archive",
+"anchor": "a decisao do banco central tambem",
+"media": {
+"file": "stock/pb1863880.jpg"
+},
+"title": "MERCADO FINANCEIRO",
+"sub": "A Selic mexe com a Bolsa",
+"layout": "left"
+},
+{
+"type": "chain",
+"anchor": "permanecem elevados",
+"title": "JUROS ALTOS × BOLSA",
+"items": [
+"Renda fixa atrai",
+"Menos dinheiro em ações",
+"Ações sobem menos"
+],
+"span": 9
+},
+{
+"type": "broll",
+"anchor": "investidores que procuram retornos",
+"media": {
+"file": "stock/pb50628.mp4"
+},
+"_filler": true
+},
+{
+"type": "broll",
+"anchor": "da bolsa isso pode",
+"media": {
+"file": "stock/pb385506.jpg"
+},
+"_filler": true
+},
+{
+"type": "broll",
+"anchor": "existe em certeza sobre",
+"media": {
+"file": "stock/pb138315.mp4"
+},
+"_filler": true
+},
+{
+"type": "chain",
+"anchor": "por outro lado uma reducao",
+"title": "QUEDA SUSTENTÁVEL DOS JUROS",
+"items": [
+[
+"Empresas",
+"up"
+],
+[
+"Investimentos",
+"up"
+],
+[
+"Interesse por ações",
+"up"
+]
+],
+"span": 6
+},
+{
+"type": "chips",
+"anchor": "mas nao basta olhar",
+"title": "O mercado também olha:",
+"items": [
+"Inflação",
+"Cenário internacional",
+"Câmbio",
+"Situação fiscal"
+],
+"span": 6
+},
+{
+"type": "archive",
+"anchor": "na vespera da decisao",
+"media": {
+"file": "stock/pb2904773.jpg"
+},
+"title": "NA VÉSPERA",
+"sub": "Atenção ao comunicado e à política fiscal · InfoMoney",
+"layout": "right"
+},
+{
+"type": "broll",
+"anchor": "justamente ao comunicado do",
+"media": {
+"file": "stock/pb4017104.jpg"
+},
+"_filler": true
+},
+{
+"type": "kinetic",
+"anchor": "ou seja a",
+"text": "A Selic é só *uma parte* do cenário",
+"size": 110
+},
+{
+"type": "titlecard",
+"anchor": "quando os juros podem",
+"kicker": "PARTE 9",
+"lines": [
+"QUANDO OS JUROS",
+"*PODEM VOLTAR A CAIR?*"
+]
+},
+{
+"type": "chips",
+"anchor": "o mercado acompanha",
+"title": "O mercado acompanha:",
+"items": [
+"Inflação",
+"Atividade econômica",
+"Expectativas de preços"
+],
+"span": 6
+},
+{
+"type": "stamp",
+"anchor": "no comunicado de novembro",
+"text": "SEM PROMESSA",
+"sub": "DE NOVO CORTE",
+"foot": "O Banco Central seguirá acompanhando os dados"
+},
+{
+"type": "doc",
+"anchor": "a instituicao afirmou",
+"head": "BANCO CENTRAL",
+"text": "Continuará acompanhando os dados para decidir o nível de restrição monetária necessário para levar a inflação à meta.",
+"hl": "levar a inflação à meta",
+"tilt": true
+},
+{
+"type": "broll",
+"anchor": "restricao monetaria sera necessario",
+"media": {
+"file": "stock/pb2724241.jpg"
+},
+"_filler": true
+},
+{
+"type": "datecard",
+"anchor": "a proxima reuniao",
+"month": "DEZEMBRO 2026",
+"first_wd": 2,
+"ndays": 31,
+"highlight": [
+8,
+9
+],
+"label": "Próxima reunião do Copom"
+},
+{
+"type": "archive",
+"anchor": "ate la os indicadores",
+"media": {
+"file": "stock/pb10045176.jpg"
+},
+"title": "ATÉ DEZEMBRO",
+"sub": "Os indicadores vão mostrar o caminho",
+"layout": "left"
+},
+{
+"type": "broll",
+"anchor": "no patamar ou severar",
+"media": {
+"file": "stock/pb349089.mp4"
+},
+"_filler": true
+},
+{
+"type": "stamp",
+"anchor": "mas nao existe garantia",
+"text": "SEM GARANTIA",
+"sub": "DE CORTE",
+"foot": "Tudo depende da inflação e da economia"
+},
+{
+"type": "titlecard",
+"anchor": "a decisao de manter",
+"kicker": "CONCLUSÃO",
+"lines": [
+"SELIC EM 13,75%",
+"*O QUE FICA*"
+]
+},
+{
+"type": "broll",
+"anchor": "ainda esta preocupado com",
+"media": {
+"file": "stock/pb1195056.jpg"
+},
+"_filler": true
+},
+{
+"type": "grid",
+"anchor": "para quem depende",
+"title": "Quem sente o quê",
+"items": [
+[
+"Crédito",
+"continua caro"
+],
+[
+"Cartão",
+"cuidado redobrado"
+],
+[
+"Renda fixa",
+"oportunidades"
+]
+],
+"gap": 2.5
+},
+{
+"type": "broll",
+"anchor": "no cartao o cuidado",
+"media": {
+"file": "stock/pb8256.mp4"
+},
+"_filler": true
+},
+{
+"type": "broll",
+"anchor": "atreladas aos juros pode",
+"media": {
+"file": "stock/pb1340649.jpg"
+},
+"_filler": true
+},
+{
+"type": "archive",
+"anchor": "no fim das contas",
+"media": {
+"file": "stock/pb1195013.jpg"
+},
+"title": "MAIS QUE UM NÚMERO",
+"sub": "Custo do dinheiro, consumo e decisões",
+"layout": "right"
+},
+{
+"type": "broll",
+"anchor": "do dinheiro os investimentos",
+"media": {
+"file": "stock/pb2387280.jpg"
+},
+"_filler": true
+},
+{
+"type": "question",
+"anchor": "e agora queremos",
+"text": "Cortar os juros ou manter a Selic *alta*?",
+"media": {
+"file": "stock/pb25911.mp4"
+}
+},
+{
+"type": "broll",
+"anchor": "deveria comecar a cortar",
+"media": {
+"file": "stock/pb59139.mp4"
+},
+"_filler": true
+},
+{
+"type": "archive",
+"anchor": "deixe aqui embaixo",
+"media": {
+"file": "stock/pb5991196.jpg"
+},
+"title": "SUA OPINIÃO",
+"sub": "Deixe seu comentário · Impacto Econômico",
+"layout": "right"
+},
+{
+"type": "outro",
+"anchor": "se inscreva no canal",
+"click": 4.0
+}
+]
