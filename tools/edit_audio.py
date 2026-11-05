@@ -88,11 +88,14 @@ def dereverb(path):
         print("DeepFilterNet indisponível, usando só filtros:", ex)
         return path
 
-clean_src = dereverb(src)
+# Pedido do usuário (vídeo 05): NÃO tentar tirar o eco por padrão — só cortar pausas e erros.
+# Para ligar a limpeza de eco/ruído com IA: LIMPAR_ECO=1
+LIMPAR_ECO = os.environ.get("LIMPAR_ECO") == "1"
+clean_src = dereverb(src) if LIMPAR_ECO else src
 # filtros: corta graves de vento, reduz ruído, "expansor" que encurta a cauda do eco entre palavras,
 # tira o som abafado de sala (250-400 Hz), dá presença (3 kHz), compressor para voz firme e na frente
-VOICE_CHAIN = ("highpass=f=85,afftdn=nf=-28,"
-               "agate=threshold=0.02:ratio=2.5:range=0.2:attack=3:release=120:knee=4,"
+VOICE_CHAIN = (("highpass=f=85,afftdn=nf=-28,agate=threshold=0.02:ratio=2.5:range=0.2:attack=3:release=120:knee=4,")
+               if LIMPAR_ECO else "highpass=f=70,") + (
                "equalizer=f=300:t=q:w=1.2:g=-3,equalizer=f=3200:t=q:w=1:g=2.5,equalizer=f=8000:t=q:w=1:g=1,"
                "deesser=i=0.4,acompressor=threshold=-22dB:ratio=3.5:attack=5:release=100:makeup=4")
 

@@ -34,6 +34,18 @@ Meta: entregar em até ~50 min. Rode etapas pesadas em segundo plano e avise o u
    (≈4 min; reduz para ~250 MB sem perda visível no celular).
 10. Entregar com `SendUserFile`. Não commitar o MP4 (grande); commitar `plano.json` e `cortes.json`.
 
+## DINAMISMO — algo acontecendo a cada ≤ 10 segundos (regra fixa)
+- Planeje **uma cena a cada 5–8 s**; nenhuma cena acima de 10 s. Se uma frase longa passar disso, divida
+  com uma cena extra (broll, kinetic, chips) ancorada no meio da frase.
+- O `render.py` avisa ("AVISO: cenas com mais de 10 s") e, como rede de segurança, aplica **batidas
+  automáticas a cada 5 s** em cenas longas: punch-in de câmera + brilho passando + whoosh discreto.
+  Fotos ganham zoom + pan lateral alternado. Ainda assim, prefira dividir as cenas.
+- Varie sempre: texto 3D, globo, mapa com radar/navios, celular (`phone`), números, gráficos, documentos
+  inclinados, carimbos, vídeos e fotos reais. Não repita o mesmo tipo mais de 2 vezes seguidas.
+- Cena `phone`: celular 3D com app de banco GENÉRICO ("BANCO DIGITAL", nunca logo/nome real) e um alerta
+  que aparece (`title`, `sub`, `alert`, `alert_sub`, `alert_at`, `saldo`).
+- Anos/quantidades inteiras: `"plain": true` no `bignum` (evita "2.023").
+
 ## FOTOS E VÍDEOS DE BANCO (Pexels + Pixabay) — usar SEMPRE, bastante
 O usuário quer o vídeo **muito dinâmico**: misture animações com fotos e vídeos reais.
 - Chaves lidas do ambiente: `PIXABAY_KEY` e `PEXELS_KEY` (nunca escrever chaves no repositório).
@@ -57,10 +69,9 @@ O usuário quer o vídeo **muito dinâmico**: misture animações com fotos e v�
   mas nunca competem com a fala. Valores no `render.py`: `SFX_LEVEL = 0.16`, `SFX_CEIL = 0.16`
   (limitador do barramento de efeitos), música 0.085 com voz / 0.17 nas pausas. Não aumentar.
 - **Nada de sirene ou alarme alto.** O som `alarm` agora é um pulso grave e discreto. Não criar sons estridentes.
-- **Tirar eco/reverberação** (o usuário grava no celular, às vezes em ambiente aberto):
-  `edit_audio.py` passa a voz pelo DeepFilterNet (remove ruído e reverberação) e depois por filtros
-  (expansor contra a cauda do eco, corte de 300 Hz abafado, presença em 3 kHz, de-esser, compressor).
-  Se o DeepFilterNet não estiver instalado: `pip install torch torchaudio --index-url https://download.pytorch.org/whl/cpu && pip install deepfilternet` (o edit_audio.py já contorna a incompatibilidade com torchaudio novo).
+- **NÃO tirar o eco de fundo** (pedido mais recente do usuário, vídeo 05). Só cortar pausas, momentos sem
+  fala e os trechos em que ele errou/repetiu. `edit_audio.py` já faz isso por padrão (sem IA de eco, sem gate).
+  A limpeza de eco com DeepFilterNet só roda se o usuário pedir: `LIMPAR_ECO=1 python3 tools/edit_audio.py ...`.
 - Ao revisar: confira que a voz soa limpa, sem eco e sem cortes de palavras.
 
 ## Estilo (referências do usuário)
