@@ -786,8 +786,12 @@ def sc_burst(img, dr, t, D, p):
             card = paper_card(cw, ch, CREAM, 5); cd = ImageDraw.Draw(card)
             v, _ = count_val(p, t) if "to" in p else (None, 1)
             big = (p.get("prefix", "") + fmt_br(v, p.get("dec", 0)) + p.get("suffix", "")) if v is not None else p.get("big", "")
-            cd.text((cw / 2, ch * 0.42), big, font=F("black", int(170 * cw / 1000)), fill=rgba(ORANGE if p.get("color") != "navy" else NAVY, 1), anchor="mm")
-            cd.text((cw / 2, ch * 0.78), p.get("label", ""), font=F("bold", int(44 * cw / 1000)), fill=rgba(NAVY, 1), anchor="mm")
+            bfs = int(170 * cw / 1000)
+            while bfs > 20 and tw(F("black", bfs), big) > cw * 0.88: bfs -= 4
+            cd.text((cw / 2, ch * 0.42), big, font=F("black", bfs), fill=rgba(ORANGE if p.get("color") != "navy" else NAVY, 1), anchor="mm")
+            lfs = int(44 * cw / 1000)
+            while lfs > 12 and tw(F("bold", lfs), p.get("label", "")) > cw * 0.9: lfs -= 2
+            cd.text((cw / 2, ch * 0.78), p.get("label", ""), font=F("bold", lfs), fill=rgba(NAVY, 1), anchor="mm")
             img.alpha_composite(card.rotate(-3, expand=True, resample=Image.BICUBIC), (int(W / 2 - cw / 2 - 20), int(H / 2 - ch / 2 - 20)))
     return [(0.0, "whoosh", 0.4), (0.1, "hit", 0.45)]
 
@@ -809,6 +813,46 @@ def sc_broll(img, dr, t, D, p):
             dr.rectangle([x0 + 14, y0 + 76, x0 + 14 + w * 0.8, y0 + 120], fill=rgba(RED, 0.9 * k))
             dr.text((x0 + 49, y0 + 99), p["sub"], font=F("med", 28), fill=rgba(WHITE, k), anchor="lm")
     return [(0.0, "whoosh", 0.3)]
+
+def sc_phone(img, dr, t, D, p):
+    """Celular com app de banco genérico mostrando um alerta (ex.: serviço suspenso)."""
+    k = back(prog(t, 0.05, 0.6)); ph_w, ph_h = 520, 1000
+    phone = Image.new("RGBA", (ph_w, ph_h)); pd = ImageDraw.Draw(phone, "RGBA")
+    pd.rounded_rectangle([0, 0, ph_w, ph_h], radius=70, fill=(18, 18, 20, 255), outline=(90, 90, 96, 255), width=6)
+    pd.rounded_rectangle([22, 22, ph_w - 22, ph_h - 22], radius=54, fill=(245, 246, 250, 255))
+    pd.rounded_rectangle([ph_w / 2 - 70, 34, ph_w / 2 + 70, 62], radius=14, fill=(18, 18, 20, 255))
+    pd.rectangle([22, 90, ph_w - 22, 230], fill=NAVY + (255,))
+    pd.text((60, 140), p.get("app", "MEU BANCO"), font=F("bold", 34), fill=(255, 255, 255), anchor="lm")
+    pd.text((60, 190), "Saldo disponível", font=F("reg", 24), fill=(200, 210, 230), anchor="lm")
+    bal = p.get("saldo", "••••••")
+    pd.text((60, 290), bal, font=F("black", 64), fill=(30, 30, 30), anchor="lm")
+    for i, lab in enumerate(["Pix / Transferir", "Pagar", "Extrato"]):
+        y = 400 + i * 110
+        pd.rounded_rectangle([50, y, ph_w - 50, y + 84], radius=18, fill=(230, 232, 240, 255))
+        pd.text((80, y + 42), lab, font=F("med", 30), fill=(120, 120, 130), anchor="lm")
+    a = prog(t, p.get("alert_at", 1.2), 0.25)
+    if a > 0:
+        sh = back(prog(t, p.get("alert_at", 1.2), 0.4))
+        bw, bh = int((ph_w - 70) * clamp(sh, 0.05, 1.1)), int(380 * clamp(sh, 0.05, 1.1))
+        pd.rounded_rectangle([22, 22, ph_w - 22, ph_h - 22], radius=54, fill=(0, 0, 0, int(120 * a)))
+        bx, by = ph_w / 2 - bw / 2, ph_h / 2 - bh / 2
+        pd.rounded_rectangle([bx, by, bx + bw, by + bh], radius=26, fill=(255, 255, 255, 255))
+        if sh > 0.7:
+            pd.ellipse([ph_w / 2 - 40, by + 30, ph_w / 2 + 40, by + 110], fill=RED + (255,))
+            pd.text((ph_w / 2, by + 72), "!", font=F("black", 60), fill=(255, 255, 255), anchor="mm")
+            for j, ln in enumerate(wrap(p.get("alert", "Serviço indisponível"), F("bold", 34), bw - 60)):
+                pd.text((ph_w / 2, by + 160 + j * 44), ln, font=F("bold", 34), fill=(30, 30, 30), anchor="mm")
+            pd.text((ph_w / 2, by + bh - 40), p.get("alert_sub", "Tente novamente mais tarde"), font=F("reg", 24), fill=(120, 120, 120), anchor="mm")
+    sc = 0.85 * clamp(k, 0.05, 1.1); yaw = 0.18 * math.sin(t * 0.8)
+    lay = warp3d(phone.resize((int(ph_w * sc), int(ph_h * sc)), Image.BICUBIC), yaw)
+    img.alpha_composite(lay, (int(W * 0.68 - lay.width / 2), int(H / 2 - lay.height / 2 + 20)))
+    if p.get("title"):
+        ta = ease(prog(t, 0.3, 0.5)); f = F("black", 76)
+        for j, ln in enumerate(wrap(p["title"], f, 820)):
+            dr.text((140, H / 2 - 80 + j * 92), ln, font=f, fill=rgba(WHITE, ta), anchor="lm")
+    if p.get("sub"):
+        label_box(dr, (140, H / 2 + 150), p["sub"], t, bgc=RED, size=34, anchor="lm", alpha=prog(t, 0.8, 0.4))
+    return [(0.0, "whoosh", 0.4), (p.get("alert_at", 1.2), "pop", 0.6), (p.get("alert_at", 1.2), "glitch", 0.3)]
 
 def find_coeffs(dst, src):
     A = []
@@ -981,7 +1025,7 @@ def radar_overlay(dr, pt, t, r=260, color=GREEN):
         dr.ellipse([bx - 7, by - 7, bx + 7, by + 7], fill=rgba(RED, al))
 
 SCENES = {k[3:]: v for k, v in globals().items() if k.startswith("sc_")}
-BGS = {"globe": "dark", "text3d": "dark", "broll": "dark", "title": "dark", "chapter": "paper", "bars": "paper", "doc": "gray", "map": "ocean", "burst": "cream", "headline": "dark", "cine": "dark"}
+BGS = {"phone": "dark", "globe": "dark", "text3d": "dark", "broll": "dark", "title": "dark", "chapter": "paper", "bars": "paper", "doc": "gray", "map": "ocean", "burst": "cream", "headline": "dark", "cine": "dark"}
 
 # ---------- quadro final ----------
 def frame(scene, t, D, mframe=None):
@@ -1000,6 +1044,9 @@ def frame(scene, t, D, mframe=None):
     dark = b in ("dark", "ocean", "gray")
     if p.get("fonte"):
         dr.text((60, H - 50), "Fonte: " + p["fonte"], font=F("reg", 26), fill=rgba(WHITE if dark else INK, 0.7), anchor="lm")
+    if D > BEAT * 1.6 and t >= BEAT:
+        nb = int(t // BEAT)
+        if (D - nb * BEAT) > 1.0: light_sweep(img, t - nb * BEAT, 0.0, 0.9, 0.3)
     if p.get("tilt"):
         img = tilt_frame(img, t, D, p); dr = ImageDraw.Draw(img, "RGBA")
     if p.get("letterbox") or kind == "cine":
@@ -1007,9 +1054,18 @@ def frame(scene, t, D, mframe=None):
     # câmera: leve aproximação contínua + entrada
     kb = 0.14 if (p.get("_media") or {}).get("kind") == "photo" else 0.045
     s = 1.0 + kb * (t / max(D, 0.1)) + 0.06 * (1 - ease(prog(t, 0, 0.45)))
+    # BATIDAS: em cenas longas, a cada BEAT s um "punch-in" rápido de câmera (algo acontece a cada < 10 s)
+    if D > BEAT * 1.6:
+        nb = int(t // BEAT)
+        if nb >= 1 and (D - nb * BEAT) > 1.0:
+            u = t - nb * BEAT
+            s += 0.07 * math.exp(-u * 4.5) * (1 if u > 0 else 0)
     im = img.convert("RGB")
     if s != 1.0:
         cw, ch = W / s, H / s; x0, y0 = (W - cw) / 2, (H - ch) / 2
+        if (p.get("_media") or {}).get("kind") == "photo":  # pan lateral alternado (Ken Burns)
+            dirx = 1 if p.get("_idx", 0) % 2 else -1
+            x0 += dirx * (W - cw) / 2 * (2 * (t / max(D, 0.1)) - 1) * 0.9
         im = im.transform((W, H), Image.EXTENT, (x0, y0, x0 + cw, y0 + ch), Image.BILINEAR)
     ImageDraw.Draw(im, "RGBA").text((60, 60), BRAND, font=F("bold", 26), fill=rgba(WHITE if dark else INK, 0.55), anchor="lm")
     if p.get("_media"):
@@ -1019,6 +1075,17 @@ def frame(scene, t, D, mframe=None):
         d2.text((x + 2, y + 2), txt, font=f, fill=(0, 0, 0), anchor="rm")
         d2.text((x, y), txt, font=f, fill=(225, 225, 225), anchor="rm")
     return im, sfx
+
+BEAT = 5.0  # segundos entre "batidas" visuais em cenas longas
+
+def beat_events(D):
+    """Efeitos sonoros discretos para cada batida visual."""
+    ev = []
+    if D > BEAT * 1.6:
+        k = 1
+        while k * BEAT < D - 1.0:
+            ev.append((k * BEAT - 0.25, "whoosh", 0.25)); k += 1
+    return ev
 
 def post(im, fi):
     a = np.asarray(im, dtype=np.float32)
@@ -1054,7 +1121,7 @@ def render_scene(args):
         proc.stdin.write(post(im, f0 + k).tobytes())
     proc.stdin.close(); proc.wait()
     if reader: reader.stdout.close(); reader.wait()
-    ev = [(f0 / FPS + a, name, g) for a, name, g in (sfx or []) if a < D]
+    ev = [(f0 / FPS + a, name, g) for a, name, g in ((sfx or []) + beat_events(D)) if a < D]
     json.dump(ev, open(f"{outdir}/s{i:03d}.json", "w"))
     return i, [(f0 / FPS + a, name, g) for a, name, g in (sfx or []) if a < D]
 
@@ -1125,6 +1192,10 @@ def main():
     total = float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", voice_p],
                                  capture_output=True, text=True).stdout) + 1.5
     starts = resolve(plan, words, total)
+    for i, sc in enumerate(plan): sc["_idx"] = i
+    longas = [(i, plan[i]["type"], round((starts[i + 1] if i + 1 < len(plan) else total) - starts[i], 1)) for i in range(len(plan))
+              if ((starts[i + 1] if i + 1 < len(plan) else total) - starts[i]) > 10]
+    if longas: print("AVISO: cenas com mais de 10 s (recebem batidas automáticas, mas prefira dividir):", longas)
     work = os.path.splitext(out)[0] + "_parts"; os.makedirs(work, exist_ok=True)
     sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
     import stock
@@ -1136,6 +1207,7 @@ def main():
             if os.path.exists(fp):
                 sc["_media"] = {"path": fp, "credit": m.get("credit", "Pixabay"), "kind": "video" if fp.endswith(".mp4") else "photo"}
                 continue
+        if not m.get("q"): print(f"cena {i}: arquivo de mídia não encontrado ({m.get('file')}), sem mídia"); continue
         r = stock.fetch(m["q"], m.get("kind", "video"), os.path.join(assets, "stock"), seed=i)
         if r: sc["_media"] = r; print(f"cena {i}: {r['credit']} <- {m['q']}")
         elif sc["type"] == "broll":

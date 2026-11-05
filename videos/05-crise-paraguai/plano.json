@@ -1,0 +1,1139 @@
+[
+{
+"type": "text3d",
+"at": 0,
+"lines": [
+"CRISE NO",
+"*PARAGUAI*"
+],
+"sub": "Banco interditado, clientes em pânico, presidente na mira"
+},
+{
+"type": "broll",
+"anchor": "milhoes de pessoas podem",
+"media": {
+"file": "stock/pb2211577.jpg"
+},
+"caption": "ASSUNÇÃO, PARAGUAI"
+},
+{
+"type": "kinetic",
+"anchor": "e politicas da historia",
+"text": "Uma das maiores crises *financeiras e políticas* do país",
+"media": {
+"file": "stock/pb21118.mp4"
+}
+},
+{
+"type": "broll",
+"anchor": "um dos principais bancos",
+"media": {
+"file": "stock/pb4481399.jpg"
+},
+"caption": "BANCO SOB INTERVENÇÃO"
+},
+{
+"type": "chips",
+"anchor": "milhoes de",
+"title": "Em poucos dias:",
+"items": [
+"Milhões afetados",
+"8 presos",
+"Impeachment"
+],
+"span": 5
+},
+{
+"type": "broll",
+"anchor": "acabaram presas",
+"media": {
+"file": "stock/pb198901.mp4"
+},
+"caption": "PRESIDENTE ENFRENTA PEDIDO DE IMPEACHMENT"
+},
+{
+"type": "doc",
+"anchor": "o escandalo ganhou",
+"head": "O ESCÂNDALO",
+"text": "Santiago Peña já teve participação acionária no grupo controlador do banco.",
+"hl": "participação acionária",
+"tilt": true
+},
+{
+"type": "kinetic",
+"anchor": "e o que chama",
+"text": "Não envolve *apenas dinheiro*",
+"size": 110
+},
+{
+"type": "chips",
+"anchor": "questionamentos sobre recursos publicos",
+"title": "Também está em jogo:",
+"items": [
+"Recursos públicos",
+"Fiscalização",
+"Conflito de interesses"
+],
+"span": 5
+},
+{
+"type": "question",
+"anchor": "mas como tudo isso",
+"text": "Como tudo isso *começou*?"
+},
+{
+"type": "question",
+"anchor": "o banco foi interditado",
+"text": "O presidente pode *perder o cargo*?",
+"media": {
+"file": "stock/pb61300.mp4"
+}
+},
+{
+"type": "headline",
+"anchor": "o que esta acontecendo no",
+"kicker": "PARTE 1",
+"date": "ASSUNÇÃO · NOVEMBRO 2026",
+"title": "O que está acontecendo no Paraguai?"
+},
+{
+"type": "globe",
+"anchor": "o paraguai enfrenta",
+"from": [
+-47,
+-15
+],
+"to": [
+-58,
+-23
+],
+"move": 5,
+"hl": {
+"PRY": "red"
+},
+"hl_at": 0.5,
+"labels": [
+{
+"ll": [
+-57.6,
+-25.3
+],
+"text": "PARAGUAI",
+"at": 3.0,
+"dx": 200,
+"dy": -120
+}
+],
+"r": 460
+},
+{
+"type": "phone",
+"anchor": "intervir no",
+"title": "Banco digital sob intervenção",
+"sub": "Banco Central do Paraguai",
+"app": "BANCO DIGITAL",
+"alert": "Serviço suspenso",
+"alert_sub": "Intervenção do Banco Central",
+"alert_at": 2.0
+},
+{
+"type": "bignum",
+"anchor": "de clientes a dimensao",
+"from": 0,
+"to": 3,
+"suffix": " milhões",
+"label": "de clientes no banco",
+"color": "gold",
+"dur": 1.2,
+"tilt": true
+},
+{
+"type": "bars",
+"anchor": "o pais tem pouco mais",
+"title": "Clientes × *população*",
+"sub": "Em milhões de pessoas",
+"items": [
+[
+"População do Paraguai",
+6
+],
+[
+"Clientes do banco",
+3
+]
+],
+"vmax": 7,
+"fmt": "{} mi",
+"span": 3
+},
+{
+"type": "kinetic",
+"anchor": "isso significa que",
+"text": "Cerca de *metade* do país ligada ao banco",
+"media": {
+"file": "stock/pb6387.mp4"
+}
+},
+{
+"type": "broll",
+"anchor": "com a intervencao os servicos",
+"media": {
+"file": "stock/pb3176.mp4"
+},
+"caption": "SERVIÇOS SUSPENSOS"
+},
+{
+"type": "broll",
+"anchor": "suspensos e os clientes",
+"media": {
+"file": "stock/pb38084.mp4"
+},
+"caption": "SEM ACESSO ÀS CONTAS"
+},
+{
+"type": "broll",
+"anchor": "a situacao provocou",
+"media": {
+"file": "stock/pb115772.mp4"
+},
+"caption": "FILAS NAS AGÊNCIAS"
+},
+{
+"type": "broll",
+"anchor": "filas em agencias",
+"media": {
+"file": "stock/pb78445.mp4"
+},
+"caption": "MANIFESTAÇÕES"
+},
+{
+"type": "kinetic",
+"anchor": "de preocupacao sobre",
+"text": "O dinheiro está *seguro*?",
+"size": 120
+},
+{
+"type": "broll",
+"anchor": "mas o caso rapidamente",
+"media": {
+"file": "stock/pb2211577.jpg"
+},
+"caption": "DA CRISE BANCÁRIA À CRISE POLÍTICA"
+},
+{
+"type": "stamp",
+"anchor": "o nome do presidente",
+"text": "OPOSIÇÃO COBRA",
+"sub": "EXPLICAÇÕES DO GOVERNO",
+"foot": "O nome de Santiago Peña entra no centro da controvérsia"
+},
+{
+"type": "headline",
+"anchor": "como comecou a crise",
+"kicker": "PARTE 2",
+"date": "BANCO CENTRAL DO PARAGUAI",
+"title": "Como começou a crise do Ueno Bank?"
+},
+{
+"type": "broll",
+"anchor": "o problema veio a tona",
+"media": {
+"file": "stock/pb349087.mp4"
+},
+"caption": "BANCO CENTRAL IDENTIFICA PROBLEMA"
+},
+{
+"type": "doc",
+"anchor": "considerada grave dentro",
+"head": "BANCO CENTRAL",
+"text": "Situação financeira considerada grave dentro da instituição.",
+"hl": "considerada grave",
+"tilt": true,
+"tilt_side": -1
+},
+{
+"type": "bars",
+"anchor": "a instituicao apresentava",
+"title": "Índice de *solvência*",
+"sub": "Capital do banco × mínimo exigido",
+"items": [
+[
+"Ueno Bank",
+5.56
+],
+[
+"Mínimo exigido",
+12
+]
+],
+"vmax": 13,
+"fmt": "{}%",
+"dec": 2,
+"span": 3
+},
+{
+"type": "burst",
+"anchor": "muito abaixo do nivel",
+"big": "MUITO ABAIXO",
+"label": "do capital necessário para operar com segurança"
+},
+{
+"type": "broll",
+"anchor": "as investigacoes tambem",
+"media": {
+"file": "stock/pb3100563.jpg"
+},
+"caption": "EMPRÉSTIMOS SOB SUSPEITA"
+},
+{
+"type": "chain",
+"anchor": "ao grupo controlador",
+"title": "A SUSPEITA",
+"items": [
+"Banco empresta",
+"Empresas do próprio grupo",
+"Risco ao patrimônio"
+],
+"span": 6
+},
+{
+"type": "broll",
+"anchor": "aos orgaos reguladores",
+"media": {
+"file": "stock/pb2681173.jpg"
+},
+"caption": "CONFLITO DE INTERESSES?"
+},
+{
+"type": "stamp",
+"anchor": "diante da situacao",
+"text": "INTERVENÇÃO",
+"sub": "ATIVIDADES SUSPENSAS",
+"foot": "Banco Central inicia o processo de resolução",
+"letterbox": true
+},
+{
+"type": "grid",
+"anchor": "a justificativa oficial",
+"title": "Justificativa oficial",
+"items": [
+[
+"Proteger",
+"os depositantes"
+],
+[
+"Preservar",
+"a estabilidade"
+]
+],
+"gap": 1.5
+},
+{
+"type": "text3d",
+"anchor": "milhoes de clientes ficaram",
+"lines": [
+"SEM ACESSO",
+"*AO DINHEIRO*"
+],
+"size": 140
+},
+{
+"type": "phone",
+"anchor": "imagine acordar",
+"title": "Imagine abrir o app...",
+"sub": "e não conseguir mexer no seu dinheiro",
+"app": "BANCO DIGITAL",
+"saldo": "Bloqueado",
+"alert": "Operação não permitida",
+"alert_sub": "Conta temporariamente indisponível",
+"alert_at": 2.5
+},
+{
+"type": "broll",
+"anchor": "situacao enfrentada por",
+"media": {
+"file": "stock/pb61290.mp4"
+},
+"caption": "MILHARES DE PARAGUAIOS"
+},
+{
+"type": "bignum",
+"anchor": "tinha aproximadamente 3 milhoes",
+"from": 0,
+"to": 850,
+"prefix": "US$ ",
+"suffix": " mi",
+"label": "em recursos públicos administrados pelo banco",
+"color": "gold",
+"dur": 1.6
+},
+{
+"type": "chips",
+"anchor": "de dolares em recursos",
+"title": "Incluindo:",
+"items": [
+"Previdência Social",
+"Fundos de aposentadoria"
+],
+"span": 4
+},
+{
+"type": "broll",
+"anchor": "a suspensao dos servicos",
+"media": {
+"file": "stock/pb6096.mp4"
+},
+"caption": "APOSENTADOS EM DESESPERO"
+},
+{
+"type": "broll",
+"anchor": "e pessoas que dependiam",
+"media": {
+"file": "stock/pb10222182.jpg"
+},
+"caption": "DESPESAS DO DIA A DIA"
+},
+{
+"type": "map",
+"anchor": "capital do pais",
+"from": [
+-58,
+-23.5,
+14
+],
+"to": [
+-57.6,
+-25.3,
+5
+],
+"move": 3,
+"hl": {
+"PRY": "red"
+},
+"hl_at": 0.2,
+"labels": [
+{
+"ll": [
+-57.6,
+-25.3
+],
+"text": "ASSUNÇÃO",
+"at": 1.6,
+"dx": 200,
+"dy": -120
+}
+],
+"title": "PROTESTOS NA CAPITAL",
+"tilt": true
+},
+{
+"type": "broll",
+"anchor": "clientes exigindo",
+"media": {
+"file": "stock/pb78443.mp4"
+},
+"caption": "\"DEVOLVAM O DINHEIRO\""
+},
+{
+"type": "kinetic",
+"anchor": "o medo tambem",
+"text": "O medo se espalhou para *outros bancos*",
+"media": {
+"file": "stock/pb14900.mp4"
+}
+},
+{
+"type": "broll",
+"anchor": "houve relatos",
+"media": {
+"file": "stock/pb202987.mp4"
+},
+"caption": "APLICATIVOS COM DIFICULDADES"
+},
+{
+"type": "broll",
+"anchor": "ou transferir seus",
+"media": {
+"file": "stock/pb1524870.jpg"
+},
+"caption": "CORRIDA PARA SACAR"
+},
+{
+"type": "doc",
+"anchor": "a associacao de bancos",
+"head": "ASSOCIAÇÃO DE BANCOS DO PARAGUAI",
+"text": "As demais instituições continuavam operando normalmente.",
+"hl": "operando normalmente",
+"tilt": true
+},
+{
+"type": "cine",
+"anchor": "executivos foram presos",
+"lines": [
+"8 EXECUTIVOS",
+"*PRESOS*"
+],
+"sub": "A investigação avançou"
+},
+{
+"type": "broll",
+"anchor": "a crise ganhou um novo",
+"media": {
+"file": "stock/pb198901.mp4"
+},
+"caption": "JUSTIÇA DETERMINA PRISÕES"
+},
+{
+"type": "bignum",
+"anchor": "as pessoas ligadas",
+"from": 0,
+"to": 8,
+"suffix": " presos",
+"label": "ligados à administração e ao controle do banco",
+"color": "red",
+"dur": 1.0,
+"tilt": true
+},
+{
+"type": "broll",
+"anchor": "entre os envolvidos",
+"media": {
+"file": "stock/pb87593.mp4"
+},
+"caption": "DIRIGENTES E EXECUTIVOS",
+"sub": "Inclusive o presidente-executivo"
+},
+{
+"type": "burst",
+"anchor": "o ministerio publico",
+"from": 0,
+"to": 27,
+"suffix": " acusados",
+"label": "formalmente pelo Ministério Público",
+"color": "navy"
+},
+{
+"type": "broll",
+"anchor": "bloqueio de bens",
+"media": {
+"file": "stock/pb153458.mp4"
+},
+"caption": "BENS BLOQUEADOS"
+},
+{
+"type": "chips",
+"anchor": "as autoridades investigam",
+"title": "Sob investigação:",
+"items": [
+"Irregularidades",
+"Operações de crédito",
+"Responsabilidades"
+],
+"span": 5
+},
+{
+"type": "stamp",
+"anchor": "e importante destacar",
+"text": "NÃO É CONDENAÇÃO",
+"sub": "PRISÃO ≠ CULPA",
+"foot": "A responsabilidade de cada investigado ainda será apurada"
+},
+{
+"type": "broll",
+"anchor": "a responsabilidade de cada",
+"media": {
+"file": "stock/pb349087.mp4"
+},
+"caption": "INVESTIGAÇÃO EM ANDAMENTO"
+},
+{
+"type": "kinetic",
+"anchor": "mesmo assim a dimensao",
+"text": "Mais *pressão* sobre o setor financeiro e o governo",
+"media": {
+"file": "stock/pb19627.mp4"
+}
+},
+{
+"type": "question",
+"anchor": "e havia outro detalhe",
+"text": "E havia outro *detalhe*..."
+},
+{
+"type": "broll",
+"anchor": "e pessoas que ja ocuparam",
+"media": {
+"file": "stock/pb2211577.jpg"
+},
+"caption": "LIGAÇÕES COM A POLÍTICA"
+},
+{
+"type": "headline",
+"anchor": "a crise atinge o proprio",
+"kicker": "PARTE 5",
+"date": "BANCO CENTRAL",
+"title": "A crise atinge o próprio Banco Central"
+},
+{
+"type": "doc",
+"anchor": "outro personagem",
+"head": "CARLOS CARVALLO",
+"text": "Presidia o Banco Central do Paraguai.",
+"hl": "Banco Central",
+"tilt": true
+},
+{
+"type": "stamp",
+"anchor": "em meio a repercussao",
+"text": "RENÚNCIA",
+"sub": "PEDIDA POR SANTIAGO PEÑA",
+"foot": "Carvallo deixa o comando do Banco Central"
+},
+{
+"type": "broll",
+"anchor": "carvalho deixou",
+"media": {
+"file": "stock/pb61299.mp4"
+},
+"caption": "FORTE PRESSÃO SOBRE O FISCALIZADOR"
+},
+{
+"type": "chain",
+"anchor": "a situacao chamou",
+"title": "O DETALHE",
+"items": [
+"Comandou o Ueno",
+"Depois: Banco Central",
+"Fiscalizava o Ueno?"
+],
+"span": 6
+},
+{
+"type": "broll",
+"anchor": "essa ligacao passou",
+"media": {
+"file": "stock/pb2241.mp4"
+},
+"caption": "PARLAMENTARES QUESTIONAM"
+},
+{
+"type": "kinetic",
+"anchor": "a saida do presidente do banco",
+"text": "A saída *não encerrou* a crise",
+"size": 110
+},
+{
+"type": "broll",
+"anchor": "aumentou os questionamentos",
+"media": {
+"file": "stock/pb7881948.jpg"
+},
+"caption": "COMO O BANCO CRESCEU TANTO?"
+},
+{
+"type": "chips",
+"anchor": "agora as autoridades",
+"title": "Precisa ser esclarecido:",
+"items": [
+"A fiscalização funcionou?",
+"Houve falhas?"
+],
+"span": 5
+},
+{
+"type": "text3d",
+"anchor": "entrou no centro do escandalo",
+"lines": [
+"SANTIAGO PEÑA",
+"*NO CENTRO DO ESCÂNDALO*"
+],
+"size": 120
+},
+{
+"type": "kinetic",
+"anchor": "e aqui que a crise",
+"text": "Um problema político de *grandes proporções*",
+"media": {
+"file": "stock/pb3760047.jpg"
+}
+},
+{
+"type": "timeline",
+"anchor": "presidente do paraguai desde",
+"items": [
+[
+"2023",
+"Peña assume a presidência"
+],
+[
+"2025",
+"Deixa de ser acionista (março)"
+],
+[
+"2026",
+"Crise do Ueno Bank"
+]
+],
+"hl": "2025",
+"title": "PEÑA E O GRUPO VÁZQUEZ"
+},
+{
+"type": "doc",
+"anchor": "ou seja ele teve",
+"head": "A LIGAÇÃO",
+"text": "Peña foi acionista do Grupo Vázquez, controlador do Ueno Bank, até março de 2025.",
+"hl": "acionista do Grupo Vázquez",
+"tilt": true,
+"tilt_side": -1
+},
+{
+"type": "broll",
+"anchor": "a oposicao passou a questionar",
+"media": {
+"file": "stock/pb153458.mp4"
+},
+"caption": "RECURSOS PÚBLICOS NO BANCO"
+},
+{
+"type": "broll",
+"anchor": "publicos depositados",
+"media": {
+"file": "stock/pb50628.mp4"
+},
+"caption": "EMPRÉSTIMOS AO PRÓPRIO GRUPO"
+},
+{
+"type": "list",
+"anchor": "os parlamentares",
+"title": "Acusações da oposição:",
+"items": [
+"Conflito de interesses",
+"Favorecimento regulatório",
+"Falhas na proteção do dinheiro público"
+],
+"span": 7
+},
+{
+"type": "stamp",
+"anchor": "sao acusacoes graves",
+"text": "ACUSAÇÕES",
+"sub": "PRECISAM SER COMPROVADAS",
+"foot": "Nada foi julgado até agora"
+},
+{
+"type": "doc",
+"anchor": "afirmou que os responsaveis",
+"head": "POSIÇÃO DE PEÑA",
+"text": "Os responsáveis por irregularidades deverão responder perante a Justiça. O governo quer acelerar a devolução dos recursos.",
+"hl": "acelerar a devolução dos recursos"
+},
+{
+"type": "broll",
+"anchor": "e defendeu medidas",
+"media": {
+"file": "stock/pb20857.mp4"
+},
+"caption": "DEVOLUÇÃO DOS RECURSOS"
+},
+{
+"type": "kinetic",
+"anchor": "o fato e que a antiga",
+"text": "A antiga relação virou *pressão* sobre o governo",
+"media": {
+"file": "stock/pb2211577.jpg"
+}
+},
+{
+"type": "cine",
+"anchor": "a oposicao apresenta",
+"lines": [
+"PEDIDO DE",
+"*IMPEACHMENT*"
+]
+},
+{
+"type": "broll",
+"anchor": "a crise chegou ao congresso",
+"media": {
+"file": "stock/pb2181101.jpg"
+},
+"caption": "CONGRESSO NACIONAL"
+},
+{
+"type": "datecard",
+"anchor": "no dia 5 de novembro",
+"month": "NOVEMBRO 2026",
+"first_wd": 0,
+"ndays": 30,
+"highlight": [
+5
+],
+"label": "Pedido contra Peña e o vice Pedro Alliana"
+},
+{
+"type": "bignum",
+"anchor": "o documento recebeu",
+"from": 0,
+"to": 35,
+"suffix": " deputados",
+"label": "apoiaram o pedido de impeachment",
+"color": "white",
+"dur": 1.2,
+"tilt": true
+},
+{
+"type": "broll",
+"anchor": "extraordinaria para",
+"media": {
+"file": "stock/pb87593.mp4"
+},
+"caption": "SESSÃO EXTRAORDINÁRIA"
+},
+{
+"type": "stamp",
+"anchor": "mas existe um obstaculo",
+"text": "OBSTÁCULO",
+"sub": "DOIS TERÇOS DOS VOTOS",
+"foot": "Na Câmara dos Deputados"
+},
+{
+"type": "bars",
+"anchor": "sao necessarios",
+"title": "A conta do *impeachment*",
+"sub": "Câmara dos Deputados (80 cadeiras)",
+"items": [
+[
+"Apoio atual",
+35
+],
+[
+"Necessário (2/3)",
+53
+],
+[
+"Total",
+80
+]
+],
+"vmax": 85,
+"fmt": "{}",
+"span": 4
+},
+{
+"type": "chain",
+"anchor": "depois disso o caso",
+"title": "O CAMINHO",
+"items": [
+"Câmara: 2/3",
+"Senado: maioria qualificada",
+"Destituição"
+],
+"span": 6
+},
+{
+"type": "broll",
+"anchor": "o partido governista",
+"media": {
+"file": "stock/pb7382391.jpg"
+},
+"caption": "PARTIDO COLORADO TEM FORÇA NO CONGRESSO"
+},
+{
+"type": "kinetic",
+"anchor": "confirmacao de que a oposicao",
+"text": "Os votos ainda *não estão garantidos*"
+},
+{
+"type": "doc",
+"anchor": "portanto e importante",
+"head": "ENTENDA",
+"text": "O pedido foi apresentado, mas o presidente não foi afastado e sua saída não está decidida.",
+"hl": "não foi afastado",
+"tilt": true
+},
+{
+"type": "kinetic",
+"anchor": "mesmo assim o episodio",
+"text": "Uma pressão política *muito séria*",
+"media": {
+"file": "stock/pb61300.mp4"
+}
+},
+{
+"type": "headline",
+"anchor": "governo promete devolver",
+"kicker": "PARTE 8",
+"date": "FUNDO DE GARANTIA",
+"title": "Governo promete devolver o dinheiro"
+},
+{
+"type": "broll",
+"anchor": "revolta dos correntistas",
+"media": {
+"file": "stock/pb20857.mp4"
+},
+"caption": "MEDIDAS PARA RECUPERAR OS DEPÓSITOS"
+},
+{
+"type": "doc",
+"anchor": "promulgou uma lei",
+"head": "NOVA LEI",
+"text": "Permite usar o Fundo de Garantia de Depósitos para antecipar pagamentos aos clientes afetados.",
+"hl": "antecipar pagamentos",
+"tilt": true,
+"tilt_side": -1
+},
+{
+"type": "bignum",
+"anchor": "a medida preve",
+"from": 0,
+"to": 5,
+"suffix": " dias úteis",
+"label": "prazo previsto para os pagamentos",
+"color": "green",
+"dur": 1.0
+},
+{
+"type": "kinetic",
+"anchor": "respeitadas as regras",
+"text": "Respeitando *regras e limites*",
+"size": 110
+},
+{
+"type": "burst",
+"anchor": "segundo as informacoes",
+"from": 0,
+"to": 228.3,
+"dec": 1,
+"suffix": " mi",
+"label": "guaranis de garantia por cliente",
+"color": "navy"
+},
+{
+"type": "bignum",
+"anchor": "por cliente equivalente",
+"from": 0,
+"to": 38,
+"prefix": "≈ US$ ",
+"suffix": " mil",
+"label": "limite de cobertura por cliente",
+"color": "gold",
+"dur": 1.2,
+"tilt": true
+},
+{
+"type": "broll",
+"anchor": "esse mecanismo",
+"media": {
+"file": "stock/pb46922.mp4"
+},
+"caption": "PROTEGE A MAIORIA DOS DEPOSITANTES"
+},
+{
+"type": "kinetic",
+"anchor": "nao significa necessariamente",
+"text": "Mas nem todos recebem *tudo de imediato*",
+"size": 96
+},
+{
+"type": "broll",
+"anchor": "quantias superiores",
+"media": {
+"file": "stock/pb50622.mp4"
+},
+"caption": "ACIMA DO LIMITE",
+"sub": "Processo mais complexo"
+},
+{
+"type": "doc",
+"anchor": "enquanto isso o banco central",
+"head": "BANCO CENTRAL",
+"text": "O problema do Ueno é um caso específico. O restante do sistema tem níveis adequados de liquidez e solvência.",
+"hl": "caso específico"
+},
+{
+"type": "broll",
+"anchor": "que o restante do sistema",
+"media": {
+"file": "stock/pb4481399.jpg"
+},
+"caption": "DEMAIS BANCOS: LIQUIDEZ ADEQUADA"
+},
+{
+"type": "question",
+"anchor": "a grande questao agora",
+"text": "As medidas vão recuperar a *confiança*?",
+"media": {
+"file": "stock/pb184612.jpg"
+}
+},
+{
+"type": "text3d",
+"anchor": "o que pode acontecer",
+"lines": [
+"E AGORA,",
+"*PARAGUAI?*"
+],
+"size": 150
+},
+{
+"type": "broll",
+"anchor": "a crise do",
+"media": {
+"file": "stock/pb184755.jpg"
+},
+"caption": "UM DOS MOMENTOS MAIS DELICADOS"
+},
+{
+"type": "grid",
+"anchor": "de um lado milhoes",
+"title": "Os dois lados da crise",
+"items": [
+[
+"Clientes",
+"querem o dinheiro"
+],
+[
+"Autoridades",
+"investigam"
+]
+],
+"gap": 2.5
+},
+{
+"type": "broll",
+"anchor": "uma instituicao desse porte",
+"media": {
+"file": "stock/pb2681173.jpg"
+},
+"caption": "COMO CHEGOU A ESSE PONTO?"
+},
+{
+"type": "kinetic",
+"anchor": "e no meio disso tudo",
+"text": "No meio de tudo: *Santiago Peña*",
+"media": {
+"file": "stock/pb2211577.jpg"
+}
+},
+{
+"type": "versus",
+"anchor": "seu pedido de",
+"left": {
+"name": "AVANÇA",
+"dir": "up",
+"val": "Cenário muda"
+},
+"right": {
+"name": "NÃO AVANÇA",
+"dir": "down",
+"val": "Desgaste segue"
+}
+},
+{
+"type": "broll",
+"anchor": "mas se nao avancar",
+"media": {
+"file": "stock/pb61290.mp4"
+},
+"caption": "DESGASTE CONTINUA"
+},
+{
+"type": "broll",
+"anchor": "com a desconfianca",
+"media": {
+"file": "stock/pb36510.mp4"
+},
+"caption": "DESCONFIANÇA DA POPULAÇÃO"
+},
+{
+"type": "globe",
+"anchor": "tambem existe uma preocupacao",
+"from": [
+-58,
+-23
+],
+"to": [
+-60,
+-15
+],
+"move": 6,
+"hl": {
+"PRY": "gold"
+},
+"hl_at": 0,
+"labels": [
+{
+"ll": [
+-57.6,
+-25.3
+],
+"text": "DESTINO DE INVESTIMENTOS?",
+"at": 1.0,
+"dx": 200,
+"dy": -120
+}
+],
+"title": "IMAGEM DO PAÍS"
+},
+{
+"type": "broll",
+"anchor": "uma crise bancaria",
+"media": {
+"file": "stock/pb941246.jpg"
+},
+"caption": "CONFIANÇA DOS INVESTIDORES"
+},
+{
+"type": "stamp",
+"anchor": "por enquanto nao ha",
+"text": "SISTEMA EM RISCO?",
+"sub": "NÃO HÁ COMO AFIRMAR",
+"foot": "Autoridades: o problema está concentrado no Ueno Bank"
+},
+{
+"type": "kinetic",
+"anchor": "mas os proximos",
+"text": "Os próximos dias serão *decisivos*",
+"size": 110,
+"media": {
+"file": "stock/pb3760047.jpg"
+}
+},
+{
+"type": "cine",
+"anchor": "e fica a pergunta",
+"lines": [
+"COMO CHEGOU",
+"*A ESSE PONTO?*"
+]
+},
+{
+"type": "kinetic",
+"anchor": "e ate onde vai",
+"text": "Até onde vai a responsabilidade de quem *fiscalizava*?",
+"size": 88
+},
+{
+"type": "broll",
+"anchor": "o caso continua",
+"media": {
+"file": "stock/pb184612.jpg"
+},
+"caption": "CASO EM DESENVOLVIMENTO"
+},
+{
+"type": "broll",
+"anchor": "se voce quer acompanhar",
+"media": {
+"file": "stock/pb21118.mp4"
+},
+"caption": "IMPACTO ECONÔMICO",
+"sub": "Acompanhe os desdobramentos"
+},
+{
+"type": "outro",
+"anchor": "se voce gostou",
+"click": 4.0
+}
+]
