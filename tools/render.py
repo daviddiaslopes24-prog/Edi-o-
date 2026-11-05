@@ -17,6 +17,10 @@ LAND = (30, 58, 44); LAND_EDGE = (78, 140, 104); OCEAN = (9, 16, 15)
 PAPER = (245, 240, 226); PAPER_GRID = (226, 219, 200); INK = (24, 24, 24)
 RED = (230, 57, 70); GREEN = (46, 204, 113); BLUE = (91, 155, 213); GOLD = (244, 196, 48)
 WHITE = (245, 245, 245); MUTED = (150, 165, 158)
+# Cores do canal: PRETO e AMARELO (pedido do usuário). ACCENT = destaque da marca; RED fica só para dados negativos.
+YELLOW = (255, 204, 0)
+ACCENT = YELLOW if os.environ.get("TEMA", "amarelo") == "amarelo" else (230, 57, 70)
+ON_ACCENT = (14, 14, 14) if ACCENT == YELLOW else (245, 245, 245)  # texto sobre o destaque
 
 # ---------- utilidades ----------
 @lru_cache(None)
@@ -154,6 +158,7 @@ def draw_map(img, view, highlights, t, hl_alpha=1.0, states=True):
 
 # ---------- elementos gráficos ----------
 def label_box(dr, xy, text, t, color=WHITE, bgc=(0, 0, 0), size=34, anchor="mm", alpha=1.0):
+    if bgc == ACCENT and color == WHITE: color = ON_ACCENT
     f = F("xbold", size); x, y = xy
     w = tw(f, text) + 34; h = size + 26
     if anchor == "mm": x0, y0 = x - w / 2, y - h / 2
@@ -199,7 +204,7 @@ def curve_arrow(dr, a, b, k, color=GOLD, width=6, bend=-0.3):
                     (bx + math.cos(ang + 2.4) * s, by + math.sin(ang + 2.4) * s),
                     (bx + math.cos(ang - 2.4) * s, by + math.sin(ang - 2.4) * s)], fill=rgba(color, 1))
 
-def word_reveal(dr, lines, font, cx, cy, t, start=0.0, gap=0.09, color=WHITE, accent=RED, lh=1.15, align="center", x0=None):
+def word_reveal(dr, lines, font, cx, cy, t, start=0.0, gap=0.09, color=WHITE, accent=ACCENT, lh=1.15, align="center", x0=None):
     """Linhas de texto com palavras surgindo; palavras entre *asteriscos* ficam na cor de destaque."""
     word_reveal.acc = False
     sz = font.size; total_h = len(lines) * sz * lh; y = cy - total_h / 2 + sz * lh / 2
@@ -221,7 +226,7 @@ def word_reveal(dr, lines, font, cx, cy, t, start=0.0, gap=0.09, color=WHITE, ac
         y += sz * lh
     return idx
 
-def kicker(dr, text, x, y, color=RED, t=0, start=0, dark=True):
+def kicker(dr, text, x, y, color=ACCENT, t=0, start=0, dark=True):
     k = ease(prog(t, start, 0.4))
     f = F("bold", 30)
     w = tw(f, text)
@@ -234,20 +239,20 @@ def sc_title(img, dr, t, D, p):
     f = F("black", 118)
     word_reveal(dr, lines, f, W / 2, H / 2 - 40, t, 0.15, 0.12)
     k = ease(prog(t, 0.9, 0.6))
-    dr.rectangle([W / 2 - 420 * k, H / 2 + 120, W / 2 + 420 * k, H / 2 + 132], fill=rgba(RED, 1))
+    dr.rectangle([W / 2 - 420 * k, H / 2 + 120, W / 2 + 420 * k, H / 2 + 132], fill=rgba(ACCENT, 1))
     if p.get("sub"):
         a = prog(t, 1.2, 0.5)
         dr.text((W / 2, H / 2 + 200), p["sub"], font=F("med", 52), fill=rgba(WHITE, a), anchor="mm")
     # faixa de "ao vivo"
     a = prog(t, 0.3, 0.4)
-    label_box(dr, (W / 2, 190), "MERCADO EM QUEDA", t, color=WHITE, bgc=RED, size=30, alpha=a)
+    label_box(dr, (W / 2, 190), "MERCADO EM QUEDA", t, color=WHITE, bgc=ACCENT, size=30, alpha=a)
     return [(0.0, "boom", 0.9), (0.15, "whoosh", 0.5)]
 
 def sc_chapter(img, dr, t, D, p):
     n = p["n"]; title = p["title"]
     kk = ease(prog(t, 0.0, 0.5))
-    dr.text((160, 380), f"PARTE {n}", font=F("bold", 40), fill=rgba(RED, kk), anchor="lm")
-    dr.rectangle([160, 420, 160 + 120 * kk, 426], fill=rgba(RED, 1))
+    dr.text((160, 380), f"PARTE {n}", font=F("bold", 40), fill=rgba(ACCENT, kk), anchor="lm")
+    dr.rectangle([160, 420, 160 + 120 * kk, 426], fill=rgba(ACCENT, 1))
     # máquina de escrever com trecho em itálico (*...*)
     parts = re.split(r"(\*[^*]+\*)", title)
     total = sum(len(s.strip("*")) for s in parts)
@@ -261,7 +266,7 @@ def sc_chapter(img, dr, t, D, p):
             if not word: continue
             if word.strip() and x + tw(f, word) > 160 + maxw: x = 160; y += 120
             vis = word[: max(0, shown - cnt)]; cnt += len(word)
-            if vis: dr.text((x, y), vis, font=f, fill=rgba(RED if it else INK, 1), anchor="ls")
+            if vis: dr.text((x, y), vis, font=f, fill=rgba(ACCENT if it else INK, 1), anchor="ls")
             x += tw(f, word)
     if shown < total and int(t * 3) % 2 == 0:
         dr.rectangle([x + 6, y - 80, x + 12, y + 10], fill=rgba(INK, 1))
@@ -279,7 +284,7 @@ def sc_question(img, dr, t, D, p):
     lines = wrap(p["text"], f, W - 360)
     k = back(prog(t, 0.0, 0.5))
     qf = F("black", 420)
-    dr.text((W - 260, H / 2), "?", font=qf, fill=rgba(RED, 0.25 * k), anchor="mm")
+    dr.text((W - 260, H / 2), "?", font=qf, fill=rgba(ACCENT, 0.25 * k), anchor="mm")
     word_reveal(dr, lines, f, W / 2 - 80, H / 2, t, 0.1, 0.1)
     return [(0.0, "whoosh_down", 0.6), (0.1, "hit", 0.35)]
 
@@ -319,12 +324,12 @@ def sc_datecard(img, dr, t, D, p):
         on = day in hl
         hk = ease(prog(t, 0.8 + hl.index(day) * 0.18, 0.3)) if on else 0
         dr.rounded_rectangle([x + 6, y + 6, x + cw - 6, y + ch - 6], radius=12,
-                             fill=rgba(RED, 0.9 * hk) if on and hk > 0 else rgba((30, 45, 40), k),
+                             fill=rgba(ACCENT, 0.9 * hk) if on and hk > 0 else rgba((30, 45, 40), k),
                              outline=rgba((60, 80, 72), k))
-        dr.text((x + cw / 2, y + ch / 2 + 2), str(day), font=F("bold", 40), fill=rgba(WHITE, k), anchor="mm")
+        dr.text((x + cw / 2, y + ch / 2 + 2), str(day), font=F("bold", 40), fill=rgba(ON_ACCENT if (on and hk > 0.5) else WHITE, k), anchor="mm")
     if p.get("label"):
         la = ease(prog(t, 1.4, 0.4))
-        label_box(dr, (W / 2, H - 90), p["label"], t, bgc=RED, size=36, alpha=la)
+        label_box(dr, (W / 2, H - 90), p["label"], t, bgc=ACCENT, size=36, alpha=la)
     return [(0.0, "whoosh", 0.5)] + [(0.8 + i * 0.18, "pop", 0.4) for i in range(len(hl))]
 
 def sc_timeline(img, dr, t, D, p):
@@ -337,7 +342,7 @@ def sc_timeline(img, dr, t, D, p):
         x = x0 + (x1 - x0) * (i + 0.5) / n
         st = 0.3 + i * 0.35; a = ease(prog(t, st, 0.4))
         on = (yr == hl)
-        col = RED if on else WHITE
+        col = ACCENT if on else WHITE
         r = 18 if not on else 22 + 4 * math.sin(t * 6)
         dr.ellipse([x - r, y - r, x + r, y + r], fill=rgba(col, a))
         dr.text((x, y - 80 - (1 - a) * 20), yr, font=F("black", 76 if on else 56), fill=rgba(col, a), anchor="mm")
@@ -397,10 +402,10 @@ def sc_bars(img, dr, t, D, p):
     for s in parts:
         if not s: continue
         it = s.startswith("*"); s = s.strip("*"); f = F("serifi" if it else "serif", 76)
-        dr.text((x, 200), s, font=f, fill=rgba(RED if it else INK, prog(t, 0, 0.4)), anchor="ls"); x += tw(f, s)
+        dr.text((x, 200), s, font=f, fill=rgba(ACCENT if it else INK, prog(t, 0, 0.4)), anchor="ls"); x += tw(f, s)
     if p.get("sub"): dr.text((162, 250), p["sub"], font=F("reg", 30), fill=rgba((90, 85, 70), prog(t, 0.2, 0.4)), anchor="lm")
     n = len(items); gap = min(170, (H - 420) / n); y = 360
-    span = p.get("span", D * 0.75); sfx = [(0.0, "whoosh", 0.5)]
+    span = min(p.get("span", D * 0.75), D * 0.72); sfx = [(0.0, "whoosh", 0.5)]
     for i, (name, v) in enumerate(items):
         st = 0.4 + span * i / max(1, n)
         k = ease(prog(t, st, 0.9))
@@ -420,22 +425,22 @@ def sc_list(img, dr, t, D, p):
     if p.get("title"):
         a = ease(prog(t, 0, 0.4))
         dr.text((160, 200), p["title"], font=F("black", 64), fill=rgba(fg, a), anchor="lm")
-        dr.rectangle([160, 250, 160 + 140 * a, 258], fill=rgba(RED, 1))
-    span = p.get("span", D * 0.7); sfx = [(0.0, "whoosh", 0.5)]
+        dr.rectangle([160, 250, 160 + 140 * a, 258], fill=rgba(ACCENT, 1))
+    span = min(p.get("span", D * 0.7), D * 0.72); sfx = [(0.0, "whoosh", 0.5)]
     gap = min(150, (H - 380) / max(n, 1)); y0 = 330 + (H - 330 - 100 - gap * n) / 2
     for i, it in enumerate(items):
         st = 0.35 + span * i / max(1, n); k = ease(prog(t, st, 0.45))
         if k <= 0: continue
         y = y0 + i * gap + gap / 2; x = 160 + (1 - k) * -60
-        dr.ellipse([x, y - 38, x + 76, y + 38], fill=rgba(RED, k))
-        dr.text((x + 38, y + 2), str(i + 1), font=F("black", 40), fill=rgba(WHITE, k), anchor="mm")
+        dr.ellipse([x, y - 38, x + 76, y + 38], fill=rgba(ACCENT, k))
+        dr.text((x + 38, y + 2), str(i + 1), font=F("black", 40), fill=rgba(ON_ACCENT, k), anchor="mm")
         f = F("bold", 54)
         dr.text((x + 110, y + 2), it, font=f, fill=rgba(fg, k), anchor="lm")
         sfx.append((st, "pop", 0.45))
     return sfx
 
 def sc_chips(img, dr, t, D, p):
-    items = p["items"]; col = RED if p.get("color", "red") == "red" else GREEN
+    items = p["items"]; col = ACCENT if p.get("color", "red") == "red" else GREEN
     if p.get("title"):
         a = ease(prog(t, 0, 0.4))
         dr.text((W / 2, 230), p["title"], font=F("black", 70), fill=rgba(WHITE, a), anchor="mm")
@@ -444,7 +449,7 @@ def sc_chips(img, dr, t, D, p):
         w = tw(f, it) + 120
         if rw + w > W - 300 and rows[-1]: rows.append([]); rw = 0
         rows[-1].append((it, w)); rw += w + 30
-    y = H / 2 + 40 - (len(rows) - 1) * 80; idx = 0; span = p.get("span", D * 0.6); sfx = [(0.0, "whoosh", 0.5)]
+    y = H / 2 + 40 - (len(rows) - 1) * 80; idx = 0; span = min(p.get("span", D * 0.6), D * 0.72); sfx = [(0.0, "whoosh", 0.5)]
     for row in rows:
         tot = sum(w for _, w in row) + 30 * (len(row) - 1); x = W / 2 - tot / 2
         for it, w in row:
@@ -454,7 +459,7 @@ def sc_chips(img, dr, t, D, p):
                 cx = x + w / 2; s = k
                 dr.rounded_rectangle([cx - w / 2 * s, y - 60 * s, cx + w / 2 * s, y + 60 * s], radius=int(24 * s) + 1, fill=rgba(col, 0.95))
                 if s > 0.6:
-                    dr.text((cx, y + 3), it, font=f, fill=rgba(WHITE, clamp(s)), anchor="mm")
+                    dr.text((cx, y + 3), it, font=f, fill=rgba(ON_ACCENT if col == ACCENT else WHITE, clamp(s)), anchor="mm")
                 sfx.append((st, "pop", 0.55))
             x += w + 30
         y += 160
@@ -465,7 +470,7 @@ def sc_chain(img, dr, t, D, p):
     items = p["items"]; n = len(items)
     bw = min(380, (W - 200 - (n - 1) * 90) / n); bh = 230
     tot = n * bw + (n - 1) * 90; x = W / 2 - tot / 2; y = H / 2 + 20
-    span = p.get("span", D * 0.7); sfx = [(0.0, "whoosh", 0.5)]
+    span = min(p.get("span", D * 0.7), D * 0.72); sfx = [(0.0, "whoosh", 0.5)]
     if p.get("title"): kicker(dr, p["title"], 140, 150, t=t)
     for i, it in enumerate(items):
         txt, arrow = (it if isinstance(it, list) else [it, None])
@@ -553,10 +558,10 @@ def sc_timer(img, dr, t, D, p):
     tot = p.get("seconds", 1800); k = ease_io(prog(t, 0.6, D - 1.0))
     rem = tot * (1 - 0.9 * k); mm, ss = divmod(int(rem), 60)
     flash = 0.5 + 0.5 * math.sin(t * 6)
-    label_box(dr, (W / 2, 230), "NEGOCIAÇÕES SUSPENSAS", t, bgc=RED, size=44, alpha=prog(t, 0, 0.3))
+    label_box(dr, (W / 2, 230), "NEGOCIAÇÕES SUSPENSAS", t, bgc=ACCENT, size=44, alpha=prog(t, 0, 0.3))
     dr.text((W / 2, H / 2 + 40), f"{mm:02d}:{ss:02d}", font=F("black", 300), fill=rgba(WHITE, 1), anchor="mm")
     dr.text((W / 2, H / 2 + 260), p.get("label", "pausa obrigatória na B3"), font=F("med", 48), fill=rgba(MUTED, 1), anchor="mm")
-    dr.ellipse([W / 2 - 520, H / 2 - 120, W / 2 - 490, H / 2 - 90], fill=rgba(RED, flash))
+    dr.ellipse([W / 2 - 520, H / 2 - 120, W / 2 - 490, H / 2 - 90], fill=rgba(ACCENT, flash))
     return [(0.0, "alarm", 0.45)] + [(0.6 + i * 0.5, "tick", 0.5) for i in range(int((D - 1) / 0.5))]
 
 def sc_stamp(img, dr, t, D, p):
@@ -564,10 +569,10 @@ def sc_stamp(img, dr, t, D, p):
     a = prog(t, 0.2, 0.1)
     if a > 0:
         lay = Image.new("RGBA", (1400, 400)); ld = ImageDraw.Draw(lay)
-        ld.rounded_rectangle([10, 10, 1390, 390], radius=20, outline=rgba(RED, 1), width=16)
+        ld.rounded_rectangle([10, 10, 1390, 390], radius=20, outline=rgba(ACCENT, 1), width=16)
         fs = 120
         while fs > 50 and tw(F("black", fs), p["text"]) > 1260: fs -= 4
-        ld.text((700, 150), p["text"], font=F("black", fs), fill=rgba(RED, 1), anchor="mm")
+        ld.text((700, 150), p["text"], font=F("black", fs), fill=rgba(ACCENT, 1), anchor="mm")
         if p.get("sub"): ld.text((700, 290), p["sub"], font=F("bold", 52), fill=rgba(WHITE, 1), anchor="mm")
         lay = lay.rotate(-4, expand=True, resample=Image.BICUBIC)
         lay = lay.resize((int(lay.width * s), int(lay.height * s)), Image.BILINEAR)
@@ -611,7 +616,7 @@ def sc_grid(img, dr, t, D, p):
         if k <= 0: continue
         s = clamp(k, 0, 1.15)
         dr.rounded_rectangle([cx - tw2 / 2 * s, cy - th / 2 * s, cx + tw2 / 2 * s, cy + th / 2 * s], radius=22,
-                             fill=rgba((24, 40, 34), 1), outline=rgba(RED, 1), width=4)
+                             fill=rgba((24, 40, 34), 1), outline=rgba(ACCENT, 1), width=4)
         if s > 0.7:
             big, small = (it if isinstance(it, list) else [it, ""])
             fs = 62
@@ -624,13 +629,13 @@ def sc_grid(img, dr, t, D, p):
 def sc_outro(img, dr, t, D, p):
     a = ease(prog(t, 0, 0.5))
     dr.text((W / 2, H / 2 - 160), BRAND, font=F("black", 110), fill=rgba(WHITE, a), anchor="mm")
-    dr.rectangle([W / 2 - 300 * a, H / 2 - 80, W / 2 + 300 * a, H / 2 - 72], fill=rgba(RED, 1))
+    dr.rectangle([W / 2 - 300 * a, H / 2 - 80, W / 2 + 300 * a, H / 2 - 72], fill=rgba(ACCENT, 1))
     k = back(prog(t, 1.0, 0.4)); clicked = t > p.get("click", 3.2)
     if k > 0:
         bw, bh = 560 * k, 130 * k; cx, cy = W / 2, H / 2 + 120
         dr.rounded_rectangle([cx - bw / 2, cy - bh / 2, cx + bw / 2, cy + bh / 2], radius=int(20 * k) + 1,
-                             fill=rgba((90, 90, 90) if clicked else RED, 1))
-        if k > 0.7: dr.text((cx, cy + 3), "INSCRITO ✓" if clicked else "INSCREVA-SE", font=F("black", 58) if not clicked else F("sym", 54), fill=rgba(WHITE, 1), anchor="mm")
+                             fill=rgba((90, 90, 90) if clicked else ACCENT, 1))
+        if k > 0.7: dr.text((cx, cy + 3), "INSCRITO ✓" if clicked else "INSCREVA-SE", font=F("black", 58) if not clicked else F("sym", 54), fill=rgba(WHITE if clicked else ON_ACCENT, 1), anchor="mm")
         # cursor
         ck = ease(prog(t, 2.2, 0.9)); mx = W / 2 + 500 - 380 * ck; my = H / 2 + 420 - 270 * ck
         if t > 2.2:
@@ -719,7 +724,7 @@ def sc_headline(img, dr, t, D, p):
     cw, ch = 1500, 420
     card = paper_card(cw, ch, (246, 242, 232), seed=len(p["title"]))
     cd = ImageDraw.Draw(card)
-    cd.text((70, 70), p.get("kicker", "INVESTIGAÇÃO"), font=F("bold", 30), fill=rgba(RED, 1), anchor="lm")
+    cd.text((70, 70), p.get("kicker", "INVESTIGAÇÃO"), font=F("bold", 30), fill=rgba(ACCENT, 1), anchor="lm")
     cd.text((cw - 70, 70), p.get("date", ""), font=F("med", 28), fill=rgba((90, 90, 90), 1), anchor="rm")
     for x in range(70, cw - 70, 14): cd.ellipse([x, 108, x + 4, 112], fill=rgba((120, 120, 120), 1))
     f = F("serif", 92); lines = wrap(p["title"].replace("*", ""), f, cw - 140)
@@ -729,7 +734,7 @@ def sc_headline(img, dr, t, D, p):
         vis = ln[: max(0, shown - c)]; c += len(ln)
         cd.text((70, y), vis, font=f, fill=rgba(INK, 1), anchor="lm"); y += 110
     ul = ease(prog(t, 0.4 + min(1.8, n_chars * 0.04), 0.5))
-    cd.rectangle([70, ch - 70, 70 + (cw - 140) * 0.45 * ul, ch - 58], fill=rgba(RED, 1))
+    cd.rectangle([70, ch - 70, 70 + (cw - 140) * 0.45 * ul, ch - 58], fill=rgba(ACCENT, 1))
     rot = -2 + 1.5 * (1 - k)
     card = card.rotate(rot, expand=True, resample=Image.BICUBIC)
     sh = Image.new("RGBA", card.size, (0, 0, 0, 0)); sh.putalpha(card.getchannel("A").point(lambda v: v * 0.45))
@@ -748,7 +753,7 @@ def sc_cine(img, dr, t, D, p):
         st = 0.05 + i * 0.12; k = ease(prog(t, st, 0.7))
         off = (1 - k) * 2200 * (1 if i % 2 else -1)
         y = 140 + i * 190 + math.sin(i) * 40; th = 90 + 60 * rng.random()
-        col = (150 + int(60 * rng.random()), 20, 28, 235)
+        col = ((200 + int(55 * rng.random()), 150 + int(40 * rng.random()), 0, 235) if ACCENT == YELLOW else (150 + int(60 * rng.random()), 20, 28, 235))
         od.polygon([(-400 + off, y + 260), (W + 400 + off, y - 260), (W + 400 + off, y - 260 + th), (-400 + off, y + 260 + th)], fill=col)
     g = grunge(W, H, 9); ov.putalpha(Image.fromarray((np.asarray(ov.getchannel("A")).astype(np.float32) * np.asarray(g) / 255).astype(np.uint8)))
     img.alpha_composite(ov)
@@ -767,7 +772,7 @@ def sc_cine(img, dr, t, D, p):
         sa = prog(t, 1.2, 0.5)
         dr.text((W / 2, H - 230), p["sub"], font=F("bold", 44), fill=rgba((230, 225, 220), sa), anchor="mm")
     light_sweep(img, t, 0.9, 1.4, 0.5)
-    dust(dr, t, 60, 1, (230, 120, 120))
+    dust(dr, t, 60, 1, (255, 220, 120))
     return [(0.0, "boom", 0.6), (0.05, "whoosh", 0.4), (0.5, "hit", 0.4)]
 
 def sc_burst(img, dr, t, D, p):
@@ -776,7 +781,7 @@ def sc_burst(img, dr, t, D, p):
     ov = Image.new("RGBA", (W, H)); od = ImageDraw.Draw(ov)
     for i in range(36):
         a0 = math.radians(rot + i * 10); a1 = a0 + math.radians(4)
-        col = ORANGE if i % 2 else NAVY
+        col = (ACCENT if i % 2 else (28, 28, 28)) if ACCENT == YELLOW else (ORANGE if i % 2 else NAVY)
         od.polygon([(W / 2, H / 2), (W / 2 + 1400 * math.cos(a0), H / 2 + 1400 * math.sin(a0)),
                     (W / 2 + 1400 * math.cos(a1), H / 2 + 1400 * math.sin(a1))], fill=col + (int(150 * clamp(k)),))
     img.alpha_composite(ov)
@@ -788,10 +793,10 @@ def sc_burst(img, dr, t, D, p):
             big = (p.get("prefix", "") + fmt_br(v, p.get("dec", 0)) + p.get("suffix", "")) if v is not None else p.get("big", "")
             bfs = int(170 * cw / 1000)
             while bfs > 20 and tw(F("black", bfs), big) > cw * 0.88: bfs -= 4
-            cd.text((cw / 2, ch * 0.42), big, font=F("black", bfs), fill=rgba(ORANGE if p.get("color") != "navy" else NAVY, 1), anchor="mm")
+            cd.text((cw / 2, ch * 0.42), big, font=F("black", bfs), fill=rgba(((14, 14, 14) if ACCENT == YELLOW else (ORANGE if p.get("color") != "navy" else NAVY)), 1), anchor="mm")
             lfs = int(44 * cw / 1000)
             while lfs > 12 and tw(F("bold", lfs), p.get("label", "")) > cw * 0.9: lfs -= 2
-            cd.text((cw / 2, ch * 0.78), p.get("label", ""), font=F("bold", lfs), fill=rgba(NAVY, 1), anchor="mm")
+            cd.text((cw / 2, ch * 0.78), p.get("label", ""), font=F("bold", lfs), fill=rgba((60, 60, 60) if ACCENT == YELLOW else NAVY, 1), anchor="mm")
             img.alpha_composite(card.rotate(-3, expand=True, resample=Image.BICUBIC), (int(W / 2 - cw / 2 - 20), int(H / 2 - ch / 2 - 20)))
     return [(0.0, "whoosh", 0.4), (0.1, "hit", 0.45)]
 
@@ -806,12 +811,12 @@ def sc_broll(img, dr, t, D, p):
     if p.get("caption"):
         k = ease(prog(t, 0.4, 0.5)); f = F("bold", 40); w = tw(f, p["caption"]) + 70
         x0 = 90 - (1 - k) * (w + 120); y0 = H - 230
-        dr.rectangle([x0, y0, x0 + 14, y0 + 76], fill=rgba(RED, 1))
+        dr.rectangle([x0, y0, x0 + 14, y0 + 76], fill=rgba(ACCENT, 1))
         dr.rectangle([x0 + 14, y0, x0 + 14 + w, y0 + 76], fill=rgba((12, 14, 16), 0.85))
         dr.text((x0 + 14 + 35, y0 + 40), p["caption"], font=f, fill=rgba(WHITE, 1), anchor="lm")
         if p.get("sub"):
-            dr.rectangle([x0 + 14, y0 + 76, x0 + 14 + w * 0.8, y0 + 120], fill=rgba(RED, 0.9 * k))
-            dr.text((x0 + 49, y0 + 99), p["sub"], font=F("med", 28), fill=rgba(WHITE, k), anchor="lm")
+            dr.rectangle([x0 + 14, y0 + 76, x0 + 14 + w * 0.8, y0 + 120], fill=rgba(ACCENT, 0.9 * k))
+            dr.text((x0 + 49, y0 + 99), p["sub"], font=F("med", 28), fill=rgba(ON_ACCENT, k), anchor="lm")
     return [(0.0, "whoosh", 0.3)]
 
 def sc_phone(img, dr, t, D, p):
@@ -851,7 +856,7 @@ def sc_phone(img, dr, t, D, p):
         for j, ln in enumerate(wrap(p["title"], f, 820)):
             dr.text((140, H / 2 - 80 + j * 92), ln, font=f, fill=rgba(WHITE, ta), anchor="lm")
     if p.get("sub"):
-        label_box(dr, (140, H / 2 + 150), p["sub"], t, bgc=RED, size=34, anchor="lm", alpha=prog(t, 0.8, 0.4))
+        label_box(dr, (140, H / 2 + 150), p["sub"], t, bgc=ACCENT, size=34, anchor="lm", alpha=prog(t, 0.8, 0.4))
     return [(0.0, "whoosh", 0.4), (p.get("alert_at", 1.2), "pop", 0.6), (p.get("alert_at", 1.2), "glitch", 0.3)]
 
 def find_coeffs(dst, src):
@@ -920,16 +925,17 @@ def sc_text3d(img, dr, t, D, p):
         ov = Image.new("RGBA", (W, H)); od = ImageDraw.Draw(ov)
         hz = H * 0.62
         for i in range(-20, 21):
-            od.line([(W / 2 + i * 40, hz), (W / 2 + i * 260, H)], fill=(230, 57, 70, 50), width=2)
+            od.line([(W / 2 + i * 40, hz), (W / 2 + i * 260, H)], fill=ACCENT + (50,), width=2)
         for j in range(12):
-            yy = hz + (H - hz) * (j / 12) ** 1.8; od.line([(0, yy), (W, yy)], fill=(230, 57, 70, 40), width=2)
+            yy = hz + (H - hz) * (j / 12) ** 1.8; od.line([(0, yy), (W, yy)], fill=ACCENT + (40,), width=2)
         img.alpha_composite(ov)
     yaw = (p.get("yaw", 0.28)) * math.cos(t * 0.9) * (1 - 0.5 * ease(prog(t, 0, D)))
     total_h = 0; layers = []
     for i, ln in enumerate(lines):
         acc = ln.startswith("*")
         lay = extruded_text(ln.strip("*"), p.get("size", 150) if not acc else int(p.get("size", 150) * 1.1),
-                            face=(255, 255, 255) if not acc else (255, 90, 100), side=(90, 14, 22) if acc else (60, 66, 72))
+                            face=(255, 255, 255) if not acc else (255, 214, 40) if ACCENT == YELLOW else (255, 90, 100),
+                            side=((110, 80, 0) if ACCENT == YELLOW else (90, 14, 22)) if acc else (60, 66, 72))
         k = back(prog(t, 0.15 + i * 0.25, 0.6))
         if k <= 0.01: layers.append(None); continue
         lay = warp3d(lay, yaw + (1 - clamp(k)) * 0.8 * (1 if i % 2 else -1), 0)
@@ -946,7 +952,7 @@ def sc_text3d(img, dr, t, D, p):
         y += lay.height * 0.82
     if p.get("sub"):
         a = ease(prog(t, 0.9, 0.5))
-        label_box(dr, (W / 2, H - 170), p["sub"], t, bgc=RED, size=40, alpha=a)
+        label_box(dr, (W / 2, H - 170), p["sub"], t, bgc=ACCENT, size=40, alpha=a)
     light_sweep(img, t, 0.6, 1.5, 0.4)
     dust(dr, t, 45, 5, (255, 200, 200))
     return [(0.0, "boom", 0.5), (0.15, "whoosh", 0.45), (0.4, "whoosh", 0.35)]
@@ -1024,8 +1030,100 @@ def radar_overlay(dr, pt, t, r=260, color=GREEN):
         bx, by = x + d * math.cos(math.radians(a)), y + d * math.sin(math.radians(a))
         dr.ellipse([bx - 7, by - 7, bx + 7, by + 7], fill=rgba(RED, al))
 
+# ================= COLAGEM 2.5D (estilo da referência do vídeo 06) =================
+@lru_cache(None)
+def halftone():
+    yy, xx = np.mgrid[0:H, 0:W].astype(np.float32)
+    a = math.radians(45); u = (xx * math.cos(a) + yy * math.sin(a)) / 7.0; v = (-xx * math.sin(a) + yy * math.cos(a)) / 7.0
+    d = np.sqrt((u - np.round(u)) ** 2 + (v - np.round(v)) ** 2)
+    return (0.9 + 0.1 * np.clip(d * 2.2, 0, 1))[..., None].astype(np.float32)
+
+@lru_cache(None)
+def foliage(seed=0):
+    """Folhagem escura e bem desfocada nas bordas (primeiro plano, dá profundidade)."""
+    rng = np.random.default_rng(seed); lay = Image.new("RGBA", (W, H)); d = ImageDraw.Draw(lay)
+    for cx0, cy0 in ((-60, H * 0.75), (W + 60, H * 0.35), (W * 0.15, H + 80)):
+        for _ in range(45):
+            r = rng.uniform(90, 230); x = cx0 + rng.normal(0, 110); y = cy0 + rng.normal(0, 220)
+            g = int(rng.uniform(10, 35)); d.ellipse([x - r, y - r, x + r, y + r], fill=(g, g, g + 3, 245))
+    return lay.resize((W // 8, H // 8)).filter(ImageFilter.GaussianBlur(5)).resize((W, H), Image.BICUBIC)
+
+def sign_card(text, seed, style="white"):
+    rng = np.random.default_rng(seed)
+    lines = text.split("|"); f = F("black", 78)
+    w = int(max(tw(f, l) for l in lines)) + 90; h = int(len(lines) * 88 + 70)
+    bgc = (250, 248, 240) if style == "white" else ACCENT; fg = (14, 14, 14)
+    card = Image.new("RGBA", (w, h), bgc + (255,)); cd = ImageDraw.Draw(card)
+    cd.rectangle([8, 8, w - 9, h - 9], outline=fg + (255,), width=7)
+    for i, l in enumerate(lines): cd.text((w / 2, 40 + 88 * i + 44), l, font=f, fill=fg, anchor="mm")
+    card.putalpha(torn_mask(w, h, seed, 6))
+    return card.rotate(float(rng.uniform(-16, 16)), expand=True, resample=Image.BICUBIC)
+
+def grade_mono(img, warm=0.06):
+    """Gradação P&B contrastada + retícula; o amarelo fica reservado para os elementos gráficos."""
+    a = np.asarray(img.convert("RGB"), dtype=np.float32)
+    g = a @ np.array([0.3, 0.59, 0.11], np.float32)
+    g = np.clip((g - 128) * 1.35 + 118, 0, 255)[..., None]
+    out = np.concatenate([g * (1 + warm), g, g * (1 - warm * 1.5)], -1) * halftone()
+    return Image.fromarray(np.clip(out, 0, 255).astype(np.uint8)).convert("RGBA")
+
+def sc_collage(img, dr, t, D, p):
+    """Colagem 2.5D: fundo P&B com retícula, cartazes que entram girando (parallax), folhagem em primeiro
+    plano, mira pulsando e movimento 'stop motion' (12 qps nos elementos)."""
+    tq = math.floor(t * 12) / 12  # stop motion
+    base = grade_mono(img) if p.get("_media") else img
+    img.paste(base, (0, 0))
+    # faixa/tarja amarela inclinada com a manchete
+    if p.get("tape"):
+        k = ease(prog(tq, 0.2, 0.5)); f = F("black", 54)
+        w = int(tw(f, p["tape"])) + 80
+        tape = Image.new("RGBA", (w, 90), ACCENT + (255,)); ImageDraw.Draw(tape).text((w / 2, 46), p["tape"], font=f, fill=ON_ACCENT, anchor="mm")
+        tape = tape.rotate(-6, expand=True, resample=Image.BICUBIC)
+        x = int(W * p.get("tape_x", 0.52) - tape.width / 2 + (1 - k) * -W - tq * 18); y = int(H * p.get("tape_y", 0.16))
+        img.alpha_composite(tape, (max(-tape.width + 1, x), y)) if x > -tape.width else None
+    # mira pulsando
+    if p.get("target"):
+        tx, ty = p["target"][0] * W, p["target"][1] * H
+        ka = prog(t, p.get("target_at", 0.8), 0.3)
+        if ka > 0:
+            ov = Image.new("RGBA", (W, H)); od = ImageDraw.Draw(ov)
+            for i in range(4):
+                r = 30 + i * 38 + 10 * math.sin(t * 7 - i)
+                od.ellipse([tx - r, ty - r, tx + r, ty + r], outline=ACCENT + (int(230 * ka * (1 - i * 0.18)),), width=6 - i)
+            od.ellipse([tx - 16, ty - 16, tx + 16, ty + 16], fill=ACCENT + (int(255 * ka),))
+            for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+                od.line([(tx + dx * 170, ty + dy * 170), (tx + dx * 220, ty + dy * 220)], fill=ACCENT + (int(220 * ka),), width=5)
+            img.alpha_composite(ov)
+    # cartazes / adesivos com parallax
+    sfx = [(0.0, "whoosh", 0.4)]
+    for i, sg in enumerate(p.get("signs", [])):
+        st = sg.get("at", 0.3 + i * 0.55); k = back(prog(tq, st, 0.35))
+        if k <= 0: continue
+        card = sign_card(sg["text"], 10 + i * 7 + p.get("_idx", 0), sg.get("style", "white" if i % 2 == 0 else "yellow"))
+        sc = clamp(k, 0.05, 1.15) * sg.get("scale", 1.0)
+        if sc != 1: card = card.resize((max(1, int(card.width * sc)), max(1, int(card.height * sc))), Image.BICUBIC)
+        jit = ((hash((i, int(t * 12))) % 7) - 3) * 1.5
+        x = sg["x"] * W - card.width / 2 + (tq - st) * sg.get("drift", -40 if i % 2 else 40) + jit
+        y = sg["y"] * H - card.height / 2 + jit
+        x = min(max(x, 20), W - card.width - 20); y = min(max(y, 20), H - card.height - 20)
+        shd = Image.new("RGBA", card.size, (0, 0, 0, 0)); shd.putalpha(card.getchannel("A").point(lambda v: v * 0.55))
+        img.alpha_composite(shd, (int(x + 16), int(y + 22))); img.alpha_composite(card, (int(x), int(y)))
+        sfx.append((st, "paper", 0.35))
+    # folhagem desfocada em primeiro plano (move mais rápido = profundidade)
+    if p.get("foliage", True):
+        fol = foliage(p.get("_idx", 0) % 3)
+        off = int(70 * math.sin(t * 0.6 + p.get("_idx", 0)) + t * 12 * (1 if p.get("_idx", 0) % 2 else -1))
+        img.alpha_composite(fol.transform((W, H), Image.AFFINE, (1, 0, off, 0, 1, 0), Image.BILINEAR))
+    if p.get("headline"):
+        k = ease(prog(tq, 0.5, 0.4)); f = F("black", 92)
+        for j, ln in enumerate(wrap(p["headline"], f, W - 320)):
+            yy = H - 300 + j * 100 + (1 - k) * 60
+            dr.text((W / 2 + 4, yy + 5), ln.replace("*", ""), font=f, fill=(0, 0, 0, int(200 * k)), anchor="mm")
+        word_reveal(dr, wrap(p["headline"], f, W - 320), f, W / 2, H - 300 + 50 * (len(wrap(p["headline"], f, W - 320)) - 1), tq, 0.5, 0.08, accent=ACCENT)
+    return sfx
+
 SCENES = {k[3:]: v for k, v in globals().items() if k.startswith("sc_")}
-BGS = {"phone": "dark", "globe": "dark", "text3d": "dark", "broll": "dark", "title": "dark", "chapter": "paper", "bars": "paper", "doc": "gray", "map": "ocean", "burst": "cream", "headline": "dark", "cine": "dark"}
+BGS = {"collage": "dark", "phone": "dark", "globe": "dark", "text3d": "dark", "broll": "dark", "title": "dark", "chapter": "paper", "bars": "paper", "doc": "gray", "map": "ocean", "burst": "cream", "headline": "dark", "cine": "dark"}
 
 # ---------- quadro final ----------
 def frame(scene, t, D, mframe=None):
@@ -1034,7 +1132,7 @@ def frame(scene, t, D, mframe=None):
     if mframe is not None:
         # foto/vídeo de banco como fundo; escurece quando há texto/gráfico por cima
         img = mframe.copy(); b = "dark"
-        dim = p.get("dim", 0.0 if kind == "broll" else 0.58)
+        dim = p.get("dim", 0.0 if kind in ("broll", "collage") else 0.58)
         if dim: img.alpha_composite(Image.new("RGBA", (W, H), (0, 0, 0, int(255 * dim))))
     else:
         img = Image.new("RGBA", (W, H), OCEAN + (255,)) if b == "ocean" else bg(b).copy()

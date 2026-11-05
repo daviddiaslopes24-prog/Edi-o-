@@ -34,9 +34,25 @@ Meta: entregar em até ~50 min. Rode etapas pesadas em segundo plano e avise o u
    (≈4 min; reduz para ~250 MB sem perda visível no celular).
 10. Entregar com `SendUserFile`. Não commitar o MP4 (grande); commitar `plano.json` e `cortes.json`.
 
+## CORES DO CANAL: PRETO E AMARELO (regra fixa)
+- Destaque da marca = **amarelo** (`ACCENT`, padrão `TEMA=amarelo`); fundo preto/escuro. Tarjas, sublinhados,
+  palavras em destaque, carimbos, números, botões e mira usam amarelo, com texto **preto** sobre o amarelo.
+- **Vermelho só para dados negativos** (barras de queda, setas para baixo). Verde para alta.
+
+## COLAGEM 2.5D (estilo da referência do vídeo 06 — usar em ~20–25% das cenas)
+Cena `collage`: foto/vídeo real em P&B contrastado com **retícula de jornal**, **cartazes/adesivos de papel
+rasgado** (brancos e amarelos, letras pretas) que entram girando com **parallax** e tremidinha de
+**stop motion** (12 qps), **folhagem desfocada** em primeiro plano nas bordas (profundidade),
+**tarja amarela inclinada** com a manchete e **mira circular pulsando** sobre o ponto principal.
+Campos: `media`, `tape` (tarja), `signs` (lista de `{text: "LINHA1|LINHA2", x, y, at, style: white|yellow, scale}`),
+`target: [x, y]` (frações da tela), `target_at`, `headline` (texto grande embaixo, `*destaque*`).
+Use para números-chave (ex.: "81,6% das famílias"), listas de fatores e viradas de argumento.
+
 ## DINAMISMO — algo acontecendo a cada ≤ 10 segundos (regra fixa)
 - Planeje **uma cena a cada 5–8 s**; nenhuma cena acima de 10 s. Se uma frase longa passar disso, divida
   com uma cena extra (broll, kinetic, chips) ancorada no meio da frase.
+- Depois de escrever o plano, rode `tools/dividir_cenas.py` (com a lista de mídias revisadas): ele insere
+  b-rolls no meio das cenas com mais de 9 s até a média ficar em ~5–6 s.
 - O `render.py` avisa ("AVISO: cenas com mais de 10 s") e, como rede de segurança, aplica **batidas
   automáticas a cada 5 s** em cenas longas: punch-in de câmera + brilho passando + whoosh discreto.
   Fotos ganham zoom + pan lateral alternado. Ainda assim, prefira dividir as cenas.

@@ -1,0 +1,1590 @@
+[
+{
+"type": "text3d",
+"at": 0,
+"lines": [
+"CRISE NO BRASIL",
+"*EM 2027?*"
+],
+"sub": "Juros, dívida e uma economia sem fôlego"
+},
+{
+"type": "collage",
+"anchor": "vida publica crescente",
+"media": {
+"file": "stock/pb5991196.jpg"
+},
+"tape": "SINAIS DE ALERTA",
+"signs": [
+{
+"text": "JUROS|ALTOS",
+"x": 0.22,
+"y": 0.6,
+"at": 0.2
+},
+{
+"text": "DÍVIDA|CRESCENTE",
+"x": 0.5,
+"y": 0.72,
+"at": 1.2
+},
+{
+"text": "FAMÍLIAS|ENDIVIDADAS",
+"x": 0.8,
+"y": 0.58,
+"at": 2.2
+}
+],
+"target": [
+0.5,
+0.4
+],
+"target_at": 3.2
+},
+{
+"type": "broll",
+"anchor": "uma economia com dificuldade",
+"media": {
+"file": "stock/pb25911.mp4"
+},
+"caption": "ECONOMIA SEM VELOCIDADE"
+},
+{
+"type": "question",
+"anchor": "e existe uma questao",
+"text": "E se o governo tentar *forçar* a queda dos juros?",
+"media": {
+"file": "stock/pb88921.mp4"
+}
+},
+{
+"type": "broll",
+"anchor": "se o governo tentasse",
+"media": {
+"file": "stock/pb59139.mp4"
+},
+"_filler": true
+},
+{
+"type": "kinetic",
+"anchor": "os numeros mais recentes",
+"text": "Os números mais recentes *merecem atenção*",
+"size": 96
+},
+{
+"type": "chips",
+"anchor": "e neste video",
+"title": "Neste vídeo:",
+"items": [
+"Seu bolso",
+"Bolsa de Valores",
+"Economia do país"
+],
+"span": 5
+},
+{
+"type": "broll",
+"anchor": "com a bolsa de",
+"media": {
+"file": "stock/pb138315.mp4"
+},
+"_filler": true
+},
+{
+"type": "headline",
+"anchor": "o crescimento economico pode",
+"kicker": "PARTE 2",
+"date": "PROJEÇÕES 2027",
+"title": "O crescimento econômico pode perder força"
+},
+{
+"type": "broll",
+"anchor": "um dos principais sinais",
+"media": {
+"file": "stock/pb262484.mp4"
+},
+"caption": "PROJEÇÕES DE CRESCIMENTO"
+},
+{
+"type": "datecard",
+"anchor": "de acordo com o boletim",
+"month": "NOVEMBRO 2026",
+"first_wd": 0,
+"ndays": 30,
+"highlight": [
+3,
+4
+],
+"label": "Boletim Focus (3/11) e Anbima (4/11)"
+},
+{
+"type": "broll",
+"anchor": "os economistas consultados pelo",
+"media": {
+"file": "stock/pb1195056.jpg"
+},
+"_filler": true
+},
+{
+"type": "bars",
+"anchor": "projetam um crescimento",
+"title": "PIB do Brasil em *2027*",
+"sub": "Projeções de crescimento (%)",
+"items": [
+[
+"Boletim Focus",
+1.2
+],
+[
+"Anbima",
+1.0
+]
+],
+"vmax": 2,
+"fmt": "{}%",
+"dec": 1,
+"posgreen": true,
+"span": 8
+},
+{
+"type": "broll",
+"anchor": "brasileiro em 2027 ja",
+"media": {
+"file": "stock/pb24114.mp4"
+},
+"_filler": true
+},
+{
+"type": "broll",
+"anchor": "dia 4 de novembro",
+"media": {
+"file": "stock/pb173333.mp4"
+},
+"_filler": true
+},
+{
+"type": "kinetic",
+"anchor": "isso significa que diferentes",
+"text": "Um cenário de crescimento *moderado*",
+"media": {
+"file": "stock/pb173333.mp4"
+}
+},
+{
+"type": "question",
+"anchor": "e por que isso importa",
+"text": "E por que isso *importa*?"
+},
+{
+"type": "chain",
+"anchor": "porque uma economia",
+"title": "QUANDO A ECONOMIA CRESCE POUCO",
+"items": [
+[
+"Empregos",
+"down"
+],
+[
+"Renda",
+"down"
+],
+[
+"Consumo",
+"down"
+],
+[
+"Arrecadação",
+"down"
+]
+],
+"span": 6
+},
+{
+"type": "broll",
+"anchor": "aumentar a renda estimular",
+"media": {
+"file": "stock/pb2301933.jpg"
+},
+"_filler": true
+},
+{
+"type": "stamp",
+"anchor": "nao significa que o brasil",
+"text": "NÃO É RECESSÃO",
+"sub": "NECESSARIAMENTE",
+"foot": "Mas existe risco de crescimento limitado"
+},
+{
+"type": "collage",
+"anchor": "o risco de o pais",
+"media": {
+"file": "stock/pb6579092.jpg"
+},
+"tape": "CRESCIMENTO LIMITADO",
+"signs": [
+{
+"text": "JUROS|ELEVADOS",
+"x": 0.25,
+"y": 0.62
+},
+{
+"text": "MENOS|INVESTIMENTO",
+"x": 0.76,
+"y": 0.6,
+"at": 1.0
+}
+],
+"target": [
+0.52,
+0.38
+],
+"target_at": 1.8
+},
+{
+"type": "broll",
+"anchor": "se os juros continuarem",
+"media": {
+"file": "stock/pb271463.mp4"
+},
+"_filler": true
+},
+{
+"type": "text3d",
+"anchor": "por que os juros sao",
+"lines": [
+"SELIC:",
+"*POR QUE IMPORTA?*"
+],
+"size": 130
+},
+{
+"type": "broll",
+"anchor": "um dos principais obstaculos",
+"media": {
+"file": "stock/pb1863880.jpg"
+},
+"caption": "TAXA SELIC"
+},
+{
+"type": "datecard",
+"anchor": "em 4 de novembro",
+"month": "NOVEMBRO 2026",
+"first_wd": 0,
+"ndays": 30,
+"highlight": [
+4
+],
+"label": "Copom mantém a Selic"
+},
+{
+"type": "bignum",
+"anchor": "o banco central decidiu manter",
+"from": 10,
+"to": 13.75,
+"dec": 2,
+"suffix": "%",
+"label": "Selic ao ano — ciclo de cortes interrompido",
+"color": "gold",
+"dur": 1.4,
+"tilt": true
+},
+{
+"type": "broll",
+"anchor": "ao ano interrompendo o",
+"media": {
+"file": "stock/pb1195065.jpg"
+},
+"_filler": true
+},
+{
+"type": "broll",
+"anchor": "a decisao veio acompanhada",
+"media": {
+"file": "stock/pb1232944.jpg"
+},
+"caption": "RISCO INFLACIONÁRIO"
+},
+{
+"type": "chain",
+"anchor": "o motivo e simples",
+"title": "A LÓGICA DO BANCO CENTRAL",
+"items": [
+"Inflação ameaça",
+"Juros altos",
+"Menos consumo",
+"Preços contidos"
+],
+"span": 8
+},
+{
+"type": "broll",
+"anchor": "os juros elevados para",
+"media": {
+"file": "stock/pb88921.mp4"
+},
+"_filler": true
+},
+{
+"type": "kinetic",
+"anchor": "mas existe um efeito",
+"text": "Mas existe um *efeito colateral*",
+"size": 110
+},
+{
+"type": "collage",
+"anchor": "juros altos encarecem",
+"media": {
+"file": "stock/pb851502.jpg"
+},
+"tape": "CRÉDITO CARO",
+"signs": [
+{
+"text": "EMPRÉSTIMOS",
+"x": 0.24,
+"y": 0.35
+},
+{
+"text": "FINANCIAMENTOS",
+"x": 0.72,
+"y": 0.68,
+"at": 0.9
+},
+{
+"text": "CAPITAL|DE GIRO",
+"x": 0.3,
+"y": 0.72,
+"at": 1.8,
+"style": "yellow"
+}
+],
+"target": [
+0.6,
+0.4
+],
+"target_at": 2.6
+},
+{
+"type": "broll",
+"anchor": "capital de giro das",
+"media": {
+"file": "stock/pb2789112.jpg"
+},
+"_filler": true
+},
+{
+"type": "broll",
+"anchor": "uma familia que pretende",
+"media": {
+"file": "stock/pb4521073.jpg"
+},
+"caption": "IMÓVEL ADIADO"
+},
+{
+"type": "broll",
+"anchor": "ou comprar um veiculo",
+"media": {
+"file": "stock/pb2165.mp4"
+},
+"caption": "CARRO ADIADO"
+},
+{
+"type": "broll",
+"anchor": "uma empresa que precisa",
+"media": {
+"file": "stock/pb3741.mp4"
+},
+"caption": "EMPRESA DESISTE DE INVESTIR"
+},
+{
+"type": "kinetic",
+"anchor": "e isso afeta toda",
+"text": "E isso afeta *toda a economia*",
+"media": {
+"file": "stock/pb87884.mp4"
+}
+},
+{
+"type": "line",
+"anchor": "o mercado financeiro projeta",
+"title": "SELIC: HOJE × FIM DE 2027",
+"points": [
+[
+"nov/2026",
+13.75
+],
+[
+"",
+13.5
+],
+[
+"",
+13.25
+],
+[
+"",
+13.0
+],
+[
+"",
+12.75
+],
+[
+"fim de 2027",
+12.5
+]
+],
+"ymin": 11,
+"ymax": 14.5,
+"ticks": [
+12,
+13,
+14
+],
+"yfmt": "{}%",
+"ydec": 0,
+"draw": 3.5,
+"color": "green",
+"notes": {
+"5": "12,5% (PROJEÇÃO)"
+},
+"note": "Trajetória intermediária ilustrativa"
+},
+{
+"type": "stamp",
+"anchor": "ou seja mesmo com",
+"text": "AINDA ELEVADO",
+"sub": "MESMO COM CORTES",
+"foot": "Juros devem seguir em patamar alto"
+},
+{
+"type": "broll",
+"anchor": "os juros ainda poderiam",
+"media": {
+"file": "stock/pb24887.mp4"
+},
+"_filler": true
+},
+{
+"type": "cine",
+"anchor": "e se o governo cortar",
+"lines": [
+"CORTAR JUROS",
+"*NA CANETADA?*"
+]
+},
+{
+"type": "kinetic",
+"anchor": "aqui esta uma das questoes",
+"text": "Uma das questões *mais importantes*"
+},
+{
+"type": "collage",
+"anchor": "imagine que o governo",
+"media": {
+"file": "stock/pb5991196.jpg"
+},
+"tape": "CENÁRIO HIPOTÉTICO",
+"signs": [
+{
+"text": "CORTE|RÁPIDO",
+"x": 0.25,
+"y": 0.6
+},
+{
+"text": "SEM QUEDA DA|INFLAÇÃO",
+"x": 0.75,
+"y": 0.62,
+"at": 1.4,
+"style": "yellow"
+}
+],
+"target": [
+0.5,
+0.42
+],
+"target_at": 2.0
+},
+{
+"type": "broll",
+"anchor": "rapida dos juros mesmo",
+"media": {
+"file": "stock/pb4164570.jpg"
+},
+"_filler": true
+},
+{
+"type": "doc",
+"anchor": "e importante esclarecer",
+"head": "ENTENDA",
+"text": "O presidente não pode, por decisão individual, determinar a taxa Selic.",
+"hl": "não pode",
+"tilt": true
+},
+{
+"type": "broll",
+"anchor": "por uma decisao individual",
+"media": {
+"file": "stock/pb112717.mp4"
+},
+"_filler": true
+},
+{
+"type": "broll",
+"anchor": "essa decisao e tomada",
+"media": {
+"file": "stock/pb87593.mp4"
+},
+"caption": "COPOM — BANCO CENTRAL"
+},
+{
+"type": "stamp",
+"anchor": "o banco central possui",
+"text": "AUTONOMIA",
+"sub": "PREVISTA EM LEI",
+"foot": "Autonomia operacional do Banco Central"
+},
+{
+"type": "kinetic",
+"anchor": "mas vamos considerar",
+"text": "Um cenário *hipotético*: corte sem respaldo nos indicadores",
+"size": 84
+},
+{
+"type": "broll",
+"anchor": "sem respaldo nos indicadores",
+"media": {
+"file": "stock/pb2724241.jpg"
+},
+"_filler": true
+},
+{
+"type": "question",
+"anchor": "o que poderia acontecer",
+"text": "O que poderia *acontecer*?"
+},
+{
+"type": "chain",
+"anchor": "primeiro investidores",
+"title": "REAÇÃO DO MERCADO",
+"items": [
+[
+"Desconfiança",
+"up"
+],
+[
+"Dólar",
+"up"
+],
+[
+"Expectativa de inflação",
+"up"
+]
+],
+"span": 10
+},
+{
+"type": "broll",
+"anchor": "do compromisso com o",
+"media": {
+"file": "stock/pb12564.mp4"
+},
+"_filler": true
+},
+{
+"type": "broll",
+"anchor": "desconfianca prestar o dolar",
+"media": {
+"file": "stock/pb4865814.jpg"
+},
+"_filler": true
+},
+{
+"type": "collage",
+"anchor": "e existe outro detalhe",
+"media": {
+"file": "stock/pb1340649.jpg"
+},
+"tape": "O PARADOXO",
+"signs": [
+{
+"text": "SELIC|CAI",
+"x": 0.25,
+"y": 0.62
+},
+{
+"text": "JUROS DO|MERCADO SOBEM",
+"x": 0.74,
+"y": 0.62,
+"at": 1.6,
+"style": "yellow"
+}
+],
+"target": [
+0.5,
+0.35
+],
+"target_at": 2.4
+},
+{
+"type": "broll",
+"anchor": "proprio mercado podem subir",
+"media": {
+"file": "stock/pb3040029.jpg"
+},
+"_filler": true
+},
+{
+"type": "chain",
+"anchor": "isso significa que o governo",
+"title": "O EFEITO CONTRÁRIO",
+"items": [
+"Tentar baratear o crédito",
+"Financiamentos mais caros",
+"Instabilidade"
+],
+"span": 8
+},
+{
+"type": "broll",
+"anchor": "uma decisao de politica",
+"media": {
+"file": "stock/pb949913.jpg"
+},
+"_filler": true
+},
+{
+"type": "broll",
+"anchor": "para financiamentos mais caros",
+"media": {
+"file": "stock/pb6688945.jpg"
+},
+"_filler": true
+},
+{
+"type": "grid",
+"anchor": "portanto cortar juros",
+"title": "Cortar juros é ruim?",
+"items": [
+[
+"Sustentável",
+"ajuda a economia"
+],
+[
+"Forçado",
+"gera instabilidade"
+]
+],
+"gap": 3.0
+},
+{
+"type": "broll",
+"anchor": "uma reducao sustentavel pode",
+"media": {
+"file": "stock/pb5190050.jpg"
+},
+"_filler": true
+},
+{
+"type": "broll",
+"anchor": "tentar reduzir os juros",
+"media": {
+"file": "stock/pb1340649.jpg"
+},
+"_filler": true
+},
+{
+"type": "text3d",
+"anchor": "a divida publica um",
+"lines": [
+"DÍVIDA PÚBLICA",
+"*DESAFIO DE 2027*"
+],
+"size": 130
+},
+{
+"type": "broll",
+"anchor": "outro ponto que merece",
+"media": {
+"file": "stock/pb2387280.jpg"
+},
+"caption": "DÍVIDA PÚBLICA BRASILEIRA"
+},
+{
+"type": "burst",
+"anchor": "segundo os dados do banco",
+"from": 0,
+"to": 11.1,
+"dec": 1,
+"prefix": "R$ ",
+"suffix": " tri",
+"label": "dívida bruta do governo geral (set/2026)"
+},
+{
+"type": "bignum",
+"anchor": "em setembro de 2026",
+"from": 60,
+"to": 82.9,
+"dec": 1,
+"suffix": "%",
+"label": "do PIB",
+"color": "gold",
+"dur": 1.4,
+"tilt": true
+},
+{
+"type": "kinetic",
+"anchor": "e um volume muito",
+"text": "Um volume *muito elevado*",
+"size": 120
+},
+{
+"type": "chain",
+"anchor": "porque o governo precisa",
+"title": "POR QUE PREOCUPA",
+"items": [
+[
+"Dívida",
+"up"
+],
+[
+"Juros",
+"up"
+],
+[
+"Custo da dívida",
+"up"
+]
+],
+"span": 8
+},
+{
+"type": "broll",
+"anchor": "permanecem altos o custo",
+"media": {
+"file": "stock/pb87884.mp4"
+},
+"_filler": true
+},
+{
+"type": "collage",
+"anchor": "o banco central registrou",
+"media": {
+"file": "stock/pb1195013.jpg"
+},
+"tape": "JUROS DA DÍVIDA",
+"signs": [
+{
+"text": "R$ 1,18|TRILHÃO",
+"x": 0.3,
+"y": 0.62,
+"style": "yellow",
+"scale": 1.2
+},
+{
+"text": "EM 12|MESES",
+"x": 0.74,
+"y": 0.56,
+"at": 1.4
+}
+],
+"target": [
+0.62,
+0.36
+],
+"target_at": 2.2
+},
+{
+"type": "broll",
+"anchor": "chegaram a aproximadamente 1",
+"media": {
+"file": "stock/pb202987.mp4"
+},
+"_filler": true
+},
+{
+"type": "broll",
+"anchor": "de 12 meses ate",
+"media": {
+"file": "stock/pb21782.mp4"
+},
+"_filler": true
+},
+{
+"type": "kinetic",
+"anchor": "isso ajuda a entender",
+"text": "Juros pesam nas *contas públicas*",
+"media": {
+"file": "stock/pb385506.jpg"
+}
+},
+{
+"type": "bars",
+"anchor": "projeta que a divida",
+"title": "Dívida bruta / *PIB*",
+"sub": "Set/2026 × projeção Anbima para o fim de 2027",
+"items": [
+[
+"Set/2026",
+82.9
+],
+[
+"Fim de 2027 (proj.)",
+87.4
+]
+],
+"vmax": 95,
+"fmt": "{}%",
+"dec": 1,
+"span": 3
+},
+{
+"type": "broll",
+"anchor": "4 do pib no",
+"media": {
+"file": "stock/pb4730.mp4"
+},
+"_filler": true
+},
+{
+"type": "stamp",
+"anchor": "mas atencao isso e",
+"text": "PROJEÇÃO",
+"sub": "NÃO É GARANTIA",
+"foot": "O resultado depende das decisões dos próximos meses"
+},
+{
+"type": "chips",
+"anchor": "o tamanho da divida",
+"title": "A dívida depende de:",
+"items": [
+"Arrecadação",
+"Despesas",
+"Crescimento",
+"Juros",
+"Decisões fiscais"
+],
+"span": 5
+},
+{
+"type": "broll",
+"anchor": "despesas crescimento economico juros",
+"media": {
+"file": "stock/pb1195013.jpg"
+},
+"_filler": true
+},
+{
+"type": "broll",
+"anchor": "o desafio e conseguir",
+"media": {
+"file": "stock/pb3992.mp4"
+},
+"caption": "SEM CORTAR INVESTIMENTOS E SERVIÇOS"
+},
+{
+"type": "broll",
+"anchor": "comprometer investimentos e servicos",
+"media": {
+"file": "stock/pb3105631.jpg"
+},
+"_filler": true
+},
+{
+"type": "headline",
+"anchor": "bolsa de valor",
+"kicker": "PARTE 6",
+"date": "MERCADO DE AÇÕES",
+"title": "Bolsa de Valores: o que pode acontecer?"
+},
+{
+"type": "broll",
+"anchor": "a relacao entre juros",
+"media": {
+"file": "stock/pb1853262.jpg"
+},
+"caption": "JUROS × AÇÕES"
+},
+{
+"type": "chain",
+"anchor": "quando os juros caem",
+"title": "QUEDA SUSTENTÁVEL DOS JUROS",
+"items": [
+"Renda fixa menos atrativa",
+"Ações ganham espaço",
+"Crédito mais barato"
+],
+"span": 9
+},
+{
+"type": "broll",
+"anchor": "tornar menos atrativos em",
+"media": {
+"file": "stock/pb1842205.jpg"
+},
+"_filler": true
+},
+{
+"type": "broll",
+"anchor": "podem conseguir credito mais",
+"media": {
+"file": "stock/pb59139.mp4"
+},
+"_filler": true
+},
+{
+"type": "kinetic",
+"anchor": "isso pode favorecer",
+"text": "Isso pode *favorecer* a Bolsa...",
+"size": 110,
+"media": {
+"file": "stock/pb202987.mp4"
+}
+},
+{
+"type": "stamp",
+"anchor": "mas existe uma condicao",
+"text": "CONDIÇÃO",
+"sub": "CORTE PRECISA SER SUSTENTÁVEL",
+"foot": "O mercado precisa acreditar"
+},
+{
+"type": "collage",
+"anchor": "se os cortes acontecerem",
+"media": {
+"file": "stock/pb1863880.jpg"
+},
+"tape": "EFEITO CONTRÁRIO",
+"signs": [
+{
+"text": "DESCONFIANÇA|FISCAL",
+"x": 0.26,
+"y": 0.62
+},
+{
+"text": "INFLAÇÃO|ELEVADA",
+"x": 0.74,
+"y": 0.62,
+"at": 1.2,
+"style": "yellow"
+}
+],
+"target": [
+0.5,
+0.36
+],
+"target_at": 2.0
+},
+{
+"type": "broll",
+"anchor": "e a inflacao e",
+"media": {
+"file": "stock/pb138315.mp4"
+},
+"_filler": true
+},
+{
+"type": "chain",
+"anchor": "podem retirar os recursos",
+"title": "INVESTIDORES PODEM",
+"items": [
+"Tirar dinheiro do país",
+"Buscar o dólar",
+"Vender ativos brasileiros"
+],
+"span": 8
+},
+{
+"type": "broll",
+"anchor": "dolar e reduzir a",
+"media": {
+"file": "stock/pb1195056.jpg"
+},
+"_filler": true
+},
+{
+"type": "stamp",
+"anchor": "ou seja uma selic",
+"text": "SELIC MENOR",
+"sub": "≠ BOLSA EM ALTA",
+"foot": "Não há garantia"
+},
+{
+"type": "grid",
+"anchor": "o que realmente importa",
+"title": "O que realmente importa",
+"items": [
+"Juros",
+"Inflação",
+"Crescimento",
+"Contas públicas"
+],
+"gap": 0.9
+},
+{
+"type": "broll",
+"anchor": "crescimento economico e a",
+"media": {
+"file": "stock/pb24114.mp4"
+},
+"_filler": true
+},
+{
+"type": "broll",
+"anchor": "para quem investe",
+"media": {
+"file": "stock/pb1058.mp4"
+},
+"caption": "INVESTIDOR: ATENÇÃO REDOBRADA EM 2027"
+},
+{
+"type": "broll",
+"anchor": "economicos e as decisoes",
+"media": {
+"file": "stock/pb173333.mp4"
+},
+"_filler": true
+},
+{
+"type": "text3d",
+"anchor": "o brasileiro endividado",
+"lines": [
+"O BRASILEIRO",
+"*ENDIVIDADO*"
+],
+"size": 140
+},
+{
+"type": "broll",
+"anchor": "dentro das casas",
+"media": {
+"file": "stock/pb5264830.jpg"
+},
+"caption": "DENTRO DAS CASAS"
+},
+{
+"type": "collage",
+"anchor": "segundo a pesquisa",
+"media": {
+"file": "stock/pb522549.jpg"
+},
+"tape": "PESQUISA CNC",
+"headline": "*81,6%* das famílias endividadas",
+"signs": [
+{
+"text": "OUTUBRO|2026",
+"x": 0.8,
+"y": 0.3,
+"style": "yellow"
+}
+],
+"target": [
+0.33,
+0.42
+],
+"target_at": 1.2
+},
+{
+"type": "broll",
+"anchor": "das familias brasileiras estavam",
+"media": {
+"file": "stock/pb2301933.jpg"
+},
+"_filler": true
+},
+{
+"type": "burst",
+"anchor": "e 29 3",
+"from": 0,
+"to": 29.3,
+"dec": 1,
+"suffix": "%",
+"label": "das famílias com contas em atraso",
+"color": "navy"
+},
+{
+"type": "grid",
+"anchor": "e importante separar",
+"title": "Não é a mesma coisa",
+"items": [
+[
+"Endividado",
+"tem dívidas"
+],
+[
+"Inadimplente",
+"está em atraso"
+]
+],
+"gap": 1.5
+},
+{
+"type": "broll",
+"anchor": "uma familia pode ter",
+"media": {
+"file": "stock/pb1583534.jpg"
+},
+"caption": "PARCELADO E EM DIA"
+},
+{
+"type": "kinetic",
+"anchor": "mesmo assim os dados",
+"text": "O orçamento das famílias está *comprometido*",
+"media": {
+"file": "stock/pb44637.mp4"
+}
+},
+{
+"type": "collage",
+"anchor": "e os numeros do banco",
+"media": {
+"file": "stock/pb1013789.jpg"
+},
+"tape": "CRÉDITO PESSOAL",
+"headline": "*62,4%* ao ano de juros",
+"signs": [
+{
+"text": "CRÉDITO|LIVRE",
+"x": 0.24,
+"y": 0.3,
+"style": "yellow"
+},
+{
+"text": "SETEMBRO",
+"x": 0.8,
+"y": 0.34,
+"at": 1.2
+}
+],
+"target": [
+0.55,
+0.45
+],
+"target_at": 1.6
+},
+{
+"type": "broll",
+"anchor": "a taxa media de",
+"media": {
+"file": "stock/pb271463.mp4"
+},
+"_filler": true
+},
+{
+"type": "broll",
+"anchor": "fisicas chegou a 62",
+"media": {
+"file": "stock/pb1195065.jpg"
+},
+"_filler": true
+},
+{
+"type": "chips",
+"anchor": "isso ajuda a explicar",
+"title": "Pesa para quem usa:",
+"items": [
+"Empréstimos",
+"Cartão de crédito",
+"Financiamentos"
+],
+"span": 5
+},
+{
+"type": "broll",
+"anchor": "de emprestimos cartao de",
+"media": {
+"file": "stock/pb88921.mp4"
+},
+"_filler": true
+},
+{
+"type": "broll",
+"anchor": "quando os juros permanecem",
+"media": {
+"file": "stock/pb3548021.jpg"
+},
+"caption": "MAIS RENDA PARA PAGAR DÍVIDAS"
+},
+{
+"type": "broll",
+"anchor": "e sobra menos dinheiro",
+"media": {
+"file": "stock/pb4730.mp4"
+},
+"caption": "MENOS CONSUMO"
+},
+{
+"type": "chain",
+"anchor": "e um ciclo de fio",
+"title": "O CICLO",
+"items": [
+[
+"Consumo",
+"down"
+],
+[
+"Comércio",
+"down"
+],
+[
+"Vendas",
+"down"
+],
+[
+"Atividade",
+"down"
+]
+],
+"span": 8
+},
+{
+"type": "broll",
+"anchor": "empresas vendem menos e",
+"media": {
+"file": "stock/pb2789112.jpg"
+},
+"_filler": true
+},
+{
+"type": "cine",
+"anchor": "entao o brasil vai entrar",
+"lines": [
+"O BRASIL VAI",
+"*ENTRAR EM CRISE?*"
+]
+},
+{
+"type": "stamp",
+"anchor": "com todos esses dados",
+"text": "RISCO ≠ CERTEZA",
+"foot": "Existe motivo para preocupação"
+},
+{
+"type": "grid",
+"anchor": "as projecoes apontam",
+"title": "O que as projeções mostram",
+"items": [
+[
+"PIB",
+"crescimento moderado"
+],
+[
+"Selic",
+"ainda alta"
+],
+[
+"Dívida",
+"pode subir"
+]
+],
+"gap": 1.5
+},
+{
+"type": "broll",
+"anchor": "ainda elevados e uma",
+"media": {
+"file": "stock/pb24887.mp4"
+},
+"_filler": true
+},
+{
+"type": "broll",
+"anchor": "o endividamento das familias",
+"media": {
+"file": "stock/pb293081.mp4"
+},
+"caption": "ORÇAMENTO APERTADO"
+},
+{
+"type": "doc",
+"anchor": "por outro lado esses",
+"head": "ANÁLISE",
+"text": "Os indicadores não permitem afirmar que uma crise econômica será inevitável.",
+"hl": "não permitem afirmar",
+"tilt": true
+},
+{
+"type": "kinetic",
+"anchor": "o cenario dependera",
+"text": "Tudo depende de *três decisões*",
+"size": 110
+},
+{
+"type": "collage",
+"anchor": "a primeira e a conducao",
+"media": {
+"file": "stock/pb5991196.jpg"
+},
+"tape": "1 · POLÍTICA FISCAL",
+"signs": [
+{
+"text": "CONTROLAR|DESPESAS",
+"x": 0.26,
+"y": 0.62
+},
+{
+"text": "CONFIANÇA|NA DÍVIDA",
+"x": 0.74,
+"y": 0.62,
+"at": 1.4,
+"style": "yellow"
+}
+],
+"target": [
+0.5,
+0.4
+],
+"target_at": 2.2
+},
+{
+"type": "broll",
+"anchor": "das despesas e transmitir",
+"media": {
+"file": "stock/pb4164570.jpg"
+},
+"_filler": true
+},
+{
+"type": "collage",
+"anchor": "a segunda e a inflacao",
+"media": {
+"file": "stock/pb3105631.jpg"
+},
+"tape": "2 · INFLAÇÃO",
+"signs": [
+{
+"text": "JUROS PODEM|CAIR?",
+"x": 0.3,
+"y": 0.62,
+"style": "yellow"
+},
+{
+"text": "PREÇOS|ESTÁVEIS",
+"x": 0.74,
+"y": 0.4,
+"at": 1.2
+}
+],
+"target": [
+0.6,
+0.6
+],
+"target_at": 1.8
+},
+{
+"type": "broll",
+"anchor": "os juros sem comprometer",
+"media": {
+"file": "stock/pb112717.mp4"
+},
+"_filler": true
+},
+{
+"type": "collage",
+"anchor": "e a terceira e o crescimento",
+"media": {
+"file": "stock/pb262484.mp4"
+},
+"tape": "3 · CRESCIMENTO",
+"signs": [
+{
+"text": "INVESTIMENTOS",
+"x": 0.26,
+"y": 0.34
+},
+{
+"text": "PRODUTIVIDADE",
+"x": 0.72,
+"y": 0.66,
+"at": 1.0,
+"style": "yellow"
+},
+{
+"text": "OPORTUNIDADES",
+"x": 0.3,
+"y": 0.7,
+"at": 2.0
+}
+],
+"target": [
+0.6,
+0.36
+],
+"target_at": 2.6
+},
+{
+"type": "broll",
+"anchor": "aumentar a produtividade e",
+"media": {
+"file": "stock/pb2724241.jpg"
+},
+"_filler": true
+},
+{
+"type": "kinetic",
+"anchor": "essas respostas",
+"text": "Impacto direto na economia em *2027*",
+"media": {
+"file": "stock/pb112718.mp4"
+}
+},
+{
+"type": "doc",
+"anchor": "o brasil nao precisa",
+"head": "CONCLUSÃO",
+"text": "O Brasil não precisa necessariamente enfrentar uma grande crise em 2027. Mas não pode ignorar os sinais de alerta.",
+"hl": "não pode ignorar os sinais de alerta",
+"tilt": true,
+"tilt_side": -1
+},
+{
+"type": "broll",
+"anchor": "crise em 2027 mas",
+"media": {
+"file": "stock/pb12564.mp4"
+},
+"_filler": true
+},
+{
+"type": "collage",
+"anchor": "juros elevados divida crescente",
+"media": {
+"file": "stock/pb1842205.jpg"
+},
+"tape": "COMBINAÇÃO PERIGOSA",
+"signs": [
+{
+"text": "JUROS|ELEVADOS",
+"x": 0.2,
+"y": 0.36
+},
+{
+"text": "DÍVIDA|CRESCENTE",
+"x": 0.78,
+"y": 0.36,
+"at": 0.8,
+"style": "yellow"
+},
+{
+"text": "BAIXO|CRESCIMENTO",
+"x": 0.24,
+"y": 0.7,
+"at": 1.6,
+"style": "yellow"
+},
+{
+"text": "FAMÍLIAS|ENDIVIDADAS",
+"x": 0.76,
+"y": 0.7,
+"at": 2.4
+}
+],
+"target": [
+0.5,
+0.5
+],
+"target_at": 3.0
+},
+{
+"type": "broll",
+"anchor": "uma combinacao que exige",
+"media": {
+"file": "stock/pb4865814.jpg"
+},
+"_filler": true
+},
+{
+"type": "kinetic",
+"anchor": "o ponto central",
+"text": "Não é só cortar juros ou *gastar mais*",
+"size": 100
+},
+{
+"type": "stamp",
+"anchor": "e criar condicoes",
+"text": "CRESCER COM EQUILÍBRIO",
+"foot": "Sem perder o controle da inflação e das contas públicas"
+},
+{
+"type": "chips",
+"anchor": "porque no final",
+"title": "Quem sente é o cidadão:",
+"items": [
+"Alimentos",
+"Financiamento",
+"Emprego",
+"Fim do mês"
+],
+"span": 8
+},
+{
+"type": "broll",
+"anchor": "e o cidadao o",
+"media": {
+"file": "stock/pb3040029.jpg"
+},
+"_filler": true
+},
+{
+"type": "broll",
+"anchor": "financiamento no emprego e",
+"media": {
+"file": "stock/pb949913.jpg"
+},
+"_filler": true
+},
+{
+"type": "question",
+"anchor": "e voce acredita",
+"text": "O Brasil vai controlar esses problemas *em 2027*?",
+"media": {
+"file": "stock/pb25911.mp4"
+}
+},
+{
+"type": "broll",
+"anchor": "ou o pais corre",
+"media": {
+"file": "stock/pb6688945.jpg"
+},
+"_filler": true
+},
+{
+"type": "outro",
+"anchor": "deixe aqui embaixo",
+"click": 4.5
+},
+{
+"type": "collage",
+"anchor": "o seu like sempre",
+"media": {
+"file": "stock/pb24887.mp4"
+},
+"tape": "IMPACTO ECONÔMICO",
+"signs": [
+{
+"text": "DEIXE|SEU LIKE",
+"x": 0.25,
+"y": 0.6,
+"style": "yellow"
+},
+{
+"text": "COMENTE",
+"x": 0.72,
+"y": 0.38,
+"at": 0.9
+},
+{
+"text": "INSCREVA-SE",
+"x": 0.68,
+"y": 0.72,
+"at": 1.8,
+"style": "yellow"
+}
+],
+"target": [
+0.5,
+0.5
+],
+"target_at": 2.4
+}
+]
