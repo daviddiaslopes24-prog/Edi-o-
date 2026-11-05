@@ -21,6 +21,7 @@ WHITE = (245, 245, 245); MUTED = (150, 165, 158)
 YELLOW = (255, 204, 0)
 ACCENT = YELLOW if os.environ.get("TEMA", "amarelo") == "amarelo" else (230, 57, 70)
 ON_ACCENT = (14, 14, 14) if ACCENT == YELLOW else (245, 245, 245)  # texto sobre o destaque
+ACCENT_INK = (176, 124, 0) if ACCENT == YELLOW else ACCENT  # destaque legível sobre papel claro
 
 # ---------- utilidades ----------
 @lru_cache(None)
@@ -40,8 +41,12 @@ def F(name, size):
 def clamp(x, a=0.0, b=1.0): return max(a, min(b, x))
 def ease(x): x = clamp(x); return 1 - (1 - x) ** 3
 def ease_io(x): x = clamp(x); return x * x * (3 - 2 * x)
+# TOM = "documental" (padrão, pedido do usuário no vídeo 07): animações sóbrias, sem quique/balanço.
+TOM = os.environ.get("TOM", "documental")
 def back(x):
-    x = clamp(x); c = 1.70158; return 1 + (c + 1) * (x - 1) ** 3 + c * (x - 1) ** 2
+    x = clamp(x)
+    if TOM == "documental": return ease_io(x) if x < 1 else 1.0  # entrada suave, sem passar do ponto
+    c = 1.70158; return 1 + (c + 1) * (x - 1) ** 3 + c * (x - 1) ** 2
 def prog(t, a, d): return clamp((t - a) / d) if d > 0 else (1.0 if t >= a else 0.0)
 def rgba(c, a): return (c[0], c[1], c[2], int(clamp(a) * 255))
 
@@ -251,7 +256,7 @@ def sc_title(img, dr, t, D, p):
 def sc_chapter(img, dr, t, D, p):
     n = p["n"]; title = p["title"]
     kk = ease(prog(t, 0.0, 0.5))
-    dr.text((160, 380), f"PARTE {n}", font=F("bold", 40), fill=rgba(ACCENT, kk), anchor="lm")
+    dr.text((160, 380), f"PARTE {n}", font=F("bold", 40), fill=rgba(ACCENT_INK, kk), anchor="lm")
     dr.rectangle([160, 420, 160 + 120 * kk, 426], fill=rgba(ACCENT, 1))
     # máquina de escrever com trecho em itálico (*...*)
     parts = re.split(r"(\*[^*]+\*)", title)
@@ -266,7 +271,7 @@ def sc_chapter(img, dr, t, D, p):
             if not word: continue
             if word.strip() and x + tw(f, word) > 160 + maxw: x = 160; y += 120
             vis = word[: max(0, shown - cnt)]; cnt += len(word)
-            if vis: dr.text((x, y), vis, font=f, fill=rgba(ACCENT if it else INK, 1), anchor="ls")
+            if vis: dr.text((x, y), vis, font=f, fill=rgba(ACCENT_INK if it else INK, 1), anchor="ls")
             x += tw(f, word)
     if shown < total and int(t * 3) % 2 == 0:
         dr.rectangle([x + 6, y - 80, x + 12, y + 10], fill=rgba(INK, 1))
@@ -402,7 +407,7 @@ def sc_bars(img, dr, t, D, p):
     for s in parts:
         if not s: continue
         it = s.startswith("*"); s = s.strip("*"); f = F("serifi" if it else "serif", 76)
-        dr.text((x, 200), s, font=f, fill=rgba(ACCENT if it else INK, prog(t, 0, 0.4)), anchor="ls"); x += tw(f, s)
+        dr.text((x, 200), s, font=f, fill=rgba(ACCENT_INK if it else INK, prog(t, 0, 0.4)), anchor="ls"); x += tw(f, s)
     if p.get("sub"): dr.text((162, 250), p["sub"], font=F("reg", 30), fill=rgba((90, 85, 70), prog(t, 0.2, 0.4)), anchor="lm")
     n = len(items); gap = min(170, (H - 420) / n); y = 360
     span = min(p.get("span", D * 0.75), D * 0.72); sfx = [(0.0, "whoosh", 0.5)]
@@ -724,7 +729,7 @@ def sc_headline(img, dr, t, D, p):
     cw, ch = 1500, 420
     card = paper_card(cw, ch, (246, 242, 232), seed=len(p["title"]))
     cd = ImageDraw.Draw(card)
-    cd.text((70, 70), p.get("kicker", "INVESTIGAÇÃO"), font=F("bold", 30), fill=rgba(ACCENT, 1), anchor="lm")
+    cd.text((70, 70), p.get("kicker", "INVESTIGAÇÃO"), font=F("bold", 30), fill=rgba(ACCENT_INK, 1), anchor="lm")
     cd.text((cw - 70, 70), p.get("date", ""), font=F("med", 28), fill=rgba((90, 90, 90), 1), anchor="rm")
     for x in range(70, cw - 70, 14): cd.ellipse([x, 108, x + 4, 112], fill=rgba((120, 120, 120), 1))
     f = F("serif", 92); lines = wrap(p["title"].replace("*", ""), f, cw - 140)
@@ -777,7 +782,7 @@ def sc_cine(img, dr, t, D, p):
 
 def sc_burst(img, dr, t, D, p):
     """Ilustração editorial: raios de explosão em azul/laranja e cartão de papel rasgado com número/texto."""
-    rot = t * 6; k = back(prog(t, 0.1, 0.5))
+    rot = t * (1.5 if TOM == "documental" else 6); k = back(prog(t, 0.1, 0.5))
     ov = Image.new("RGBA", (W, H)); od = ImageDraw.Draw(ov)
     for i in range(36):
         a0 = math.radians(rot + i * 10); a1 = a0 + math.radians(4)
@@ -848,7 +853,7 @@ def sc_phone(img, dr, t, D, p):
             for j, ln in enumerate(wrap(p.get("alert", "Serviço indisponível"), F("bold", 34), bw - 60)):
                 pd.text((ph_w / 2, by + 160 + j * 44), ln, font=F("bold", 34), fill=(30, 30, 30), anchor="mm")
             pd.text((ph_w / 2, by + bh - 40), p.get("alert_sub", "Tente novamente mais tarde"), font=F("reg", 24), fill=(120, 120, 120), anchor="mm")
-    sc = 0.85 * clamp(k, 0.05, 1.1); yaw = 0.18 * math.sin(t * 0.8)
+    sc = 0.85 * clamp(k, 0.05, 1.1); yaw = 0.12 if TOM == "documental" else 0.18 * math.sin(t * 0.8)
     lay = warp3d(phone.resize((int(ph_w * sc), int(ph_h * sc)), Image.BICUBIC), yaw)
     img.alpha_composite(lay, (int(W * 0.68 - lay.width / 2), int(H / 2 - lay.height / 2 + 20)))
     if p.get("title"):
@@ -871,9 +876,9 @@ def tilt_frame(inner, t, D, p):
     small = inner.resize((W // 6, H // 6), Image.BILINEAR).filter(ImageFilter.GaussianBlur(3)).resize((W, H), Image.BILINEAR)
     bgimg = Image.blend(small.convert("RGB"), Image.new("RGB", (W, H), (0, 0, 0)), 0.55).convert("RGBA")
     k = ease_io(t / max(D, 0.1)); side = p.get("tilt_side", 1)
-    yaw = (0.22 - 0.12 * k) * side  # rotação aparente
-    sc = 0.80 + 0.05 * k
-    cw, ch = W * sc, H * sc; cx, cy = W / 2 + 40 * side * (1 - k), H / 2
+    yaw = (0.14 if TOM == "documental" else (0.22 - 0.12 * k)) * side  # ângulo fixo no modo documental
+    sc = 0.80 + 0.04 * k
+    cw, ch = W * sc, H * sc; cx, cy = (W / 2 if TOM == "documental" else W / 2 + 40 * side * (1 - k)), H / 2
     dz = yaw * cw * 0.5
     quad = [(cx - cw / 2, cy - ch / 2 + dz * 0.6), (cx + cw / 2, cy - ch / 2 - dz * 0.6),
             (cx + cw / 2, cy + ch / 2 + dz * 0.6), (cx - cw / 2, cy + ch / 2 - dz * 0.6)]
@@ -920,7 +925,13 @@ def warp3d(layer, yaw, pitch=0.0):
 def sc_text3d(img, dr, t, D, p):
     """Título em letras 3D extrudadas que giram no espaço, com reflexo e partículas."""
     lines = p["lines"]; n = len(lines)
-    if not p.get("_media"):
+    if not p.get("_media") and TOM == "documental":
+        # fundo sóbrio: luz suave atrás do título (sem grade "de videogame")
+        y_, x_ = np.mgrid[0:H // 4, 0:W // 4].astype(np.float32)
+        g_ = np.exp(-(((x_ - W / 8) / (W / 6)) ** 2 + ((y_ - H / 8) / (H / 7)) ** 2))
+        spot = Image.fromarray(np.stack([g_ * 60, g_ * 52, g_ * 30, g_ * 255], -1).astype(np.uint8), "RGBA").resize((W, H), Image.BICUBIC)
+        img.alpha_composite(spot)
+    elif not p.get("_media"):
         # piso com perspectiva (grade)
         ov = Image.new("RGBA", (W, H)); od = ImageDraw.Draw(ov)
         hz = H * 0.62
@@ -929,7 +940,8 @@ def sc_text3d(img, dr, t, D, p):
         for j in range(12):
             yy = hz + (H - hz) * (j / 12) ** 1.8; od.line([(0, yy), (W, yy)], fill=ACCENT + (40,), width=2)
         img.alpha_composite(ov)
-    yaw = (p.get("yaw", 0.28)) * math.cos(t * 0.9) * (1 - 0.5 * ease(prog(t, 0, D)))
+    yaw = p.get("yaw", 0.10 if TOM == "documental" else 0.28)
+    if TOM != "documental": yaw *= math.cos(t * 0.9) * (1 - 0.5 * ease(prog(t, 0, D)))
     total_h = 0; layers = []
     for i, ln in enumerate(lines):
         acc = ln.startswith("*")
@@ -938,8 +950,15 @@ def sc_text3d(img, dr, t, D, p):
                             side=((110, 80, 0) if ACCENT == YELLOW else (90, 14, 22)) if acc else (60, 66, 72))
         k = back(prog(t, 0.15 + i * 0.25, 0.6))
         if k <= 0.01: layers.append(None); continue
-        lay = warp3d(lay, yaw + (1 - clamp(k)) * 0.8 * (1 if i % 2 else -1), 0)
-        if k != 1: lay = lay.resize((max(1, int(lay.width * clamp(k, 0.05, 1.2))), max(1, int(lay.height * clamp(k, 0.05, 1.2)))), Image.BICUBIC)
+        if TOM == "documental":
+            lay = warp3d(lay, yaw, 0)
+            dz = 0.96 + 0.04 * ease_io(prog(t, 0, D))  # aproximação lenta
+            lay = lay.resize((max(1, int(lay.width * dz)), max(1, int(lay.height * dz))), Image.BICUBIC)
+            a8 = ease_io(prog(t, 0.15 + i * 0.3, 0.9))
+            if a8 < 1: lay.putalpha(lay.getchannel("A").point(lambda v, a8=a8: int(v * a8)))
+        else:
+            lay = warp3d(lay, yaw + (1 - clamp(k)) * 0.8 * (1 if i % 2 else -1), 0)
+            if k != 1: lay = lay.resize((max(1, int(lay.width * clamp(k, 0.05, 1.2))), max(1, int(lay.height * clamp(k, 0.05, 1.2)))), Image.BICUBIC)
         layers.append(lay); total_h += lay.height * 0.82
     y = H / 2 - total_h / 2 - 30
     for lay in layers:
@@ -1070,7 +1089,7 @@ def grade_mono(img, warm=0.06):
 def sc_collage(img, dr, t, D, p):
     """Colagem 2.5D: fundo P&B com retícula, cartazes que entram girando (parallax), folhagem em primeiro
     plano, mira pulsando e movimento 'stop motion' (12 qps nos elementos)."""
-    tq = math.floor(t * 12) / 12  # stop motion
+    tq = t if TOM == "documental" else math.floor(t * 12) / 12  # stop motion só fora do modo documental
     base = grade_mono(img) if p.get("_media") else img
     img.paste(base, (0, 0))
     # faixa/tarja amarela inclinada com a manchete
@@ -1102,7 +1121,7 @@ def sc_collage(img, dr, t, D, p):
         card = sign_card(sg["text"], 10 + i * 7 + p.get("_idx", 0), sg.get("style", "white" if i % 2 == 0 else "yellow"))
         sc = clamp(k, 0.05, 1.15) * sg.get("scale", 1.0)
         if sc != 1: card = card.resize((max(1, int(card.width * sc)), max(1, int(card.height * sc))), Image.BICUBIC)
-        jit = ((hash((i, int(t * 12))) % 7) - 3) * 1.5
+        jit = 0 if TOM == "documental" else ((hash((i, int(t * 12))) % 7) - 3) * 1.5
         x = sg["x"] * W - card.width / 2 + (tq - st) * sg.get("drift", -40 if i % 2 else 40) + jit
         y = sg["y"] * H - card.height / 2 + jit
         x = min(max(x, 20), W - card.width - 20); y = min(max(y, 20), H - card.height - 20)
@@ -1151,13 +1170,13 @@ def frame(scene, t, D, mframe=None):
         lb = int(110 * ease(prog(t, 0, 0.5))); dr.rectangle([0, 0, W, lb], fill=(0, 0, 0, 255)); dr.rectangle([0, H - lb, W, H], fill=(0, 0, 0, 255))
     # câmera: leve aproximação contínua + entrada
     kb = 0.14 if (p.get("_media") or {}).get("kind") == "photo" else 0.045
-    s = 1.0 + kb * (t / max(D, 0.1)) + 0.06 * (1 - ease(prog(t, 0, 0.45)))
+    s = 1.0 + kb * (t / max(D, 0.1)) + (0.025 if TOM == "documental" else 0.06) * (1 - ease(prog(t, 0, 0.6)))
     # BATIDAS: em cenas longas, a cada BEAT s um "punch-in" rápido de câmera (algo acontece a cada < 10 s)
     if D > BEAT * 1.6:
         nb = int(t // BEAT)
         if nb >= 1 and (D - nb * BEAT) > 1.0:
             u = t - nb * BEAT
-            s += 0.07 * math.exp(-u * 4.5) * (1 if u > 0 else 0)
+            s += (0.02 * ((nb - 1) + ease_io(min(u / 1.2, 1.0))) if TOM == "documental" else 0.07 * math.exp(-u * 4.5))
     im = img.convert("RGB")
     if s != 1.0:
         cw, ch = W / s, H / s; x0, y0 = (W - cw) / 2, (H - ch) / 2

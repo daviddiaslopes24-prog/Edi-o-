@@ -34,6 +34,18 @@ Meta: entregar em até ~50 min. Rode etapas pesadas em segundo plano e avise o u
    (≈4 min; reduz para ~250 MB sem perda visível no celular).
 10. Entregar com `SendUserFile`. Não commitar o MP4 (grande); commitar `plano.json` e `cortes.json`.
 
+## TOM DOCUMENTAL — sério, profissional, que passe confiança (regra fixa, vídeo 07)
+O usuário pediu: 3D sim, mas **sem movimento infantil/juvenil**. O `render.py` usa `TOM=documental` por padrão:
+- **Letras 3D (`text3d`) em ângulo fixo e discreto**, só com aproximação lenta da câmera e fade suave.
+  NUNCA balançar de um lado para o outro, girar ou "quicar". Sem piso quadriculado (fundo com luz suave).
+- **Sem efeito de quique/overshoot** nas entradas (chips, grades, carimbos, cartões): tudo entra com easing suave.
+- Cartões em ângulo (`tilt`) e celular: ângulo fixo, sem rotação durante a cena.
+- Colagem sem tremido de stop motion; raios do `burst` quase parados; "batidas" de câmera como
+  aproximação lenta e contínua (sem solavanco).
+- Em temas de guerra/tragédia: nada de `burst` nem `phone`; imagens respeitosas (vela, escombros sem
+  vítimas, equipes de resgate), nunca imagens chocantes. Preferir mapas, documentos, dados, globo e b-roll.
+- O modo antigo (mais animado) só com `TOM=dinamico`, se o usuário pedir.
+
 ## CORES DO CANAL: PRETO E AMARELO (regra fixa)
 - Destaque da marca = **amarelo** (`ACCENT`, padrão `TEMA=amarelo`); fundo preto/escuro. Tarjas, sublinhados,
   palavras em destaque, carimbos, números, botões e mira usam amarelo, com texto **preto** sobre o amarelo.
