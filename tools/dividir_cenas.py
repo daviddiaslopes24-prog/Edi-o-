@@ -16,7 +16,9 @@ for _ in range(3):
     st = r.resolve(plan, words, total); ends = st[1:] + [total]; new = []; added = 0
     for i, sc in enumerate(plan):
         new.append(sc); D = ends[i] - st[i]
-        if D > MAX and sc["type"] != "outro" and pool:
+        # nunca interromper infográficos (cadeias, grades, listas, gráficos, mapas): eles revelam itens ao longo da cena
+        INFO = ("outro", "chain", "grid", "list", "chips", "bars", "line", "timeline", "datecard", "map", "globe", "versus")
+        if D > (MAX if sc["type"] not in INFO else 15) and sc["type"] != "outro" and pool:
             n = int(D // 7.5)
             for j in range(1, n + 1):
                 tm = st[i] + D * j / (n + 1)

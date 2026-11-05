@@ -5,6 +5,7 @@ A=${1:-/tmp/assets}; mkdir -p "$A/fonts" "$A/geo"
 python3 -c "import faster_whisper" 2>/dev/null || pip install -q faster-whisper
 cd "$A/fonts"
 for f in "playfairdisplay/PlayfairDisplay%5Bwght%5D.ttf" "playfairdisplay/PlayfairDisplay-Italic%5Bwght%5D.ttf" \
+         "cinzel/Cinzel%5Bwght%5D.ttf" labelleaurore/LaBelleAurore.ttf \
          poppins/Poppins-Black.ttf poppins/Poppins-Bold.ttf poppins/Poppins-ExtraBold.ttf poppins/Poppins-Medium.ttf poppins/Poppins-Regular.ttf; do
   [ -f "$(basename "$f")" ] || curl -sSfLO "https://raw.githubusercontent.com/google/fonts/main/ofl/$f"
 done

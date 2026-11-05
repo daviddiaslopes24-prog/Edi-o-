@@ -29,11 +29,12 @@ def F(name, size):
     files = {"black": "Poppins-Black.ttf", "bold": "Poppins-Bold.ttf", "xbold": "Poppins-ExtraBold.ttf",
              "med": "Poppins-Medium.ttf", "reg": "Poppins-Regular.ttf",
              "serif": "PlayfairDisplay%5Bwght%5D.ttf", "serifi": "PlayfairDisplay-Italic%5Bwght%5D.ttf",
-             "sym": "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"}
+             "sym": "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+             "cinzel": "Cinzel%5Bwght%5D.ttf", "hand": "LaBelleAurore.ttf", "hand2": "HomemadeApple-Regular.ttf"}
     f = files[name]
     path = f if f.startswith("/") else os.path.join(ASSETS, "fonts", f)
     font = ImageFont.truetype(path, size)
-    if name.startswith("serif"):
+    if name.startswith("serif") or name == "cinzel":
         try: font.set_variation_by_axes([800 if name == "serif" else 700])
         except Exception: pass
     return font
@@ -617,7 +618,7 @@ def sc_grid(img, dr, t, D, p):
         if cols == n and n == 3: cx = W / 2 + (c - 1) * 560; tw2 = 500
         else: tw2 = tw_
         cy = H / 2 + 60 + (r - (rows - 1) / 2) * (th + 40)
-        st = 0.3 + i * p.get("gap", 0.45); k = back(prog(t, st, 0.4))
+        st = 0.3 + i * min(p.get("gap", 0.45), D * 0.7 / max(1, n)); k = back(prog(t, st, 0.4))
         if k <= 0: continue
         s = clamp(k, 0, 1.15)
         dr.rounded_rectangle([cx - tw2 / 2 * s, cy - th / 2 * s, cx + tw2 / 2 * s, cy + th / 2 * s], radius=22,
@@ -1169,8 +1170,132 @@ def sc_titlecard(img, dr, t, D, p):
         dr.text((W / 2, yl + 60), p["sub"], font=F("reg", 38), fill=rgba((200, 200, 196), sa), anchor="mm")
     return [(0.0, "whoosh", 0.25), (0.35, "hit", 0.25)]
 
+# ================= ARQUIVO DOCUMENTAL (referência do vídeo 08) =================
+GOLD = (236, 186, 40)
+
+@lru_cache(None)
+def archive_bg(seed=0):
+    """Fundo escuro gasto: textura de papel queimado, arranhões e caligrafia apagada."""
+    rng = np.random.default_rng(seed)
+    low = np.asarray(Image.fromarray((rng.random((27, 48)) * 255).astype(np.uint8)).resize((W, H), Image.BICUBIC)).astype(np.float32) / 255
+    mid = np.asarray(Image.fromarray((rng.random((108, 192)) * 255).astype(np.uint8)).resize((W, H), Image.BICUBIC)).astype(np.float32) / 255
+    base = 14 + 26 * low + 10 * mid + rng.normal(0, 5, (H, W))
+    yy, xx = np.mgrid[0:H, 0:W]; d = np.sqrt(((xx - W / 2) / W) ** 2 + ((yy - H / 2) / H) ** 2)
+    base *= (1.15 - 0.9 * d)
+    a = np.stack([base * 1.08, base * 0.98, base * 0.82], -1)
+    img = Image.fromarray(np.clip(a, 0, 255).astype(np.uint8)).convert("RGBA")
+    ov = Image.new("RGBA", (W, H)); od = ImageDraw.Draw(ov)
+    for _ in range(140):  # arranhões
+        x = rng.uniform(0, W); y = rng.uniform(0, H); L = rng.uniform(30, 260); ang = rng.uniform(-0.5, 0.5) + (math.pi / 2 if rng.random() < 0.3 else 0)
+        od.line([(x, y), (x + L * math.cos(ang), y + L * math.sin(ang))], fill=(200, 190, 170, int(rng.uniform(8, 30))), width=1)
+    words = ("Banco Central juros inflação moeda crédito economia brasileira mercado taxa política monetária "
+             "comitê decisão reunião preços custo dinheiro").split()
+    fh = F("hand", 46)
+    for _ in range(26):  # caligrafia apagada
+        txt = " ".join(rng.choice(words, int(rng.integers(3, 7))))
+        od.text((rng.uniform(-100, W - 200), rng.uniform(0, H)), txt, font=fh, fill=(225, 210, 180, int(rng.uniform(12, 32))))
+    ov = ov.filter(ImageFilter.GaussianBlur(0.6)); img.alpha_composite(ov)
+    return img
+
+def sepia_gold(im):
+    """Tom sépia escuro com realce dourado (preto -> âmbar -> creme)."""
+    a = np.asarray(im.convert("RGB"), dtype=np.float32) @ np.array([0.3, 0.59, 0.11], np.float32)
+    a = np.clip((a - 128) * 1.25 + 120, 0, 255) / 255.0
+    r = 255 * (a ** 0.9); g = 255 * (a ** 1.05) * 0.86; b = 255 * (a ** 1.35) * 0.6
+    return Image.fromarray(np.clip(np.stack([r, g, b], -1), 0, 255).astype(np.uint8)).convert("RGBA")
+
+@lru_cache(16)
+def load_photo(path, w, h):
+    ph = Image.open(path).convert("RGB"); r = max(w / ph.width, h / ph.height)
+    ph = ph.resize((int(ph.width * r) + 1, int(ph.height * r) + 1), Image.LANCZOS)
+    return ph.crop(((ph.width - w) // 2, (ph.height - h) // 2, (ph.width - w) // 2 + w, (ph.height - h) // 2 + h)).convert("RGBA")
+
+def print_frame(photo, rot, seed):
+    """Foto como cópia impressa: borda clara fina, vidro/fita nas pontas, sombra."""
+    w, h = photo.size; pad = 10
+    card = Image.new("RGBA", (w + 2 * pad, h + 2 * pad), (232, 222, 200, 255))
+    card.paste(sepia_gold(photo), (pad, pad))
+    d = ImageDraw.Draw(card, "RGBA")
+    d.rectangle([pad, pad, pad + w, pad + h], outline=(255, 255, 255, 40), width=2)
+    rng = np.random.default_rng(seed)
+    for cx, cy in ((0, 0), (card.width, card.height)) if rng.random() < 0.5 else ((card.width, 0), (0, card.height)):
+        tw_, th_ = 150, 44
+        tape = Image.new("RGBA", (tw_, th_), (235, 230, 210, 70)); ImageDraw.Draw(tape).rectangle([0, 0, tw_ - 1, th_ - 1], outline=(255, 255, 255, 50))
+        tape = tape.rotate(45 if (cx == 0) == (cy == 0) else -45, expand=True, resample=Image.BICUBIC)
+        card.alpha_composite(tape, (int(min(max(cx - tape.width / 2, 0), card.width - tape.width)), int(min(max(cy - tape.height / 2, 0), card.height - tape.height))))
+    card = card.rotate(rot, expand=True, resample=Image.BICUBIC)
+    return card
+
+def letter_reveal(dr, text, font, x, y, t, start, dur, color, anchor="ls", seed=1):
+    """Letras surgem em ordem aleatória (como na referência), sem movimento."""
+    rng = np.random.default_rng(seed); order = rng.permutation(len(text))
+    xs = x if anchor == "ls" else x - tw(font, text) / 2
+    for i, ch in enumerate(text):
+        k = ease_io(prog(t, start + dur * order[i] / max(1, len(text)), 0.45))
+        if k > 0 and ch.strip():
+            dr.text((xs + tw(font, text[:i]), y), ch, font=font, fill=rgba(color, k), anchor="ls")
+
+def sc_archive(img, dr, t, D, p):
+    """Arquivo documental: fundo escuro gasto, 1–2 fotos sépia/douradas emolduradas com fita, título
+    em serifa clássica dourada (Cinzel) com letras surgindo, subtítulo e (opcional) parágrafo."""
+    src = img.copy() if p.get("_media") else None
+    img.paste(archive_bg(p.get("_idx", 0) % 3), (0, 0))
+    lay = p.get("layout", "right" if p.get("_idx", 0) % 2 else "left")
+    k = ease_io(prog(t, 0, 1.2)); drift = 18 * ease_io(prog(t, 0, D))
+    sfx = [(0.0, "whoosh", 0.25), (0.2, "paper", 0.3)]
+    # foto secundária (fica atrás)
+    if p.get("media2"):
+        fp = os.path.join(ASSETS, p["media2"])
+        if os.path.exists(fp):
+            ph2 = load_photo(fp, 640, 420)
+            c2 = print_frame(ph2, 4 if lay == "left" else -4, 7)
+            a2 = ease_io(prog(t, 0.5, 1.0))
+            if a2 < 1: c2.putalpha(c2.getchannel("A").point(lambda v, a2=a2: int(v * a2)))
+            x2 = (W * 0.50 if lay == "left" else W * 0.08) + drift
+            img.alpha_composite(c2, (int(x2), int(H * 0.08)))
+    if src is not None:
+        pw, ph = (820, 530) if p.get("media2") else (860, 560)
+        sh_ = int(pw * H / W); photo = src.resize((pw, sh_), Image.BILINEAR)
+        if sh_ > ph: photo = photo.crop((0, (sh_ - ph) // 2, pw, (sh_ - ph) // 2 + ph))
+        else: photo = src.resize((int(ph * W / H), ph), Image.BILINEAR).crop(((int(ph * W / H) - pw) // 2, 0, (int(ph * W / H) - pw) // 2 + pw, ph))
+        card = print_frame(photo, -2.5 if lay == "left" else 2.5, 3)
+        if k < 1: card.putalpha(card.getchannel("A").point(lambda v, k=k: int(v * k)))
+        x = (W * 0.07 if lay == "left" else W * 0.93 - card.width) - drift * (1 if lay == "left" else -1)
+        y = H * (0.30 if p.get("media2") else 0.16)
+        sh = Image.new("RGBA", card.size, (0, 0, 0, 0)); sh.putalpha(card.getchannel("A").point(lambda v: v * 0.6))
+        sh = sh.resize((card.width // 4, card.height // 4)).filter(ImageFilter.GaussianBlur(5)).resize(card.size)
+        img.alpha_composite(sh, (int(x + 22), int(y + 28))); img.alpha_composite(card, (int(x), int(y)))
+    # texto
+    tx = W * 0.565 if lay == "left" else W * 0.07
+    if src is None: tx = W * 0.5
+    ty = H * (0.62 if p.get("media2") else 0.46)
+    anchor = "ls"
+    ft = F("cinzel", p.get("tsize", 84)); title = p.get("title", "")
+    maxw = (W * 0.37 if src is not None else W * 0.8)
+    while ft.size > 40 and tw(ft, title) > maxw: ft = F("cinzel", ft.size - 4)
+    if src is None:
+        letter_reveal(dr, title, ft, tx, ty, t, 0.2, 0.9, GOLD, anchor="mm", seed=p.get("_idx", 1))
+    else:
+        letter_reveal(dr, title, ft, tx, ty, t, 0.3, 0.9, GOLD, seed=p.get("_idx", 1))
+    sa = ease_io(prog(t, 1.0, 0.8))
+    if p.get("sub"):
+        fs = F("med", 34)
+        if src is None: dr.text((W / 2, ty + 56), p["sub"], font=fs, fill=rgba((225, 220, 205), sa), anchor="mm")
+        else:
+            for j, ln in enumerate(wrap(p["sub"], fs, maxw)):
+                dr.text((tx + 4, ty + 52 + j * 42), ln, font=fs, fill=rgba((225, 220, 205), sa), anchor="ls")
+    if p.get("body") and src is not None:
+        fb = F("reg", 26); yb = ty + 100 + 42 * (len(wrap(p.get("sub", ""), F("med", 34), maxw)) - 1)
+        dr.rectangle([tx, yb - 14, tx + 70 * sa, yb - 11], fill=rgba(GOLD, sa))
+        for j, ln in enumerate(wrap(p["body"], fb, maxw)):
+            dr.text((tx + 2, yb + 26 + j * 36), ln, font=fb, fill=rgba((200, 194, 180), ease_io(prog(t, 1.3 + j * 0.15, 0.6))), anchor="ls")
+    # luz/fumaça suave
+    light_sweep(img, t, 0.5, 2.2, 0.18)
+    dust(dr, t, 30, 9, (240, 220, 170))
+    return sfx
+
 SCENES = {k[3:]: v for k, v in globals().items() if k.startswith("sc_")}
-BGS = {"titlecard": "dark", "collage": "dark", "phone": "dark", "globe": "dark", "text3d": "dark", "broll": "dark", "title": "dark", "chapter": "paper", "bars": "paper", "doc": "gray", "map": "ocean", "burst": "cream", "headline": "dark", "cine": "dark"}
+BGS = {"archive": "dark", "titlecard": "dark", "collage": "dark", "phone": "dark", "globe": "dark", "text3d": "dark", "broll": "dark", "title": "dark", "chapter": "paper", "bars": "paper", "doc": "gray", "map": "ocean", "burst": "cream", "headline": "dark", "cine": "dark"}
 
 # ---------- quadro final ----------
 def frame(scene, t, D, mframe=None):
@@ -1179,7 +1304,7 @@ def frame(scene, t, D, mframe=None):
     if mframe is not None:
         # foto/vídeo de banco como fundo; escurece quando há texto/gráfico por cima
         img = mframe.copy(); b = "dark"
-        dim = p.get("dim", 0.0 if kind in ("broll", "collage") else 0.58)
+        dim = p.get("dim", 0.0 if kind in ("broll", "collage", "archive") else 0.58)
         if dim: img.alpha_composite(Image.new("RGBA", (W, H), (0, 0, 0, int(255 * dim))))
     else:
         img = Image.new("RGBA", (W, H), OCEAN + (255,)) if b == "ocean" else bg(b).copy()
