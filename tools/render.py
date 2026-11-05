@@ -1141,8 +1141,36 @@ def sc_collage(img, dr, t, D, p):
         word_reveal(dr, wrap(p["headline"], f, W - 320), f, W / 2, H - 300 + 50 * (len(wrap(p["headline"], f, W - 320)) - 1), tq, 0.5, 0.08, accent=ACCENT)
     return sfx
 
+def sc_titlecard(img, dr, t, D, p):
+    """Título de documentário: tipografia plana e limpa, linha fina amarela, subtítulo discreto.
+    Substitui o texto 3D (o usuário achou o 3D amador)."""
+    if not p.get("_media"):
+        y_, x_ = np.mgrid[0:H // 4, 0:W // 4].astype(np.float32)
+        g_ = np.exp(-(((x_ - W / 8) / (W / 5)) ** 2 + ((y_ - H / 8) / (H / 5)) ** 2))
+        img.alpha_composite(Image.fromarray(np.stack([g_ * 34, g_ * 34, g_ * 30, g_ * 255], -1).astype(np.uint8), "RGBA").resize((W, H), Image.BICUBIC))
+    lines = [l.replace("*", "") for l in p["lines"]]
+    f = F("bold", p.get("tsize", 104))
+    while f.size > 50 and max(tw(f, l) for l in lines) > W - 360: f = F("bold", f.size - 4)
+    lh = f.size * 1.12; total = lh * len(lines); y0 = H / 2 - total / 2 - 10
+    kick = p.get("kicker", BRAND + " · ANÁLISE")
+    ka = ease_io(prog(t, 0.1, 0.8))
+    fk = F("med", 28); spaced = "  ".join(kick.upper())
+    while tw(fk, spaced) > W - 300 and fk.size > 16: fk = F("med", fk.size - 2)
+    dr.text((W / 2, y0 - 70), spaced, font=fk, fill=rgba(ACCENT, ka), anchor="mm")
+    for i, ln in enumerate(lines):
+        a = ease_io(prog(t, 0.35 + i * 0.25, 0.9)); dy = (1 - a) * 18
+        col = ACCENT if p["lines"][i].startswith("*") else WHITE
+        dr.text((W / 2, y0 + lh * i + lh / 2 + dy), ln, font=f, fill=rgba(col, a), anchor="mm")
+    la = ease_io(prog(t, 0.9, 1.0)); half = 260 * la
+    yl = y0 + total + 34
+    dr.rectangle([W / 2 - half, yl, W / 2 + half, yl + 3], fill=rgba(ACCENT, 1))
+    if p.get("sub"):
+        sa = ease_io(prog(t, 1.2, 0.9))
+        dr.text((W / 2, yl + 60), p["sub"], font=F("reg", 38), fill=rgba((200, 200, 196), sa), anchor="mm")
+    return [(0.0, "whoosh", 0.25), (0.35, "hit", 0.25)]
+
 SCENES = {k[3:]: v for k, v in globals().items() if k.startswith("sc_")}
-BGS = {"collage": "dark", "phone": "dark", "globe": "dark", "text3d": "dark", "broll": "dark", "title": "dark", "chapter": "paper", "bars": "paper", "doc": "gray", "map": "ocean", "burst": "cream", "headline": "dark", "cine": "dark"}
+BGS = {"titlecard": "dark", "collage": "dark", "phone": "dark", "globe": "dark", "text3d": "dark", "broll": "dark", "title": "dark", "chapter": "paper", "bars": "paper", "doc": "gray", "map": "ocean", "burst": "cream", "headline": "dark", "cine": "dark"}
 
 # ---------- quadro final ----------
 def frame(scene, t, D, mframe=None):
@@ -1156,7 +1184,8 @@ def frame(scene, t, D, mframe=None):
     else:
         img = Image.new("RGBA", (W, H), OCEAN + (255,)) if b == "ocean" else bg(b).copy()
     dr = ImageDraw.Draw(img, "RGBA")
-    sfx = SCENES[kind](img, dr, t, D, p)
+    fn = SCENES["titlecard"] if (kind in ("text3d", "cine") and TOM == "documental") else SCENES[kind]
+    sfx = fn(img, dr, t, D, p)
     # marca do canal + fonte
     dark = b in ("dark", "ocean", "gray")
     if p.get("fonte"):

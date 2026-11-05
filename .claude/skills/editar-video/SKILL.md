@@ -36,8 +36,11 @@ Meta: entregar em até ~50 min. Rode etapas pesadas em segundo plano e avise o u
 
 ## TOM DOCUMENTAL — sério, profissional, que passe confiança (regra fixa, vídeo 07)
 O usuário pediu: 3D sim, mas **sem movimento infantil/juvenil**. O `render.py` usa `TOM=documental` por padrão:
-- **Letras 3D (`text3d`) em ângulo fixo e discreto**, só com aproximação lenta da câmera e fade suave.
-  NUNCA balançar de um lado para o outro, girar ou "quicar". Sem piso quadriculado (fundo com luz suave).
+- **NADA de letras 3D extrudadas** — o usuário achou amador/infantil mesmo paradas. No tom documental,
+  `text3d` e `cine` são renderizados como `titlecard`: tipografia plana e limpa (Poppins Bold), rubrica
+  espaçada em amarelo ("IMPACTO ECONÔMICO · ANÁLISE"), 2ª linha em amarelo, linha fina amarela e
+  subtítulo discreto, com fade e leve subida. Use `titlecard` diretamente nos planos novos.
+  O "3D" que continua valendo é sutil e de espaço: globo, mapa em ângulo, documentos inclinados.
 - **Sem efeito de quique/overshoot** nas entradas (chips, grades, carimbos, cartões): tudo entra com easing suave.
 - Cartões em ângulo (`tilt`) e celular: ângulo fixo, sem rotação durante a cena.
 - Colagem sem tremido de stop motion; raios do `burst` quase parados; "batidas" de câmera como
