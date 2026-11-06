@@ -1,0 +1,303 @@
+[
+ {
+  "type": "glitchword",
+  "at": 0,
+  "lines": [
+   "EUA",
+   "*X IRÃ*"
+  ],
+  "sub": "RISCO DE ESCALADA",
+  "nocap": true,
+  "glitchy": true
+ },
+ {
+  "type": "alert",
+  "anchor": "ataques ameacas",
+  "l1": "ATAQUES",
+  "l2": "E AMEAÇAS",
+  "sub": "TENSÃO NO ORIENTE MÉDIO"
+ },
+ {
+  "type": "date",
+  "anchor": "na segunda feira",
+  "weekday": "SEGUNDA-FEIRA",
+  "day": "2",
+  "month": "NOVEMBRO 2026",
+  "kicker": "O DIA DO ATAQUE"
+ },
+ {
+  "type": "map",
+  "anchor": "forcas americanas",
+  "iso": "IRN",
+  "view": [
+   50.0,
+   60.0,
+   22.5,
+   30.0
+  ],
+  "pin": [
+   55.9,
+   26.75
+  ],
+  "pin_label": "QESHM",
+  "label": "ATAQUE DOS EUA",
+  "strikes": [
+   [
+    [
+     58.8,
+     23.4
+    ],
+    [
+     55.9,
+     26.75
+    ],
+    0.6
+   ],
+   [
+    [
+     57.2,
+     23.0
+    ],
+    [
+     55.7,
+     26.8
+    ],
+    1.6
+   ]
+  ],
+  "labels": [
+   [
+    54.0,
+    29.0,
+    "IRÃ"
+   ],
+   [
+    51.6,
+    27.0,
+    "GOLFO PÉRSICO"
+   ]
+  ],
+  "size": 1040
+ },
+ {
+  "type": "map",
+  "anchor": "localizada no",
+  "iso": "IRN",
+  "view": [
+   52.0,
+   59.5,
+   23.5,
+   29.0
+  ],
+  "pin": [
+   56.4,
+   26.5
+  ],
+  "pin_label": "HORMUZ",
+  "label": "ESTREITO DE HORMUZ",
+  "ships": [
+   [
+    [
+     52.5,
+     26.6
+    ],
+    [
+     54.8,
+     26.1
+    ],
+    [
+     56.3,
+     26.4
+    ],
+    [
+     56.9,
+     25.6
+    ],
+    [
+     57.8,
+     24.9
+    ],
+    [
+     59.4,
+     24.2
+    ]
+   ]
+  ],
+  "bg": "navy",
+  "size": 1040
+ },
+ {
+  "type": "switch",
+  "anchor": "segundo os relatos",
+  "kicker": "DEFESA AÉREA DO IRÃ",
+  "label": "ALVO DOS ATAQUES",
+  "flip": 2.2
+ },
+ {
+  "type": "versus",
+  "anchor": "e o mais preocupante",
+  "left": {
+   "name": "ESTADOS UNIDOS",
+   "role": "ATACOU",
+   "color": [
+    52,
+    104,
+    200
+   ]
+  },
+  "right": {
+   "name": "IRÃ",
+   "role": "PROMETE REAGIR",
+   "color": [
+    200,
+    45,
+    60
+   ]
+  },
+  "right_at": 0.6,
+  "vs_at": 1.1
+ },
+ {
+  "type": "glitchword",
+  "anchor": "nao pretende",
+  "lines": [
+   "IRÃ PROMETE",
+   "*REAGIR*"
+  ],
+  "glitchy": true
+ },
+ {
+  "type": "map",
+  "anchor": "o estreito de hormuz e",
+  "iso": "IRN",
+  "view": [
+   44.0,
+   66.0,
+   16.0,
+   33.0
+  ],
+  "pin": [
+   56.4,
+   26.5
+  ],
+  "pin_label": "HORMUZ",
+  "label": "ROTA DO PETRÓLEO",
+  "ships": [
+   [
+    [
+     48.5,
+     29.3
+    ],
+    [
+     51.5,
+     27.4
+    ],
+    [
+     54.8,
+     26.1
+    ],
+    [
+     56.4,
+     26.4
+    ],
+    [
+     57.5,
+     25.0
+    ],
+    [
+     60.0,
+     23.0
+    ],
+    [
+     65.5,
+     20.0
+    ]
+   ],
+   [
+    [
+     50.2,
+     26.5
+    ],
+    [
+     53.5,
+     25.6
+    ],
+    [
+     56.3,
+     26.3
+    ],
+    [
+     57.3,
+     24.8
+    ],
+    [
+     59.0,
+     22.2
+    ],
+    [
+     63.0,
+     17.0
+    ]
+   ]
+  ],
+  "labels": [
+   [
+    53.5,
+    31.0,
+    "IRÃ"
+   ],
+   [
+    45.5,
+    24.5,
+    "ARÁBIA SAUDITA"
+   ]
+  ],
+  "size": 1040
+ },
+ {
+  "type": "reaction",
+  "anchor": "uma parcela expressiva",
+  "items": [
+   [
+    "glyph:⚓",
+    "NAVIOS PETROLEIROS"
+   ],
+   [
+    "glyph:✈",
+    "ROTA ESTRATÉGICA"
+   ],
+   [
+    "glyph:⚡",
+    "ENERGIA DO MUNDO"
+   ]
+  ],
+  "times": [
+   0.2,
+   1.8,
+   3.6
+  ]
+ },
+ {
+  "type": "question",
+  "anchor": "e o ira sabe",
+  "label": "ARMA DE PRESSÃO"
+ },
+ {
+  "type": "candles",
+  "anchor": "mas depois dos ataques",
+  "up": true,
+  "title": "PETRÓLEO",
+  "label": "PREÇOS VOLTAM A SUBIR"
+ },
+ {
+  "type": "map",
+  "anchor": "e o brasil",
+  "label": "E O BRASIL?"
+ },
+ {
+  "type": "outro",
+  "at": "end",
+  "label": "Geopolítica e economia sem enrolação",
+  "nocap": true
+ }
+]

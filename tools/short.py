@@ -151,7 +151,8 @@ def sc_candles(img, dr, t, D, p):
     pulse_glow(img, t, RED, 1.2, 0.25)
     rng = np.random.default_rng(11); n = 46
     price = [100.0]
-    for i in range(n - 1): price.append(price[-1] + rng.normal(-0.9, 2.2) - (2.5 if 25 < i < 34 else 0))
+    sg = -1 if p.get("up") else 1
+    for i in range(n - 1): price.append(price[-1] + sg * (rng.normal(-0.9, 2.2) - (2.5 if 25 < i < 34 else 0)))
     lo, hi = min(price) - 6, max(price) + 6
     x0, x1, y0, y1 = 60, W - 150, CY - 380, CY + 360
     vis = 8 + int((n - 8) * ease_io(prog(t, 0, D * 0.85)))
@@ -171,7 +172,7 @@ def sc_candles(img, dr, t, D, p):
     dr.line([(x0, ly), (x1 + 10, ly)], fill=rgba(RED, 0.6), width=2)
     dr.rounded_rectangle([x1 + 6, ly - 28, W - 10, ly + 28], 8, fill=rgba(RED, 1))
     dr.polygon([(x1 + 6, ly - 12), (x1 - 10, ly), (x1 + 6, ly + 12)], fill=rgba(RED, 1))
-    dr.text(((x1 + W) / 2, ly + 2), "▼", font=F("sym", 34), fill=rgba(WHITE, 1), anchor="mm")
+    dr.text(((x1 + W) / 2, ly + 2), "▲" if p.get("up") else "▼", font=F("sym", 34), fill=rgba(WHITE, 1), anchor="mm")
     a = ease(prog(t, 0.1, 0.3))
     pill(dr, W / 2, y0 - 110, p.get("title", "IBOVESPA"), 54, WHITE, (20, 20, 20), a)
     if math.sin(t * 9) > 0: dr.ellipse([W / 2 - 200, y0 - 126, W / 2 - 172, y0 - 98], fill=rgba(RED, a))
@@ -406,7 +407,7 @@ def country_layer(iso="BRA", view=(-75, -33, -35, 7), size=900):
 
 def sc_map(img, dr, t, D, p):
     """Mapa de um país pulsando em vermelho, com ondas saindo de um ponto (capital/cidade)."""
-    base, mask, P = country_layer(p.get("iso", "BRA"), tuple(p.get("view", (-75, -33, -35, 7))))
+    base, mask, P = country_layer(p.get("iso", "BRA"), tuple(p.get("view", (-75, -33, -35, 7))), p.get("size", 900))
     k = ease(prog(t, 0, 0.6)); zoom = 0.9 + 0.12 * (t / max(D, 0.1))
     lay = base.copy()
     a = 0.75 + 0.25 * math.sin(t * 5)
@@ -419,6 +420,30 @@ def sc_map(img, dr, t, D, p):
         rr = ((t * 260 + i * 140) % 420)
         ld.ellipse([bx - rr, by - rr, bx + rr, by + rr], outline=(255, 255, 255, int(200 * (1 - rr / 420))), width=6)
     ld.ellipse([bx - 16, by - 16, bx + 16, by + 16], fill=(255, 255, 255, 255))
+    for (lo, la, txt) in p.get("labels", []):
+        x, y = P(lo, la); ld.text((x, y), txt, font=F("black", 40), fill=(235, 240, 235, int(255 * ease(prog(t, 0.3, 0.4)))), anchor="mm",
+                                  stroke_width=5, stroke_fill=(0, 0, 0, 200))
+    for j, route in enumerate(p.get("ships", [])):
+        pts = [P(*q) for q in route]
+        segs = [math.dist(a_, b_) for a_, b_ in zip(pts[:-1], pts[1:])]; tot = sum(segs)
+        ld.line(pts, fill=(255, 255, 255, 70), width=4)
+        for m in range(3):
+            dd = ((t * 70 + m * tot / 3 + j * 40) % tot); ii = 0
+            while ii < len(segs) - 1 and dd > segs[ii]: dd -= segs[ii]; ii += 1
+            f_ = dd / segs[ii]; x = pts[ii][0] + (pts[ii + 1][0] - pts[ii][0]) * f_; y = pts[ii][1] + (pts[ii + 1][1] - pts[ii][1]) * f_
+            ld.rounded_rectangle([x - 18, y - 9, x + 18, y + 9], 6, fill=(255, 200, 40, 255), outline=(40, 30, 0, 255), width=2)
+    for (a0, b0, t0) in p.get("strikes", []):
+        ks = prog(t, t0, 0.7)
+        if ks <= 0: continue
+        (x0, y0), (x1, y1) = P(*a0), P(*b0); mx, my = (x0 + x1) / 2, min(y0, y1) - 220
+        path = []
+        for q in np.linspace(0, ease_io(ks), 24):
+            path.append(((1 - q) ** 2 * x0 + 2 * (1 - q) * q * mx + q * q * x1, (1 - q) ** 2 * y0 + 2 * (1 - q) * q * my + q * q * y1))
+        if len(path) > 1: ld.line(path, fill=(255, 120, 60, 255), width=7); ld.ellipse([path[-1][0] - 10, path[-1][1] - 10, path[-1][0] + 10, path[-1][1] + 10], fill=(255, 255, 255, 255))
+        ke = prog(t, t0 + 0.7, 0.6)
+        if 0 < ke < 1:
+            rr = 30 + 160 * ease(ke); al = int(255 * (1 - ke))
+            ld.ellipse([x1 - rr, y1 - rr, x1 + rr, y1 + rr], fill=(255, 150, 40, al)); ld.ellipse([x1 - rr * 0.5, y1 - rr * 0.5, x1 + rr * 0.5, y1 + rr * 0.5], fill=(255, 245, 200, al))
     if p.get("pin_label") and t > 0.5:
         f = F("black", 54); w = tw(f, p["pin_label"]) + 40
         lx = bx + 30 if bx + 30 + w < lay.width else bx - 30 - w
@@ -428,7 +453,7 @@ def sc_map(img, dr, t, D, p):
     put(img, lay, W / 2, CY + 20, zoom * k, clamp(k * 2))
     if p.get("label"):
         put(img, text_layer(p["label"], 70, WHITE, "black", 8), W / 2, CY - 450, back(prog(t, 0.4, 0.35)))
-    return [(0.0, "whoosh", 0.5), (0.4, "boom", 0.4)]
+    return [(0.0, "whoosh", 0.5), (0.4, "boom", 0.4)] + [(st[2] + 0.7, "boom", 0.6) for st in p.get("strikes", [])] + [(st[2] + 0.72, "hit", 0.5) for st in p.get("strikes", [])]
 
 # ---------- pessoas / instituições (silhuetas genéricas, nunca rostos reais) ----------
 def silhouette(d, cx, cy, s, col, tie=None):

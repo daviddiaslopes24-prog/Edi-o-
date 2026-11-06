@@ -52,7 +52,7 @@ diferente a cada 2–5 s, nada de cena com mais de ~6 s. Modelos prontos: `video
 |---|---|---|
 | `hook` | abertura: palavras 3D batendo + gráfico despencando | `lines` (`*destaque*`), `times`, `sub`, `nocap: true` |
 | `date` | calendário caindo e circulando o dia | `weekday`, `day`, `month`, `kicker` |
-| `candles` | gráfico de velas despencando (ilustrativo, já mostra o aviso) | `title`, `label` |
+| `candles` | gráfico de velas despencando, ou subindo com `up: true` (ilustrativo, já mostra o aviso) | `title`, `label`, `up` |
 | `bignum` | número gigante 3D contando + batida | `from`, `to`, `dec`, `prefix`, `suffix`, `dur`, `arrow` up/down, `color`, `kicker`, `label` |
 | `ticker` | painel de LED com cotação + fita rolando | `name`, `sub`, `to`, `tape` |
 | `alert` | faixas de perigo, luz girando, texto 3D amarelo | `l1`, `l2`, `sub` |
@@ -61,7 +61,7 @@ diferente a cada 2–5 s, nada de cena com mais de ~6 s. Modelos prontos: `video
 | `switch` | disjuntor ON → OFF com faíscas | `kicker`, `label`, `flip` (s) |
 | `gauge` | termômetro descendo até um limite + "PARA TUDO!" | `limit`, `kicker` |
 | `timer` | cronômetro circular + cadeado | `minutes`, `label` |
-| `map` | mapa de qualquer país pulsando com ondas e alfinete | `iso` (ISO3, padrão BRA), `view` [lon0,lon1,lat0,lat1], `pin` [lon,lat], `pin_label`, `label` |
+| `map` | mapa de qualquer país pulsando, com alfinete, mísseis e navios | `iso` (ISO3, padrão BRA), `view` [lon0,lon1,lat0,lat1], `size`, `pin` [lon,lat], `pin_label`, `label`, `labels` [[lon,lat,texto]], `strikes` [[origem,alvo,t0]] (míssil em arco + explosão), `ships` [[[lon,lat],...]] (navios andando na rota) |
 | `versus` | duelo: dois cartões com silhueta (ou prédio com `icon: "bank"`) + VS 3D e raio | `left`/`right` {`name`,`role`,`color`,`icon`}, `right_at`, `vs_at`, `kicker` |
 | `court` | prédio de tribunal/banco/instituição subindo; `crack` racha e treme; `stamp` carimba (ex.: INTERDITADO) | `label`, `kicker`, `crack`, `stamp`, `at_stamp` |
 | `phone` | celular com app do banco: saldo some, cadeado e alerta | `app`, `lock_at`, `toast`, `toast_at` |
