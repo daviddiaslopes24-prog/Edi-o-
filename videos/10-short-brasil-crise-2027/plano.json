@@ -1,0 +1,14 @@
+[
+{"type": "glitchword", "at": 0, "lines": ["BRASIL", "*2027*"], "sub": "UMA COMBINAÇÃO PREOCUPANTE", "nocap": true, "glitchy": true},
+{"type": "reaction", "anchor": "juros elevados", "items": [["glyph:▲", "JUROS ALTOS"], ["glyph:⚖", "DÍVIDA CRESCENTE"], ["glyph:☹", "FAMÍLIAS ENDIVIDADAS"], ["glyph:⚠", "ECONOMIA LENTA"]], "times": [0.05, 1.0, 2.5, 4.0], "gap": 235, "scale": 0.85},
+{"type": "date", "anchor": "em 4 de novembro", "weekday": "COPOM", "day": "4", "month": "NOVEMBRO 2026", "kicker": "DECISÃO DO BANCO CENTRAL"},
+{"type": "bignum", "anchor": "decidiu manter", "from": 0, "to": 13.75, "dec": 2, "suffix": "%", "dur": 1.4, "kicker": "TAXA SELIC", "label": "AO ANO", "arrow": "up"},
+{"type": "switch", "anchor": "interrompendo", "kicker": "CICLO DE CORTES", "label": "INTERROMPIDO", "flip": 0.5},
+{"type": "bignum", "anchor": "a divida bruta", "from": 0, "to": 11.1, "dec": 1, "prefix": "R$ ", "suffix": " TRI", "dur": 2.6, "kicker": "DÍVIDA PÚBLICA BRUTA", "label": "SETEMBRO DE 2026", "size": 220, "bg": "dark"},
+{"type": "donut", "anchor": "equivalente a", "pct": 82.9, "unit": "DO PIB", "kicker": "DÍVIDA / PIB", "label": "VOLUME MUITO ELEVADO", "dur": 1.2},
+{"type": "alert", "anchor": "segundo a pesquisa", "l1": "FAMÍLIAS", "l2": "ENDIVIDADAS", "sub": "PESQUISA CNC"},
+{"type": "donut", "anchor": "81", "pct": 81.6, "unit": "ENDIVIDADAS", "kicker": "FAMÍLIAS BRASILEIRAS", "label": "OUTUBRO DE 2026", "dur": 1.2, "color": [244, 196, 48], "bg": "dark"},
+{"type": "bignum", "anchor": "e 29", "from": 0, "to": 29.3, "dec": 1, "suffix": "%", "dur": 1.3, "kicker": "CONTAS EM ATRASO", "label": "DAS FAMÍLIAS", "arrow": "down"},
+{"type": "glitchword", "anchor": "entao o brasil", "lines": ["CRISE", "*EM 2027?*"], "sub": "COMENTA AÍ", "glitchy": true},
+{"type": "outro", "at": "end", "label": "Economia explicada sem enrolação", "nocap": true}
+]

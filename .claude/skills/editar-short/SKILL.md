@@ -54,6 +54,7 @@ diferente a cada 2–5 s, nada de cena com mais de ~6 s. Modelos prontos: `video
 | `date` | calendário caindo e circulando o dia | `weekday`, `day`, `month`, `kicker` |
 | `candles` | gráfico de velas despencando, ou subindo com `up: true` (ilustrativo, já mostra o aviso) | `title`, `label`, `up` |
 | `bignum` | número gigante 3D contando + batida | `from`, `to`, `dec`, `prefix`, `suffix`, `dur`, `arrow` up/down, `color`, `kicker`, `label` |
+| `donut` | anel de porcentagem enchendo em 3D com o número no centro (ex.: 82,9% do PIB) | `pct`, `dec`, `unit`, `color`, `dur`, `kicker`, `label` |
 | `ticker` | painel de LED com cotação + fita rolando | `name`, `sub`, `to`, `tape` |
 | `alert` | faixas de perigo, luz girando, texto 3D amarelo | `l1`, `l2`, `sub` |
 | `since` | ano voltando no tempo até um marco | `kicker`, `from`, `to`, `month` |

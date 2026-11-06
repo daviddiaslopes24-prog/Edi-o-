@@ -715,10 +715,33 @@ def sc_phone(img, dr, t, D, p):
         put(img, text_layer(p.get("toast", "CONTA BLOQUEADA"), 78, WHITE, "black", 10, RED), W / 2, CY - 470, ka, 1.0, rot=-4)
     return [(0.0, "whoosh", 0.5), (lock_at, "hit", 0.6), (p.get("toast_at", 2.0), "glitch", 0.4)]
 
+
+def sc_donut(img, dr, t, D, p):
+    """Anel de porcentagem enchendo em 3D com o número no centro (ex.: 82,9% do PIB)."""
+    col = tuple(p.get("color", RED)); pct = p["pct"]
+    pulse_glow(img, t, col, 1.0, 0.3)
+    k = ease_io(prog(t, 0.2, p.get("dur", 1.4))); v = pct * k
+    S = 760; ring = Image.new("RGBA", (S, S)); rd = ImageDraw.Draw(ring)
+    rd.ellipse([20, 20, S - 20, S - 20], outline=(255, 255, 255, 40), width=90)
+    if k > 0: rd.arc([20, 20, S - 20, S - 20], -90, -90 + 360 * v / 100, fill=col + (255,), width=90)
+    ang = math.radians(-90 + 360 * v / 100); cx = cy = S / 2; r = S / 2 - 65
+    rd.ellipse([cx + math.cos(ang) * r - 30, cy + math.sin(ang) * r - 30, cx + math.cos(ang) * r + 30, cy + math.sin(ang) * r + 30], fill=(255, 255, 255, 255))
+    ring = R.warp3d(ring, 0.18 * math.sin(t * 1.2), 0.05)
+    s = back(prog(t, 0, 0.45))
+    shadowed(img, ring, W / 2, CY - 40, clamp(s, 0, 1.2) * 0.95)
+    txt = fmt_br(v, p.get("dec", 1)) + "%"
+    lay = fit(R.extruded_text(txt, 170, face=(255, 255, 255), side=(70, 76, 82), depth=18), 520)
+    put(img, lay, W / 2, CY - 60, clamp(s, 0, 1.2) * (1 + 0.15 * (1 - ease(prog(t, 0.2 + p.get("dur", 1.4), 0.25)))))
+    if p.get("unit"): dr.text((W / 2, CY + 90), p["unit"], font=F("black", 56), fill=rgba(col, ease(prog(t, 0.5, 0.3))), anchor="mm")
+    if p.get("kicker"): pill(dr, W / 2, CY - 500, p["kicker"], 48, WHITE, (20, 20, 20), ease(prog(t, 0, 0.3)))
+    if p.get("label"): put(img, text_layer(p["label"], 60, WHITE, "black", 7), W / 2, CY + 430, back(prog(t, 0.8, 0.35)))
+    d = p.get("dur", 1.4)
+    return [(0.0, "whoosh", 0.5)] + [(0.2 + d * i / 6, "tick", 0.45) for i in range(6)] + [(0.2 + d, "hit", 0.6)]
+
 SCENES = {k[3:]: v for k, v in globals().items() if k.startswith("sc_")}
 BGS = {"hook": "red", "date": "dark", "candles": "dark", "bignum": "red", "ticker": "dark", "alert": "red",
        "since": "navy", "question": "navy", "switch": "dark", "gauge": "dark", "timer": "navy", "map": "dark", "outro": "red",
-       "versus": "dark", "court": "navy", "stamp": "red", "reaction": "dark", "police": "dark", "glitchword": "red", "flagdays": "navy", "phone": "dark"}
+       "versus": "dark", "court": "navy", "stamp": "red", "reaction": "dark", "police": "dark", "glitchword": "red", "flagdays": "navy", "phone": "dark", "donut": "navy"}
 
 # ================= LEGENDA (palavra por palavra) =================
 KEYS = {"bolsa", "despenca", "queda", "grave", "circuit", "breaker", "b3", "ibovespa", "seguranca", "suspensas",
