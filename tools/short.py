@@ -436,11 +436,12 @@ def silhouette(d, cx, cy, s, col, tie=None):
     d.rounded_rectangle([cx - 120 * s, cy - 30 * s, cx + 120 * s, cy + 150 * s], int(70 * s), fill=rgba(col, 1))
     if tie: d.polygon([(cx, cy - 25 * s), (cx - 16 * s, cy + 10 * s), (cx, cy + 90 * s), (cx + 16 * s, cy + 10 * s)], fill=rgba(tie, 1))
 
-def person_card(name, role, col, w=470, h=640):
+def person_card(name, role, col, w=470, h=640, icon_kind=None):
     c = Image.new("RGBA", (w, h)); d = ImageDraw.Draw(c, "RGBA")
     d.rounded_rectangle([0, 0, w, h], 36, fill=(245, 242, 235, 255))
     d.rounded_rectangle([0, 0, w, 380], 36, fill=col + (255,)); d.rectangle([0, 340, w, 380], fill=col + (255,))
-    silhouette(d, w / 2, 250, 1.15, tuple(int(v * 0.45) for v in col), (240, 240, 240))
+    if icon_kind == "bank": building(d, w / 2, 350, 0.42, (245, 242, 235), tuple(int(v * 0.6) for v in col))
+    else: silhouette(d, w / 2, 250, 1.15, tuple(int(v * 0.45) for v in col), (240, 240, 240))
     lines = R.wrap(name, F("black", 56), w - 40)
     for i, ln in enumerate(lines[:2]):
         d.text((w / 2, 440 + i * 62), ln, font=F("black", 56), fill=INK + (255,), anchor="mm")
@@ -454,7 +455,7 @@ def sc_versus(img, dr, t, D, p):
     for side, info, a0 in ((-1, L, 0.0), (1, Rr, ra)):
         k = back(prog(t, a0, 0.45))
         if k <= 0: continue
-        card = person_card(info["name"], info["role"], tuple(info.get("color", BLUE if side < 0 else RED)))
+        card = person_card(info["name"], info["role"], tuple(info.get("color", BLUE if side < 0 else RED)), icon_kind=info.get("icon"))
         card = R.warp3d(card, -0.25 * side + 0.05 * math.sin(t * 1.5), 0)
         x = W / 2 + side * 275 + side * 700 * (1 - k)
         shadowed(img, card, x, CY + 10 * math.sin(t * 2 + side), 0.8)
@@ -495,10 +496,18 @@ def sc_court(img, dr, t, D, p):
                 x += rng.normal(0, 40); y += 50; pts.append((x, y))
             od.line(pts, fill=(25, 20, 20, 255), width=10)
     img.alpha_composite(R.warp3d(ov.crop((0, 0, W, H)), 0.06 * math.sin(t * 1.2), 0).resize((W, H)))
+    if p.get("stamp"):
+        at = p.get("at_stamp", 0.8); ks = prog(t, at, 0.22)
+        if ks > 0:
+            st = text_layer(p["stamp"], 130, RED, "black", 0)
+            box = Image.new("RGBA", (st.width + 60, st.height + 20)); bd = ImageDraw.Draw(box)
+            bd.rounded_rectangle([4, 4, box.width - 4, box.height - 4], 20, outline=RED + (255,), width=14); box.alpha_composite(st, (30, 10))
+            put(img, fit(box, 980), W / 2, CY - 60, 2.6 - 1.6 * ease(ks) if ks < 1 else 1.0, 0.95, rot=12)
     if p.get("label"):
         put(img, text_layer(p["label"], 66, WHITE, "black", 8, (0, 0, 0)), W / 2, CY + 420, back(prog(t, 0.5, 0.35)))
     if p.get("kicker"): pill(dr, W / 2, CY - 500, p["kicker"], 48, WHITE, RED, ease(prog(t, 0.2, 0.3)))
     ev = [(0.0, "whoosh_down", 0.5), (0.35, "hit", 0.5)]
+    if p.get("stamp"): ev.append((p.get("at_stamp", 0.8) + 0.2, "hit", 0.8))
     if p.get("crack"): ev += [(0.6, "glitch", 0.4), (0.9, "boom", 0.5)]
     return ev
 
@@ -652,10 +661,39 @@ def sc_flagdays(img, dr, t, D, p):
     if p.get("label"): pill(dr, W / 2, CY + 450, p["label"], 46, WHITE, RED, ease(prog(t, 1.2, 0.3)))
     return [(0.0, "whoosh", 0.5), (a, "riser", 0.3), (a + 0.7, "hit", 0.6)]
 
+
+def sc_phone(img, dr, t, D, p):
+    """Celular com app do banco: saldo some, cadeado e alerta "conta bloqueada"."""
+    k = back(prog(t, 0, 0.45))
+    pw, ph = 520, 980
+    ph_img = Image.new("RGBA", (pw, ph)); d = ImageDraw.Draw(ph_img, "RGBA")
+    d.rounded_rectangle([0, 0, pw, ph], 70, fill=(25, 25, 30, 255))
+    d.rounded_rectangle([20, 20, pw - 20, ph - 20], 56, fill=(245, 245, 248, 255))
+    d.rounded_rectangle([pw / 2 - 70, 34, pw / 2 + 70, 62], 14, fill=(25, 25, 30, 255))
+    d.rounded_rectangle([20, 20, pw - 20, 300], 56, fill=(40, 90, 200, 255)); d.rectangle([20, 240, pw - 20, 300], fill=(40, 90, 200, 255))
+    d.text((60, 120), p.get("app", "MEU BANCO"), font=F("black", 44), fill=(255, 255, 255, 255), anchor="lm")
+    d.text((60, 200), "Saldo disponível", font=F("med", 32), fill=(220, 230, 255, 255), anchor="lm")
+    lock_at = p.get("lock_at", 1.2); kl = prog(t, lock_at, 0.4)
+    bal = "•••••" if kl > 0 else p.get("balance", "••• ••••")
+    d.text((60, 260), bal, font=F("black", 52), fill=(255, 255, 255, 255), anchor="lm")
+    for i, lbl in enumerate(["PIX", "TRANSFERIR", "PAGAR", "SACAR"]):
+        y = 360 + i * 130; dis = kl > 0
+        d.rounded_rectangle([60, y, pw - 60, y + 100], 24, fill=(225, 225, 230, 255) if dis else (220, 232, 255, 255))
+        d.text((100, y + 50), lbl, font=F("bold", 40), fill=(160, 160, 165, 255) if dis else (40, 90, 200, 255), anchor="lm")
+        if dis: d.line([(80, y + 50), (pw - 80, y + 50)], fill=(230, 57, 70, 255), width=6)
+    yaw = 0.2 * math.sin(t * 1.3)
+    shadowed(img, R.warp3d(ph_img, yaw, 0), W / 2, CY + 40 + 900 * (1 - clamp(k)), 0.95)
+    if kl > 0:
+        lock_icon(dr, W / 2, CY - 40, 1.6 * back(kl), RED, ease(prog(t, lock_at + 0.2, 0.3)))
+    ka = back(prog(t, p.get("toast_at", 2.0), 0.35))
+    if ka > 0:
+        put(img, text_layer(p.get("toast", "CONTA BLOQUEADA"), 78, WHITE, "black", 10, RED), W / 2, CY - 470, ka, 1.0, rot=-4)
+    return [(0.0, "whoosh", 0.5), (lock_at, "hit", 0.6), (p.get("toast_at", 2.0), "glitch", 0.4)]
+
 SCENES = {k[3:]: v for k, v in globals().items() if k.startswith("sc_")}
 BGS = {"hook": "red", "date": "dark", "candles": "dark", "bignum": "red", "ticker": "dark", "alert": "red",
        "since": "navy", "question": "navy", "switch": "dark", "gauge": "dark", "timer": "navy", "map": "dark", "outro": "red",
-       "versus": "dark", "court": "navy", "stamp": "red", "reaction": "dark", "police": "dark", "glitchword": "red", "flagdays": "navy"}
+       "versus": "dark", "court": "navy", "stamp": "red", "reaction": "dark", "police": "dark", "glitchword": "red", "flagdays": "navy", "phone": "dark"}
 
 # ================= LEGENDA (palavra por palavra) =================
 KEYS = {"bolsa", "despenca", "queda", "grave", "circuit", "breaker", "b3", "ibovespa", "seguranca", "suspensas",

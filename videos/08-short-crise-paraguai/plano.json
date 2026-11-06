@@ -1,0 +1,16 @@
+[
+{"type": "glitchword", "at": 0, "lines": ["CRISE NO", "*PARAGUAI*"], "nocap": true, "glitchy": true},
+{"type": "court", "anchor": "banco interditado", "kicker": "UENO BANK", "stamp": "INTERDITADO", "at_stamp": 0.25, "label": "MILHÕES EM PÂNICO"},
+{"type": "glitchword", "anchor": "presidente na mira", "lines": ["PRESIDENTE", "*NA MIRA*"], "sub": "IMPEACHMENT", "glitchy": true},
+{"type": "alert", "anchor": "um dos principais", "l1": "INTERVENÇÃO", "l2": "NO BANCO", "sub": "BANCO CENTRAL"},
+{"type": "bignum", "anchor": "milhoes de correntistas", "from": 0, "to": 3, "suffix": " MI", "dur": 1.0, "color": [230, 57, 70], "kicker": "CLIENTES AFETADOS", "label": "QUASE METADE DA POPULAÇÃO", "size": 300},
+{"type": "police", "anchor": "oito pessoas", "label": "8 PESSOAS PRESAS", "badge": "JUSTIÇA", "tape": "INVESTIGAÇÃO"},
+{"type": "stamp", "anchor": "e agora o proprio", "name": "SANTIAGO PEÑA", "role": "PRESIDENTE DO PARAGUAI", "stamp": "IMPEACHMENT?", "at_stamp": 3.6, "kicker": "PEDIDO DA OPOSIÇÃO"},
+{"type": "question", "anchor": "o escandalo ganhou", "label": "CONFLITO DE INTERESSES?"},
+{"type": "versus", "anchor": "ja teve participacao", "left": {"name": "SANTIAGO PEÑA", "role": "EX-ACIONISTA", "color": [52, 104, 200]}, "right": {"name": "GRUPO DO BANCO", "role": "CONTROLADOR", "color": [200, 45, 60], "icon": "bank"}, "right_at": 0.3, "vs_at": 0.9, "kicker": "LIGAÇÃO COM O BANCO"},
+{"type": "phone", "anchor": "milhoes de clientes ficaram", "app": "UENO BANK", "lock_at": 1.0, "toast_at": 3.2, "toast": "SEM ACESSO AO DINHEIRO"},
+{"type": "switch", "anchor": "e descobrir que", "kicker": "SUAS ECONOMIAS", "label": "TUDO BLOQUEADO", "flip": 1.4},
+{"type": "map", "anchor": "foi essa situacao", "iso": "PRY", "view": [-63.0, -53.5, -28.0, -19.0], "pin": [-57.6, -25.3], "pin_label": "ASSUNÇÃO", "label": "MILHÕES DE PARAGUAIOS"},
+{"type": "glitchword", "anchor": "e sera que", "lines": ["VAI PERDER", "*O CARGO?*"], "sub": "COMENTA AÍ", "glitchy": true},
+{"type": "outro", "at": "end", "label": "Política e economia sem enrolação", "nocap": true}
+]

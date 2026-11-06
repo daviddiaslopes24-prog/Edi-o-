@@ -22,6 +22,9 @@ diferente a cada 2–5 s, nada de cena com mais de ~6 s. Modelos prontos: `video
    - Termine numa frase que feche a ideia.
    - Escreva `videos/NN-short-tema/cortes.json` = tudo que sai: `[[0, ini_gancho], [fim_gancho, ini_trecho], ..., [fim_trecho, duração]]`
      e também as regravações dentro do trecho.
+   - **Pode reordenar trechos** (ex.: gancho → fatos → "Imagine..." → pergunta final): cole os trechos na ordem
+     com `ffmpeg -filter_complex "[0]atrim=A:B,asetpts=N/SR/TB[a];...concat=n=N:v=0:a=1"`, transcreva o arquivo colado
+     e rode o `edit_audio.py` nele com `cortes.json` = `[]`. Guarde a ordem em `trechos.json` (modelo: `videos/08-short-crise-paraguai/`).
 4. **Caçar regravações**: o whisper às vezes não transcreve uma tentativa abandonada. Se houver um
    buraco grande entre palavras (> 1 s) ou uma palavra "longa demais", meça a energia do trecho com ffmpeg
    e retranscreva só aquele pedaço (`-ss X -t 8`) para ver o que foi dito. Mantenha sempre a ÚLTIMA tentativa.
@@ -59,8 +62,9 @@ diferente a cada 2–5 s, nada de cena com mais de ~6 s. Modelos prontos: `video
 | `gauge` | termômetro descendo até um limite + "PARA TUDO!" | `limit`, `kicker` |
 | `timer` | cronômetro circular + cadeado | `minutes`, `label` |
 | `map` | mapa de qualquer país pulsando com ondas e alfinete | `iso` (ISO3, padrão BRA), `view` [lon0,lon1,lat0,lat1], `pin` [lon,lat], `pin_label`, `label` |
-| `versus` | duelo: dois cartões com silhueta + VS 3D e raio | `left`/`right` {`name`,`role`,`color`}, `right_at`, `vs_at`, `kicker` |
-| `court` | prédio de tribunal/instituição subindo; `crack` racha e treme | `label`, `kicker`, `crack` |
+| `versus` | duelo: dois cartões com silhueta (ou prédio com `icon: "bank"`) + VS 3D e raio | `left`/`right` {`name`,`role`,`color`,`icon`}, `right_at`, `vs_at`, `kicker` |
+| `court` | prédio de tribunal/banco/instituição subindo; `crack` racha e treme; `stamp` carimba (ex.: INTERDITADO) | `label`, `kicker`, `crack`, `stamp`, `at_stamp` |
+| `phone` | celular com app do banco: saldo some, cadeado e alerta | `app`, `lock_at`, `toast`, `toast_at` |
 | `stamp` | cartão de autoridade + carimbo batendo | `name`, `role`, `stamp` (padrão SUSPENSO), `at_stamp`, `kicker` |
 | `reaction` | 3 reações em sequência (ícones `politico`, `autoridade`, `manifestante` ou `glyph:⚔`) | `items` [[ícone, rótulo]], `times`, `gap`, `scale` |
 | `police` | sirene azul/vermelha, distintivo e fita de isolamento | `label`, `badge`, `tape` |
