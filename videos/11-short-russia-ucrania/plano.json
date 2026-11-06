@@ -1,0 +1,15 @@
+[
+{"type": "glitchword", "at": 0, "lines": ["RÚSSIA", "*ATACA*"], "sub": "UCRÂNIA SOB FOGO", "nocap": true, "glitchy": true},
+{"type": "bignum", "anchor": "mais de 40", "from": 0, "to": 40, "prefix": "+", "suffix": " MORTOS", "dur": 1.0, "kicker": "NOVA ESCALADA", "label": "ANTES DAS NEGOCIAÇÕES", "size": 230},
+{"type": "flags3", "anchor": "enquanto representantes", "isos": ["RUS", "UKR", "USA"], "names": ["RÚSSIA", "UCRÂNIA", "EUA"], "times": [1.5, 2.3, 3.1], "label": "NOVA RODADA DE PAZ"},
+{"type": "alert", "anchor": "os ataques continuam", "l1": "ATAQUES", "l2": "CONTINUAM"},
+{"type": "map", "anchor": "um bombardeio russo", "iso": "UKR", "view": [22.0, 41.0, 44.0, 53.0], "size": 1040, "pin": [35.1, 47.8], "pin_label": "ZAPORÍJIA", "label": "BOMBARDEIO RUSSO", "strikes": [[[39.8, 48.8], [35.1, 47.8], 0.5]], "labels": [[38.5, 51.5, "RÚSSIA"], [29.0, 49.5, "UCRÂNIA"]]},
+{"type": "court", "anchor": "deixou mais de", "crack": true, "kicker": "PONTO DE AJUDA HUMANITÁRIA", "label": "+40 MORTOS NO SUL"},
+{"type": "date", "anchor": "e nesta quinta", "weekday": "QUINTA-FEIRA", "day": "5", "month": "NOVEMBRO 2026", "kicker": "NOVA ONDA DE DRONES"},
+{"type": "map", "anchor": "drones russos", "iso": "UKR", "view": [22.0, 41.0, 44.0, 53.0], "size": 1040, "pin": [30.5, 50.45], "pin_label": "KIEV", "label": "DRONES EM VÁRIAS REGIÕES", "strikes": [[[39.5, 51.0], [30.5, 50.45], 0.2], [[40.0, 48.5], [35.0, 48.45], 0.6], [[39.0, 50.5], [36.2, 50.0], 1.0], [[36.5, 45.0], [30.7, 46.5], 1.4]], "bg": "navy"},
+{"type": "switch", "anchor": "a russia realizou", "kicker": "TERÇA, 3 DE NOVEMBRO", "label": "ENERGIA ATINGIDA", "flip": 1.6},
+{"type": "reaction", "anchor": "segundo o presidente", "items": [["glyph:✈", "289 DRONES"], ["glyph:☢", "17 MÍSSEIS BALÍSTICOS"], ["glyph:⚡", "59 MÍSSEIS DE CRUZEIRO"]], "times": [0.4, 4.2, 6.3]},
+{"type": "glitchword", "anchor": "a pergunta agora", "lines": ["NOVA", "*ESCALADA?*"], "glitchy": true},
+{"type": "question", "anchor": "justamente quando", "label": "PAZ OU GUERRA? COMENTA AÍ"},
+{"type": "outro", "at": "end", "label": "Geopolítica sem enrolação", "nocap": true}
+]

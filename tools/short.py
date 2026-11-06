@@ -443,7 +443,9 @@ def sc_map(img, dr, t, D, p):
         ke = prog(t, t0 + 0.7, 0.6)
         if 0 < ke < 1:
             rr = 30 + 160 * ease(ke); al = int(255 * (1 - ke))
-            ld.ellipse([x1 - rr, y1 - rr, x1 + rr, y1 + rr], fill=(255, 150, 40, al)); ld.ellipse([x1 - rr * 0.5, y1 - rr * 0.5, x1 + rr * 0.5, y1 + rr * 0.5], fill=(255, 245, 200, al))
+            ov = Image.new("RGBA", lay.size); od = ImageDraw.Draw(ov)
+            od.ellipse([x1 - rr, y1 - rr, x1 + rr, y1 + rr], fill=(255, 150, 40, al)); od.ellipse([x1 - rr * 0.5, y1 - rr * 0.5, x1 + rr * 0.5, y1 + rr * 0.5], fill=(255, 245, 200, al))
+            lay.alpha_composite(ov); ld = ImageDraw.Draw(lay)
     if p.get("pin_label") and t > 0.5:
         f = F("black", 54); w = tw(f, p["pin_label"]) + 40
         lx = bx + 30 if bx + 30 + w < lay.width else bx - 30 - w
@@ -653,6 +655,15 @@ def flag_img(iso, w=640, h=400):
         for i, c in enumerate([(20, 20, 20), (220, 30, 40), (255, 205, 0)]): d.rectangle([0, i * h / 3, w, (i + 1) * h / 3], fill=c + (255,))
     elif iso == "JPN":
         d.rectangle([0, 0, w, h], fill=(250, 250, 250, 255)); r = h * 0.3; d.ellipse([w / 2 - r, h / 2 - r, w / 2 + r, h / 2 + r], fill=(200, 16, 46, 255))
+    elif iso == "RUS":
+        for i, c in enumerate([(250, 250, 250), (0, 57, 166), (213, 43, 30)]): d.rectangle([0, i * h / 3, w, (i + 1) * h / 3], fill=c + (255,))
+    elif iso == "UKR":
+        d.rectangle([0, 0, w, h / 2], fill=(0, 87, 183, 255)); d.rectangle([0, h / 2, w, h], fill=(255, 215, 0, 255))
+    elif iso == "USA":
+        for i in range(13): d.rectangle([0, i * h / 13, w, (i + 1) * h / 13], fill=(178, 34, 52, 255) if i % 2 == 0 else (250, 250, 250, 255))
+        d.rectangle([0, 0, w * 0.42, h * 7 / 13], fill=(60, 59, 110, 255))
+        for r in range(5):
+            for c in range(6): d.ellipse([18 + c * w * 0.066 - 5, 18 + r * h * 0.1 - 5, 18 + c * w * 0.066 + 5, 18 + r * h * 0.1 + 5], fill=(255, 255, 255, 255))
     elif iso == "GBR":
         d.rectangle([0, 0, w, h], fill=(1, 33, 105, 255))
         d.line([(0, 0), (w, h)], fill=(255, 255, 255, 255), width=int(h * 0.2)); d.line([(0, h), (w, 0)], fill=(255, 255, 255, 255), width=int(h * 0.2))
@@ -738,10 +749,27 @@ def sc_donut(img, dr, t, D, p):
     d = p.get("dur", 1.4)
     return [(0.0, "whoosh", 0.5)] + [(0.2 + d * i / 6, "tick", 0.45) for i in range(6)] + [(0.2 + d, "hit", 0.6)]
 
+
+def sc_flags3(img, dr, t, D, p):
+    """Várias bandeiras tremulando em fila (ex.: países numa negociação), entrando uma a uma."""
+    isos = p.get("isos", ["RUS", "UKR", "USA"]); n = len(isos); times = p.get("times", [0.1 + 0.35 * i for i in range(n)])
+    names = p.get("names", isos); ev = [(0.0, "whoosh", 0.5)]
+    for i, (iso, a) in enumerate(zip(isos, times)):
+        k = back(prog(t, a, 0.4))
+        if k <= 0: continue
+        fl = wave(flag_img(iso, 560, 350), t + i)
+        y = CY - 420 + i * 330
+        x = W / 2 - 80 + (1 - clamp(k)) * 900 * (1 if i % 2 else -1)
+        shadowed(img, R.warp3d(fl, 0.2 * math.sin(t * 1.3 + i), 0), x, y, 0.75)
+        dr.text((x + 270, y), names[i], font=F("black", 52), fill=rgba(WHITE, clamp(k)), anchor="lm", stroke_width=5, stroke_fill=(0, 0, 0, 200))
+        ev.append((a, "pop", 0.5))
+    if p.get("label"): pill(dr, W / 2, CY + 560, p["label"], 48, WHITE, RED, ease(prog(t, times[-1] + 0.4, 0.3)))
+    return ev
+
 SCENES = {k[3:]: v for k, v in globals().items() if k.startswith("sc_")}
 BGS = {"hook": "red", "date": "dark", "candles": "dark", "bignum": "red", "ticker": "dark", "alert": "red",
        "since": "navy", "question": "navy", "switch": "dark", "gauge": "dark", "timer": "navy", "map": "dark", "outro": "red",
-       "versus": "dark", "court": "navy", "stamp": "red", "reaction": "dark", "police": "dark", "glitchword": "red", "flagdays": "navy", "phone": "dark", "donut": "navy"}
+       "versus": "dark", "court": "navy", "stamp": "red", "reaction": "dark", "police": "dark", "glitchword": "red", "flagdays": "navy", "phone": "dark", "donut": "navy", "flags3": "navy"}
 
 # ================= LEGENDA (palavra por palavra) =================
 KEYS = {"bolsa", "despenca", "queda", "grave", "circuit", "breaker", "b3", "ibovespa", "seguranca", "suspensas",

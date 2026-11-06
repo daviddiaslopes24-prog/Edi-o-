@@ -69,7 +69,8 @@ diferente a cada 2–5 s, nada de cena com mais de ~6 s. Modelos prontos: `video
 | `stamp` | cartão de autoridade + carimbo batendo | `name`, `role`, `stamp` (padrão SUSPENSO), `at_stamp`, `kicker` |
 | `reaction` | 3 reações em sequência (ícones `politico`, `autoridade`, `manifestante` ou `glyph:⚔`) | `items` [[ícone, rótulo]], `times`, `gap`, `scale` |
 | `police` | sirene azul/vermelha, distintivo e fita de isolamento | `label`, `badge`, `tape` |
-| `flagdays` | bandeira tremulando (GBR, DEU, JPN) + contagem de dias 3D | `iso`, `country`, `days`, `unit`, `at_days`, `label` |
+| `flags3` | várias bandeiras tremulando em fila, entrando uma a uma | `isos`, `names`, `times`, `label` |
+| `flagdays` | bandeira tremulando (GBR, DEU, JPN, RUS, UKR, USA) + contagem de dias 3D | `iso`, `country`, `days`, `unit`, `at_days`, `label` |
 | `glitchword` | palavras 3D gigantes com glitch (termos fortes, abertura) | `lines` (`*destaque*`), `sub`, `glitchy: true` |
 | `outro` | marca 3D + botão "Inscreva-se" clicado | `label`, `nocap: true` |
 
